@@ -12,6 +12,22 @@
 #ifndef RUBY_VM_CORE_H
 #define RUBY_VM_CORE_H
 
+/*
+ * Enable check mode.
+ *   1: enable local assertions.
+ */
+#ifndef VM_CHECK_MODE
+#define VM_CHECK_MODE 0
+#endif
+
+#if VM_CHECK_MODE > 0
+#define VM_ASSERT(expr) do { \
+    if(!(expr)) rb_bug("%s:%d assertion violation - %s", __FILE__, __LINE__, #expr); \
+} while (0)
+#else
+#define VM_ASSERT(expr)
+#endif
+
 #define RUBY_VM_THREAD_MODEL 2
 
 #include "ruby/ruby.h"
@@ -560,7 +576,7 @@ enum rb_thread_status {
     THREAD_KILLED
 };
 
-/*! jmp_buf か sigjmp_buf ? configure.in を参照
+/*! jmp_buf か sigjmp_buf ? configure.in を参照 */
 typedef RUBY_JMP_BUF rb_jmpbuf_t;
 
 /**
