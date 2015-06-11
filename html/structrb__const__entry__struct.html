@@ -1,0 +1,185 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: rb_const_entry_struct 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li class="current"><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>クラス一覧</span></a></li>
+      <li><a href="classes.html"><span>クラス索引</span></a></li>
+      <li><a href="functions.html"><span>クラスメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="structrb__const__entry__struct-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">rb_const_entry_struct 構造体</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="constant_8h_source.html">constant.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a7a2bc7e61ef4103054cd6c162ba3cfbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="constant_8h.html#a19aaf97fbc1f949c3ddc4e6dfe93f6a8">rb_const_flag_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__const__entry__struct.html#a7a2bc7e61ef4103054cd6c162ba3cfbb">flag</a></td></tr>
+<tr class="separator:a7a2bc7e61ef4103054cd6c162ba3cfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98e59beb965ced287b4a78230574aa5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__const__entry__struct.html#ae98e59beb965ced287b4a78230574aa5">line</a></td></tr>
+<tr class="separator:ae98e59beb965ced287b4a78230574aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8174b24fad6c5d285d058502148d269a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__const__entry__struct.html#a8174b24fad6c5d285d058502148d269a">value</a></td></tr>
+<tr class="separator:a8174b24fad6c5d285d058502148d269a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f42909a3e0dc0866e896edc7d42b25a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__const__entry__struct.html#a8f42909a3e0dc0866e896edc7d42b25a">file</a></td></tr>
+<tr class="separator:a8f42909a3e0dc0866e896edc7d42b25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock">
+<p> <a class="el" href="constant_8h_source.html">constant.h</a> の <a class="el" href="constant_8h_source.html#l00025">25</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">メンバ詳解</h2>
+<a class="anchor" id="a8f42909a3e0dc0866e896edc7d42b25a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE rb_const_entry_struct::file</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="constant_8h_source.html">constant.h</a> の <a class="el" href="constant_8h_source.html#l00029">29</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7a2bc7e61ef4103054cd6c162ba3cfbb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="constant_8h.html#a19aaf97fbc1f949c3ddc4e6dfe93f6a8">rb_const_flag_t</a> rb_const_entry_struct::flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="constant_8h_source.html">constant.h</a> の <a class="el" href="constant_8h_source.html#l00026">26</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae98e59beb965ced287b4a78230574aa5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_const_entry_struct::line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="constant_8h_source.html">constant.h</a> の <a class="el" href="constant_8h_source.html#l00027">27</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8174b24fad6c5d285d058502148d269a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE rb_const_entry_struct::value</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="constant_8h_source.html">constant.h</a> の <a class="el" href="constant_8h_source.html#l00028">28</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li><a class="el" href="constant_8h_source.html">constant.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

@@ -28,6 +28,9 @@ static void vm_analysis_insn(int insn);
 #define DECL_SC_REG(type, r, reg) register type reg_##r __asm__("r" reg)
 
 #else
+/**
+ * レジスタに変数を割り当てる。
+ */
 #define DECL_SC_REG(type, r, reg) register type reg_##r
 #endif
 /* #define DECL_SC_REG(r, reg) VALUE reg_##r */
@@ -44,6 +47,9 @@ vm_stack_overflow_for_insn(void)
 #endif
 
 #if !OPT_CALL_THREADED_CODE
+/**
+ * VM 評価ループ。ここで Ruby の VM の 実行を行っている。実行方法は Direct Threaded Code。
+ */
 static VALUE
 vm_exec_core(rb_thread_t *th, VALUE initial)
 {
@@ -101,8 +107,12 @@ vm_exec_core(rb_thread_t *th, VALUE initial)
 #endif
 
 #if OPT_TOKEN_THREADED_CODE || OPT_DIRECT_THREADED_CODE
+/**
+ * Threaded code のために命令のアドレステーブルを作成。
+ */
 #include "vmtc.inc"
     if (UNLIKELY(th == 0)) {
+	/* rb_vm_get_insns_address_table 用 */
 	return (VALUE)insns_address_table;
     }
 #endif
@@ -115,6 +125,7 @@ vm_exec_core(rb_thread_t *th, VALUE initial)
 #endif
 
   first:
+  	/* 命令分岐をする巨大な switch 文。命令実行後は return reg_cfp をする。 */
     INSN_DISPATCH();
 /*****************/
  #include "vm.inc"
@@ -126,6 +137,9 @@ vm_exec_core(rb_thread_t *th, VALUE initial)
     goto first;
 }
 
+/**
+ * 命令のアドレステーブルを取得する。
+ */
 const void **
 rb_vm_get_insns_address_table(void)
 {

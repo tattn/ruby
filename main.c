@@ -31,6 +31,7 @@ main(int argc, char **argv)
 
     ruby_sysinit(&argc, &argv);
     {
+	/* マシンスタックの一番下を判別するための変数の作成とスタックの大きさとスタックが伸びる方向を取得 */
 	RUBY_INIT_STACK;
 	ruby_init();
 	return ruby_run_node(ruby_options(argc, argv));

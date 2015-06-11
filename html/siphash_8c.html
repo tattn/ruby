@@ -1,0 +1,1990 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: siphash.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a> &#124;
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">siphash.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="siphash_8h_source.html">siphash.h</a>&quot;</code><br />
+<code>#include &lt;endian.h&gt;</code><br />
+</div>
+<p><a href="siphash_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsip__interface__st.html">sip_interface_st</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a3ccd11960e7f283297c87da29a6705e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a3ccd11960e7f283297c87da29a6705e5">SIP_HASH_STREAMING</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a3ccd11960e7f283297c87da29a6705e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8782a401fbf55261460863fc2f8df1ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a8782a401fbf55261460863fc2f8df1ce">LITTLE_ENDIAN</a>&#160;&#160;&#160;__LITTLE_ENDIAN</td></tr>
+<tr class="separator:a8782a401fbf55261460863fc2f8df1ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23eb5e058a210efdde3d64e69679fafa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a23eb5e058a210efdde3d64e69679fafa">BIG_ENDIAN</a>&#160;&#160;&#160;__BIG_ENDIAN</td></tr>
+<tr class="separator:a23eb5e058a210efdde3d64e69679fafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06c5f8eeca62bb9b7d4c85d43c4f20d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a06c5f8eeca62bb9b7d4c85d43c4f20d9">lo</a>&#160;&#160;&#160;<a class="el" href="random_8c.html#a07f17cb37995beefed21fa2144b8e86f">u32</a>[0]</td></tr>
+<tr class="separator:a06c5f8eeca62bb9b7d4c85d43c4f20d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073817140685ccd37103f69352762610"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a073817140685ccd37103f69352762610">hi</a>&#160;&#160;&#160;<a class="el" href="random_8c.html#a07f17cb37995beefed21fa2144b8e86f">u32</a>[1]</td></tr>
+<tr class="separator:a073817140685ccd37103f69352762610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0383aadd3cd4f433220552852e96568e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a0383aadd3cd4f433220552852e96568e">UNALIGNED_WORD_ACCESS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a0383aadd3cd4f433220552852e96568e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f859632e32dfd0c1c427db07df07bb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a3f859632e32dfd0c1c427db07df07bb7">U8TO32_LE</a>(p)</td></tr>
+<tr class="separator:a3f859632e32dfd0c1c427db07df07bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08af2fb25b17973248d8cc16f9aa7c46"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a08af2fb25b17973248d8cc16f9aa7c46">U32TO8_LE</a>(p,  v)</td></tr>
+<tr class="separator:a08af2fb25b17973248d8cc16f9aa7c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1de2481f51a86cbfa0b7d0cdd4d68a69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(p)&#160;&#160;&#160;<a class="el" href="siphash_8c.html#ac657c12afa90af1ec03451b40a4a4bb9">u8to64_le</a>(p)</td></tr>
+<tr class="separator:a1de2481f51a86cbfa0b7d0cdd4d68a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46b0f26e70f8e8ad39288d04bc710077"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a46b0f26e70f8e8ad39288d04bc710077">U64TO8_LE</a>(p,  v)&#160;&#160;&#160;<a class="el" href="siphash_8c.html#ae884b5a2f6356ab7b05458220552ecbd">u64to8_le</a>(p, v)</td></tr>
+<tr class="separator:a46b0f26e70f8e8ad39288d04bc710077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e694c9baf6659cbb8d5e1753c9594a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">ROTL64_TO</a>(v,  s)</td></tr>
+<tr class="separator:a5e694c9baf6659cbb8d5e1753c9594a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4914530da5d6d1190f75950fdd0281bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">ADD64_TO</a>(v,  s)&#160;&#160;&#160;<a class="el" href="siphash_8c.html#adad4868ee101ff94a048e0af4a3833b6">add64_to</a>(&amp;(v), (s))</td></tr>
+<tr class="separator:a4914530da5d6d1190f75950fdd0281bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a236a0312d506df147808e24f3cbb3c49"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v,  s)&#160;&#160;&#160;<a class="el" href="siphash_8c.html#aac50cf5cf78af132df0c6be197e6f8bc">xor64_to</a>(&amp;(v), (s))</td></tr>
+<tr class="separator:a236a0312d506df147808e24f3cbb3c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be02abb1a5b9515cb63eb676c0aed59"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59">XOR64_INT</a>(v,  x)&#160;&#160;&#160;((v).<a class="el" href="siphash_8c.html#a06c5f8eeca62bb9b7d4c85d43c4f20d9">lo</a> ^= (x))</td></tr>
+<tr class="separator:a1be02abb1a5b9515cb63eb676c0aed59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6f68bf3c683ab2df667978be33c8e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#a46725ff96081ffe3696ea05ff44b484c">sip_init_state_bin.u64</a></td></tr>
+<tr class="separator:a9c6f68bf3c683ab2df667978be33c8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96467f86b79bda415f550df8a2f04da0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(v0,  v1,  v2,  v3)</td></tr>
+<tr class="separator:a96467f86b79bda415f550df8a2f04da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4168c3c3d996290adfe6fa04c7e2008f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a4168c3c3d996290adfe6fa04c7e2008f">SIP_2_ROUND</a>(m,  v0,  v1,  v2,  v3)</td></tr>
+<tr class="separator:a4168c3c3d996290adfe6fa04c7e2008f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4e11aaa3c8b8c164acf5d932b86318"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(n)</td></tr>
+<tr class="separator:aac4e11aaa3c8b8c164acf5d932b86318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:ac657c12afa90af1ec03451b40a4a4bb9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ac657c12afa90af1ec03451b40a4a4bb9">u8to64_le</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *p)</td></tr>
+<tr class="separator:ac657c12afa90af1ec03451b40a4a4bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae884b5a2f6356ab7b05458220552ecbd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ae884b5a2f6356ab7b05458220552ecbd">u64to8_le</a> (uint8_t *p, <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> v)</td></tr>
+<tr class="separator:ae884b5a2f6356ab7b05458220552ecbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab206c654af91128cb7f46b03ed9bc195"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ab206c654af91128cb7f46b03ed9bc195">rotl64_to</a> (<a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *v, unsigned int s)</td></tr>
+<tr class="separator:ab206c654af91128cb7f46b03ed9bc195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed2657ab313af14d2a3642166eb4bbc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a6ed2657ab313af14d2a3642166eb4bbc">rotl64_swap</a> (<a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *v)</td></tr>
+<tr class="separator:a6ed2657ab313af14d2a3642166eb4bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad4868ee101ff94a048e0af4a3833b6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#adad4868ee101ff94a048e0af4a3833b6">add64_to</a> (<a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *v, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> s)</td></tr>
+<tr class="separator:adad4868ee101ff94a048e0af4a3833b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac50cf5cf78af132df0c6be197e6f8bc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#aac50cf5cf78af132df0c6be197e6f8bc">xor64_to</a> (<a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *v, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> s)</td></tr>
+<tr class="separator:aac50cf5cf78af132df0c6be197e6f8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add97dc10aa0ad84ef865944d2eccd2ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#add97dc10aa0ad84ef865944d2eccd2ae">int_sip_init</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *<a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>)</td></tr>
+<tr class="separator:add97dc10aa0ad84ef865944d2eccd2ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8871cd96c17fd1f4ebb22f90354a2dd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ad8871cd96c17fd1f4ebb22f90354a2dd">int_sip_update</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ad8871cd96c17fd1f4ebb22f90354a2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476e7c3d792677114ca33c89c431b1d7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a476e7c3d792677114ca33c89c431b1d7">int_sip_final</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *digest)</td></tr>
+<tr class="separator:a476e7c3d792677114ca33c89c431b1d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5e956354688628a80d2db69b37f1c9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#aab5e956354688628a80d2db69b37f1c9">int_sip_dump</a> (<a class="el" href="structsip__state.html">sip_state</a> *state)</td></tr>
+<tr class="separator:aab5e956354688628a80d2db69b37f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5306dbcf02241434d66c95cd4c1ae882"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a5306dbcf02241434d66c95cd4c1ae882">int_sip_init</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t <a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>[16])</td></tr>
+<tr class="separator:a5306dbcf02241434d66c95cd4c1ae882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5703cc841fd15278f40b65547144a806"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a5703cc841fd15278f40b65547144a806">int_sip_round</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, int n)</td></tr>
+<tr class="separator:a5703cc841fd15278f40b65547144a806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50b3af9bc63c523e39518948a387da37"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> m)</td></tr>
+<tr class="separator:a50b3af9bc63c523e39518948a387da37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b03ec9996f03bc52f57186ad88aea03"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a2b03ec9996f03bc52f57186ad88aea03">int_sip_pre_update</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t **pdata, size_t *plen)</td></tr>
+<tr class="separator:a2b03ec9996f03bc52f57186ad88aea03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a402cff08801d46a41783282f3353c8ca"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a402cff08801d46a41783282f3353c8ca">int_sip_post_update</a> (<a class="el" href="structsip__state.html">sip_state</a> *state, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a402cff08801d46a41783282f3353c8ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e651cdf7e1636bffc9ced5b5b12e99"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a71e651cdf7e1636bffc9ced5b5b12e99">int_sip_pad_final_block</a> (<a class="el" href="structsip__state.html">sip_state</a> *state)</td></tr>
+<tr class="separator:a71e651cdf7e1636bffc9ced5b5b12e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cae026e6356af9a2818cf5da1279407"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a1cae026e6356af9a2818cf5da1279407">sip_hash_new</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t <a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>[16], int c, int d)</td></tr>
+<tr class="separator:a1cae026e6356af9a2818cf5da1279407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c04260c5c2a6167c7e165f187927c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ab6c04260c5c2a6167c7e165f187927c9">sip_hash_init</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t <a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>[16], int c, int d)</td></tr>
+<tr class="separator:ab6c04260c5c2a6167c7e165f187927c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bcc6e36ac0c74372491a95f57224ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ae4bcc6e36ac0c74372491a95f57224ec">sip_hash_update</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *msg, size_t len)</td></tr>
+<tr class="separator:ae4bcc6e36ac0c74372491a95f57224ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a975b542f025a901854e5bb56f20436d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a975b542f025a901854e5bb56f20436d3">sip_hash_final</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, uint8_t **digest, size_t *len)</td></tr>
+<tr class="separator:a975b542f025a901854e5bb56f20436d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a692f6b932808905a8e8fd7da73343de1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a692f6b932808905a8e8fd7da73343de1">sip_hash_final_integer</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *digest)</td></tr>
+<tr class="separator:a692f6b932808905a8e8fd7da73343de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25998e8b5fa58903004c273457926c9b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a25998e8b5fa58903004c273457926c9b">sip_hash_digest</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *data, size_t data_len, uint8_t **digest, size_t *digest_len)</td></tr>
+<tr class="separator:a25998e8b5fa58903004c273457926c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5e895cb30acba1cc83bcb328597470"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a9a5e895cb30acba1cc83bcb328597470">sip_hash_digest_integer</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h, <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *data, size_t data_len, <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *digest)</td></tr>
+<tr class="separator:a9a5e895cb30acba1cc83bcb328597470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a484eb97369990142442ca7563c6239"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a6a484eb97369990142442ca7563c6239">sip_hash_free</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h)</td></tr>
+<tr class="separator:a6a484eb97369990142442ca7563c6239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c68d753c5bda7424940cdbeb391109"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ad3c68d753c5bda7424940cdbeb391109">sip_hash_dump</a> (<a class="el" href="structsip__hash.html">sip_hash</a> *h)</td></tr>
+<tr class="separator:ad3c68d753c5bda7424940cdbeb391109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1eebf0f838223893f11def805a7676d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#ae1eebf0f838223893f11def805a7676d">sip_hash24</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t <a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>[16], <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ae1eebf0f838223893f11def805a7676d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:a0d792f7739e62f82aab1464063a68736"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:a44ab1e00d6c6ae8d78eb4ceb919a8d6b"><td class="memItemLeft" >&#160;&#160;&#160;char&#160;&#160;&#160;<a class="el" href="siphash_8c.html#a7554ecfa3328eca753497d3c52dc3561">bin</a> [32]</td></tr>
+<tr class="separator:a44ab1e00d6c6ae8d78eb4ceb919a8d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d5dfce9da0aa2659e788e0a64ea050"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#a46725ff96081ffe3696ea05ff44b484c">u64</a> [4]</td></tr>
+<tr class="separator:af4d5dfce9da0aa2659e788e0a64ea050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d792f7739e62f82aab1464063a68736"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a0d792f7739e62f82aab1464063a68736">sip_init_state_bin</a> = {&quot;uespemos&quot;&quot;modnarod&quot;&quot;arenegyl&quot;&quot;setybdet&quot;}</td></tr>
+<tr class="separator:a0d792f7739e62f82aab1464063a68736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d6548c77e14aa3b1805eb7166cdeb1c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="siphash_8h.html#abf9f37d428f980144ce70af01a094a39">sip_interface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="siphash_8c.html#a6d6548c77e14aa3b1805eb7166cdeb1c">sip_methods</a></td></tr>
+<tr class="separator:a6d6548c77e14aa3b1805eb7166cdeb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="a4914530da5d6d1190f75950fdd0281bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADD64_TO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#adad4868ee101ff94a048e0af4a3833b6">add64_to</a>(&amp;(v), (s))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00112">112</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a23eb5e058a210efdde3d64e69679fafa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BIG_ENDIAN&#160;&#160;&#160;__BIG_ENDIAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00017">17</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a073817140685ccd37103f69352762610"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define hi&#160;&#160;&#160;<a class="el" href="random_8c.html#a07f17cb37995beefed21fa2144b8e86f">u32</a>[1]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00022">22</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8782a401fbf55261460863fc2f8df1ce"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LITTLE_ENDIAN&#160;&#160;&#160;__LITTLE_ENDIAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00014">14</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a06c5f8eeca62bb9b7d4c85d43c4f20d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define lo&#160;&#160;&#160;<a class="el" href="random_8c.html#a07f17cb37995beefed21fa2144b8e86f">u32</a>[0]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00021">21</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aac4e11aaa3c8b8c164acf5d932b86318"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OR_BYTE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">    if (n &gt;= 4) \</div>
+<div class="line">        last.hi |= ((uint32_t) end[n]) &lt;&lt; ((n) &gt;= 4 ? (n) * 8 - 32 : 0); \</div>
+<div class="line">    else \</div>
+<div class="line">        last.lo |= ((uint32_t) end[n]) &lt;&lt; ((n) &gt;= 4 ? 0 : (n) * 8); \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5e694c9baf6659cbb8d5e1753c9594a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ROTL64_TO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line">((s) &gt; 32 ? <a class="code" href="siphash_8c.html#a6ed2657ab313af14d2a3642166eb4bbc">rotl64_swap</a>(<a class="code" href="siphash_8c.html#ab206c654af91128cb7f46b03ed9bc195">rotl64_to</a>(&amp;(v), (s) - 32)) : \</div>
+<div class="line">             (s) == 32 ? <a class="code" href="siphash_8c.html#a6ed2657ab313af14d2a3642166eb4bbc">rotl64_swap</a>(&amp;(v)) : <a class="code" href="siphash_8c.html#ab206c654af91128cb7f46b03ed9bc195">rotl64_to</a>(&amp;(v), (s)))</div>
+<div class="ttc" id="siphash_8c_html_a6ed2657ab313af14d2a3642166eb4bbc"><div class="ttname"><a href="siphash_8c.html#a6ed2657ab313af14d2a3642166eb4bbc">rotl64_swap</a></div><div class="ttdeci">static sip_uint64_t * rotl64_swap(sip_uint64_t *v)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00104">siphash.c:104</a></div></div>
+<div class="ttc" id="siphash_8c_html_ab206c654af91128cb7f46b03ed9bc195"><div class="ttname"><a href="siphash_8c.html#ab206c654af91128cb7f46b03ed9bc195">rotl64_to</a></div><div class="ttdeci">static sip_uint64_t * rotl64_to(sip_uint64_t *v, unsigned int s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00094">siphash.c:94</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00091">91</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4168c3c3d996290adfe6fa04c7e2008f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIP_2_ROUND</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">m, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v0, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v1, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v2, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v3&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v3), (m));        <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">    SIP_COMPRESS</a>(v0, v1, v2, v3);   <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">    SIP_COMPRESS</a>(v0, v1, v2, v3);   <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v0), (m));        \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="siphash_8c_html_a96467f86b79bda415f550df8a2f04da0"><div class="ttname"><a href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a></div><div class="ttdeci">#define SIP_COMPRESS(v0, v1, v2, v3)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00158">siphash.c:158</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00389">389</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a96467f86b79bda415f550df8a2f04da0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIP_COMPRESS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v0, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v1, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v2, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v3&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                    <a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">    ADD64_TO</a>((v0), (v1));       <a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">    ADD64_TO</a>((v2), (v3));       <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v1), 13);        <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v3), 16);        <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v1), (v0));       <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v3), (v2));       <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v0), 32);        <a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">    ADD64_TO</a>((v2), (v1));       <a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">    ADD64_TO</a>((v0), (v3));       <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v1), 17);        <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v3), 21);        <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v1), (v2));       <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">    XOR64_TO</a>((v3), (v0));       <a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">\</a></div>
+<div class="line"><a class="code" href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">    ROTL64_TO</a>((v2), 32);        \</div>
+<div class="line">} <span class="keywordflow">while</span>(0)</div>
+<div class="ttc" id="siphash_8c_html_a4914530da5d6d1190f75950fdd0281bd"><div class="ttname"><a href="siphash_8c.html#a4914530da5d6d1190f75950fdd0281bd">ADD64_TO</a></div><div class="ttdeci">#define ADD64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00112">siphash.c:112</a></div></div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="siphash_8c_html_a5e694c9baf6659cbb8d5e1753c9594a9"><div class="ttname"><a href="siphash_8c.html#a5e694c9baf6659cbb8d5e1753c9594a9">ROTL64_TO</a></div><div class="ttdeci">#define ROTL64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00091">siphash.c:91</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00158">158</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3ccd11960e7f283297c87da29a6705e5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIP_HASH_STREAMING&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00005">5</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c6f68bf3c683ab2df667978be33c8e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sip_init_state&#160;&#160;&#160;<a class="el" href="siphash_8c.html#a46725ff96081ffe3696ea05ff44b484c">sip_init_state_bin.u64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00138">138</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a08af2fb25b17973248d8cc16f9aa7c46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define U32TO8_LE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">p, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                    \</div>
+<div class="line">    (p)[0] = (uint8_t)((v)      );  \</div>
+<div class="line">    (p)[1] = (uint8_t)((v) &gt;&gt;  8);  \</div>
+<div class="line">    (p)[2] = (uint8_t)((v) &gt;&gt; 16);  \</div>
+<div class="line">    (p)[3] = (uint8_t)((v) &gt;&gt; 24);  \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00046">46</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a46b0f26e70f8e8ad39288d04bc710077"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define U64TO8_LE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">p, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#ae884b5a2f6356ab7b05458220552ecbd">u64to8_le</a>(p, v)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00083">83</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3f859632e32dfd0c1c427db07df07bb7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define U8TO32_LE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">p</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line">(((uint32_t)((p)[0])       ) | ((uint32_t)((p)[1]) &lt;&lt;  8) |     \</div>
+<div class="line">     ((uint32_t)((p)[2]) &lt;&lt;  16) | ((uint32_t)((p)[3]) &lt;&lt; 24))      \</div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00042">42</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1de2481f51a86cbfa0b7d0cdd4d68a69"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define U8TO64_LE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">p</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#ac657c12afa90af1ec03451b40a4a4bb9">u8to64_le</a>(p)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00073">73</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0383aadd3cd4f433220552852e96568e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UNALIGNED_WORD_ACCESS&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00039">39</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1be02abb1a5b9515cb63eb676c0aed59"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define XOR64_INT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((v).<a class="el" href="siphash_8c.html#a06c5f8eeca62bb9b7d4c85d43c4f20d9">lo</a> ^= (x))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00131">131</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a236a0312d506df147808e24f3cbb3c49"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define XOR64_TO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="siphash_8c.html#aac50cf5cf78af132df0c6be197e6f8bc">xor64_to</a>(&amp;(v), (s))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00122">122</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="adad4868ee101ff94a048e0af4a3833b6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>* add64_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00114">114</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    v-&gt;lo += s.lo;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    v-&gt;hi += s.hi;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> (v-&gt;lo &lt; s.lo) v-&gt;hi++;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aab5e956354688628a80d2db69b37f1c9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_dump </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00178">178</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordtype">int</span> v;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">for</span> (v = 0; v &lt; 4; v++) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">#if HAVE_UINT64_T</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    printf(<span class="stringliteral">&quot;v%d: %&quot;</span> PRIx64 <span class="stringliteral">&quot;\n&quot;</span>, v, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[v]);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    printf(<span class="stringliteral">&quot;v%d: %&quot;</span> PRIx32 <span class="stringliteral">&quot;%.8&quot;</span> PRIx32 <span class="stringliteral">&quot;\n&quot;</span>, v, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[v].hi, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[v].lo);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_a40f42158d4db0ba89ea99b8f935e742e"><div class="ttname"><a href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">sip_state::v</a></div><div class="ttdeci">sip_uint64_t v[4]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00023">siphash.h:23</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a476e7c3d792677114ca33c89c431b1d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_final </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>digest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00293">293</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;{</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> m;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="siphash_8c.html#a71e651cdf7e1636bffc9ced5b5b12e99">int_sip_pad_final_block</a>(state);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    m = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <a class="code" href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a>(state, m);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <a class="code" href="siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59">XOR64_INT</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[2], 0xff);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="siphash_8c.html#a5703cc841fd15278f40b65547144a806">int_sip_round</a>(state, state-&gt;<a class="code" href="structsip__state.html#abcd2c53063996b24f53008ced9e62737">d</a>);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    *digest = state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[0];</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(*digest, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[1]);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(*digest, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[2]);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(*digest, state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[3]);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="structsip__state_html_afba94ab509fbdc8546aa5cfcfcbc6e8e"><div class="ttname"><a href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">sip_state::buf</a></div><div class="ttdeci">uint8_t buf[sizeof(sip_uint64_t)]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00024">siphash.h:24</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a50b3af9bc63c523e39518948a387da37"><div class="ttname"><a href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a></div><div class="ttdeci">static void int_sip_update_block(sip_state *state, sip_uint64_t m)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00216">siphash.c:216</a></div></div>
+<div class="ttc" id="structsip__state_html_abcd2c53063996b24f53008ced9e62737"><div class="ttname"><a href="structsip__state.html#abcd2c53063996b24f53008ced9e62737">sip_state::d</a></div><div class="ttdeci">int d</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00022">siphash.h:22</a></div></div>
+<div class="ttc" id="siphash_8c_html_a5703cc841fd15278f40b65547144a806"><div class="ttname"><a href="siphash_8c.html#a5703cc841fd15278f40b65547144a806">int_sip_round</a></div><div class="ttdeci">static void int_sip_round(sip_state *state, int n)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00206">siphash.c:206</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1de2481f51a86cbfa0b7d0cdd4d68a69"><div class="ttname"><a href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a></div><div class="ttdeci">#define U8TO64_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00073">siphash.c:73</a></div></div>
+<div class="ttc" id="siphash_8c_html_a71e651cdf7e1636bffc9ced5b5b12e99"><div class="ttname"><a href="siphash_8c.html#a71e651cdf7e1636bffc9ced5b5b12e99">int_sip_pad_final_block</a></div><div class="ttdeci">static void int_sip_pad_final_block(sip_state *state)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00282">siphash.c:282</a></div></div>
+<div class="ttc" id="structsip__state_html_a40f42158d4db0ba89ea99b8f935e742e"><div class="ttname"><a href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">sip_state::v</a></div><div class="ttdeci">sip_uint64_t v[4]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00023">siphash.h:23</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1be02abb1a5b9515cb63eb676c0aed59"><div class="ttname"><a href="siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59">XOR64_INT</a></div><div class="ttdeci">#define XOR64_INT(v, x)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00131">siphash.c:131</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="add97dc10aa0ad84ef865944d2eccd2ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5306dbcf02241434d66c95cd4c1ae882"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t&#160;</td>
+          <td class="paramname"><em>key</em>[16]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00192">192</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;{</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> k0, k1;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    k0 = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    k1 = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a> + <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>));</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[0] = k0; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[0], <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[0]);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[1] = k1; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[1], <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[1]);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[2] = k0; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[2], <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[2]);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[3] = k1; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[3], <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[3]);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1de2481f51a86cbfa0b7d0cdd4d68a69"><div class="ttname"><a href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a></div><div class="ttdeci">#define U8TO64_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00073">siphash.c:73</a></div></div>
+<div class="ttc" id="structsip__state_html_a40f42158d4db0ba89ea99b8f935e742e"><div class="ttname"><a href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">sip_state::v</a></div><div class="ttdeci">sip_uint64_t v[4]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00023">siphash.h:23</a></div></div>
+<div class="ttc" id="siphash_8c_html_a9c6f68bf3c683ab2df667978be33c8e9"><div class="ttname"><a href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a></div><div class="ttdeci">#define sip_init_state</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00138">siphash.c:138</a></div></div>
+<div class="ttc" id="random_8c_html_a742229490b6759a90ece7ba82ba129d5"><div class="ttname"><a href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a></div><div class="ttdeci">uint8_t key[16]</div><div class="ttdef"><b>Definition:</b> <a href="random_8c_source.html#l01398">random.c:1398</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a71e651cdf7e1636bffc9ced5b5b12e99"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_pad_final_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00282">282</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;{</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="comment">/* pad with 0&#39;s and finalize with msg_len mod 256 */</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">for</span> (i = state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a>; i &lt; <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>); i++) {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a>[i] = 0x00;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a>[<span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>) - 1] = state-&gt;<a class="code" href="structsip__state.html#a375f6433fec365a8294175759566ff35">msglen_byte</a>;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_afba94ab509fbdc8546aa5cfcfcbc6e8e"><div class="ttname"><a href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">sip_state::buf</a></div><div class="ttdeci">uint8_t buf[sizeof(sip_uint64_t)]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00024">siphash.h:24</a></div></div>
+<div class="ttc" id="structsip__state_html_a375f6433fec365a8294175759566ff35"><div class="ttname"><a href="structsip__state.html#a375f6433fec365a8294175759566ff35">sip_state::msglen_byte</a></div><div class="ttdeci">uint8_t msglen_byte</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00026">siphash.h:26</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="structsip__state_html_aafd1a41477f85798a6ac4d0d890a52ae"><div class="ttname"><a href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">sip_state::buflen</a></div><div class="ttdeci">uint8_t buflen</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00025">siphash.h:25</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a402cff08801d46a41783282f3353c8ca"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_post_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00241">241</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;{</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    uint8_t r = len % <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">if</span> (r) {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    memcpy(state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a>, data + len - r, r);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a> = r;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_afba94ab509fbdc8546aa5cfcfcbc6e8e"><div class="ttname"><a href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">sip_state::buf</a></div><div class="ttdeci">uint8_t buf[sizeof(sip_uint64_t)]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00024">siphash.h:24</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="structsip__state_html_aafd1a41477f85798a6ac4d0d890a52ae"><div class="ttname"><a href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">sip_state::buflen</a></div><div class="ttdeci">uint8_t buflen</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00025">siphash.h:25</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a2b03ec9996f03bc52f57186ad88aea03"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_pre_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t **&#160;</td>
+          <td class="paramname"><em>pdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>plen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00224">224</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;{</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordtype">int</span> to_read;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> m;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">if</span> (!state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    to_read = <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>) - state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a>;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    memcpy(state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a> + state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a>, *pdata, to_read);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    m = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(state-&gt;<a class="code" href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">buf</a>);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <a class="code" href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a>(state, m);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    *pdata += to_read;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    *plen -= to_read;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a> = 0;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_afba94ab509fbdc8546aa5cfcfcbc6e8e"><div class="ttname"><a href="structsip__state.html#afba94ab509fbdc8546aa5cfcfcbc6e8e">sip_state::buf</a></div><div class="ttdeci">uint8_t buf[sizeof(sip_uint64_t)]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00024">siphash.h:24</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a50b3af9bc63c523e39518948a387da37"><div class="ttname"><a href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a></div><div class="ttdeci">static void int_sip_update_block(sip_state *state, sip_uint64_t m)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00216">siphash.c:216</a></div></div>
+<div class="ttc" id="structsip__state_html_aafd1a41477f85798a6ac4d0d890a52ae"><div class="ttname"><a href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">sip_state::buflen</a></div><div class="ttdeci">uint8_t buflen</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00025">siphash.h:25</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1de2481f51a86cbfa0b7d0cdd4d68a69"><div class="ttname"><a href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a></div><div class="ttdeci">#define U8TO64_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00073">siphash.c:73</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5703cc841fd15278f40b65547144a806"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_round </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00206">206</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;{</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; n; i++) {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[0], state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[1], state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[2], state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[3]);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_a40f42158d4db0ba89ea99b8f935e742e"><div class="ttname"><a href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">sip_state::v</a></div><div class="ttdeci">sip_uint64_t v[4]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00023">siphash.h:23</a></div></div>
+<div class="ttc" id="siphash_8c_html_a96467f86b79bda415f550df8a2f04da0"><div class="ttname"><a href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a></div><div class="ttdeci">#define SIP_COMPRESS(v0, v1, v2, v3)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00158">siphash.c:158</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad8871cd96c17fd1f4ebb22f90354a2dd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00251">251</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *end;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *data64;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    state-&gt;<a class="code" href="structsip__state.html#a375f6433fec365a8294175759566ff35">msglen_byte</a> = state-&gt;<a class="code" href="structsip__state.html#a375f6433fec365a8294175759566ff35">msglen_byte</a> + (len % 256);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    data64 = (<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *) data;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="siphash_8c.html#a2b03ec9996f03bc52f57186ad88aea03">int_sip_pre_update</a>(state, &amp;data, &amp;len);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    end = data64 + (len / <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>));</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="preprocessor">#if BYTE_ORDER == LITTLE_ENDIAN</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">while</span> (data64 != end) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a>(state, *data64++);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="preprocessor">#elif BYTE_ORDER == BIG_ENDIAN</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> m;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    uint8_t *data8 = data;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">for</span> (; data8 != (uint8_t *) end; data8 += <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>)) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        m = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(data8);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <a class="code" href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a>(state, m);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <a class="code" href="siphash_8c.html#a402cff08801d46a41783282f3353c8ca">int_sip_post_update</a>(state, data, len);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}</div>
+<div class="ttc" id="structsip__state_html_a375f6433fec365a8294175759566ff35"><div class="ttname"><a href="structsip__state.html#a375f6433fec365a8294175759566ff35">sip_state::msglen_byte</a></div><div class="ttdeci">uint8_t msglen_byte</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00026">siphash.h:26</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a50b3af9bc63c523e39518948a387da37"><div class="ttname"><a href="siphash_8c.html#a50b3af9bc63c523e39518948a387da37">int_sip_update_block</a></div><div class="ttdeci">static void int_sip_update_block(sip_state *state, sip_uint64_t m)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00216">siphash.c:216</a></div></div>
+<div class="ttc" id="siphash_8c_html_a402cff08801d46a41783282f3353c8ca"><div class="ttname"><a href="siphash_8c.html#a402cff08801d46a41783282f3353c8ca">int_sip_post_update</a></div><div class="ttdeci">static void int_sip_post_update(sip_state *state, const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00241">siphash.c:241</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1de2481f51a86cbfa0b7d0cdd4d68a69"><div class="ttname"><a href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a></div><div class="ttdeci">#define U8TO64_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00073">siphash.c:73</a></div></div>
+<div class="ttc" id="siphash_8c_html_a2b03ec9996f03bc52f57186ad88aea03"><div class="ttname"><a href="siphash_8c.html#a2b03ec9996f03bc52f57186ad88aea03">int_sip_pre_update</a></div><div class="ttdeci">static void int_sip_pre_update(sip_state *state, const uint8_t **pdata, size_t *plen)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00224">siphash.c:224</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a50b3af9bc63c523e39518948a387da37"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void int_sip_update_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__state.html">sip_state</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00216">216</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[3], m);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <a class="code" href="siphash_8c.html#a5703cc841fd15278f40b65547144a806">int_sip_round</a>(state, state-&gt;<a class="code" href="structsip__state.html#a2c2bbf0634de680cda9f48459484dda5">c</a>);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(state-&gt;<a class="code" href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">v</a>[0], m);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="siphash_8c_html_a5703cc841fd15278f40b65547144a806"><div class="ttname"><a href="siphash_8c.html#a5703cc841fd15278f40b65547144a806">int_sip_round</a></div><div class="ttdeci">static void int_sip_round(sip_state *state, int n)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00206">siphash.c:206</a></div></div>
+<div class="ttc" id="structsip__state_html_a40f42158d4db0ba89ea99b8f935e742e"><div class="ttname"><a href="structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e">sip_state::v</a></div><div class="ttdeci">sip_uint64_t v[4]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00023">siphash.h:23</a></div></div>
+<div class="ttc" id="structsip__state_html_a2c2bbf0634de680cda9f48459484dda5"><div class="ttname"><a href="structsip__state.html#a2c2bbf0634de680cda9f48459484dda5">sip_state::c</a></div><div class="ttdeci">int c</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00021">siphash.h:21</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6ed2657ab313af14d2a3642166eb4bbc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>* rotl64_swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00104">104</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    uint32_t t = v-&gt;lo;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    v-&gt;lo = v-&gt;hi;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    v-&gt;hi = t;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ab206c654af91128cb7f46b03ed9bc195"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>* rotl64_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00094">94</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    uint32_t uhi = (v-&gt;hi &lt;&lt; s) | (v-&gt;lo &gt;&gt; (32 - s));</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    uint32_t ulo = (v-&gt;lo &lt;&lt; s) | (v-&gt;hi &gt;&gt; (32 - s));</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    v-&gt;hi = uhi;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    v-&gt;lo = ulo;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae1eebf0f838223893f11def805a7676d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> sip_hash24 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t&#160;</td>
+          <td class="paramname"><em>key</em>[16], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00398">398</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;{</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> k0, k1;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> v0, v1, v2, v3;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> m, last;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keyword">const</span> uint8_t *end = data + len - (len % <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>));</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    k0 = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    k1 = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a> + <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>));</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    v0 = k0; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v0, <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[0]);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    v1 = k1; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v1, <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[1]);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    v2 = k0; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v2, <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[2]);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    v3 = k1; <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v3, <a class="code" href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a>[3]);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="preprocessor">#if BYTE_ORDER == LITTLE_ENDIAN &amp;&amp; UNALIGNED_WORD_ACCESS</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    {</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *data64 = (<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *)data;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        <span class="keywordflow">while</span> (data64 != (<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> *) end) {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        m = *data64++;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        <a class="code" href="siphash_8c.html#a4168c3c3d996290adfe6fa04c7e2008f">SIP_2_ROUND</a>(m, v0, v1, v2, v3);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        }</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    }</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">for</span> (; data != end; data += <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>)) {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    m = <a class="code" href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a>(data);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <a class="code" href="siphash_8c.html#a4168c3c3d996290adfe6fa04c7e2008f">SIP_2_ROUND</a>(m, v0, v1, v2, v3);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="preprocessor">#ifdef HAVE_UINT64_T</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    last = (<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>)len &lt;&lt; 56;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="preprocessor">#define OR_BYTE(n) (last |= ((uint64_t) end[n]) &lt;&lt; ((n) * 8))</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    last.hi = len &lt;&lt; 24;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    last.lo = 0;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="preprocessor">#define OR_BYTE(n) do { \</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="preprocessor">    if (n &gt;= 4) \</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="preprocessor">        last.hi |= ((uint32_t) end[n]) &lt;&lt; ((n) &gt;= 4 ? (n) * 8 - 32 : 0); \</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="preprocessor">    else \</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="preprocessor">        last.lo |= ((uint32_t) end[n]) &lt;&lt; ((n) &gt;= 4 ? 0 : (n) * 8); \</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="preprocessor">    } while (0)</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keywordflow">switch</span> (len % <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>)) {</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">case</span> 7:</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(6);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordflow">case</span> 6:</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(5);</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    <span class="keywordflow">case</span> 5:</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(4);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keywordflow">case</span> 4:</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="preprocessor">#if BYTE_ORDER == LITTLE_ENDIAN &amp;&amp; UNALIGNED_WORD_ACCESS</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="preprocessor">  #if HAVE_UINT64_T</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        last |= (<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>) ((uint32_t *) end)[0];</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="preprocessor">  #else</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        last.lo |= ((uint32_t *) end)[0];</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(3);</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(2);</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(1);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <a class="code" href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a>(0);</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    }</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    <a class="code" href="siphash_8c.html#a4168c3c3d996290adfe6fa04c7e2008f">SIP_2_ROUND</a>(last, v0, v1, v2, v3);</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <a class="code" href="siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59">XOR64_INT</a>(v2, 0xff);</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(v0, v1, v2, v3);</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(v0, v1, v2, v3);</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(v0, v1, v2, v3);</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <a class="code" href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a>(v0, v1, v2, v3);</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v0, v1);</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v0, v2);</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    <a class="code" href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a>(v0, v3);</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    <span class="keywordflow">return</span> v0;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_aac4e11aaa3c8b8c164acf5d932b86318"><div class="ttname"><a href="siphash_8c.html#aac4e11aaa3c8b8c164acf5d932b86318">OR_BYTE</a></div><div class="ttdeci">#define OR_BYTE(n)</div></div>
+<div class="ttc" id="siphash_8c_html_a236a0312d506df147808e24f3cbb3c49"><div class="ttname"><a href="siphash_8c.html#a236a0312d506df147808e24f3cbb3c49">XOR64_TO</a></div><div class="ttdeci">#define XOR64_TO(v, s)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00122">siphash.c:122</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1de2481f51a86cbfa0b7d0cdd4d68a69"><div class="ttname"><a href="siphash_8c.html#a1de2481f51a86cbfa0b7d0cdd4d68a69">U8TO64_LE</a></div><div class="ttdeci">#define U8TO64_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00073">siphash.c:73</a></div></div>
+<div class="ttc" id="siphash_8c_html_a4168c3c3d996290adfe6fa04c7e2008f"><div class="ttname"><a href="siphash_8c.html#a4168c3c3d996290adfe6fa04c7e2008f">SIP_2_ROUND</a></div><div class="ttdeci">#define SIP_2_ROUND(m, v0, v1, v2, v3)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00389">siphash.c:389</a></div></div>
+<div class="ttc" id="siphash_8c_html_a1be02abb1a5b9515cb63eb676c0aed59"><div class="ttname"><a href="siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59">XOR64_INT</a></div><div class="ttdeci">#define XOR64_INT(v, x)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00131">siphash.c:131</a></div></div>
+<div class="ttc" id="siphash_8c_html_a9c6f68bf3c683ab2df667978be33c8e9"><div class="ttname"><a href="siphash_8c.html#a9c6f68bf3c683ab2df667978be33c8e9">sip_init_state</a></div><div class="ttdeci">#define sip_init_state</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00138">siphash.c:138</a></div></div>
+<div class="ttc" id="random_8c_html_a742229490b6759a90ece7ba82ba129d5"><div class="ttname"><a href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a></div><div class="ttdeci">uint8_t key[16]</div><div class="ttdef"><b>Definition:</b> <a href="random_8c_source.html#l01398">random.c:1398</a></div></div>
+<div class="ttc" id="siphash_8c_html_a96467f86b79bda415f550df8a2f04da0"><div class="ttname"><a href="siphash_8c.html#a96467f86b79bda415f550df8a2f04da0">SIP_COMPRESS</a></div><div class="ttdeci">#define SIP_COMPRESS(v0, v1, v2, v3)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00158">siphash.c:158</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a25998e8b5fa58903004c273457926c9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sip_hash_digest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>data_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t **&#160;</td>
+          <td class="paramname"><em>digest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>digest_len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00363">363</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;{</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="siphash_8c.html#ae4bcc6e36ac0c74372491a95f57224ec">sip_hash_update</a>(h, data, data_len)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="siphash_8c.html#a975b542f025a901854e5bb56f20436d3">sip_hash_final</a>(h, digest, digest_len);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_ae4bcc6e36ac0c74372491a95f57224ec"><div class="ttname"><a href="siphash_8c.html#ae4bcc6e36ac0c74372491a95f57224ec">sip_hash_update</a></div><div class="ttdeci">int sip_hash_update(sip_hash *h, const uint8_t *msg, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00334">siphash.c:334</a></div></div>
+<div class="ttc" id="siphash_8c_html_a975b542f025a901854e5bb56f20436d3"><div class="ttname"><a href="siphash_8c.html#a975b542f025a901854e5bb56f20436d3">sip_hash_final</a></div><div class="ttdeci">int sip_hash_final(sip_hash *h, uint8_t **digest, size_t *len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00341">siphash.c:341</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a9a5e895cb30acba1cc83bcb328597470"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sip_hash_digest_integer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>data_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>digest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00370">370</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;{</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="siphash_8c.html#ae4bcc6e36ac0c74372491a95f57224ec">sip_hash_update</a>(h, data, data_len)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="siphash_8c.html#a692f6b932808905a8e8fd7da73343de1">sip_hash_final_integer</a>(h, digest);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_ae4bcc6e36ac0c74372491a95f57224ec"><div class="ttname"><a href="siphash_8c.html#ae4bcc6e36ac0c74372491a95f57224ec">sip_hash_update</a></div><div class="ttdeci">int sip_hash_update(sip_hash *h, const uint8_t *msg, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00334">siphash.c:334</a></div></div>
+<div class="ttc" id="siphash_8c_html_a692f6b932808905a8e8fd7da73343de1"><div class="ttname"><a href="siphash_8c.html#a692f6b932808905a8e8fd7da73343de1">sip_hash_final_integer</a></div><div class="ttdeci">int sip_hash_final_integer(sip_hash *h, sip_uint64_t *digest)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00356">siphash.c:356</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad3c68d753c5bda7424940cdbeb391109"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sip_hash_dump </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00383">383</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;{</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <a class="code" href="siphash_8c.html#aab5e956354688628a80d2db69b37f1c9">int_sip_dump</a>(h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;}</div>
+<div class="ttc" id="structsip__hash_html_a88532f700d09c224b6f50fd1e4058305"><div class="ttname"><a href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">sip_hash::state</a></div><div class="ttdeci">sip_state state[1]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00032">siphash.h:32</a></div></div>
+<div class="ttc" id="siphash_8c_html_aab5e956354688628a80d2db69b37f1c9"><div class="ttname"><a href="siphash_8c.html#aab5e956354688628a80d2db69b37f1c9">int_sip_dump</a></div><div class="ttdeci">static void int_sip_dump(sip_state *state)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00178">siphash.c:178</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a975b542f025a901854e5bb56f20436d3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sip_hash_final </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t **&#160;</td>
+          <td class="paramname"><em>digest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00341">341</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> digest64;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    uint8_t *ret;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">methods</a>-&gt;<a class="code" href="structsip__interface__st.html#a96701d57f6ce2a6e0abf7441d23fddb2">final</a>(h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>, &amp;digest64);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordflow">if</span> (!(ret = (uint8_t *)<a class="code" href="strftime_8c.html#aa21fad24622996b74839deccf1202f29">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>)))) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <a class="code" href="siphash_8c.html#a46b0f26e70f8e8ad39288d04bc710077">U64TO8_LE</a>(ret, digest64);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    *len = <span class="keyword">sizeof</span>(<a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a>);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    *digest = ret;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;}</div>
+<div class="ttc" id="structsip__hash_html_acc625003f330547adeda7c7a22c1bf4a"><div class="ttname"><a href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">sip_hash::methods</a></div><div class="ttdeci">const sip_interface * methods</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00033">siphash.h:33</a></div></div>
+<div class="ttc" id="strftime_8c_html_aa21fad24622996b74839deccf1202f29"><div class="ttname"><a href="strftime_8c.html#aa21fad24622996b74839deccf1202f29">malloc</a></div><div class="ttdeci">void * malloc()</div></div>
+<div class="ttc" id="structsip__interface__st_html_a96701d57f6ce2a6e0abf7441d23fddb2"><div class="ttname"><a href="structsip__interface__st.html#a96701d57f6ce2a6e0abf7441d23fddb2">sip_interface_st::final</a></div><div class="ttdeci">void(* final)(sip_state *s, sip_uint64_t *digest)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00144">siphash.c:144</a></div></div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a46b0f26e70f8e8ad39288d04bc710077"><div class="ttname"><a href="siphash_8c.html#a46b0f26e70f8e8ad39288d04bc710077">U64TO8_LE</a></div><div class="ttdeci">#define U64TO8_LE(p, v)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00083">siphash.c:83</a></div></div>
+<div class="ttc" id="structsip__hash_html_a88532f700d09c224b6f50fd1e4058305"><div class="ttname"><a href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">sip_hash::state</a></div><div class="ttdeci">sip_state state[1]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00032">siphash.h:32</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a692f6b932808905a8e8fd7da73343de1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sip_hash_final_integer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>digest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00356">356</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;{</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">methods</a>-&gt;<a class="code" href="structsip__interface__st.html#a96701d57f6ce2a6e0abf7441d23fddb2">final</a>(h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>, digest);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;}</div>
+<div class="ttc" id="structsip__hash_html_acc625003f330547adeda7c7a22c1bf4a"><div class="ttname"><a href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">sip_hash::methods</a></div><div class="ttdeci">const sip_interface * methods</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00033">siphash.h:33</a></div></div>
+<div class="ttc" id="structsip__interface__st_html_a96701d57f6ce2a6e0abf7441d23fddb2"><div class="ttname"><a href="structsip__interface__st.html#a96701d57f6ce2a6e0abf7441d23fddb2">sip_interface_st::final</a></div><div class="ttdeci">void(* final)(sip_state *s, sip_uint64_t *digest)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00144">siphash.c:144</a></div></div>
+<div class="ttc" id="structsip__hash_html_a88532f700d09c224b6f50fd1e4058305"><div class="ttname"><a href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">sip_hash::state</a></div><div class="ttdeci">sip_state state[1]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00032">siphash.h:32</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6a484eb97369990142442ca7563c6239"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sip_hash_free </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00377">377</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;{</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <a class="code" href="dln_8c.html#affb9fc32698fab7f7b36e0cf8e64c83e">free</a>(h);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;}</div>
+<div class="ttc" id="dln_8c_html_affb9fc32698fab7f7b36e0cf8e64c83e"><div class="ttname"><a href="dln_8c.html#affb9fc32698fab7f7b36e0cf8e64c83e">free</a></div><div class="ttdeci">#define free(x)</div><div class="ttdef"><b>Definition:</b> <a href="dln_8c_source.html#l00051">dln.c:51</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ab6c04260c5c2a6167c7e165f187927c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsip__hash.html">sip_hash</a>* sip_hash_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t&#160;</td>
+          <td class="paramname"><em>key</em>[16], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00322">322</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;{</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>-&gt;<a class="code" href="structsip__state.html#a2c2bbf0634de680cda9f48459484dda5">c</a> = c;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>-&gt;<a class="code" href="structsip__state.html#abcd2c53063996b24f53008ced9e62737">d</a> = d;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>-&gt;<a class="code" href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">buflen</a> = 0;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>-&gt;<a class="code" href="structsip__state.html#a375f6433fec365a8294175759566ff35">msglen_byte</a> = 0;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">methods</a> = &amp;<a class="code" href="siphash_8c.html#a6d6548c77e14aa3b1805eb7166cdeb1c">sip_methods</a>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">methods</a>-&gt;<a class="code" href="structsip__interface__st.html#aa758397fa1c60a9028f264c721b0226d">init</a>(h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>, <a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordflow">return</span> h;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;}</div>
+<div class="ttc" id="structsip__hash_html_acc625003f330547adeda7c7a22c1bf4a"><div class="ttname"><a href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">sip_hash::methods</a></div><div class="ttdeci">const sip_interface * methods</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00033">siphash.h:33</a></div></div>
+<div class="ttc" id="structsip__interface__st_html_aa758397fa1c60a9028f264c721b0226d"><div class="ttname"><a href="structsip__interface__st.html#aa758397fa1c60a9028f264c721b0226d">sip_interface_st::init</a></div><div class="ttdeci">void(* init)(sip_state *s, const uint8_t *key)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00142">siphash.c:142</a></div></div>
+<div class="ttc" id="siphash_8c_html_a6d6548c77e14aa3b1805eb7166cdeb1c"><div class="ttname"><a href="siphash_8c.html#a6d6548c77e14aa3b1805eb7166cdeb1c">sip_methods</a></div><div class="ttdeci">static const sip_interface sip_methods</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00151">siphash.c:151</a></div></div>
+<div class="ttc" id="structsip__state_html_a375f6433fec365a8294175759566ff35"><div class="ttname"><a href="structsip__state.html#a375f6433fec365a8294175759566ff35">sip_state::msglen_byte</a></div><div class="ttdeci">uint8_t msglen_byte</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00026">siphash.h:26</a></div></div>
+<div class="ttc" id="structsip__state_html_abcd2c53063996b24f53008ced9e62737"><div class="ttname"><a href="structsip__state.html#abcd2c53063996b24f53008ced9e62737">sip_state::d</a></div><div class="ttdeci">int d</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00022">siphash.h:22</a></div></div>
+<div class="ttc" id="structsip__state_html_aafd1a41477f85798a6ac4d0d890a52ae"><div class="ttname"><a href="structsip__state.html#aafd1a41477f85798a6ac4d0d890a52ae">sip_state::buflen</a></div><div class="ttdeci">uint8_t buflen</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00025">siphash.h:25</a></div></div>
+<div class="ttc" id="structsip__state_html_a2c2bbf0634de680cda9f48459484dda5"><div class="ttname"><a href="structsip__state.html#a2c2bbf0634de680cda9f48459484dda5">sip_state::c</a></div><div class="ttdeci">int c</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00021">siphash.h:21</a></div></div>
+<div class="ttc" id="random_8c_html_a742229490b6759a90ece7ba82ba129d5"><div class="ttname"><a href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a></div><div class="ttdeci">uint8_t key[16]</div><div class="ttdef"><b>Definition:</b> <a href="random_8c_source.html#l01398">random.c:1398</a></div></div>
+<div class="ttc" id="structsip__hash_html_a88532f700d09c224b6f50fd1e4058305"><div class="ttname"><a href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">sip_hash::state</a></div><div class="ttdeci">sip_state state[1]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00032">siphash.h:32</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a1cae026e6356af9a2818cf5da1279407"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsip__hash.html">sip_hash</a>* sip_hash_new </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t&#160;</td>
+          <td class="paramname"><em>key</em>[16], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00313">313</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;{</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <a class="code" href="structsip__hash.html">sip_hash</a> *h = <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">if</span> (!(h = (<a class="code" href="structsip__hash.html">sip_hash</a> *) <a class="code" href="strftime_8c.html#aa21fad24622996b74839deccf1202f29">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structsip__hash.html">sip_hash</a>)))) <span class="keywordflow">return</span> <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="siphash_8c.html#ab6c04260c5c2a6167c7e165f187927c9">sip_hash_init</a>(h, <a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>, c, d);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;}</div>
+<div class="ttc" id="strftime_8c_html_aa21fad24622996b74839deccf1202f29"><div class="ttname"><a href="strftime_8c.html#aa21fad24622996b74839deccf1202f29">malloc</a></div><div class="ttdeci">void * malloc()</div></div>
+<div class="ttc" id="structsip__hash_html"><div class="ttname"><a href="structsip__hash.html">sip_hash</a></div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00031">siphash.h:31</a></div></div>
+<div class="ttc" id="siphash_8c_html_ab6c04260c5c2a6167c7e165f187927c9"><div class="ttname"><a href="siphash_8c.html#ab6c04260c5c2a6167c7e165f187927c9">sip_hash_init</a></div><div class="ttdeci">sip_hash * sip_hash_init(sip_hash *h, const uint8_t key[16], int c, int d)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00322">siphash.c:322</a></div></div>
+<div class="ttc" id="random_8c_html_a742229490b6759a90ece7ba82ba129d5"><div class="ttname"><a href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a></div><div class="ttdeci">uint8_t key[16]</div><div class="ttdef"><b>Definition:</b> <a href="random_8c_source.html#l01398">random.c:1398</a></div></div>
+<div class="ttc" id="regenc_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00055">regenc.h:55</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae4bcc6e36ac0c74372491a95f57224ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sip_hash_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__hash.html">sip_hash</a> *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00334">334</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;{</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    h-&gt;<a class="code" href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">methods</a>-&gt;<a class="code" href="structsip__interface__st.html#ab730548771e192ccd5a05a9379b227f5">update</a>(h-&gt;<a class="code" href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">state</a>, msg, len);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
+<div class="ttc" id="structsip__hash_html_acc625003f330547adeda7c7a22c1bf4a"><div class="ttname"><a href="structsip__hash.html#acc625003f330547adeda7c7a22c1bf4a">sip_hash::methods</a></div><div class="ttdeci">const sip_interface * methods</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00033">siphash.h:33</a></div></div>
+<div class="ttc" id="structsip__interface__st_html_ab730548771e192ccd5a05a9379b227f5"><div class="ttname"><a href="structsip__interface__st.html#ab730548771e192ccd5a05a9379b227f5">sip_interface_st::update</a></div><div class="ttdeci">void(* update)(sip_state *s, const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00143">siphash.c:143</a></div></div>
+<div class="ttc" id="structsip__hash_html_a88532f700d09c224b6f50fd1e4058305"><div class="ttname"><a href="structsip__hash.html#a88532f700d09c224b6f50fd1e4058305">sip_hash::state</a></div><div class="ttdeci">sip_state state[1]</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00032">siphash.h:32</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae884b5a2f6356ab7b05458220552ecbd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void u64to8_le </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00085">85</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="siphash_8c.html#a08af2fb25b17973248d8cc16f9aa7c46">U32TO8_LE</a>(p,     v.lo);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="siphash_8c.html#a08af2fb25b17973248d8cc16f9aa7c46">U32TO8_LE</a>(p + 4, v.hi);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="ttc" id="siphash_8c_html_a08af2fb25b17973248d8cc16f9aa7c46"><div class="ttname"><a href="siphash_8c.html#a08af2fb25b17973248d8cc16f9aa7c46">U32TO8_LE</a></div><div class="ttdeci">#define U32TO8_LE(p, v)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00046">siphash.c:46</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ac657c12afa90af1ec03451b40a4a4bb9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> u8to64_le </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00075">75</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a> ret;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    ret.lo = <a class="code" href="siphash_8c.html#a3f859632e32dfd0c1c427db07df07bb7">U8TO32_LE</a>(p);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    ret.hi = <a class="code" href="siphash_8c.html#a3f859632e32dfd0c1c427db07df07bb7">U8TO32_LE</a>(p + 4);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="ttc" id="siphash_8h_html_a104204cb123abb831baa5adcfffc64e0"><div class="ttname"><a href="siphash_8h.html#a104204cb123abb831baa5adcfffc64e0">uint64_t</a></div><div class="ttdeci">#define uint64_t</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8h_source.html#l00015">siphash.h:15</a></div></div>
+<div class="ttc" id="siphash_8c_html_a3f859632e32dfd0c1c427db07df07bb7"><div class="ttname"><a href="siphash_8c.html#a3f859632e32dfd0c1c427db07df07bb7">U8TO32_LE</a></div><div class="ttdeci">#define U8TO32_LE(p)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00042">siphash.c:42</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aac50cf5cf78af132df0c6be197e6f8bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>* xor64_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="structsip__uint64__t.html">sip_uint64_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00124">124</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;{</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    v-&gt;lo ^= s.lo;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    v-&gt;hi ^= s.hi;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">変数詳解</h2>
+<a class="anchor" id="a7554ecfa3328eca753497d3c52dc3561"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char bin[32]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00135">135</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0d792f7739e62f82aab1464063a68736"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const { ... }   sip_init_state_bin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6d6548c77e14aa3b1805eb7166cdeb1c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="siphash_8h.html#abf9f37d428f980144ce70af01a094a39">sip_interface</a> sip_methods</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初期値:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    <a class="code" href="siphash_8c.html#add97dc10aa0ad84ef865944d2eccd2ae">int_sip_init</a>,</div>
+<div class="line">    <a class="code" href="siphash_8c.html#ad8871cd96c17fd1f4ebb22f90354a2dd">int_sip_update</a>,</div>
+<div class="line">    <a class="code" href="siphash_8c.html#a476e7c3d792677114ca33c89c431b1d7">int_sip_final</a></div>
+<div class="line">}</div>
+<div class="ttc" id="siphash_8c_html_ad8871cd96c17fd1f4ebb22f90354a2dd"><div class="ttname"><a href="siphash_8c.html#ad8871cd96c17fd1f4ebb22f90354a2dd">int_sip_update</a></div><div class="ttdeci">static void int_sip_update(sip_state *state, const uint8_t *data, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00251">siphash.c:251</a></div></div>
+<div class="ttc" id="siphash_8c_html_a476e7c3d792677114ca33c89c431b1d7"><div class="ttname"><a href="siphash_8c.html#a476e7c3d792677114ca33c89c431b1d7">int_sip_final</a></div><div class="ttdeci">static void int_sip_final(sip_state *state, sip_uint64_t *digest)</div><div class="ttdef"><b>Definition:</b> <a href="siphash_8c_source.html#l00293">siphash.c:293</a></div></div>
+<div class="ttc" id="siphash_8c_html_add97dc10aa0ad84ef865944d2eccd2ae"><div class="ttname"><a href="siphash_8c.html#add97dc10aa0ad84ef865944d2eccd2ae">int_sip_init</a></div><div class="ttdeci">static void int_sip_init(sip_state *state, const uint8_t *key)</div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00151">151</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a46725ff96081ffe3696ea05ff44b484c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsip__uint64__t.html">sip_uint64_t</a> u64[4]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="siphash_8c_source.html">siphash.c</a> の <a class="el" href="siphash_8c_source.html#l00136">136</a> 行目に定義があります。</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分02秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

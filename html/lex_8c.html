@@ -1,0 +1,549 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: lex.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle">
+<div class="title">lex.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="lex_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkwtable.html">kwtable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:ac4a38142b075a785d0673e75886531d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#ac4a38142b075a785d0673e75886531d1">rb_reserved_word</a>(str,  len)&#160;&#160;&#160;<a class="el" href="lex_8c.html#aff16dbdd96dda7e11fc66e2dd8219d9f">reserved_word</a>(str, len)</td></tr>
+<tr class="separator:ac4a38142b075a785d0673e75886531d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a120c1ed986c6271250e689887e765840"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#a120c1ed986c6271250e689887e765840">TOTAL_KEYWORDS</a>&#160;&#160;&#160;41</td></tr>
+<tr class="separator:a120c1ed986c6271250e689887e765840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7073af2fa16b860b734ab4554eacf3c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#a7073af2fa16b860b734ab4554eacf3c3">MIN_WORD_LENGTH</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a7073af2fa16b860b734ab4554eacf3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7b4994021c554c1761ea31d016b680"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#aec7b4994021c554c1761ea31d016b680">MAX_WORD_LENGTH</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:aec7b4994021c554c1761ea31d016b680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a21935276b7118f4116df1ee70e3c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#a18a21935276b7118f4116df1ee70e3c9">MIN_HASH_VALUE</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a18a21935276b7118f4116df1ee70e3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcb5e53d22730cfbca1e27236cd11aff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#adcb5e53d22730cfbca1e27236cd11aff">MAX_HASH_VALUE</a>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:adcb5e53d22730cfbca1e27236cd11aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a3b4979e9d93cd557b3c3ed5b8126f72a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> struct <a class="el" href="structkwtable.html">kwtable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#a3b4979e9d93cd557b3c3ed5b8126f72a">rb_reserved_word</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *, unsigned int)</td></tr>
+<tr class="separator:a3b4979e9d93cd557b3c3ed5b8126f72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff16dbdd96dda7e11fc66e2dd8219d9f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> struct <a class="el" href="structkwtable.html">kwtable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#aff16dbdd96dda7e11fc66e2dd8219d9f">reserved_word</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *, unsigned int)</td></tr>
+<tr class="separator:aff16dbdd96dda7e11fc66e2dd8219d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5541f85ce416df233cce93949f0eeeca"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *str, unsigned int len)</td></tr>
+<tr class="separator:a5541f85ce416df233cce93949f0eeeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="adcb5e53d22730cfbca1e27236cd11aff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_HASH_VALUE&#160;&#160;&#160;50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00045">45</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aec7b4994021c554c1761ea31d016b680"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_WORD_LENGTH&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00043">43</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a18a21935276b7118f4116df1ee70e3c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MIN_HASH_VALUE&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00044">44</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7073af2fa16b860b734ab4554eacf3c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MIN_WORD_LENGTH&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00042">42</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4a38142b075a785d0673e75886531d1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rb_reserved_word</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">str, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">len&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="lex_8c.html#aff16dbdd96dda7e11fc66e2dd8219d9f">reserved_word</a>(str, len)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00037">37</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a120c1ed986c6271250e689887e765840"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOTAL_KEYWORDS&#160;&#160;&#160;41</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00041">41</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a5541f85ce416df233cce93949f0eeeca"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static unsigned int hash </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00056">56</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> asso_values[] =</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      51, 51, 51, 26, 51, 51, 14, 51, 16,  8,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      11, 13, 51, 51, 51, 51, 10, 51, 13, 51,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      51, 51, 51, 51, 51, 11, 51, 13,  1, 26,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;       4,  1,  8, 28, 51, 23, 51,  1,  1, 27,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;       5, 19, 21, 51,  8,  3,  3, 11, 51, 21,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      24, 16, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      51, 51, 51, 51, 51, 51, 51, 51, 51, 51,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      51, 51, 51, 51, 51, 51</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    };</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">register</span> <span class="keywordtype">int</span> hval = len;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">switch</span> (hval)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        hval += asso_values[(<span class="keywordtype">unsigned</span> char)str[2]];</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="comment">/*FALLTHROUGH*/</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        hval += asso_values[(<span class="keywordtype">unsigned</span> char)str[0]];</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">return</span> hval + asso_values[(<span class="keywordtype">unsigned</span> char)str[len - 1]];</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a3b4979e9d93cd557b3c3ed5b8126f72a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> struct <a class="el" href="structkwtable.html">kwtable</a>* rb_reserved_word </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>int</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="parse_8c_source.html">parse.c</a> の <a class="el" href="parse_8c_source.html#l16326">16326</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l16327"></a><span class="lineno">16327</span>&#160;{</div>
+<div class="line"><a name="l16328"></a><span class="lineno">16328</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="lex_8c.html#aff16dbdd96dda7e11fc66e2dd8219d9f">reserved_word</a>(str, len);</div>
+<div class="line"><a name="l16329"></a><span class="lineno">16329</span>&#160;}</div>
+<div class="ttc" id="lex_8c_html_aff16dbdd96dda7e11fc66e2dd8219d9f"><div class="ttname"><a href="lex_8c.html#aff16dbdd96dda7e11fc66e2dd8219d9f">reserved_word</a></div><div class="ttdeci">static const struct kwtable * reserved_word(const char *, unsigned int)</div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00111">lex.c:111</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aff16dbdd96dda7e11fc66e2dd8219d9f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> struct <a class="el" href="structkwtable.html">kwtable</a> * reserved_word </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="lex_8c_source.html">lex.c</a> の <a class="el" href="lex_8c_source.html#l00111">111</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="structkwtable.html">kwtable</a> wordlist[] =</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>},</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#line 19 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      {<span class="stringliteral">&quot;break&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9add899acbd7b4a4dcb788be15312ef65b">keyword_break</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9add899acbd7b4a4dcb788be15312ef65b">keyword_break</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2">EXPR_MID</a>},</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#line 25 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      {<span class="stringliteral">&quot;else&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aadb1610f9ac2a66e06eeccb4b05764f9">keyword_else</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aadb1610f9ac2a66e06eeccb4b05764f9">keyword_else</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a>},</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#line 35 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      {<span class="stringliteral">&quot;nil&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a70830d301cff3484cefaca4cdcd04ad3">keyword_nil</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a70830d301cff3484cefaca4cdcd04ad3">keyword_nil</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#line 28 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      {<span class="stringliteral">&quot;ensure&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a43969f2ecc2b28c817f7dc263351f35e">keyword_ensure</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a43969f2ecc2b28c817f7dc263351f35e">keyword_ensure</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a>},</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#line 27 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      {<span class="stringliteral">&quot;end&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a45b59efc0aac74ebece40d0aaef35df6">keyword_end</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a45b59efc0aac74ebece40d0aaef35df6">keyword_end</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#line 44 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      {<span class="stringliteral">&quot;then&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a8fb7161ad870f69bb0328200a5033a45">keyword_then</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a8fb7161ad870f69bb0328200a5033a45">keyword_then</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a>},</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#line 36 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      {<span class="stringliteral">&quot;not&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad21aae9dd43179d7cccbcceb3b2f3c7c">keyword_not</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad21aae9dd43179d7cccbcceb3b2f3c7c">keyword_not</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882">EXPR_ARG</a>},</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#line 29 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      {<span class="stringliteral">&quot;false&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3bc2b4c2b9db61dc4052d4c5cc1314be">keyword_false</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3bc2b4c2b9db61dc4052d4c5cc1314be">keyword_false</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#line 42 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      {<span class="stringliteral">&quot;self&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9adb165dc1d760e229a76f0213a90b2da0">keyword_self</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9adb165dc1d760e229a76f0213a90b2da0">keyword_self</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#line 26 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      {<span class="stringliteral">&quot;elsif&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9af191da80f1440a2c6d9eebd011c3c926">keyword_elsif</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9af191da80f1440a2c6d9eebd011c3c926">keyword_elsif</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#line 39 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      {<span class="stringliteral">&quot;rescue&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6148b67b6c42b5c69be09e407e9df466">keyword_rescue</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aca73cb66f0731ae4904e2dea32c6a156">modifier_rescue</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2">EXPR_MID</a>},</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#line 45 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;      {<span class="stringliteral">&quot;true&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aab6ffbcc4e2f8825594fdb4ffd22581b">keyword_true</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aab6ffbcc4e2f8825594fdb4ffd22581b">keyword_true</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#line 48 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      {<span class="stringliteral">&quot;until&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae342a0231f2e52e6bbcee95ced12b242">keyword_until</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aecbadd8d6396c5a88afe04e7d15a4853">modifier_until</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#line 47 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      {<span class="stringliteral">&quot;unless&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ac21894e11352bb578b9014dcf68af738">keyword_unless</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aaee1aa4c0e662ef95f14c953062f8610">modifier_unless</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#line 41 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      {<span class="stringliteral">&quot;return&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a212ad9cc654dbe688265704592872a88">keyword_return</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a212ad9cc654dbe688265704592872a88">keyword_return</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2">EXPR_MID</a>},</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">#line 22 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      {<span class="stringliteral">&quot;def&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a94c56b37e97dd5a82e3369a12fc7f70f">keyword_def</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a94c56b37e97dd5a82e3369a12fc7f70f">keyword_def</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a099bfc9473c6bbfffaf9ef2f473ca743">EXPR_FNAME</a>},</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">#line 17 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      {<span class="stringliteral">&quot;and&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a46a9d10e49f0f98af16ad48777a15259">keyword_and</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a46a9d10e49f0f98af16ad48777a15259">keyword_and</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">#line 24 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      {<span class="stringliteral">&quot;do&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5fc8c27f9be7b3311775435fbcb7f1db">keyword_do</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5fc8c27f9be7b3311775435fbcb7f1db">keyword_do</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a>},</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#line 51 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      {<span class="stringliteral">&quot;yield&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae6379b3c694d5f618153f8bc88cb5db1">keyword_yield</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae6379b3c694d5f618153f8bc88cb5db1">keyword_yield</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882">EXPR_ARG</a>},</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#line 30 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;      {<span class="stringliteral">&quot;for&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ac91d66f5884dfa39ae43ca6e4f37f927">keyword_for</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ac91d66f5884dfa39ae43ca6e4f37f927">keyword_for</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#line 46 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      {<span class="stringliteral">&quot;undef&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a38cac94c1e98db3284696102d600573a">keyword_undef</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a38cac94c1e98db3284696102d600573a">keyword_undef</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a099bfc9473c6bbfffaf9ef2f473ca743">EXPR_FNAME</a>},</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#line 37 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      {<span class="stringliteral">&quot;or&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5d5cb153fcd8ff3a0f4c44833afd03b2">keyword_or</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5d5cb153fcd8ff3a0f4c44833afd03b2">keyword_or</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#line 32 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      {<span class="stringliteral">&quot;in&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aaea5b752cf4cdd83abc9ca736164b744">keyword_in</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aaea5b752cf4cdd83abc9ca736164b744">keyword_in</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#line 49 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      {<span class="stringliteral">&quot;when&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4dc53d602b363de59f626213a2c85d36">keyword_when</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4dc53d602b363de59f626213a2c85d36">keyword_when</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#line 40 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      {<span class="stringliteral">&quot;retry&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4f82b27c13f52747eaf673cee623036d">keyword_retry</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4f82b27c13f52747eaf673cee623036d">keyword_retry</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#line 31 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;      {<span class="stringliteral">&quot;if&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a7a7254e8aeaee8af7d8c125634501fc8">keyword_if</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6de6608cc863f041b5380fa91bd16178">modifier_if</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#line 20 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      {<span class="stringliteral">&quot;case&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae3823dd50b0d30dd4111fbf607b628e0">keyword_case</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae3823dd50b0d30dd4111fbf607b628e0">keyword_case</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#line 38 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      {<span class="stringliteral">&quot;redo&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3b335d986b063b13b576bb70a13ebe4b">keyword_redo</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3b335d986b063b13b576bb70a13ebe4b">keyword_redo</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">#line 34 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;      {<span class="stringliteral">&quot;next&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6ccdfc2d7d21aa35386b613fa13adce8">keyword_next</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6ccdfc2d7d21aa35386b613fa13adce8">keyword_next</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2">EXPR_MID</a>},</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">#line 43 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      {<span class="stringliteral">&quot;super&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aa254b3be84301cf10df375c69e087a10">keyword_super</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aa254b3be84301cf10df375c69e087a10">keyword_super</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882">EXPR_ARG</a>},</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#line 33 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;      {<span class="stringliteral">&quot;module&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a2ffa765a88b948a71595466f07061bd2">keyword_module</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a2ffa765a88b948a71595466f07061bd2">keyword_module</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>},</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">#line 18 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      {<span class="stringliteral">&quot;begin&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad6a8358b4e14cb2d5063ec0856167b22">keyword_begin</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad6a8358b4e14cb2d5063ec0856167b22">keyword_begin</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a>},</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#line 12 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      {<span class="stringliteral">&quot;__LINE__&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aacc52a947ec0788be859d9ff37c9d568">keyword__LINE__</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aacc52a947ec0788be859d9ff37c9d568">keyword__LINE__</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">#line 13 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      {<span class="stringliteral">&quot;__FILE__&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a9f94da06b57a552d4496c0b72fb5c6c5">keyword__FILE__</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a9f94da06b57a552d4496c0b72fb5c6c5">keyword__FILE__</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">#line 11 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;      {<span class="stringliteral">&quot;__ENCODING__&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5ee4135773333c4f321e21b77fbbbaa7">keyword__ENCODING__</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5ee4135773333c4f321e21b77fbbbaa7">keyword__ENCODING__</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#line 15 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      {<span class="stringliteral">&quot;END&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a64404b2af9f891595c7e392733ec0086">keyword_END</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a64404b2af9f891595c7e392733ec0086">keyword_END</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#line 16 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      {<span class="stringliteral">&quot;alias&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a03a09748aea9f6660c6599231553011d">keyword_alias</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a03a09748aea9f6660c6599231553011d">keyword_alias</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a099bfc9473c6bbfffaf9ef2f473ca743">EXPR_FNAME</a>},</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor">#line 14 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      {<span class="stringliteral">&quot;BEGIN&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a7b948e9a792fb3843ac6de23642df5fd">keyword_BEGIN</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a7b948e9a792fb3843ac6de23642df5fd">keyword_BEGIN</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a>},</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor">#line 23 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;      {<span class="stringliteral">&quot;defined?&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a0fab01a75702a436f40b0b51b8eb6a4a">keyword_defined</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a0fab01a75702a436f40b0b51b8eb6a4a">keyword_defined</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882">EXPR_ARG</a>},</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#line 21 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;      {<span class="stringliteral">&quot;class&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a416af1aebffee359a69d5c78015d7e93">keyword_class</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a416af1aebffee359a69d5c78015d7e93">keyword_class</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a98a4a7774a64c9570a583444940f74d5">EXPR_CLASS</a>},</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;      {<span class="stringliteral">&quot;&quot;</span>}, {<span class="stringliteral">&quot;&quot;</span>},</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">#line 50 &quot;defs/keywords&quot;</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;      {<span class="stringliteral">&quot;while&quot;</span>, {<a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aa50546542aac66bbff6b15f390074f58">keyword_while</a>, <a class="code" href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a927f4d1496162f5d3520887b6f450b5a">modifier_while</a>}, <a class="code" href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a>}</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    };</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordflow">if</span> (len &lt;= MAX_WORD_LENGTH &amp;&amp; len &gt;= <a class="code" href="lex_8c.html#a7073af2fa16b860b734ab4554eacf3c3">MIN_WORD_LENGTH</a>)</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      <span class="keyword">register</span> <span class="keywordtype">int</span> <a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a> = <a class="code" href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a> (str, len);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;      <span class="keywordflow">if</span> (key &lt;= MAX_HASH_VALUE &amp;&amp; key &gt;= 0)</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        {</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;          <span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *s = wordlist[<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>].<a class="code" href="structkwtable.html#a83406d5d3b22fd47c70ba6b496d8d68f">name</a>;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;          <span class="keywordflow">if</span> (*str == *s &amp;&amp; !strcmp (str + 1, s + 1))</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordflow">return</span> &amp;wordlist[<a class="code" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>];</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    }</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ae3823dd50b0d30dd4111fbf607b628e0"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae3823dd50b0d30dd4111fbf607b628e0">keyword_case</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00062">parse.h:62</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aaea5b752cf4cdd83abc9ca736164b744"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aaea5b752cf4cdd83abc9ca736164b744">keyword_in</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00071">parse.h:71</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aacc52a947ec0788be859d9ff37c9d568"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aacc52a947ec0788be859d9ff37c9d568">keyword__LINE__</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00095">parse.h:95</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a46a9d10e49f0f98af16ad48777a15259"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a46a9d10e49f0f98af16ad48777a15259">keyword_and</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00083">parse.h:83</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ae342a0231f2e52e6bbcee95ced12b242"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae342a0231f2e52e6bbcee95ced12b242">keyword_until</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00065">parse.h:65</a></div></div>
+<div class="ttc" id="structkwtable_html"><div class="ttname"><a href="structkwtable.html">kwtable</a></div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00033">lex.c:33</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a89dc74e00b82af2e66a4b8299ff7dfa2">EXPR_MID</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00129">parse.c:129</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9add899acbd7b4a4dcb788be15312ef65b"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9add899acbd7b4a4dcb788be15312ef65b">keyword_break</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00067">parse.h:67</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ac91d66f5884dfa39ae43ca6e4f37f927"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ac91d66f5884dfa39ae43ca6e4f37f927">keyword_for</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00066">parse.h:66</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aa50546542aac66bbff6b15f390074f58"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aa50546542aac66bbff6b15f390074f58">keyword_while</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00064">parse.h:64</a></div></div>
+<div class="ttc" id="structkwtable_html_a83406d5d3b22fd47c70ba6b496d8d68f"><div class="ttname"><a href="structkwtable.html#a83406d5d3b22fd47c70ba6b496d8d68f">kwtable::name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00033">lex.c:33</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a6148b67b6c42b5c69be09e407e9df466"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6148b67b6c42b5c69be09e407e9df466">keyword_rescue</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00054">parse.h:54</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389a099bfc9473c6bbfffaf9ef2f473ca743"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a099bfc9473c6bbfffaf9ef2f473ca743">EXPR_FNAME</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00130">parse.c:130</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389ae75329b254e24a50315bb64425443d68">EXPR_BEG</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00123">parse.c:123</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aadb1610f9ac2a66e06eeccb4b05764f9"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aadb1610f9ac2a66e06eeccb4b05764f9">keyword_else</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00061">parse.h:61</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a416af1aebffee359a69d5c78015d7e93"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a416af1aebffee359a69d5c78015d7e93">keyword_class</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00049">parse.h:49</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a7a7254e8aeaee8af7d8c125634501fc8"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a7a7254e8aeaee8af7d8c125634501fc8">keyword_if</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00057">parse.h:57</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a64404b2af9f891595c7e392733ec0086"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a64404b2af9f891595c7e392733ec0086">keyword_END</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00094">parse.h:94</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a2ffa765a88b948a71595466f07061bd2"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a2ffa765a88b948a71595466f07061bd2">keyword_module</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00050">parse.h:50</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389a98a4a7774a64c9570a583444940f74d5"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a98a4a7774a64c9570a583444940f74d5">EXPR_CLASS</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00132">parse.c:132</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a212ad9cc654dbe688265704592872a88"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a212ad9cc654dbe688265704592872a88">keyword_return</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00076">parse.h:76</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a03a09748aea9f6660c6599231553011d"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a03a09748aea9f6660c6599231553011d">keyword_alias</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00091">parse.h:91</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9af191da80f1440a2c6d9eebd011c3c926"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9af191da80f1440a2c6d9eebd011c3c926">keyword_elsif</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00060">parse.h:60</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a38cac94c1e98db3284696102d600573a"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a38cac94c1e98db3284696102d600573a">keyword_undef</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00052">parse.h:52</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a3bc2b4c2b9db61dc4052d4c5cc1314be"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3bc2b4c2b9db61dc4052d4c5cc1314be">keyword_false</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00082">parse.h:82</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ac21894e11352bb578b9014dcf68af738"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ac21894e11352bb578b9014dcf68af738">keyword_unless</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00058">parse.h:58</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ad6a8358b4e14cb2d5063ec0856167b22"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad6a8358b4e14cb2d5063ec0856167b22">keyword_begin</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00053">parse.h:53</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a5d5cb153fcd8ff3a0f4c44833afd03b2"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5d5cb153fcd8ff3a0f4c44833afd03b2">keyword_or</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00084">parse.h:84</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389aba244091a1141a6b2cbb212831263882">EXPR_ARG</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00127">parse.c:127</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a7b948e9a792fb3843ac6de23642df5fd"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a7b948e9a792fb3843ac6de23642df5fd">keyword_BEGIN</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00093">parse.h:93</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a4f82b27c13f52747eaf673cee623036d"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4f82b27c13f52747eaf673cee623036d">keyword_retry</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00070">parse.h:70</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a5fc8c27f9be7b3311775435fbcb7f1db"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5fc8c27f9be7b3311775435fbcb7f1db">keyword_do</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00072">parse.h:72</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a927f4d1496162f5d3520887b6f450b5a"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a927f4d1496162f5d3520887b6f450b5a">modifier_while</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00088">parse.h:88</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389abb6d8e9fea98441c3b5971c4e7d509ae">EXPR_END</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00124">parse.c:124</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a43969f2ecc2b28c817f7dc263351f35e"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a43969f2ecc2b28c817f7dc263351f35e">keyword_ensure</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00055">parse.h:55</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aaee1aa4c0e662ef95f14c953062f8610"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aaee1aa4c0e662ef95f14c953062f8610">modifier_unless</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00087">parse.h:87</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a6ccdfc2d7d21aa35386b613fa13adce8"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6ccdfc2d7d21aa35386b613fa13adce8">keyword_next</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00068">parse.h:68</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a94c56b37e97dd5a82e3369a12fc7f70f"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a94c56b37e97dd5a82e3369a12fc7f70f">keyword_def</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00051">parse.h:51</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ae6379b3c694d5f618153f8bc88cb5db1"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ae6379b3c694d5f618153f8bc88cb5db1">keyword_yield</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00077">parse.h:77</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a8fb7161ad870f69bb0328200a5033a45"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a8fb7161ad870f69bb0328200a5033a45">keyword_then</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00059">parse.h:59</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a4dc53d602b363de59f626213a2c85d36"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4dc53d602b363de59f626213a2c85d36">keyword_when</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00063">parse.h:63</a></div></div>
+<div class="ttc" id="lex_8c_html_a7073af2fa16b860b734ab4554eacf3c3"><div class="ttname"><a href="lex_8c.html#a7073af2fa16b860b734ab4554eacf3c3">MIN_WORD_LENGTH</a></div><div class="ttdeci">#define MIN_WORD_LENGTH</div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00042">lex.c:42</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9adb165dc1d760e229a76f0213a90b2da0"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9adb165dc1d760e229a76f0213a90b2da0">keyword_self</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00079">parse.h:79</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a5ee4135773333c4f321e21b77fbbbaa7"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a5ee4135773333c4f321e21b77fbbbaa7">keyword__ENCODING__</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00097">parse.h:97</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a6de6608cc863f041b5380fa91bd16178"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a6de6608cc863f041b5380fa91bd16178">modifier_if</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00086">parse.h:86</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9ad21aae9dd43179d7cccbcceb3b2f3c7c"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9ad21aae9dd43179d7cccbcceb3b2f3c7c">keyword_not</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00085">parse.h:85</a></div></div>
+<div class="ttc" id="random_8c_html_a742229490b6759a90ece7ba82ba129d5"><div class="ttname"><a href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a></div><div class="ttdeci">uint8_t key[16]</div><div class="ttdef"><b>Definition:</b> <a href="random_8c_source.html#l01398">random.c:1398</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a0fab01a75702a436f40b0b51b8eb6a4a"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a0fab01a75702a436f40b0b51b8eb6a4a">keyword_defined</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00092">parse.h:92</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aecbadd8d6396c5a88afe04e7d15a4853"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aecbadd8d6396c5a88afe04e7d15a4853">modifier_until</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00089">parse.h:89</a></div></div>
+<div class="ttc" id="lex_8c_html_a5541f85ce416df233cce93949f0eeeca"><div class="ttname"><a href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a></div><div class="ttdeci">static unsigned int hash(const char *str, unsigned int len)</div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00056">lex.c:56</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aab6ffbcc4e2f8825594fdb4ffd22581b"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aab6ffbcc4e2f8825594fdb4ffd22581b">keyword_true</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00081">parse.h:81</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a3b335d986b063b13b576bb70a13ebe4b"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3b335d986b063b13b576bb70a13ebe4b">keyword_redo</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00069">parse.h:69</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a9f94da06b57a552d4496c0b72fb5c6c5"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a9f94da06b57a552d4496c0b72fb5c6c5">keyword__FILE__</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00096">parse.h:96</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a70830d301cff3484cefaca4cdcd04ad3"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a70830d301cff3484cefaca4cdcd04ad3">keyword_nil</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00080">parse.h:80</a></div></div>
+<div class="ttc" id="parse_8c_html_a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193"><div class="ttname"><a href="parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a26cd215d29270ab3dcfa7bf9bbb81193">EXPR_VALUE</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8c_source.html#l00133">parse.c:133</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aa254b3be84301cf10df375c69e087a10"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aa254b3be84301cf10df375c69e087a10">keyword_super</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00078">parse.h:78</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9aca73cb66f0731ae4904e2dea32c6a156"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9aca73cb66f0731ae4904e2dea32c6a156">modifier_rescue</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00090">parse.h:90</a></div></div>
+<div class="ttc" id="parse_8h_html_a15c9f7bd2f0e9686df5d9df4f3314aa9a45b59efc0aac74ebece40d0aaef35df6"><div class="ttname"><a href="parse_8h.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a45b59efc0aac74ebece40d0aaef35df6">keyword_end</a></div><div class="ttdef"><b>Definition:</b> <a href="parse_8h_source.html#l00056">parse.h:56</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分51秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

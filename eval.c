@@ -37,7 +37,7 @@ ID ruby_static_id_signo, ruby_static_id_status;
     (!SPECIAL_CONST_P(obj) && \
      (BUILTIN_TYPE(obj) == T_CLASS || BUILTIN_TYPE(obj) == T_MODULE))
 
-/* Initializes the Ruby VM and builtin libraries.
+/** Initializes the Ruby VM and builtin libraries.
  * @retval 0 if succeeded.
  * @retval non-zero an error occurred.
  */

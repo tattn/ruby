@@ -1467,6 +1467,9 @@ hook_before_rewind(rb_thread_t *th, rb_control_frame_t *cfp)
   };
  */
 
+ /**
+  * VM のメイン処理の呼び出しと処理内のエラーハンドリング。
+  */
 static VALUE
 vm_exec(rb_thread_t *th)
 {
@@ -1477,6 +1480,7 @@ vm_exec(rb_thread_t *th)
 
     TH_PUSH_TAG(th);
     _tag.retval = Qnil;
+	/* setjmp でエラー時に戻れるようにしている。state には th->state が入る。 */
     if ((state = EXEC_TAG()) == 0) {
       vm_loop_start:
 	result = vm_exec_core(th, initial);
@@ -1986,6 +1990,9 @@ check_machine_stack_size(size_t *sizep)
 #endif
 }
 
+/**
+ * スタックサイズのデフォルト値を設定
+ */
 static void
 vm_default_params_setup(rb_vm_t *vm)
 {
@@ -2014,6 +2021,9 @@ vm_default_params_setup(rb_vm_t *vm)
     check_machine_stack_size(&vm->default_params.fiber_machine_stack_size);
 }
 
+/**
+ * rb_vm_t の初期化。スレッド数を 0 に、vm->at_exit を見えない Embed Array に、マシンスタックサイズのデフォルト値を設定。
+ */
 static void
 vm_init2(rb_vm_t *vm)
 {
@@ -2830,6 +2840,9 @@ rb_vm_set_progname(VALUE filename)
 struct rb_objspace *rb_objspace_alloc(void);
 #endif
 
+/**
+ * vm の初期化と th の初期化。
+ */
 void
 Init_BareVM(void)
 {
@@ -2855,6 +2868,9 @@ Init_BareVM(void)
     ruby_thread_init_stack(th);
 }
 
+/**
+ * vm が内部で使用するオブジェクトを確保。
+ */
 void
 Init_vm_objects(void)
 {

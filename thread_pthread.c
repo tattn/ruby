@@ -696,10 +696,13 @@ reserve_stack(volatile char *limit, size_t size)
 #endif
 
 #undef ruby_init_stack
-/* Set stack bottom of Ruby implementation.
+/** Set stack bottom of Ruby implementation.
  *
  * You must call this function before any heap allocation by Ruby implementation.
- * Or GC will break living objects */
+ * Or GC will break living objects
+ *
+ * 引数はスタックの一番下。スタックの大きさを取得。スタックの伸びる方向も調べている。
+ */
 void
 ruby_init_stack(volatile VALUE *addr
 #ifdef __ia64

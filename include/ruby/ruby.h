@@ -896,6 +896,7 @@ struct RArray {
 	const VALUE ary[RARRAY_EMBED_LEN_MAX];
     } as;
 };
+/*! 配列が構造体内で収まっているフラグ。(サイズが3以下) */
 #define RARRAY_EMBED_FLAG FL_USER1
 /* FL_USER2 is for ELTS_SHARED */
 #define RARRAY_EMBED_LEN_MASK (FL_USER4|FL_USER3)
@@ -1153,6 +1154,7 @@ struct RStruct {
 #define FL_USER18    (((VALUE)1)<<(FL_USHIFT+18))
 #define FL_USER19    (((VALUE)1)<<(FL_USHIFT+19))
 
+/*! x が実体の構造体を持たないとき真。具体的には Qnil, Qtrue, Qfalse, Fixnum, Symbol */
 #define SPECIAL_CONST_P(x) (IMMEDIATE_P(x) || !RTEST(x))
 
 #define FL_ABLE(x) (!SPECIAL_CONST_P(x) && BUILTIN_TYPE(x) != T_NODE)

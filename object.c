@@ -47,6 +47,7 @@ VALUE rb_cFalseClass;
     (!SPECIAL_CONST_P(obj) && \
      (BUILTIN_TYPE(obj) == T_CLASS || BUILTIN_TYPE(obj) == T_MODULE))
 
+/*! オブジェクトを ObjectSpace から隠す */
 VALUE
 rb_obj_hide(VALUE obj)
 {

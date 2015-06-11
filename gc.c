@@ -2160,6 +2160,9 @@ obj_free(rb_objspace_t *objspace, VALUE obj)
     }
 }
 
+/**
+ * ObjectSpace の初期化
+ */
 void
 Init_heap(void)
 {

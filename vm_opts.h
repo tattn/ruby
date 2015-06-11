@@ -32,6 +32,10 @@
 /* C compiler dependent */
 #define OPT_DIRECT_THREADED_CODE     1
 #define OPT_TOKEN_THREADED_CODE      0
+/**
+ * 各命令を関数ポインタとして持ち、VM
+ * 評価ループで関数として呼び出す。
+ */
 #define OPT_CALL_THREADED_CODE       0
 
 /* VM running option */
@@ -44,6 +48,11 @@
 #define OPT_OPERANDS_UNIFICATION     1
 #define OPT_INSTRUCTIONS_UNIFICATION 0
 #define OPT_UNIFY_ALL_COMBINATION    0
+/**
+ * スタックトップをマシンレジスタにキャッシュする。
+ * http://rucila.s43.xrea.com/archives/rhgsb_11_stack_caching.pdf
+ * http://d.hatena.ne.jp/nagachika/20090214/rhg_strikes_back_11
+ */
 #define OPT_STACK_CACHING            0
 
 /* misc */

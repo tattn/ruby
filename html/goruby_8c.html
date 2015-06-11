@@ -1,0 +1,436 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: goruby.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle">
+<div class="title">goruby.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8c_source.html">main.c</a>&quot;</code><br />
+</div>
+<p><a href="goruby_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:ad306a5b66e3f0a8431e5b32330252db3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a>&#160;&#160;&#160;<a class="el" href="goruby_8c.html#a0861eb74cb699a60cee626121a08b91f">goruby_options</a></td></tr>
+<tr class="separator:ad306a5b66e3f0a8431e5b32330252db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363efd3b81046ed07af9eeb1489bc30b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#a363efd3b81046ed07af9eeb1489bc30b">ruby_run_node</a>&#160;&#160;&#160;<a class="el" href="goruby_8c.html#ac714967c59f29b9c77684d369991b18c">goruby_run_node</a></td></tr>
+<tr class="separator:a363efd3b81046ed07af9eeb1489bc30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a563800b2331cd0a129db8ed75fc2f4f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#a563800b2331cd0a129db8ed75fc2f4f3">Init_golf</a> (void)</td></tr>
+<tr class="separator:a563800b2331cd0a129db8ed75fc2f4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd93e4bc6640e7d8d1a20fff1b7473cc"><td class="memItemLeft" align="right" valign="top">RUBY_EXTERN void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#acd93e4bc6640e7d8d1a20fff1b7473cc">ruby_options</a> (int <a class="el" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, char **<a class="el" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>)</td></tr>
+<tr class="separator:acd93e4bc6640e7d8d1a20fff1b7473cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7391f82f34cb5c257464bbf203bc8a7"><td class="memItemLeft" align="right" valign="top">RUBY_EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#ab7391f82f34cb5c257464bbf203bc8a7">ruby_run_node</a> (void *)</td></tr>
+<tr class="separator:ab7391f82f34cb5c257464bbf203bc8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9e0a16f5e7e64a0f06524903bef428"><td class="memItemLeft" align="right" valign="top">RUBY_EXTERN void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#a6d9e0a16f5e7e64a0f06524903bef428">ruby_init_ext</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *<a class="el" href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a>, void(*init)(void))</td></tr>
+<tr class="separator:a6d9e0a16f5e7e64a0f06524903bef428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb27dff06fe7fed747bd9b2821b4a0ed"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#acb27dff06fe7fed747bd9b2821b4a0ed">init_golf</a> (VALUE arg)</td></tr>
+<tr class="separator:acb27dff06fe7fed747bd9b2821b4a0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0861eb74cb699a60cee626121a08b91f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#a0861eb74cb699a60cee626121a08b91f">goruby_options</a> (int <a class="el" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, char **<a class="el" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>)</td></tr>
+<tr class="separator:a0861eb74cb699a60cee626121a08b91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac714967c59f29b9c77684d369991b18c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="goruby_8c.html#ac714967c59f29b9c77684d369991b18c">goruby_run_node</a> (void *arg)</td></tr>
+<tr class="separator:ac714967c59f29b9c77684d369991b18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="ad306a5b66e3f0a8431e5b32330252db3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ruby_options&#160;&#160;&#160;<a class="el" href="goruby_8c.html#a0861eb74cb699a60cee626121a08b91f">goruby_options</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="goruby_8c_source.html">goruby.c</a> の <a class="el" href="goruby_8c_source.html#l00002">2</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a363efd3b81046ed07af9eeb1489bc30b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ruby_run_node&#160;&#160;&#160;<a class="el" href="goruby_8c.html#ac714967c59f29b9c77684d369991b18c">goruby_run_node</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="goruby_8c_source.html">goruby.c</a> の <a class="el" href="goruby_8c_source.html#l00003">3</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a0861eb74cb699a60cee626121a08b91f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* goruby_options </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="goruby_8c_source.html">goruby.c</a> の <a class="el" href="goruby_8c_source.html#l00028">28</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> cmd[] = <span class="stringliteral">&quot;END{require &#39;irb&#39;;IRB.start}&quot;</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span> rw[2], infd;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> *ret;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> ((isatty(0) &amp;&amp; isatty(1) &amp;&amp; isatty(2)) &amp;&amp; (pipe(rw) == 0)) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ssize_t n;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    infd = dup(0);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (infd &lt; 0) <span class="keywordflow">return</span> <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    dup2(rw[0], 0);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    close(rw[0]);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    n = write(rw[1], cmd, <span class="keyword">sizeof</span>(cmd) - 1);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    close(rw[1]);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    ret = n &gt; 0 ? <a class="code" href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a>(<a class="code" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="code" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>) : <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    dup2(infd, 0);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    close(infd);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a>(<a class="code" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="code" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="ttc" id="ruby_8c_html_ad1447518f4372828b8435ae82e48499e"><div class="ttname"><a href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00129">ruby.c:129</a></div></div>
+<div class="ttc" id="goruby_8c_html_ad306a5b66e3f0a8431e5b32330252db3"><div class="ttname"><a href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a></div><div class="ttdeci">#define ruby_options</div><div class="ttdef"><b>Definition:</b> <a href="goruby_8c_source.html#l00002">goruby.c:2</a></div></div>
+<div class="ttc" id="regenc_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00055">regenc.h:55</a></div></div>
+<div class="ttc" id="ruby_8c_html_af2efa898e9eed6fe6715279cb1ec35b0"><div class="ttname"><a href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00130">ruby.c:130</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ac714967c59f29b9c77684d369991b18c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int goruby_run_node </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="goruby_8c_source.html">goruby.c</a> の <a class="el" href="goruby_8c_source.html#l00053">53</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">int</span> state;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (NIL_P(<a class="code" href="eval_8c.html#a6aa7fb1169ed41978a16375b6f921b0e">rb_protect</a>(<a class="code" href="goruby_8c.html#acb27dff06fe7fed747bd9b2821b4a0ed">init_golf</a>, Qtrue, &amp;state))) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> state == <a class="code" href="error_8c.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a> ? <a class="code" href="eval__intern_8h.html#a73efe787c131b385070f25d18b7c9aa4">EXIT_FAILURE</a> : state;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="goruby_8c.html#a363efd3b81046ed07af9eeb1489bc30b">ruby_run_node</a>(arg);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="ttc" id="eval_8c_html_a6aa7fb1169ed41978a16375b6f921b0e"><div class="ttname"><a href="eval_8c.html#a6aa7fb1169ed41978a16375b6f921b0e">rb_protect</a></div><div class="ttdeci">VALUE rb_protect(VALUE(*proc)(VALUE), VALUE data, int *state)</div><div class="ttdef"><b>Definition:</b> <a href="eval_8c_source.html#l00867">eval.c:867</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_a73efe787c131b385070f25d18b7c9aa4"><div class="ttname"><a href="eval__intern_8h.html#a73efe787c131b385070f25d18b7c9aa4">EXIT_FAILURE</a></div><div class="ttdeci">#define EXIT_FAILURE</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00024">eval_intern.h:24</a></div></div>
+<div class="ttc" id="error_8c_html_a687984f47d8cce148d1b914d2b79612a"><div class="ttname"><a href="error_8c.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a></div><div class="ttdeci">#define EXIT_SUCCESS</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00027">error.c:27</a></div></div>
+<div class="ttc" id="goruby_8c_html_acb27dff06fe7fed747bd9b2821b4a0ed"><div class="ttname"><a href="goruby_8c.html#acb27dff06fe7fed747bd9b2821b4a0ed">init_golf</a></div><div class="ttdeci">static VALUE init_golf(VALUE arg)</div><div class="ttdef"><b>Definition:</b> <a href="goruby_8c_source.html#l00021">goruby.c:21</a></div></div>
+<div class="ttc" id="goruby_8c_html_a363efd3b81046ed07af9eeb1489bc30b"><div class="ttname"><a href="goruby_8c.html#a363efd3b81046ed07af9eeb1489bc30b">ruby_run_node</a></div><div class="ttdeci">#define ruby_run_node</div><div class="ttdef"><b>Definition:</b> <a href="goruby_8c_source.html#l00003">goruby.c:3</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a563800b2331cd0a129db8ed75fc2f4f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Init_golf </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acb27dff06fe7fed747bd9b2821b4a0ed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE init_golf </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="goruby_8c_source.html">goruby.c</a> の <a class="el" href="goruby_8c_source.html#l00021">21</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="goruby_8c.html#a6d9e0a16f5e7e64a0f06524903bef428">ruby_init_ext</a>(<span class="stringliteral">&quot;golf.so&quot;</span>, <a class="code" href="goruby_8c.html#a563800b2331cd0a129db8ed75fc2f4f3">Init_golf</a>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">return</span> arg;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="ttc" id="goruby_8c_html_a563800b2331cd0a129db8ed75fc2f4f3"><div class="ttname"><a href="goruby_8c.html#a563800b2331cd0a129db8ed75fc2f4f3">Init_golf</a></div><div class="ttdeci">void Init_golf(void)</div></div>
+<div class="ttc" id="goruby_8c_html_a6d9e0a16f5e7e64a0f06524903bef428"><div class="ttname"><a href="goruby_8c.html#a6d9e0a16f5e7e64a0f06524903bef428">ruby_init_ext</a></div><div class="ttdeci">RUBY_EXTERN void ruby_init_ext(const char *name, void(*init)(void))</div><div class="ttdef"><b>Definition:</b> <a href="load_8c_source.html#l01081">load.c:1081</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6d9e0a16f5e7e64a0f06524903bef428"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUBY_EXTERN void ruby_init_ext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(void)&#160;</td>
+          <td class="paramname"><em>init</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="load_8c_source.html">load.c</a> の <a class="el" href="load_8c_source.html#l01081">1081</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;{</div>
+<div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;    st_table *loading_tbl = <a class="code" href="load_8c.html#ada57c7f5625ca18fd51d3107603ca0eb">get_loading_table</a>();</div>
+<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;</div>
+<div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="load_8c.html#addbc60a14109eb0880b996a601c75dfc">rb_provided</a>(<a class="code" href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a>))</div>
+<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;    <a class="code" href="st_8c.html#a5a026e0f0fbb0375b83056f0124889ee">st_update</a>(loading_tbl, (st_data_t)<a class="code" href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a>, <a class="code" href="load_8c.html#a9de73006e8c7db707f0172bf6fc52683">register_init_ext</a>, (st_data_t)init);</div>
+<div class="line"><a name="l01088"></a><span class="lineno"> 1088</span>&#160;}</div>
+<div class="ttc" id="load_8c_html_a9de73006e8c7db707f0172bf6fc52683"><div class="ttname"><a href="load_8c.html#a9de73006e8c7db707f0172bf6fc52683">register_init_ext</a></div><div class="ttdeci">static int register_init_ext(st_data_t *key, st_data_t *value, st_data_t init, int existing)</div><div class="ttdef"><b>Definition:</b> <a href="load_8c_source.html#l01066">load.c:1066</a></div></div>
+<div class="ttc" id="st_8c_html_a5a026e0f0fbb0375b83056f0124889ee"><div class="ttname"><a href="st_8c.html#a5a026e0f0fbb0375b83056f0124889ee">st_update</a></div><div class="ttdeci">int st_update(st_table *table, st_data_t key, st_update_callback_func *func, st_data_t arg)</div><div class="ttdef"><b>Definition:</b> <a href="st_8c_source.html#l00836">st.c:836</a></div></div>
+<div class="ttc" id="load_8c_html_addbc60a14109eb0880b996a601c75dfc"><div class="ttname"><a href="load_8c.html#addbc60a14109eb0880b996a601c75dfc">rb_provided</a></div><div class="ttdeci">int rb_provided(const char *feature)</div><div class="ttdef"><b>Definition:</b> <a href="load_8c_source.html#l00519">load.c:519</a></div></div>
+<div class="ttc" id="load_8c_html_ada57c7f5625ca18fd51d3107603ca0eb"><div class="ttname"><a href="load_8c.html#ada57c7f5625ca18fd51d3107603ca0eb">get_loading_table</a></div><div class="ttdeci">static st_table * get_loading_table(void)</div><div class="ttdef"><b>Definition:</b> <a href="load_8c_source.html#l00178">load.c:178</a></div></div>
+<div class="ttc" id="symbol_8c_html_a392c96a032ae411c09950e557dc4097e"><div class="ttname"><a href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a></div><div class="ttdeci">const char name[3]</div><div class="ttdef"><b>Definition:</b> <a href="symbol_8c_source.html#l00056">symbol.c:56</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="acd93e4bc6640e7d8d1a20fff1b7473cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUBY_EXTERN void* ruby_options </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Processes command line arguments and compiles the Ruby source to execute.</p>
+<p>This function does: </p><ul>
+<li>Processes the given command line flags and arguments for ruby(1) </li>
+<li>compiles the source code from the given argument, -e or stdin, and </li>
+<li>returns the compiled source as an opaque pointer to an internal data structure</li>
+</ul>
+<dl class="section return"><dt>戻り値</dt><dd>an opaque pointer to the compiled source or an internal special value. </dd></dl>
+<dl class="section see"><dt>参照</dt><dd><a class="el" href="eval_8c.html#af1e7523c41d03fef5f1ed44b4a00c80f">ruby_executable_node()</a>. </dd></dl>
+
+<p> <a class="el" href="eval_8c_source.html">eval.c</a> の <a class="el" href="eval_8c_source.html#l00097">97</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">int</span> state;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> *<span class="keyword">volatile</span> iseq = 0;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ruby_init_stack((<span class="keywordtype">void</span> *)&amp;iseq);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="eval__intern_8h.html#ac0e28e3418925cd969f30157281642bf">PUSH_TAG</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> ((state = <a class="code" href="eval__intern_8h.html#a3441e3967c633da99c3dcd025494053e">EXEC_TAG</a>()) == 0) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="eval__intern_8h.html#ae04396c4a051215fa7a77469d9547933">SAVE_ROOT_JMPBUF</a>(<a class="code" href="vm__core_8h.html#aec678927729c3dcca12b2fae241158b0">GET_THREAD</a>(), iseq = <a class="code" href="ruby_8c.html#ad256d3e65e8db649bb88b817dd726faa">ruby_process_options</a>(<a class="code" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="code" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="internal_8h.html#ac5abc5929f7fc2c05cbbd8e5eab8b664">rb_clear_trace_func</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    state = <a class="code" href="eval__error_8c.html#a2a46db9211e42178912e4c974c391238">error_handle</a>(state);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    iseq = (<span class="keywordtype">void</span> *)INT2FIX(state);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="eval__intern_8h.html#accfba89bbfaf289dc5fff2d2f235f2f1">POP_TAG</a>();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> iseq;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="ttc" id="ruby_8c_html_ad256d3e65e8db649bb88b817dd726faa"><div class="ttname"><a href="ruby_8c.html#ad256d3e65e8db649bb88b817dd726faa">ruby_process_options</a></div><div class="ttdeci">void * ruby_process_options(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l01979">ruby.c:1979</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_ac0e28e3418925cd969f30157281642bf"><div class="ttname"><a href="eval__intern_8h.html#ac0e28e3418925cd969f30157281642bf">PUSH_TAG</a></div><div class="ttdeci">#define PUSH_TAG()</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00137">eval_intern.h:137</a></div></div>
+<div class="ttc" id="eval__error_8c_html_a2a46db9211e42178912e4c974c391238"><div class="ttname"><a href="eval__error_8c.html#a2a46db9211e42178912e4c974c391238">error_handle</a></div><div class="ttdeci">static int error_handle(int ex)</div><div class="ttdef"><b>Definition:</b> <a href="eval__error_8c_source.html#l00262">eval_error.c:262</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_a3441e3967c633da99c3dcd025494053e"><div class="ttname"><a href="eval__intern_8h.html#a3441e3967c633da99c3dcd025494053e">EXEC_TAG</a></div><div class="ttdeci">#define EXEC_TAG()</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00172">eval_intern.h:172</a></div></div>
+<div class="ttc" id="ruby_8c_html_ad1447518f4372828b8435ae82e48499e"><div class="ttname"><a href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00129">ruby.c:129</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_accfba89bbfaf289dc5fff2d2f235f2f1"><div class="ttname"><a href="eval__intern_8h.html#accfba89bbfaf289dc5fff2d2f235f2f1">POP_TAG</a></div><div class="ttdeci">#define POP_TAG()</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00138">eval_intern.h:138</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_ae04396c4a051215fa7a77469d9547933"><div class="ttname"><a href="eval__intern_8h.html#ae04396c4a051215fa7a77469d9547933">SAVE_ROOT_JMPBUF</a></div><div class="ttdeci">#define SAVE_ROOT_JMPBUF(th, stmt)</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00112">eval_intern.h:112</a></div></div>
+<div class="ttc" id="internal_8h_html_ac5abc5929f7fc2c05cbbd8e5eab8b664"><div class="ttname"><a href="internal_8h.html#ac5abc5929f7fc2c05cbbd8e5eab8b664">rb_clear_trace_func</a></div><div class="ttdeci">void rb_clear_trace_func(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__trace_8c_source.html#l00214">vm_trace.c:214</a></div></div>
+<div class="ttc" id="vm__core_8h_html_aec678927729c3dcca12b2fae241158b0"><div class="ttname"><a href="vm__core_8h.html#aec678927729c3dcca12b2fae241158b0">GET_THREAD</a></div><div class="ttdeci">static rb_thread_t * GET_THREAD(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l01058">vm_core.h:1058</a></div></div>
+<div class="ttc" id="ruby_8c_html_af2efa898e9eed6fe6715279cb1ec35b0"><div class="ttname"><a href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00130">ruby.c:130</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ab7391f82f34cb5c257464bbf203bc8a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUBY_EXTERN int ruby_run_node </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Runs the given compiled source and exits this process. </p><dl class="retval"><dt>戻り値</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>if successfully run the source </td></tr>
+    <tr><td class="paramname">non-zero</td><td>if an error occurred. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="eval_8c_source.html">eval.c</a> の <a class="el" href="eval_8c_source.html#l00307">307</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;{</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordtype">int</span> status;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="eval_8c.html#af1e7523c41d03fef5f1ed44b4a00c80f">ruby_executable_node</a>(n, &amp;status)) {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <a class="code" href="eval_8c.html#a9ed88aaffd7cc6e96903df0b31956d88">ruby_cleanup</a>(0);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> status;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="eval_8c.html#a9ed88aaffd7cc6e96903df0b31956d88">ruby_cleanup</a>(<a class="code" href="eval_8c.html#a37e32e7c9181dda6e68eb8e9627baf0c">ruby_exec_node</a>(n));</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}</div>
+<div class="ttc" id="eval_8c_html_a9ed88aaffd7cc6e96903df0b31956d88"><div class="ttname"><a href="eval_8c.html#a9ed88aaffd7cc6e96903df0b31956d88">ruby_cleanup</a></div><div class="ttdeci">int ruby_cleanup(volatile int ex)</div><div class="ttdef"><b>Definition:</b> <a href="eval_8c_source.html#l00161">eval.c:161</a></div></div>
+<div class="ttc" id="eval_8c_html_a37e32e7c9181dda6e68eb8e9627baf0c"><div class="ttname"><a href="eval_8c.html#a37e32e7c9181dda6e68eb8e9627baf0c">ruby_exec_node</a></div><div class="ttdeci">int ruby_exec_node(void *n)</div><div class="ttdef"><b>Definition:</b> <a href="eval_8c_source.html#l00319">eval.c:319</a></div></div>
+<div class="ttc" id="eval_8c_html_af1e7523c41d03fef5f1ed44b4a00c80f"><div class="ttname"><a href="eval_8c.html#af1e7523c41d03fef5f1ed44b4a00c80f">ruby_executable_node</a></div><div class="ttdeci">int ruby_executable_node(void *n, int *status)</div><div class="ttdef"><b>Definition:</b> <a href="eval_8c_source.html#l00286">eval.c:286</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分46秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: OnigToken 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li class="current"><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>クラス一覧</span></a></li>
+      <li><a href="classes.html"><span>クラス索引</span></a></li>
+      <li><a href="functions.html"><span>クラスメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="struct_onig_token-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">OnigToken 構造体</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a46f3343f204ac67de13f0a774284e476"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="regparse_8c.html#abdbce4de6f29a432a816baee4cce250d">TokenSyms</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_onig_token.html#a46f3343f204ac67de13f0a774284e476">type</a></td></tr>
+<tr class="separator:a46f3343f204ac67de13f0a774284e476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ac92059fef31b2d7932d04523f8c17"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_onig_token.html#a71ac92059fef31b2d7932d04523f8c17">escaped</a></td></tr>
+<tr class="separator:a71ac92059fef31b2d7932d04523f8c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a938bb7f9e071e3c6ce68480e3138a0cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_onig_token.html#a938bb7f9e071e3c6ce68480e3138a0cc">base</a></td></tr>
+<tr class="separator:a938bb7f9e071e3c6ce68480e3138a0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accba0041ec257e1619caefea1ea12d10"><td class="memItemLeft" align="right" valign="top">UChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_onig_token.html#accba0041ec257e1619caefea1ea12d10">backp</a></td></tr>
+<tr class="separator:accba0041ec257e1619caefea1ea12d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c75a18151c087c83c8b9c8c5dbdbccb"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:a5b810b9e721f49e84aa293359d8c66c3"><td class="memItemLeft" >&#160;&#160;&#160;UChar *&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a7bbb79ad3a0ff1e0c961df243ed45ae5">s</a></td></tr>
+<tr class="separator:a5b810b9e721f49e84aa293359d8c66c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9323c8b610f701ce032fe78304f14a6"><td class="memItemLeft" >&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#ac1f4ee5fa57d7ebbfa95642148efe0f5">c</a></td></tr>
+<tr class="separator:af9323c8b610f701ce032fe78304f14a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a1d8fc5be1b7906ae7ab94af017b28c"><td class="memItemLeft" >&#160;&#160;&#160;OnigCodePoint&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a40121b0193b6bbfbf9fdb88d82f1ea7a">code</a></td></tr>
+<tr class="separator:a6a1d8fc5be1b7906ae7ab94af017b28c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae744cda5c19ad7c29dfc56c916c749ba"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a32e81cc065be8daadb624bd85fd2dce8"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a35c9bc2e550c33f1909fa430fa3e7733">subtype</a></td></tr>
+<tr class="separator:a32e81cc065be8daadb624bd85fd2dce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528567f3af76cc4531c1ddfebc7637f0"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a19cdcd57552bcd2abe7307db1e11d602">ascii_range</a></td></tr>
+<tr class="separator:a528567f3af76cc4531c1ddfebc7637f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae744cda5c19ad7c29dfc56c916c749ba"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a28378e2d731cee1dadb7098c122ba466">anchor</a></td></tr>
+<tr class="separator:ae744cda5c19ad7c29dfc56c916c749ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368e03d3eb52c40472d87d8efe2e3bbf"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a3cd5a04753152b7238ddb7c7a780d5aa"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#aafb507fa1ed9d59f26e86a849f3a712a">lower</a></td></tr>
+<tr class="separator:a3cd5a04753152b7238ddb7c7a780d5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97fe7d78681ea5e1d450c66d61a8b3c"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a5ff91b0feca47ff5b69a2643e26b505f">upper</a></td></tr>
+<tr class="separator:af97fe7d78681ea5e1d450c66d61a8b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af179bfe1830723cb15af309852fc0bd5"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#aeaeab9aa50540ededbd16587f10f4f96">greedy</a></td></tr>
+<tr class="separator:af179bfe1830723cb15af309852fc0bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f29490b963a49ee6f5b49188284cb7"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#abe5468558845f1011fda84708d816027">possessive</a></td></tr>
+<tr class="separator:a41f29490b963a49ee6f5b49188284cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368e03d3eb52c40472d87d8efe2e3bbf"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a997dce6f32cdef1ed47bde22f39a6ac6">repeat</a></td></tr>
+<tr class="separator:a368e03d3eb52c40472d87d8efe2e3bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cbefe67ebdab62dcf97d2e304179101"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:ac3c0000d29cd1894ae1f250bcab338e0"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a4bf7ba1e0aa0dfe95c28a343bba5c651">num</a></td></tr>
+<tr class="separator:ac3c0000d29cd1894ae1f250bcab338e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65dbc702606640a5337713dc94ef4441"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a034ded8e83d0572f2aca51f18134c6a1">ref1</a></td></tr>
+<tr class="separator:a65dbc702606640a5337713dc94ef4441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afd247f550994633b22a87e20d1dbd2"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int *&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a4144217e14dfde4e4c0dce1edb505ac8">refs</a></td></tr>
+<tr class="separator:a5afd247f550994633b22a87e20d1dbd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a299165837f330d864baf3e9ea7e66ebc"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a9f3acf29111ac66a1c3011c71eb82a64">by_name</a></td></tr>
+<tr class="separator:a299165837f330d864baf3e9ea7e66ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a015d143e8b4b3dbd5feb9ff63783da1f"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a4d30c66fba32b30e7b49288aa8acf914">exist_level</a></td></tr>
+<tr class="separator:a015d143e8b4b3dbd5feb9ff63783da1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014bd715ec14132b9a1b114a34d623c6"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#af784e70e0320ea39fd093686432f8eea">level</a></td></tr>
+<tr class="separator:a014bd715ec14132b9a1b114a34d623c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cbefe67ebdab62dcf97d2e304179101"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#ad5018482ce386ee475f0e10e34bc74ec">backref</a></td></tr>
+<tr class="separator:a5cbefe67ebdab62dcf97d2e304179101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac31466331a02f8d696d5d7db41f078a1"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a6c99430174aebbda80f6948dfbd49d63"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;UChar *&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a7984fd71874118d96468dbe178fbaa17">name</a></td></tr>
+<tr class="separator:a6c99430174aebbda80f6948dfbd49d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50c0eaf9fab8080c11c901ce42a011d6"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;UChar *&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#aaf0bc073cfae45a2843eab484bf0c515">name_end</a></td></tr>
+<tr class="separator:a50c0eaf9fab8080c11c901ce42a011d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357f148abaab4574f99720b2f702fe21"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#acbef04581e0e9d663faa615877874abb">gnum</a></td></tr>
+<tr class="separator:a357f148abaab4574f99720b2f702fe21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31723d5d79b544fb676e1f441552ba84"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a545c12ac909fe71afb358691930b3c56">rel</a></td></tr>
+<tr class="separator:a31723d5d79b544fb676e1f441552ba84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac31466331a02f8d696d5d7db41f078a1"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#ac45440ccc606e7a083f7ecbbd65db597">call</a></td></tr>
+<tr class="separator:ac31466331a02f8d696d5d7db41f078a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed32e39deff2080c354b7d3d4bf2db20"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a7463a25c053461a70420937fccc0657b"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a4a2ccb61fe5148f04949d8b9f4a6fb99">ctype</a></td></tr>
+<tr class="separator:a7463a25c053461a70420937fccc0657b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6178cd9408c595c72308c970c461842"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#afc1fc8893a20ea01ce98dca3304c76e3">not</a></td></tr>
+<tr class="separator:ad6178cd9408c595c72308c970c461842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed32e39deff2080c354b7d3d4bf2db20"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="struct_onig_token.html#a35bc4d32c975d231b8c7a926eb218683">prop</a></td></tr>
+<tr class="separator:aed32e39deff2080c354b7d3d4bf2db20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c75a18151c087c83c8b9c8c5dbdbccb"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_onig_token.html#a4c75a18151c087c83c8b9c8c5dbdbccb">u</a></td></tr>
+<tr class="separator:a4c75a18151c087c83c8b9c8c5dbdbccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock">
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02396">2396</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">メンバ詳解</h2>
+<a class="anchor" id="a28378e2d731cee1dadb7098c122ba466"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   OnigToken::anchor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19cdcd57552bcd2abe7307db1e11d602"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::ascii_range</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02407">2407</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="accba0041ec257e1619caefea1ea12d10"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UChar* OnigToken::backp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02400">2400</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad5018482ce386ee475f0e10e34bc74ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   OnigToken::backref</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a938bb7f9e071e3c6ce68480e3138a0cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::base</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02399">2399</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f3acf29111ac66a1c3011c71eb82a64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::by_name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02419">2419</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac1f4ee5fa57d7ebbfa95642148efe0f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::c</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02403">2403</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac45440ccc606e7a083f7ecbbd65db597"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   OnigToken::call</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a40121b0193b6bbfbf9fdb88d82f1ea7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">OnigCodePoint OnigToken::code</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02404">2404</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4a2ccb61fe5148f04949d8b9f4a6fb99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::ctype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02432">2432</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a71ac92059fef31b2d7932d04523f8c17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::escaped</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02398">2398</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4d30c66fba32b30e7b49288aa8acf914"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::exist_level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02421">2421</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="acbef04581e0e9d663faa615877874abb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::gnum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02428">2428</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aeaeab9aa50540ededbd16587f10f4f96"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::greedy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02412">2412</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="af784e70e0320ea39fd093686432f8eea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02422">2422</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aafb507fa1ed9d59f26e86a849f3a712a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::lower</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02410">2410</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7984fd71874118d96468dbe178fbaa17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UChar* OnigToken::name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02426">2426</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf0bc073cfae45a2843eab484bf0c515"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UChar* OnigToken::name_end</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02427">2427</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="afc1fc8893a20ea01ce98dca3304c76e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::not</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02433">2433</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4bf7ba1e0aa0dfe95c28a343bba5c651"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::num</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02416">2416</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="abe5468558845f1011fda84708d816027"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::possessive</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02413">2413</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a35bc4d32c975d231b8c7a926eb218683"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   OnigToken::prop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a034ded8e83d0572f2aca51f18134c6a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::ref1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02417">2417</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4144217e14dfde4e4c0dce1edb505ac8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* OnigToken::refs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02418">2418</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a545c12ac909fe71afb358691930b3c56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::rel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02429">2429</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a997dce6f32cdef1ed47bde22f39a6ac6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   OnigToken::repeat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7bbb79ad3a0ff1e0c961df243ed45ae5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UChar* OnigToken::s</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02402">2402</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a35c9bc2e550c33f1909fa430fa3e7733"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::subtype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02406">2406</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a46f3343f204ac67de13f0a774284e476"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="regparse_8c.html#abdbce4de6f29a432a816baee4cce250d">TokenSyms</a> OnigToken::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02397">2397</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4c75a18151c087c83c8b9c8c5dbdbccb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union { ... }   OnigToken::u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ff91b0feca47ff5b69a2643e26b505f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OnigToken::upper</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="regparse_8c_source.html">regparse.c</a> の <a class="el" href="regparse_8c_source.html#l02411">2411</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li><a class="el" href="regparse_8c_source.html">regparse.c</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

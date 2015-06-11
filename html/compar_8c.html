@@ -1,0 +1,709 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: compar.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a> &#124;
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">compar.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;ruby/ruby.h&quot;</code><br />
+</div>
+<p><a href="compar_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a9cfa42d4b79c89d68c53be8b2150a503"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a9cfa42d4b79c89d68c53be8b2150a503">rb_intern</a>(str)&#160;&#160;&#160;rb_intern_const(str)</td></tr>
+<tr class="separator:a9cfa42d4b79c89d68c53be8b2150a503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:ae167ee135d7bb4178188c2ad356dfcc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ae167ee135d7bb4178188c2ad356dfcc7">rb_cmperr</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:ae167ee135d7bb4178188c2ad356dfcc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac30f6079e628ab726d1c8d2de2df230c"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ac30f6079e628ab726d1c8d2de2df230c">invcmp_recursive</a> (VALUE x, VALUE y, int recursive)</td></tr>
+<tr class="separator:ac30f6079e628ab726d1c8d2de2df230c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a78a9ceacc33447846fee87e590fa7a"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a3a78a9ceacc33447846fee87e590fa7a">rb_invcmp</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:a3a78a9ceacc33447846fee87e590fa7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab788bd34845dff59a2743517149a0ae9"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ab788bd34845dff59a2743517149a0ae9">cmp_eq_recursive</a> (VALUE arg1, VALUE arg2, int recursive)</td></tr>
+<tr class="separator:ab788bd34845dff59a2743517149a0ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad15b316c0033742a7e1a48b52aba59d0"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ad15b316c0033742a7e1a48b52aba59d0">cmp_equal</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:ad15b316c0033742a7e1a48b52aba59d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e9ab3c8e7085f14db5e63c3cb3702f"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a66e9ab3c8e7085f14db5e63c3cb3702f">cmp_gt</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:a66e9ab3c8e7085f14db5e63c3cb3702f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10d7ee6b7cea8d869f2886dce31c8924"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a10d7ee6b7cea8d869f2886dce31c8924">cmp_ge</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:a10d7ee6b7cea8d869f2886dce31c8924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84ca3bc0f87fedcb6c2650decb1aeaac"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a84ca3bc0f87fedcb6c2650decb1aeaac">cmp_lt</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:a84ca3bc0f87fedcb6c2650decb1aeaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c9e986bd55bd3421069e2481d6a047"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#aa8c9e986bd55bd3421069e2481d6a047">cmp_le</a> (VALUE x, VALUE y)</td></tr>
+<tr class="separator:aa8c9e986bd55bd3421069e2481d6a047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b3d837bb19c4835ad5285ab1b2262e"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ae6b3d837bb19c4835ad5285ab1b2262e">cmp_between</a> (VALUE x, VALUE <a class="el" href="strftime_8c.html#a2f2bf96d77a187bd4446b4ba3864470d">min</a>, VALUE <a class="el" href="strftime_8c.html#aa5d960354774dc177393b360c0f90aa9">max</a>)</td></tr>
+<tr class="separator:ae6b3d837bb19c4835ad5285ab1b2262e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a00f45fb9b207d53d91db5e9fa69c65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a9a00f45fb9b207d53d91db5e9fa69c65">Init_Comparable</a> (void)</td></tr>
+<tr class="separator:a9a00f45fb9b207d53d91db5e9fa69c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:ad8e98e5d1395d6a879bc0a2131916fd4"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a></td></tr>
+<tr class="separator:ad8e98e5d1395d6a879bc0a2131916fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087ca087a20f74015a46cf31400c675e"><td class="memItemLeft" align="right" valign="top">static ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></td></tr>
+<tr class="separator:a087ca087a20f74015a46cf31400c675e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="a9cfa42d4b79c89d68c53be8b2150a503"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rb_intern</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">str</td><td>)</td>
+          <td>&#160;&#160;&#160;rb_intern_const(str)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="ae6b3d837bb19c4835ad5285ab1b2262e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_between </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00169">169</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">if</span> (RTEST(<a class="code" href="compar_8c.html#a84ca3bc0f87fedcb6c2650decb1aeaac">cmp_lt</a>(x, <a class="code" href="strftime_8c.html#a2f2bf96d77a187bd4446b4ba3864470d">min</a>))) <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (RTEST(<a class="code" href="compar_8c.html#a66e9ab3c8e7085f14db5e63c3cb3702f">cmp_gt</a>(x, <a class="code" href="strftime_8c.html#aa5d960354774dc177393b360c0f90aa9">max</a>))) <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
+<div class="ttc" id="compar_8c_html_a66e9ab3c8e7085f14db5e63c3cb3702f"><div class="ttname"><a href="compar_8c.html#a66e9ab3c8e7085f14db5e63c3cb3702f">cmp_gt</a></div><div class="ttdeci">static VALUE cmp_gt(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00094">compar.c:94</a></div></div>
+<div class="ttc" id="strftime_8c_html_aa5d960354774dc177393b360c0f90aa9"><div class="ttname"><a href="strftime_8c.html#aa5d960354774dc177393b360c0f90aa9">max</a></div><div class="ttdeci">static int max(int a, int b)</div><div class="ttdef"><b>Definition:</b> <a href="strftime_8c_source.html#l00141">strftime.c:141</a></div></div>
+<div class="ttc" id="strftime_8c_html_a2f2bf96d77a187bd4446b4ba3864470d"><div class="ttname"><a href="strftime_8c.html#a2f2bf96d77a187bd4446b4ba3864470d">min</a></div><div class="ttdeci">static int min(int a, int b)</div><div class="ttdef"><b>Definition:</b> <a href="strftime_8c_source.html#l00131">strftime.c:131</a></div></div>
+<div class="ttc" id="compar_8c_html_a84ca3bc0f87fedcb6c2650decb1aeaac"><div class="ttname"><a href="compar_8c.html#a84ca3bc0f87fedcb6c2650decb1aeaac">cmp_lt</a></div><div class="ttdeci">static VALUE cmp_lt(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00128">compar.c:128</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ab788bd34845dff59a2743517149a0ae9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_eq_recursive </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>arg1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>arg2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>recursive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00054">54</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (recursive) <span class="keywordflow">return</span> Qnil;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__eval_8c.html#a16134fd0630301596954fc3a077f0777">rb_funcallv</a>(arg1, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, &amp;arg2);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="ttc" id="vm__eval_8c_html_a16134fd0630301596954fc3a077f0777"><div class="ttname"><a href="vm__eval_8c.html#a16134fd0630301596954fc3a077f0777">rb_funcallv</a></div><div class="ttdeci">VALUE rb_funcallv(VALUE recv, ID mid, int argc, const VALUE *argv)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00831">vm_eval.c:831</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad15b316c0033742a7e1a48b52aba59d0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_equal </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00073">73</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    VALUE c;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (x == y) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    c = <a class="code" href="thread_8c.html#a8721d55ec5a34ca39d689dbfcb722ac4">rb_exec_recursive_paired_outer</a>(<a class="code" href="compar_8c.html#ab788bd34845dff59a2743517149a0ae9">cmp_eq_recursive</a>, x, y, y);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (NIL_P(c)) <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(c, x, y) == 0) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+<div class="ttc" id="thread_8c_html_a8721d55ec5a34ca39d689dbfcb722ac4"><div class="ttname"><a href="thread_8c.html#a8721d55ec5a34ca39d689dbfcb722ac4">rb_exec_recursive_paired_outer</a></div><div class="ttdeci">VALUE rb_exec_recursive_paired_outer(VALUE(*func)(VALUE, VALUE, int), VALUE obj, VALUE paired_obj, VALUE arg)</div><div class="ttdef"><b>Definition:</b> <a href="thread_8c_source.html#l04928">thread.c:4928</a></div></div>
+<div class="ttc" id="compar_8c_html_ab788bd34845dff59a2743517149a0ae9"><div class="ttname"><a href="compar_8c.html#ab788bd34845dff59a2743517149a0ae9">cmp_eq_recursive</a></div><div class="ttdeci">static VALUE cmp_eq_recursive(VALUE arg1, VALUE arg2, int recursive)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00054">compar.c:54</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a10d7ee6b7cea8d869f2886dce31c8924"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_ge </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00111">111</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    VALUE c = <a class="code" href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a>(x, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, y);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(c, x, y) &gt;= 0) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+<div class="ttc" id="vm__eval_8c_html_a0e619febdba1807eb2aa51ae94e6f0d8"><div class="ttname"><a href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a></div><div class="ttdeci">VALUE rb_funcall(VALUE recv, ID mid, int n,...)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00800">vm_eval.c:800</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a66e9ab3c8e7085f14db5e63c3cb3702f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_gt </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00094">94</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    VALUE c = <a class="code" href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a>(x, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, y);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(c, x, y) &gt; 0) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+<div class="ttc" id="vm__eval_8c_html_a0e619febdba1807eb2aa51ae94e6f0d8"><div class="ttname"><a href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a></div><div class="ttdeci">VALUE rb_funcall(VALUE recv, ID mid, int n,...)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00800">vm_eval.c:800</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aa8c9e986bd55bd3421069e2481d6a047"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_le </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00145">145</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    VALUE c = <a class="code" href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a>(x, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, y);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(c, x, y) &lt;= 0) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+<div class="ttc" id="vm__eval_8c_html_a0e619febdba1807eb2aa51ae94e6f0d8"><div class="ttname"><a href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a></div><div class="ttdeci">VALUE rb_funcall(VALUE recv, ID mid, int n,...)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00800">vm_eval.c:800</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a84ca3bc0f87fedcb6c2650decb1aeaac"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE cmp_lt </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00128">128</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    VALUE c = <a class="code" href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a>(x, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, y);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(c, x, y) &lt; 0) <span class="keywordflow">return</span> Qtrue;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">return</span> Qfalse;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+<div class="ttc" id="vm__eval_8c_html_a0e619febdba1807eb2aa51ae94e6f0d8"><div class="ttname"><a href="vm__eval_8c.html#a0e619febdba1807eb2aa51ae94e6f0d8">rb_funcall</a></div><div class="ttdeci">VALUE rb_funcall(VALUE recv, ID mid, int n,...)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00800">vm_eval.c:800</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a9a00f45fb9b207d53d91db5e9fa69c65"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Init_Comparable </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00216">216</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="preprocessor">#undef rb_intern</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#define rb_intern(str) rb_intern_const(str)</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a> = <a class="code" href="group__class.html#ga911071d40f9312e49a774ea0e1b12869">rb_define_module</a>(<span class="stringliteral">&quot;Comparable&quot;</span>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;==&quot;</span>, <a class="code" href="compar_8c.html#ad15b316c0033742a7e1a48b52aba59d0">cmp_equal</a>, 1);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;&gt;&quot;</span>, <a class="code" href="compar_8c.html#a66e9ab3c8e7085f14db5e63c3cb3702f">cmp_gt</a>, 1);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;&gt;=&quot;</span>, <a class="code" href="compar_8c.html#a10d7ee6b7cea8d869f2886dce31c8924">cmp_ge</a>, 1);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;&lt;&quot;</span>, <a class="code" href="compar_8c.html#a84ca3bc0f87fedcb6c2650decb1aeaac">cmp_lt</a>, 1);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;&lt;=&quot;</span>, <a class="code" href="compar_8c.html#aa8c9e986bd55bd3421069e2481d6a047">cmp_le</a>, 1);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <a class="code" href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a>(<a class="code" href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a>, <span class="stringliteral">&quot;between?&quot;</span>, <a class="code" href="compar_8c.html#ae6b3d837bb19c4835ad5285ab1b2262e">cmp_between</a>, 2);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a> = <a class="code" href="compar_8c.html#a9cfa42d4b79c89d68c53be8b2150a503">rb_intern</a>(<span class="stringliteral">&quot;&lt;=&gt;&quot;</span>);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
+<div class="ttc" id="compar_8c_html_a66e9ab3c8e7085f14db5e63c3cb3702f"><div class="ttname"><a href="compar_8c.html#a66e9ab3c8e7085f14db5e63c3cb3702f">cmp_gt</a></div><div class="ttdeci">static VALUE cmp_gt(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00094">compar.c:94</a></div></div>
+<div class="ttc" id="compar_8c_html_aa8c9e986bd55bd3421069e2481d6a047"><div class="ttname"><a href="compar_8c.html#aa8c9e986bd55bd3421069e2481d6a047">cmp_le</a></div><div class="ttdeci">static VALUE cmp_le(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00145">compar.c:145</a></div></div>
+<div class="ttc" id="compar_8c_html_ad15b316c0033742a7e1a48b52aba59d0"><div class="ttname"><a href="compar_8c.html#ad15b316c0033742a7e1a48b52aba59d0">cmp_equal</a></div><div class="ttdeci">static VALUE cmp_equal(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00073">compar.c:73</a></div></div>
+<div class="ttc" id="compar_8c_html_a9cfa42d4b79c89d68c53be8b2150a503"><div class="ttname"><a href="compar_8c.html#a9cfa42d4b79c89d68c53be8b2150a503">rb_intern</a></div><div class="ttdeci">#define rb_intern(str)</div></div>
+<div class="ttc" id="compar_8c_html_ad8e98e5d1395d6a879bc0a2131916fd4"><div class="ttname"><a href="compar_8c.html#ad8e98e5d1395d6a879bc0a2131916fd4">rb_mComparable</a></div><div class="ttdeci">VALUE rb_mComparable</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00014">compar.c:14</a></div></div>
+<div class="ttc" id="compar_8c_html_ae6b3d837bb19c4835ad5285ab1b2262e"><div class="ttname"><a href="compar_8c.html#ae6b3d837bb19c4835ad5285ab1b2262e">cmp_between</a></div><div class="ttdeci">static VALUE cmp_between(VALUE x, VALUE min, VALUE max)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00169">compar.c:169</a></div></div>
+<div class="ttc" id="compar_8c_html_a10d7ee6b7cea8d869f2886dce31c8924"><div class="ttname"><a href="compar_8c.html#a10d7ee6b7cea8d869f2886dce31c8924">cmp_ge</a></div><div class="ttdeci">static VALUE cmp_ge(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00111">compar.c:111</a></div></div>
+<div class="ttc" id="compar_8c_html_a84ca3bc0f87fedcb6c2650decb1aeaac"><div class="ttname"><a href="compar_8c.html#a84ca3bc0f87fedcb6c2650decb1aeaac">cmp_lt</a></div><div class="ttdeci">static VALUE cmp_lt(VALUE x, VALUE y)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00128">compar.c:128</a></div></div>
+<div class="ttc" id="group__class_html_ga911071d40f9312e49a774ea0e1b12869"><div class="ttname"><a href="group__class.html#ga911071d40f9312e49a774ea0e1b12869">rb_define_module</a></div><div class="ttdeci">VALUE rb_define_module(const char *name)</div><div class="ttdef"><b>Definition:</b> <a href="class_8c_source.html#l00743">class.c:743</a></div></div>
+<div class="ttc" id="group__defmethod_html_ga118dc7abcdb97f56fe35727ac0ff6eb8"><div class="ttname"><a href="group__defmethod.html#ga118dc7abcdb97f56fe35727ac0ff6eb8">rb_define_method</a></div><div class="ttdeci">void rb_define_method(VALUE klass, const char *name, VALUE(*func)(ANYARGS), int argc)</div><div class="ttdef"><b>Definition:</b> <a href="class_8c_source.html#l01479">class.c:1479</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ac30f6079e628ab726d1c8d2de2df230c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE invcmp_recursive </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>recursive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00034">34</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> (recursive) <span class="keywordflow">return</span> Qnil;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__eval_8c.html#a631212f137255e4f31b65c7d51d0cb87">rb_check_funcall</a>(y, <a class="code" href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a>, 1, &amp;x);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="ttc" id="vm__eval_8c_html_a631212f137255e4f31b65c7d51d0cb87"><div class="ttname"><a href="vm__eval_8c.html#a631212f137255e4f31b65c7d51d0cb87">rb_check_funcall</a></div><div class="ttdeci">VALUE rb_check_funcall(VALUE recv, ID mid, int argc, const VALUE *argv)</div><div class="ttdef"><b>Definition:</b> <a href="vm__eval_8c_source.html#l00438">vm_eval.c:438</a></div></div>
+<div class="ttc" id="compar_8c_html_a087ca087a20f74015a46cf31400c675e"><div class="ttname"><a href="compar_8c.html#a087ca087a20f74015a46cf31400c675e">cmp</a></div><div class="ttdeci">static ID cmp</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00016">compar.c:16</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae167ee135d7bb4178188c2ad356dfcc7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_cmperr </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00019">19</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    VALUE <a class="code" href="variable_8c.html#a5a0414c0b73009545015e262e917e59e">classname</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> (SPECIAL_CONST_P(y) || BUILTIN_TYPE(y) == T_FLOAT) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    classname = <a class="code" href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a>(y);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    classname = <a class="code" href="object_8c.html#a9338e4719b257b9dbe33c829306c317f">rb_obj_class</a>(y);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="error_8c.html#a0f771a2840561f1838169b3d7d4616f3">rb_raise</a>(<a class="code" href="error_8c.html#ab5e2a9fec766c75176fbb262bfe6a596">rb_eArgError</a>, <span class="stringliteral">&quot;comparison of %&quot;</span>PRIsVALUE<span class="stringliteral">&quot; with %&quot;</span>PRIsVALUE<span class="stringliteral">&quot; failed&quot;</span>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;         <a class="code" href="object_8c.html#a9338e4719b257b9dbe33c829306c317f">rb_obj_class</a>(x), classname);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="ttc" id="variable_8c_html_a5a0414c0b73009545015e262e917e59e"><div class="ttname"><a href="variable_8c.html#a5a0414c0b73009545015e262e917e59e">classname</a></div><div class="ttdeci">static VALUE classname(VALUE klass, int *permanent)</div><div class="ttdef"><b>Definition:</b> <a href="variable_8c_source.html#l00176">variable.c:176</a></div></div>
+<div class="ttc" id="object_8c_html_a9e2095c762dfd7aa2710e49896687679"><div class="ttname"><a href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a></div><div class="ttdeci">VALUE rb_inspect(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00472">object.c:472</a></div></div>
+<div class="ttc" id="error_8c_html_a0f771a2840561f1838169b3d7d4616f3"><div class="ttname"><a href="error_8c.html#a0f771a2840561f1838169b3d7d4616f3">rb_raise</a></div><div class="ttdeci">void rb_raise(VALUE exc, const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l01932">error.c:1932</a></div></div>
+<div class="ttc" id="object_8c_html_a9338e4719b257b9dbe33c829306c317f"><div class="ttname"><a href="object_8c.html#a9338e4719b257b9dbe33c829306c317f">rb_obj_class</a></div><div class="ttdeci">VALUE rb_obj_class(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00226">object.c:226</a></div></div>
+<div class="ttc" id="error_8c_html_ab5e2a9fec766c75176fbb262bfe6a596"><div class="ttname"><a href="error_8c.html#ab5e2a9fec766c75176fbb262bfe6a596">rb_eArgError</a></div><div class="ttdeci">VALUE rb_eArgError</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00623">error.c:623</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a3a78a9ceacc33447846fee87e590fa7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_invcmp </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00041">41</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    VALUE invcmp = <a class="code" href="thread_8c.html#ac029739bb809529487f4851cb281e7b0">rb_exec_recursive</a>(<a class="code" href="compar_8c.html#ac30f6079e628ab726d1c8d2de2df230c">invcmp_recursive</a>, x, y);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (invcmp == Qundef || NIL_P(invcmp)) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> Qnil;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> result = -<a class="code" href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a>(invcmp, x, y);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> INT2FIX(result);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="ttc" id="compar_8c_html_ac30f6079e628ab726d1c8d2de2df230c"><div class="ttname"><a href="compar_8c.html#ac30f6079e628ab726d1c8d2de2df230c">invcmp_recursive</a></div><div class="ttdeci">static VALUE invcmp_recursive(VALUE x, VALUE y, int recursive)</div><div class="ttdef"><b>Definition:</b> <a href="compar_8c_source.html#l00034">compar.c:34</a></div></div>
+<div class="ttc" id="thread_8c_html_ac029739bb809529487f4851cb281e7b0"><div class="ttname"><a href="thread_8c.html#ac029739bb809529487f4851cb281e7b0">rb_exec_recursive</a></div><div class="ttdeci">VALUE rb_exec_recursive(VALUE(*func)(VALUE, VALUE, int), VALUE obj, VALUE arg)</div><div class="ttdef"><b>Definition:</b> <a href="thread_8c_source.html#l04893">thread.c:4893</a></div></div>
+<div class="ttc" id="bignum_8c_html_a178460e9f3ea7ee183fe951123a08a50"><div class="ttname"><a href="bignum_8c.html#a178460e9f3ea7ee183fe951123a08a50">rb_cmpint</a></div><div class="ttdeci">int rb_cmpint(VALUE val, VALUE a, VALUE b)</div><div class="ttdef"><b>Definition:</b> <a href="bignum_8c_source.html#l02908">bignum.c:2908</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">変数詳解</h2>
+<a class="anchor" id="a087ca087a20f74015a46cf31400c675e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID cmp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00016">16</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad8e98e5d1395d6a879bc0a2131916fd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_mComparable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="compar_8c_source.html">compar.c</a> の <a class="el" href="compar_8c_source.html#l00014">14</a> 行目に定義があります。</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分40秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

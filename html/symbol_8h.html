@@ -1,0 +1,653 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: symbol.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a> &#124;
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">symbol.h ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="id_8h_source.html">id.h</a>&quot;</code><br />
+</div>
+<p><a href="symbol_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_symbol.html">RSymbol</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:aca629702b4c3c0f4f13858e6d73b2b35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aca629702b4c3c0f4f13858e6d73b2b35">DYNAMIC_ID_P</a>(id)&#160;&#160;&#160;(!(id&amp;<a class="el" href="id_8h.html#af94efe4356a6eed9ac971a1248627ce5">ID_STATIC_SYM</a>)&amp;&amp;id&gt;<a class="el" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>)</td></tr>
+<tr class="separator:aca629702b4c3c0f4f13858e6d73b2b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01199c17e5e51f2a030a942cecdfaae8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a01199c17e5e51f2a030a942cecdfaae8">STATIC_ID2SYM</a>(id)&#160;&#160;&#160;(((VALUE)(id)&lt;&lt;RUBY_SPECIAL_SHIFT)|SYMBOL_FLAG)</td></tr>
+<tr class="separator:a01199c17e5e51f2a030a942cecdfaae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5cdd1b421a4496123184194d74ef000"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#ae5cdd1b421a4496123184194d74ef000">RSYMBOL</a>(obj)&#160;&#160;&#160;(R_CAST(<a class="el" href="struct_r_symbol.html">RSymbol</a>)(obj))</td></tr>
+<tr class="separator:ae5cdd1b421a4496123184194d74ef000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5db02b120da701d1ed73fc08192a3a98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a5db02b120da701d1ed73fc08192a3a98">is_notop_id</a>(id)&#160;&#160;&#160;((id)&gt;<a class="el" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>)</td></tr>
+<tr class="separator:a5db02b120da701d1ed73fc08192a3a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe05eb6b7b2f2f735012a349f49c4c69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#abe05eb6b7b2f2f735012a349f49c4c69">is_local_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#ad76be6937fe27e0331cb5ff66c0d94ca">ID_LOCAL</a>)</td></tr>
+<tr class="separator:abe05eb6b7b2f2f735012a349f49c4c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c989c33902ce26ac5a769ab9859ffa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aa7c989c33902ce26ac5a769ab9859ffa">is_global_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a213f06511d6f5719cc0a625d9aa1bd32">ID_GLOBAL</a>)</td></tr>
+<tr class="separator:aa7c989c33902ce26ac5a769ab9859ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0e139999d70d80ad07178ebc0c15424"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#ad0e139999d70d80ad07178ebc0c15424">is_instance_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#abec98916456cd3faf05963cf2c8d9098">ID_INSTANCE</a>)</td></tr>
+<tr class="separator:ad0e139999d70d80ad07178ebc0c15424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2481b126efced59aff92031680a70596"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a2481b126efced59aff92031680a70596">is_attrset_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a7ea3b5e7f92094ad3f27a8585e4fc1db">ID_ATTRSET</a>)</td></tr>
+<tr class="separator:a2481b126efced59aff92031680a70596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42465fd45eabc7e20d3d7637460b9baf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a42465fd45eabc7e20d3d7637460b9baf">is_const_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a4aee1d3e78b30d117f1b58269e5afd4a">ID_CONST</a>)</td></tr>
+<tr class="separator:a42465fd45eabc7e20d3d7637460b9baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c0f4eec23a7f1b2845f70c14b648b9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a25c0f4eec23a7f1b2845f70c14b648b9">is_class_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a27f67f7d60c26b133a5be10363911af5">ID_CLASS</a>)</td></tr>
+<tr class="separator:a25c0f4eec23a7f1b2845f70c14b648b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d348f8d197ab35cb30bb4f30070330b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a8d348f8d197ab35cb30bb4f30070330b">is_junk_id</a>(id)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#aae62653c09515583c30005f2b6725c16">ID_JUNK</a>)</td></tr>
+<tr class="separator:a8d348f8d197ab35cb30bb4f30070330b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1a81f5e494b895972b8a9966eabe44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aaa1a81f5e494b895972b8a9966eabe44">is_local_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#ad76be6937fe27e0331cb5ff66c0d94ca">ID_LOCAL</a>)</td></tr>
+<tr class="separator:aaa1a81f5e494b895972b8a9966eabe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa731e449106a087eeb354f7957c375fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aa731e449106a087eeb354f7957c375fd">is_global_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a213f06511d6f5719cc0a625d9aa1bd32">ID_GLOBAL</a>)</td></tr>
+<tr class="separator:aa731e449106a087eeb354f7957c375fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5168330be80be1a2467901e812c03b8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#ab5168330be80be1a2467901e812c03b8">is_instance_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#abec98916456cd3faf05963cf2c8d9098">ID_INSTANCE</a>)</td></tr>
+<tr class="separator:ab5168330be80be1a2467901e812c03b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb66fb03e5ce84bfb697fdfeed2afc38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aeb66fb03e5ce84bfb697fdfeed2afc38">is_attrset_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a7ea3b5e7f92094ad3f27a8585e4fc1db">ID_ATTRSET</a>)</td></tr>
+<tr class="separator:aeb66fb03e5ce84bfb697fdfeed2afc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441ff006f977c7582698e99a582ecbdb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a441ff006f977c7582698e99a582ecbdb">is_const_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a4aee1d3e78b30d117f1b58269e5afd4a">ID_CONST</a>)</td></tr>
+<tr class="separator:a441ff006f977c7582698e99a582ecbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a9b50706a336a6949dcf78a1faf1f9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a8a9b50706a336a6949dcf78a1faf1f9e">is_class_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a27f67f7d60c26b133a5be10363911af5">ID_CLASS</a>)</td></tr>
+<tr class="separator:a8a9b50706a336a6949dcf78a1faf1f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103ca4d7c7a42128f6a462d325112089"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a103ca4d7c7a42128f6a462d325112089">is_junk_sym</a>(sym)&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#aae62653c09515583c30005f2b6725c16">ID_JUNK</a>)</td></tr>
+<tr class="separator:a103ca4d7c7a42128f6a462d325112089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:aef0f6cb5c3c2866a6e47b86f0abb6c7c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a> (ID id)</td></tr>
+<tr class="separator:aef0f6cb5c3c2866a6e47b86f0abb6c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e572bf2a619ab1c48c600ea88e087d2"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a> (VALUE sym)</td></tr>
+<tr class="separator:a0e572bf2a619ab1c48c600ea88e087d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36eab12a877b944edad3e6c45a46cf68"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#a36eab12a877b944edad3e6c45a46cf68">is_global_name_punct</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> int c)</td></tr>
+<tr class="separator:a36eab12a877b944edad3e6c45a46cf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb1df7f80fb5792d7d3ce6879fa4e3e"><td class="memItemLeft" align="right" valign="top">ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#aaeb1df7f80fb5792d7d3ce6879fa4e3e">rb_intern_cstr_without_pindown</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *, long, rb_encoding *)</td></tr>
+<tr class="separator:aaeb1df7f80fb5792d7d3ce6879fa4e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:af2a31cfe3cbe370d6ff76eb3d16cb9bd"><td class="memItemLeft" align="right" valign="top">RUBY_FUNC_EXPORTED <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol_8h.html#af2a31cfe3cbe370d6ff76eb3d16cb9bd">ruby_global_name_punct_bits</a> [(0x7e-0x20+31)/32]</td></tr>
+<tr class="separator:af2a31cfe3cbe370d6ff76eb3d16cb9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="aca629702b4c3c0f4f13858e6d73b2b35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DYNAMIC_ID_P</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(!(id&amp;<a class="el" href="id_8h.html#af94efe4356a6eed9ac971a1248627ce5">ID_STATIC_SYM</a>)&amp;&amp;id&gt;<a class="el" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00017">17</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2481b126efced59aff92031680a70596"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_attrset_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a7ea3b5e7f92094ad3f27a8585e4fc1db">ID_ATTRSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00047">47</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aeb66fb03e5ce84bfb697fdfeed2afc38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_attrset_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a7ea3b5e7f92094ad3f27a8585e4fc1db">ID_ATTRSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00071">71</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a25c0f4eec23a7f1b2845f70c14b648b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_class_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a27f67f7d60c26b133a5be10363911af5">ID_CLASS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00049">49</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8a9b50706a336a6949dcf78a1faf1f9e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_class_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a27f67f7d60c26b133a5be10363911af5">ID_CLASS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00073">73</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a42465fd45eabc7e20d3d7637460b9baf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_const_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a4aee1d3e78b30d117f1b58269e5afd4a">ID_CONST</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00048">48</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a441ff006f977c7582698e99a582ecbdb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_const_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a4aee1d3e78b30d117f1b58269e5afd4a">ID_CONST</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00072">72</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa7c989c33902ce26ac5a769ab9859ffa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_global_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#a213f06511d6f5719cc0a625d9aa1bd32">ID_GLOBAL</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00045">45</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa731e449106a087eeb354f7957c375fd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_global_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#a213f06511d6f5719cc0a625d9aa1bd32">ID_GLOBAL</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00069">69</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0e139999d70d80ad07178ebc0c15424"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_instance_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#abec98916456cd3faf05963cf2c8d9098">ID_INSTANCE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00046">46</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab5168330be80be1a2467901e812c03b8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_instance_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#abec98916456cd3faf05963cf2c8d9098">ID_INSTANCE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00070">70</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8d348f8d197ab35cb30bb4f30070330b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_junk_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#aae62653c09515583c30005f2b6725c16">ID_JUNK</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00050">50</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a103ca4d7c7a42128f6a462d325112089"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_junk_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#aae62653c09515583c30005f2b6725c16">ID_JUNK</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00074">74</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="abe05eb6b7b2f2f735012a349f49c4c69"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_local_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#aef0f6cb5c3c2866a6e47b86f0abb6c7c">id_type</a>(id)==<a class="el" href="id_8h.html#ad76be6937fe27e0331cb5ff66c0d94ca">ID_LOCAL</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00044">44</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aaa1a81f5e494b895972b8a9966eabe44"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_local_sym</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sym</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="symbol_8h.html#a0e572bf2a619ab1c48c600ea88e087d2">sym_type</a>(sym)==<a class="el" href="id_8h.html#ad76be6937fe27e0331cb5ff66c0d94ca">ID_LOCAL</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00068">68</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5db02b120da701d1ed73fc08192a3a98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_notop_id</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;((id)&gt;<a class="el" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00043">43</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5cdd1b421a4496123184194d74ef000"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RSYMBOL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">obj</td><td>)</td>
+          <td>&#160;&#160;&#160;(R_CAST(<a class="el" href="struct_r_symbol.html">RSymbol</a>)(obj))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00032">32</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a01199c17e5e51f2a030a942cecdfaae8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATIC_ID2SYM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">id</td><td>)</td>
+          <td>&#160;&#160;&#160;(((VALUE)(id)&lt;&lt;RUBY_SPECIAL_SHIFT)|SYMBOL_FLAG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00018">18</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="aef0f6cb5c3c2866a6e47b86f0abb6c7c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int id_type </td>
+          <td>(</td>
+          <td class="paramtype">ID&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00035">35</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">id</span>&lt;=<a class="code" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)(<span class="keywordtype">id</span>&amp;<a class="code" href="id_8h.html#aebd99ce63043772cfae5d386a5322c20">ID_SCOPE_MASK</a>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="ttc" id="id_8h_html_aebd99ce63043772cfae5d386a5322c20"><div class="ttname"><a href="id_8h.html#aebd99ce63043772cfae5d386a5322c20">ID_SCOPE_MASK</a></div><div class="ttdeci">#define ID_SCOPE_MASK</div><div class="ttdef"><b>Definition:</b> <a href="id_8h_source.html#l00032">id.h:32</a></div></div>
+<div class="ttc" id="id_8h_html_a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67"><div class="ttname"><a href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a></div><div class="ttdef"><b>Definition:</b> <a href="id_8h_source.html#l00206">id.h:206</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a36eab12a877b944edad3e6c45a46cf68"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int is_global_name_punct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> int&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00079">79</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (c &lt;= 0x20 || 0x7e &lt; c) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="symbol_8h.html#af2a31cfe3cbe370d6ff76eb3d16cb9bd">ruby_global_name_punct_bits</a>[(c - 0x20) / 32] &gt;&gt; (c % 32)) &amp; 1;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="ttc" id="symbol_8h_html_af2a31cfe3cbe370d6ff76eb3d16cb9bd"><div class="ttname"><a href="symbol_8h.html#af2a31cfe3cbe370d6ff76eb3d16cb9bd">ruby_global_name_punct_bits</a></div><div class="ttdeci">RUBY_FUNC_EXPORTED const unsigned int ruby_global_name_punct_bits[(0x7e-0x20+31)/32]</div><div class="ttdef"><b>Definition:</b> <a href="symbol_8h_source.html#l00076">symbol.h:76</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aaeb1df7f80fb5792d7d3ce6879fa4e3e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID rb_intern_cstr_without_pindown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rb_encoding *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0e572bf2a619ab1c48c600ea88e087d2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int sym_type </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>sym</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00053">53</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    ID id;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (STATIC_SYM_P(sym)) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">id</span> = RSHIFT(sym, RUBY_SPECIAL_SHIFT);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">id</span>&lt;=<a class="code" href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a>) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">id</span> = <a class="code" href="symbol_8h.html#ae5cdd1b421a4496123184194d74ef000">RSYMBOL</a>(sym)-&gt;id;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)(<span class="keywordtype">id</span>&amp;<a class="code" href="id_8h.html#aebd99ce63043772cfae5d386a5322c20">ID_SCOPE_MASK</a>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="ttc" id="id_8h_html_aebd99ce63043772cfae5d386a5322c20"><div class="ttname"><a href="id_8h.html#aebd99ce63043772cfae5d386a5322c20">ID_SCOPE_MASK</a></div><div class="ttdeci">#define ID_SCOPE_MASK</div><div class="ttdef"><b>Definition:</b> <a href="id_8h_source.html#l00032">id.h:32</a></div></div>
+<div class="ttc" id="symbol_8h_html_ae5cdd1b421a4496123184194d74ef000"><div class="ttname"><a href="symbol_8h.html#ae5cdd1b421a4496123184194d74ef000">RSYMBOL</a></div><div class="ttdeci">#define RSYMBOL(obj)</div><div class="ttdef"><b>Definition:</b> <a href="symbol_8h_source.html#l00032">symbol.h:32</a></div></div>
+<div class="ttc" id="id_8h_html_a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67"><div class="ttname"><a href="id_8h.html#a08dd4fbd61c5fde369edd59783f753b3a23ea907a6370479b32f4db146cf94d67">tLAST_OP_ID</a></div><div class="ttdef"><b>Definition:</b> <a href="id_8h_source.html#l00206">id.h:206</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">変数詳解</h2>
+<a class="anchor" id="af2a31cfe3cbe370d6ff76eb3d16cb9bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUBY_FUNC_EXPORTED <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> unsigned int ruby_global_name_punct_bits[(0x7e-0x20+31)/32]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="symbol_8h_source.html">symbol.h</a> の <a class="el" href="symbol_8h_source.html#l00076">76</a> 行目に定義があります。</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分04秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: Rubyとは</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li class="current"><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Rubyとは </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Rubyはシンプルかつ強力なオブジェクト指向スクリプト言語です． Rubyは純粋なオブジェクト指向言語として設計されているので， オブジェクト指向プログラミングを手軽に行う事が出来ます．もちろん普通の手続き型のプログラミングも可能です．</p>
+<p>Rubyはテキスト処理関係の能力などに優れ，Perlと同じくらい強力です．さらにシンプルな文法と， 例外処理やイテレータなどの機構によって，より分かりやすいプログラミングが出来ます．</p>
+<h2>Rubyの特長</h2>
+<ul>
+<li>シンプルな文法</li>
+<li>普通のオブジェクト指向機能(クラス，メソッドコールなど)</li>
+<li>特殊なオブジェクト指向機能(Mixin, 特異メソッドなど)</li>
+<li>演算子オーバーロード</li>
+<li>例外処理機能</li>
+<li>イテレータとクロージャ</li>
+<li>ガーベージコレクタ</li>
+<li>ダイナミックローディング (アーキテクチャによる)</li>
+<li>移植性が高い．多くのUnix-like/POSIX互換プラットフォーム上で動くだけでなく，Windows， Mac OS X，BeOSなどの上でも動く cf. <a href="http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/SupportedPlatformsJa">http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/SupportedPlatformsJa</a></li>
+</ul>
+<h2>入手法</h2>
+<h3>FTPで</h3>
+<p>以下の場所においてあります．</p>
+<p><a href="ftp://ftp.ruby-lang.org/pub/ruby/">ftp://ftp.ruby-lang.org/pub/ruby/</a></p>
+<h3>Subversionで</h3>
+<p>開発先端のソースコードは次のコマンドで取得できます． </p><pre class="fragment">$ svn co http://svn.ruby-lang.org/repos/ruby/trunk/ ruby
+</pre><p>他に開発中のブランチの一覧は次のコマンドで見られます． </p><pre class="fragment">$ svn ls http://svn.ruby-lang.org/repos/ruby/branches/
+</pre><h3>Gitで</h3>
+<p>SubversionのミラーをGitHubに公開しています． 以下のコマンドでリポジトリを取得できます． </p><pre class="fragment">$ git clone git://github.com/ruby/ruby.git
+</pre><h2>ホームページ</h2>
+<p>RubyのホームページのURLは</p>
+<p><a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a></p>
+<p>です．</p>
+<h2>メーリングリスト</h2>
+<p>Rubyのメーリングリストがあります．参加希望の方は</p>
+<p><a href="#" onclick="location.href='mai'+'lto:'+'rub'+'y-'+'lis'+'t-'+'req'+'ue'+'st@'+'ru'+'by-'+'la'+'ng.'+'or'+'g'; return false;">ruby-<span style="display: none;">.nosp@m.</span>list<span style="display: none;">.nosp@m.</span>-requ<span style="display: none;">.nosp@m.</span>est@<span style="display: none;">.nosp@m.</span>ruby-<span style="display: none;">.nosp@m.</span>lang<span style="display: none;">.nosp@m.</span>.org</a></p>
+<p>まで本文に </p><pre class="fragment">subscribe
+</pre><p>と書いて送って下さい．</p>
+<p>Ruby開発者向けメーリングリストもあります．こちらではrubyのバグ，将来の仕様拡張など実装上の問題について議論されています． 参加希望の方は</p>
+<p><a href="#" onclick="location.href='mai'+'lto:'+'rub'+'y-'+'dev'+'-r'+'equ'+'es'+'t@r'+'ub'+'y-l'+'an'+'g.o'+'rg'; return false;">ruby-<span style="display: none;">.nosp@m.</span>dev-<span style="display: none;">.nosp@m.</span>reque<span style="display: none;">.nosp@m.</span>st@r<span style="display: none;">.nosp@m.</span>uby-l<span style="display: none;">.nosp@m.</span>ang.<span style="display: none;">.nosp@m.</span>org</a></p>
+<p>までruby-listと同様の方法でメールしてください．</p>
+<p>Ruby拡張モジュールについて話し合うruby-extメーリングリストと数学関係の話題について話し合うruby-mathメーリングリストと 英語でrubyについて話し合うruby-talkメーリングリストもあります．参加方法はどれも同じです．</p>
+<h2>コンパイル・インストール</h2>
+<p>以下の手順で行ってください．</p>
+<ol type="1">
+<li>もし <code>configure</code> ファイルが見つからない，もしくは <code>configure.in</code> より古いようなら， <code>autoconf</code> を実行して 新しく <code>configure</code> を生成する</li>
+<li><p class="startli"><code>configure</code> を実行して <code>Makefile</code> などを生成する</p>
+<p class="startli">環境によってはデフォルトのCコンパイラ用オプションが付きます． <code>configure</code> オプションで <code>optflags=..</code> <code>warnflags=..</code> 等で上書きできます．</p>
+</li>
+<li><p class="startli">(必要ならば)<code>defines.h</code> を編集する</p>
+<p class="startli">多分，必要無いと思います．</p>
+</li>
+<li><p class="startli">(必要ならば)<code>ext/Setup</code> に静的にリンクする拡張モジュールを指定する</p>
+<p class="startli"><code>ext/Setup</code> に記述したモジュールは静的にリンクされます．</p>
+<p class="startli">ダイナミックローディングをサポートしていないアーキテクチャでは <code>Setup</code> の1行目の「<code>option nodynamic</code>」という行のコ メントを外す必要があります．また，このアーキテクチャで拡張モジュールを利用するためには，あらかじめ静的にリンクをしておく必要があります．</p>
+</li>
+<li><code>make</code> を実行してコンパイルする</li>
+<li><p class="startli"><code>make check</code>でテストを行う．</p>
+<p class="startli">「<code>check succeeded</code>」と表示されれば成功です．ただしテストに成功しても完璧だと保証されている訳ではありません．</p>
+</li>
+<li><p class="startli"><code>make install</code></p>
+<p class="startli">以下のディレクトリを作って，そこにファイルをインストー ルします．</p><ul>
+<li><code>${DESTDIR}${prefix}/bin</code></li>
+<li><code>${DESTDIR}${prefix}/include/ruby-${MAJOR}.${MINOR}.${TEENY}</code></li>
+<li><code>${DESTDIR}${prefix}/include/ruby-${MAJOR}.${MINOR}.${TEENY}/${PLATFORM}</code></li>
+<li><code>${DESTDIR}${prefix}/lib</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/${MAJOR}.${MINOR}.${TEENY}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/${MAJOR}.${MINOR}.${TEENY}/${PLATFORM}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/site_ruby</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/site_ruby/${MAJOR}.${MINOR}.${TEENY}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/site_ruby/${MAJOR}.${MINOR}.${TEENY}/${PLATFORM}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/vendor_ruby</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/vendor_ruby/${MAJOR}.${MINOR}.${TEENY}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/vendor_ruby/${MAJOR}.${MINOR}.${TEENY}/${PLATFORM}</code></li>
+<li><code>${DESTDIR}${prefix}/lib/ruby/gems/${MAJOR}.${MINOR}.${TEENY}</code></li>
+<li><code>${DESTDIR}${prefix}/share/man/man1</code></li>
+<li><code>${DESTDIR}${prefix}/share/ri/${MAJOR}.${MINOR}.${TEENY}/system</code></li>
+</ul>
+</li>
+</ol>
+<pre class="fragment">RubyのAPIバージョンが'*x.y.z*'であれば，`${MAJOR}`は
+'*x*'で，`${MINOR}`は'*y*'，`${TEENY}`は'*z*'です．
+
+**注意**: APIバージョンの `teeny` は，Rubyプログラムのバージョンとは異なることがあります．
+
+`root` で作業する必要があるかもしれません．
+</pre><p>もし，コンパイル時にエラーが発生した場合にはエラーのログとマシン，OSの種類を含むできるだけ詳しいレポートを作者に送って下さると他の方のためにもなります．</p>
+<h2>移植</h2>
+<p>UNIXであれば <code>configure</code> がほとんどの差異を吸収してくれるはずですが，思わぬ見落としがあった場合(ある事が多い)，作者にその ことを報告すれば，解決できる可能性があります．</p>
+<p>アーキテクチャにもっとも依存するのはGC部です．RubyのGCは対象 のアーキテクチャが<code>setjmp()</code>または<code>getcontext()</code>によって全てのレジスタを <code>jmp_buf</code> や <code>ucontext_t</code> に格納することと， <code>jmp_buf</code> や <code>ucontext_t</code> とスタックが32bitアラインメントされていることを仮定 しています．特に前者が成立しない場合の対応は非常に困難でしょう． 後者の解決は比較的簡単で， <code><a class="el" href="gc_8c.html">gc.c</a></code> でスタックをマークしている 部分にアラインメントのバイト数だけずらしてマークするコードを追加するだけで済みます．<code>defined(_\*mc68000*\_)</code>で括られてい る部分を参考にしてください．</p>
+<p>レジスタウィンドウを持つCPUでは，レジスタウィンドウをスタックにフラッシュするアセンブラコードを追加する必要があるかもしれません．</p>
+<h2>配布条件</h2>
+<p><code>COPYING.ja</code> ファイルを参照してください．</p>
+<h2>フィードバック</h2>
+<p>Rubyに関する質問は Ruby-Talk（英語）や Ruby-List（日本語） (<a href="https://www.ruby-lang.org/ja/community/mailing-lists">https://www.ruby-lang.org/ja/community/mailing-lists</a>) や， stackoverflow (<a href="http://ja.stackoverflow.com/">http://ja.stackoverflow.com/</a>) などのWebサイトに投稿してください．</p>
+<p>バグ報告は <a href="http://bugs.ruby-lang.org">http://bugs.ruby-lang.org</a> で受け付けています．</p>
+<h2>著者</h2>
+<p>Rubyのオリジナル版は，1995年にまつもとゆきひろ氏によって設計・開発されました．</p>
+<p><a href="#" onclick="location.href='mai'+'lto:'+'mat'+'z@'+'rub'+'y-'+'lan'+'g.'+'org'; return false;">matz@<span style="display: none;">.nosp@m.</span>ruby<span style="display: none;">.nosp@m.</span>-lang<span style="display: none;">.nosp@m.</span>.org</a> </p><hr/>
+<p> created at: Thu Aug 3 11:57:36 JST 1995 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

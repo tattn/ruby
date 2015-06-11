@@ -1,0 +1,1137 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: vm_dump.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle">
+<div class="title">vm_dump.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="internal_8h_source.html">internal.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="addr2line_8h_source.html">addr2line.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vm__core_8h_source.html">vm_core.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="iseq_8h_source.html">iseq.h</a>&quot;</code><br />
+</div>
+<p><a href="vm__dump_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a5e6b7f865cae591e5e27b0e36b0d357f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a5e6b7f865cae591e5e27b0e36b0d357f">VMDEBUG</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a5e6b7f865cae591e5e27b0e36b0d357f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8537bba92a6b0ad9700c765c83969b57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a8537bba92a6b0ad9700c765c83969b57">MAX_POSBUF</a>&#160;&#160;&#160;128</td></tr>
+<tr class="separator:a8537bba92a6b0ad9700c765c83969b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3a62eaa8bfb2c0c2a59c2afa1179bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#acd3a62eaa8bfb2c0c2a59c2afa1179bb">VM_CFP_CNT</a>(th,  cfp)&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *)((th)-&gt;stack + (th)-&gt;stack_size) - (<a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *)(cfp))</td></tr>
+<tr class="separator:acd3a62eaa8bfb2c0c2a59c2afa1179bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b54f4ff55e31a8cca0a50884304a79"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a20b54f4ff55e31a8cca0a50884304a79">HAVE_BACKTRACE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a20b54f4ff55e31a8cca0a50884304a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508455efbb54ce25058830553d39ad2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a508455efbb54ce25058830553d39ad2c">rb_dump_machine_register</a>(ctx)&#160;&#160;&#160;((void)0)</td></tr>
+<tr class="separator:a508455efbb54ce25058830553d39ad2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6a80f86a2270267d54d25899f51b98a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a>(s)&#160;&#160;&#160;(((len = RSTRING_LEN(s)) &gt; max_name_length) ? max_name_length : (int)len)</td></tr>
+<tr class="separator:ad6a80f86a2270267d54d25899f51b98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:ac8e45243b47b9a4d73d977c62c3e6975"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#ac8e45243b47b9a4d73d977c62c3e6975">control_frame_dump</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th, <a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *cfp)</td></tr>
+<tr class="separator:ac8e45243b47b9a4d73d977c62c3e6975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dbfe98ae709e8806918bdd3121bf986"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a1dbfe98ae709e8806918bdd3121bf986">rb_vmdebug_stack_dump_raw</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th, <a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *cfp)</td></tr>
+<tr class="separator:a1dbfe98ae709e8806918bdd3121bf986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130d5c43a9da83c86a471cb88c28f080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a130d5c43a9da83c86a471cb88c28f080">rb_vmdebug_stack_dump_raw_current</a> (void)</td></tr>
+<tr class="separator:a130d5c43a9da83c86a471cb88c28f080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a410ecb917b379a91325deaea5765d7ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a410ecb917b379a91325deaea5765d7ee">rb_vmdebug_env_dump_raw</a> (<a class="el" href="structrb__env__t.html">rb_env_t</a> *env, VALUE *ep)</td></tr>
+<tr class="separator:a410ecb917b379a91325deaea5765d7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3e8c769e0c63ba229bd1b6338639512"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#ab3e8c769e0c63ba229bd1b6338639512">rb_vmdebug_proc_dump_raw</a> (<a class="el" href="structrb__proc__t.html">rb_proc_t</a> *proc)</td></tr>
+<tr class="separator:ab3e8c769e0c63ba229bd1b6338639512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaefbe89c8af3d369bde339711a6e8668"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#aaefbe89c8af3d369bde339711a6e8668">rb_vmdebug_stack_dump_th</a> (VALUE thval)</td></tr>
+<tr class="separator:aaefbe89c8af3d369bde339711a6e8668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066f88891bb609fc5d137b4347038f40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th)</td></tr>
+<tr class="separator:a066f88891bb609fc5d137b4347038f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dcc677a7d7e5b4bebbbcf6afe5955fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a2dcc677a7d7e5b4bebbbcf6afe5955fd">rb_vmdebug_thread_dump_regs</a> (VALUE thval)</td></tr>
+<tr class="separator:a2dcc677a7d7e5b4bebbbcf6afe5955fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c2b08cb73028cde0c86d29d6011692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#ad5c2b08cb73028cde0c86d29d6011692">rb_vmdebug_debug_print_pre</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th, <a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *cfp, VALUE *_pc)</td></tr>
+<tr class="separator:ad5c2b08cb73028cde0c86d29d6011692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10140e7b70a08eb48ba3befe9485ac42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a10140e7b70a08eb48ba3befe9485ac42">rb_vmdebug_debug_print_post</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th, <a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *cfp)</td></tr>
+<tr class="separator:a10140e7b70a08eb48ba3befe9485ac42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4829e1bba567279a3c7df1a8e0056c65"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a4829e1bba567279a3c7df1a8e0056c65">rb_vmdebug_thread_dump_state</a> (VALUE self)</td></tr>
+<tr class="separator:a4829e1bba567279a3c7df1a8e0056c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087782b21c9f1e04c5eef8185586542d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a087782b21c9f1e04c5eef8185586542d">rb_print_backtrace</a> (void)</td></tr>
+<tr class="separator:a087782b21c9f1e04c5eef8185586542d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73150bfabe78bc05b3155c6fb82ce28"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#af73150bfabe78bc05b3155c6fb82ce28">preface_dump</a> (void)</td></tr>
+<tr class="separator:af73150bfabe78bc05b3155c6fb82ce28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51811dbc8d6c09403474d86e4ae0cb7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__dump_8c.html#a51811dbc8d6c09403474d86e4ae0cb7c">rb_vm_bugreport</a> (<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> void *ctx)</td></tr>
+<tr class="separator:a51811dbc8d6c09403474d86e4ae0cb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="a20b54f4ff55e31a8cca0a50884304a79"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAVE_BACKTRACE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00508">508</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad6a80f86a2270267d54d25899f51b98a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIMITED_NAME_LENGTH</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s</td><td>)</td>
+          <td>&#160;&#160;&#160;(((len = RSTRING_LEN(s)) &gt; max_name_length) ? max_name_length : (int)len)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8537bba92a6b0ad9700c765c83969b57"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_POSBUF&#160;&#160;&#160;128</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00022">22</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a508455efbb54ce25058830553d39ad2c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rb_dump_machine_register</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ctx</td><td>)</td>
+          <td>&#160;&#160;&#160;((void)0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00938">938</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="acd3a62eaa8bfb2c0c2a59c2afa1179bb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VM_CFP_CNT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">th, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cfp&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *)((th)-&gt;stack + (th)-&gt;stack_size) - (<a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *)(cfp))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00024">24</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e6b7f865cae591e5e27b0e36b0d357f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VMDEBUG&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00019">19</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="ac8e45243b47b9a4d73d977c62c3e6975"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void control_frame_dump </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *&#160;</td>
+          <td class="paramname"><em>cfp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00028">28</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ptrdiff_t pc = -1;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    ptrdiff_t ep = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">ep</a> - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">char</span> ep_in_heap = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">char</span> posbuf[<a class="code" href="vm__dump_8c.html#a8537bba92a6b0ad9700c765c83969b57">MAX_POSBUF</a>+1];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> line = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *magic, *iseq_name = <span class="stringliteral">&quot;-&quot;</span>, *selfstr = <span class="stringliteral">&quot;-&quot;</span>, *biseq_name = <span class="stringliteral">&quot;-&quot;</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    VALUE tmp;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span> (cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#aa229bdd30dd8f935df8d550d7268ec1e">block_iseq</a> != 0 &amp;&amp; !RUBY_VM_IFUNC_P(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#aa229bdd30dd8f935df8d550d7268ec1e">block_iseq</a>)) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    biseq_name = <span class="stringliteral">&quot;&quot;</span>;    <span class="comment">/* RSTRING(cfp-&gt;block_iseq-&gt;location.label)-&gt;ptr; */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (ep &lt; 0 || (<span class="keywordtype">size_t</span>)ep &gt; th-&gt;<a class="code" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a>) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ep = (ptrdiff_t)cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">ep</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ep_in_heap = <span class="charliteral">&#39;p&#39;</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">switch</span> (VM_FRAME_TYPE(cfp)) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_TOP:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    magic = <span class="stringliteral">&quot;TOP&quot;</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_METHOD:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    magic = <span class="stringliteral">&quot;METHOD&quot;</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_CLASS:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    magic = <span class="stringliteral">&quot;CLASS&quot;</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_BLOCK:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    magic = <span class="stringliteral">&quot;BLOCK&quot;</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_CFUNC:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    magic = <span class="stringliteral">&quot;CFUNC&quot;</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_PROC:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    magic = <span class="stringliteral">&quot;PROC&quot;</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_LAMBDA:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    magic = <span class="stringliteral">&quot;LAMBDA&quot;</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_IFUNC:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    magic = <span class="stringliteral">&quot;IFUNC&quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_EVAL:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    magic = <span class="stringliteral">&quot;EVAL&quot;</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keywordflow">case</span> VM_FRAME_MAGIC_RESCUE:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    magic = <span class="stringliteral">&quot;RESCUE&quot;</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    magic = <span class="stringliteral">&quot;------&quot;</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    magic = <span class="stringliteral">&quot;(none)&quot;</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (0) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    tmp = <a class="code" href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a>(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#aba6bb1166e207f96d81c4fcac16b3119">self</a>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    selfstr = StringValueCStr(tmp);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    selfstr = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a> != 0) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (RUBY_VM_IFUNC_P(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>)) {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        iseq_name = <span class="stringliteral">&quot;&lt;ifunc&gt;&quot;</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        pc = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">pc</a> - cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>-&gt;<a class="code" href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">iseq_encoded</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        iseq_name = RSTRING_PTR(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>-&gt;<a class="code" href="structrb__iseq__struct.html#acf13c2a9990e88276a7223a4881302d6">location</a>.<a class="code" href="structrb__iseq__location__struct.html#a203f0f52988314c40d65dd137f50fcdd">label</a>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        line = <a class="code" href="vm__backtrace_8c.html#a70289cbb34babceed6243d9471e70e5f">rb_vm_get_sourceline</a>(cfp);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">if</span> (line) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        snprintf(posbuf, <a class="code" href="vm__dump_8c.html#a8537bba92a6b0ad9700c765c83969b57">MAX_POSBUF</a>, <span class="stringliteral">&quot;%s:%d&quot;</span>, RSTRING_PTR(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>-&gt;<a class="code" href="structrb__iseq__struct.html#acf13c2a9990e88276a7223a4881302d6">location</a>.<a class="code" href="structrb__iseq__location__struct.html#a155c8f31e825f44e7fa41601ff149357">path</a>), line);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((me = <a class="code" href="vm__core_8h.html#a0fd84eecf3eaaa90bd9107d3d3b9674a">rb_vm_frame_method_entry</a>(cfp)) != <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    iseq_name = <a class="code" href="symbol_8c.html#a877bc58c495643fcf49dc64c44631e72">rb_id2name</a>(me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a7fc0edb8505a61f8ae8bf2544fa7f676">original_id</a>);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    snprintf(posbuf, <a class="code" href="vm__dump_8c.html#a8537bba92a6b0ad9700c765c83969b57">MAX_POSBUF</a>, <span class="stringliteral">&quot;:%s&quot;</span>, iseq_name);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    line = -1;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;c:%04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot; &quot;</span>,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        ((<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *)(th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a> + th-&gt;<a class="code" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a>) - cfp));</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> (pc == -1) {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;p:---- &quot;</span>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;p:%04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot; &quot;</span>, pc);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;s:%04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot; &quot;</span>, cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">sp</a> - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    fprintf(stderr, ep_in_heap == <span class="charliteral">&#39; &#39;</span> ? <span class="stringliteral">&quot;e:%06&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot; &quot;</span> : <span class="stringliteral">&quot;E:%06&quot;</span>PRIxPTRDIFF<span class="stringliteral">&quot; &quot;</span>, ep % 10000);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;%-6s&quot;</span>, magic);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (line) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %s&quot;</span>, posbuf);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> (VM_FRAME_TYPE_FINISH_P(cfp)) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; [FINISH]&quot;</span>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span> (0) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;              \t&quot;</span>);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;iseq: %-24s &quot;</span>, iseq_name);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;self: %-24s &quot;</span>, selfstr);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;%-1s &quot;</span>, biseq_name);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="ttc" id="vm__backtrace_8c_html_a70289cbb34babceed6243d9471e70e5f"><div class="ttname"><a href="vm__backtrace_8c.html#a70289cbb34babceed6243d9471e70e5f">rb_vm_get_sourceline</a></div><div class="ttdeci">int rb_vm_get_sourceline(const rb_control_frame_t *cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__backtrace_8c_source.html#l00038">vm_backtrace.c:38</a></div></div>
+<div class="ttc" id="object_8c_html_a9e2095c762dfd7aa2710e49896687679"><div class="ttname"><a href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a></div><div class="ttdeci">VALUE rb_inspect(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00472">object.c:472</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a0e900de65ec08ba64df1125350b4071b"><div class="ttname"><a href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">rb_control_frame_struct::sp</a></div><div class="ttdeci">VALUE * sp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00521">vm_core.h:521</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a8537bba92a6b0ad9700c765c83969b57"><div class="ttname"><a href="vm__dump_8c.html#a8537bba92a6b0ad9700c765c83969b57">MAX_POSBUF</a></div><div class="ttdeci">#define MAX_POSBUF</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00022">vm_dump.c:22</a></div></div>
+<div class="ttc" id="structrb__method__definition__struct_html_a7fc0edb8505a61f8ae8bf2544fa7f676"><div class="ttname"><a href="structrb__method__definition__struct.html#a7fc0edb8505a61f8ae8bf2544fa7f676">rb_method_definition_struct::original_id</a></div><div class="ttdeci">ID original_id</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00132">method.h:132</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a3fd7aab45a1c539bc9ca022acfc1ad51"><div class="ttname"><a href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">rb_thread_struct::stack</a></div><div class="ttdeci">VALUE * stack</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00620">vm_core.h:620</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_aba6bb1166e207f96d81c4fcac16b3119"><div class="ttname"><a href="structrb__control__frame__struct.html#aba6bb1166e207f96d81c4fcac16b3119">rb_control_frame_struct::self</a></div><div class="ttdeci">VALUE self</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00527">vm_core.h:527</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_aa229bdd30dd8f935df8d550d7268ec1e"><div class="ttname"><a href="structrb__control__frame__struct.html#aa229bdd30dd8f935df8d550d7268ec1e">rb_control_frame_struct::block_iseq</a></div><div class="ttdeci">rb_iseq_t * block_iseq</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00533">vm_core.h:533</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a06a5a5485839fd92e3e274868f525bb2"><div class="ttname"><a href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">rb_control_frame_struct::iseq</a></div><div class="ttdeci">rb_iseq_t * iseq</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00523">vm_core.h:523</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html"><div class="ttname"><a href="structrb__control__frame__struct.html">rb_control_frame_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00517">vm_core.h:517</a></div></div>
+<div class="ttc" id="symbol_8c_html_a877bc58c495643fcf49dc64c44631e72"><div class="ttname"><a href="symbol_8c.html#a877bc58c495643fcf49dc64c44631e72">rb_id2name</a></div><div class="ttdeci">const char * rb_id2name(ID id)</div><div class="ttdef"><b>Definition:</b> <a href="symbol_8c_source.html#l00788">symbol.c:788</a></div></div>
+<div class="ttc" id="structrb__iseq__location__struct_html_a155c8f31e825f44e7fa41601ff149357"><div class="ttname"><a href="structrb__iseq__location__struct.html#a155c8f31e825f44e7fa41601ff149357">rb_iseq_location_struct::path</a></div><div class="ttdeci">const VALUE path</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00199">vm_core.h:199</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html_aa70f3e195a4350acbbc130f8a95c9958"><div class="ttname"><a href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">rb_iseq_struct::iseq_encoded</a></div><div class="ttdeci">VALUE * iseq_encoded</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00231">vm_core.h:231</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html_acf13c2a9990e88276a7223a4881302d6"><div class="ttname"><a href="structrb__iseq__struct.html#acf13c2a9990e88276a7223a4881302d6">rb_iseq_struct::location</a></div><div class="ttdeci">rb_iseq_location_t location</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00229">vm_core.h:229</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a596de17ddc9fb186769848a9f27f3510"><div class="ttname"><a href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">rb_control_frame_struct::pc</a></div><div class="ttdeci">VALUE * pc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00519">vm_core.h:519</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a98749000ef85777099b645d7d755275d"><div class="ttname"><a href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">rb_control_frame_struct::ep</a></div><div class="ttdeci">VALUE * ep</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00531">vm_core.h:531</a></div></div>
+<div class="ttc" id="regenc_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00055">regenc.h:55</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a1f263d7b7ee19fc82ea14d83ed1dc7bd"><div class="ttname"><a href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">rb_thread_struct::stack_size</a></div><div class="ttdeci">size_t stack_size</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00621">vm_core.h:621</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a0fd84eecf3eaaa90bd9107d3d3b9674a"><div class="ttname"><a href="vm__core_8h.html#a0fd84eecf3eaaa90bd9107d3d3b9674a">rb_vm_frame_method_entry</a></div><div class="ttdeci">const rb_method_entry_t * rb_vm_frame_method_entry(const rb_control_frame_t *cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8c_source.html#l00366">vm_insnhelper.c:366</a></div></div>
+<div class="ttc" id="structrb__iseq__location__struct_html_a203f0f52988314c40d65dd137f50fcdd"><div class="ttname"><a href="structrb__iseq__location__struct.html#a203f0f52988314c40d65dd137f50fcdd">rb_iseq_location_struct::label</a></div><div class="ttdeci">const VALUE label</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00202">vm_core.h:202</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af73150bfabe78bc05b3155c6fb82ce28"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void preface_dump </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00942">942</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;{</div>
+<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;<span class="preprocessor">#if defined __APPLE__</span></div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> msg[] = <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;    <span class="stringliteral">&quot;-- Crash Report log information &quot;</span></div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;    <span class="stringliteral">&quot;--------------------------------------------\n&quot;</span></div>
+<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;    <span class="stringliteral">&quot;   See Crash Report log file under the one of following:\n&quot;</span></div>
+<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;    <span class="stringliteral">&quot;     * ~/Library/Logs/CrashReporter\n&quot;</span></div>
+<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    <span class="stringliteral">&quot;     * /Library/Logs/CrashReporter\n&quot;</span></div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;    <span class="stringliteral">&quot;     * ~/Library/Logs/DiagnosticReports\n&quot;</span></div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    <span class="stringliteral">&quot;     * /Library/Logs/DiagnosticReports\n&quot;</span></div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;    <span class="stringliteral">&quot;   for more details.\n&quot;</span></div>
+<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;    <span class="stringliteral">&quot;Don&#39;t forget to include the above Crash Report log file in bug reports.\n&quot;</span></div>
+<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;    <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> endmsg = msg + <span class="keyword">sizeof</span>(msg) - 1;</div>
+<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *p = msg;</div>
+<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;<span class="preprocessor">#define RED &quot;\033[;31;1;7m&quot;</span></div>
+<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;<span class="preprocessor">#define GREEN &quot;\033[;32;7m&quot;</span></div>
+<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;<span class="preprocessor">#define RESET &quot;\033[m&quot;</span></div>
+<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;</div>
+<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;    <span class="keywordflow">if</span> (isatty(<a class="code" href="vsnprintf_8c.html#a7aa82a32f4ad97a0107302dae80a2b1e">fileno</a>(stderr))) {</div>
+<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *e = <a class="code" href="dir_8c.html#a99c0c80536c9a3937814525bb5f8a7ad">strchr</a>(p, <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> w = (int)(e - p);</div>
+<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;        <span class="keywordtype">int</span> i = (int)(e - p);</div>
+<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;        fputs(*p == <span class="charliteral">&#39; &#39;</span> ? GREEN : RED, stderr);</div>
+<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;        fwrite(p, 1, e - p, stderr);</div>
+<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;        <span class="keywordflow">for</span> (; i &lt; w; ++i) fputc(<span class="charliteral">&#39; &#39;</span>, stderr);</div>
+<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;        fputs(RESET, stderr);</div>
+<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;        fputc(<span class="charliteral">&#39;\n&#39;</span>, stderr);</div>
+<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;    } <span class="keywordflow">while</span> ((p = e + 1) &lt; endmsg &amp;&amp; (e = <a class="code" href="dir_8c.html#a99c0c80536c9a3937814525bb5f8a7ad">strchr</a>(p, <span class="charliteral">&#39;\n&#39;</span>)) != 0 &amp;&amp; e &gt; p + 1);</div>
+<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;    }</div>
+<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;    fwrite(p, 1, endmsg - p, stderr);</div>
+<div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;}</div>
+<div class="ttc" id="dir_8c_html_a99c0c80536c9a3937814525bb5f8a7ad"><div class="ttname"><a href="dir_8c.html#a99c0c80536c9a3937814525bb5f8a7ad">strchr</a></div><div class="ttdeci">char * strchr(char *, char)</div></div>
+<div class="ttc" id="vsnprintf_8c_html_a7aa82a32f4ad97a0107302dae80a2b1e"><div class="ttname"><a href="vsnprintf_8c.html#a7aa82a32f4ad97a0107302dae80a2b1e">fileno</a></div><div class="ttdeci">#define fileno(p)</div><div class="ttdef"><b>Definition:</b> <a href="vsnprintf_8c_source.html#l00217">vsnprintf.c:217</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a087782b21c9f1e04c5eef8185586542d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_print_backtrace </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00690">690</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;{</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="preprocessor">#if HAVE_BACKTRACE</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="preprocessor">#define MAX_NATIVE_TRACE 1024</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> *trace[MAX_NATIVE_TRACE];</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    <span class="keywordtype">int</span> n = (int)backtrace(trace, MAX_NATIVE_TRACE);</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="preprocessor">#if defined(USE_ELF) &amp;&amp; defined(HAVE_DLADDR)</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;    rb_dump_backtrace_with_lines(n, trace);</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;    <span class="keywordtype">char</span> **syms = backtrace_symbols(trace, n);</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    <span class="keywordflow">if</span> (syms) {</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <span class="keywordflow">for</span> (i=0; i&lt;n; i++) {</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, syms[i]);</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    }</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <a class="code" href="dln_8c.html#affb9fc32698fab7f7b36e0cf8e64c83e">free</a>(syms);</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    }</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="preprocessor">#elif defined(_WIN32)</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    DWORD tid = GetCurrentThreadId();</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    HANDLE th = (HANDLE)_beginthread(dump_thread, 0, &amp;tid);</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <span class="keywordflow">if</span> (th != (HANDLE)-1)</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    WaitForSingleObject(th, INFINITE);</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;}</div>
+<div class="ttc" id="dln_8c_html_affb9fc32698fab7f7b36e0cf8e64c83e"><div class="ttname"><a href="dln_8c.html#affb9fc32698fab7f7b36e0cf8e64c83e">free</a></div><div class="ttdeci">#define free(x)</div><div class="ttdef"><b>Definition:</b> <a href="dln_8c_source.html#l00051">dln.c:51</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a51811dbc8d6c09403474d86e4ae0cb7c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vm_bugreport </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> void *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00979">979</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;{</div>
+<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;<span class="preprocessor">#ifdef __linux__</span></div>
+<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;<span class="preprocessor"># define PROC_MAPS_NAME &quot;/proc/self/maps&quot;</span></div>
+<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;<span class="preprocessor">#ifdef PROC_MAPS_NAME</span></div>
+<div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;    <span class="keyword">enum</span> {other_runtime_info = 1};</div>
+<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;    <span class="keyword">enum</span> {other_runtime_info = 0};</div>
+<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__vm__struct.html">rb_vm_t</a> *<span class="keyword">const</span> vm = GET_VM();</div>
+<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;</div>
+<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;    <a class="code" href="vm__dump_8c.html#af73150bfabe78bc05b3155c6fb82ce28">preface_dump</a>();</div>
+<div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;</div>
+<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;    <span class="keywordflow">if</span> (vm) {</div>
+<div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;    SDR();</div>
+<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;    <a class="code" href="internal_8h.html#a502328e0566286728cffab0fce8b1d98">rb_backtrace_print_as_bugreport</a>();</div>
+<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;    fputs(<span class="stringliteral">&quot;\n&quot;</span>, stderr);</div>
+<div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;    }</div>
+<div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160;</div>
+<div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160;    <a class="code" href="vm__dump_8c.html#a508455efbb54ce25058830553d39ad2c">rb_dump_machine_register</a>(ctx);</div>
+<div class="line"><a name="l01000"></a><span class="lineno"> 1000</span>&#160;</div>
+<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160;<span class="preprocessor">#if HAVE_BACKTRACE || defined(_WIN32)</span></div>
+<div class="line"><a name="l01002"></a><span class="lineno"> 1002</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- C level backtrace information &quot;</span></div>
+<div class="line"><a name="l01003"></a><span class="lineno"> 1003</span>&#160;        <span class="stringliteral">&quot;-------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160;    <a class="code" href="vm__dump_8c.html#a087782b21c9f1e04c5eef8185586542d">rb_print_backtrace</a>();</div>
+<div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160;</div>
+<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;</div>
+<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01008"></a><span class="lineno"> 1008</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAVE_BACKTRACE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160;</div>
+<div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;    <span class="keywordflow">if</span> (other_runtime_info || vm) {</div>
+<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- Other runtime information &quot;</span></div>
+<div class="line"><a name="l01012"></a><span class="lineno"> 1012</span>&#160;        <span class="stringliteral">&quot;-----------------------------------------------\n\n&quot;</span>);</div>
+<div class="line"><a name="l01013"></a><span class="lineno"> 1013</span>&#160;    }</div>
+<div class="line"><a name="l01014"></a><span class="lineno"> 1014</span>&#160;    <span class="keywordflow">if</span> (vm) {</div>
+<div class="line"><a name="l01015"></a><span class="lineno"> 1015</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160;    VALUE <a class="code" href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a>;</div>
+<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;    <span class="keywordtype">long</span> len;</div>
+<div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> max_name_length = 1024;</div>
+<div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;<span class="preprocessor"># define LIMITED_NAME_LENGTH(s) \</span></div>
+<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;<span class="preprocessor">    (((len = RSTRING_LEN(s)) &gt; max_name_length) ? max_name_length : (int)len)</span></div>
+<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;</div>
+<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;    name = vm-&gt;<a class="code" href="structrb__vm__struct.html#a0fabbe8c44aac34d9538388955e2b461">progname</a>;</div>
+<div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;* Loaded script: %.*s\n&quot;</span>,</div>
+<div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160;        <a class="code" href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a>(name), RSTRING_PTR(name));</div>
+<div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;* Loaded features:\n\n&quot;</span>);</div>
+<div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;    <span class="keywordflow">for</span> (i=0; i&lt;RARRAY_LEN(vm-&gt;<a class="code" href="structrb__vm__struct.html#adc9a2f20cba11e9a872bbe603b7db593">loaded_features</a>); i++) {</div>
+<div class="line"><a name="l01028"></a><span class="lineno"> 1028</span>&#160;        name = RARRAY_AREF(vm-&gt;<a class="code" href="structrb__vm__struct.html#adc9a2f20cba11e9a872bbe603b7db593">loaded_features</a>, i);</div>
+<div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160;        <span class="keywordflow">if</span> (RB_TYPE_P(name, T_STRING)) {</div>
+<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; %4d %.*s\n&quot;</span>, i,</div>
+<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;            <a class="code" href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a>(name), RSTRING_PTR(name));</div>
+<div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;        }</div>
+<div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (RB_TYPE_P(name, T_CLASS) || RB_TYPE_P(name, T_MODULE)) {</div>
+<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> type = RB_TYPE_P(name, T_CLASS) ?</div>
+<div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;            <span class="stringliteral">&quot;class&quot;</span> : <span class="stringliteral">&quot;module&quot;</span>;</div>
+<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;        name = <a class="code" href="internal_8h.html#af5ac1a3529770cd52de40fc9fe765d74">rb_search_class_path</a>(<a class="code" href="object_8c.html#ab9b3817b9557403438176f301fa11b93">rb_class_real</a>(name));</div>
+<div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;        <span class="keywordflow">if</span> (!RB_TYPE_P(name, T_STRING)) {</div>
+<div class="line"><a name="l01038"></a><span class="lineno"> 1038</span>&#160;            fprintf(stderr, <span class="stringliteral">&quot; %4d %s:&lt;unnamed&gt;\n&quot;</span>, i, type);</div>
+<div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;        }</div>
+<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; %4d %s:%.*s\n&quot;</span>, i, type,</div>
+<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160;            <a class="code" href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a>(name), RSTRING_PTR(name));</div>
+<div class="line"><a name="l01043"></a><span class="lineno"> 1043</span>&#160;        }</div>
+<div class="line"><a name="l01044"></a><span class="lineno"> 1044</span>&#160;        <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;        VALUE klass = <a class="code" href="internal_8h.html#af5ac1a3529770cd52de40fc9fe765d74">rb_search_class_path</a>(<a class="code" href="object_8c.html#a9338e4719b257b9dbe33c829306c317f">rb_obj_class</a>(name));</div>
+<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;        <span class="keywordflow">if</span> (!RB_TYPE_P(klass, T_STRING)) {</div>
+<div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160;            fprintf(stderr, <span class="stringliteral">&quot; %4d #&lt;%p:%p&gt;\n&quot;</span>, i,</div>
+<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;                (<span class="keywordtype">void</span> *)CLASS_OF(name), (<span class="keywordtype">void</span> *)name);</div>
+<div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;        }</div>
+<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; %4d #&lt;%.*s:%p&gt;\n&quot;</span>, i,</div>
+<div class="line"><a name="l01052"></a><span class="lineno"> 1052</span>&#160;            <a class="code" href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a>(klass), RSTRING_PTR(klass),</div>
+<div class="line"><a name="l01053"></a><span class="lineno"> 1053</span>&#160;            (<span class="keywordtype">void</span> *)name);</div>
+<div class="line"><a name="l01054"></a><span class="lineno"> 1054</span>&#160;        }</div>
+<div class="line"><a name="l01055"></a><span class="lineno"> 1055</span>&#160;    }</div>
+<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160;    }</div>
+<div class="line"><a name="l01058"></a><span class="lineno"> 1058</span>&#160;</div>
+<div class="line"><a name="l01059"></a><span class="lineno"> 1059</span>&#160;    {</div>
+<div class="line"><a name="l01060"></a><span class="lineno"> 1060</span>&#160;<span class="preprocessor">#ifdef PROC_MAPS_NAME</span></div>
+<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;    {</div>
+<div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160;        <a class="code" href="struct____s_f_i_l_e.html">FILE</a> *fp = fopen(PROC_MAPS_NAME, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a name="l01063"></a><span class="lineno"> 1063</span>&#160;        <span class="keywordflow">if</span> (fp) {</div>
+<div class="line"><a name="l01064"></a><span class="lineno"> 1064</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;* Process memory map:\n\n&quot;</span>);</div>
+<div class="line"><a name="l01065"></a><span class="lineno"> 1065</span>&#160;</div>
+<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;        <span class="keywordflow">while</span> (!<a class="code" href="vsnprintf_8c.html#ac752882e678e3368676e57e5eb4b9d86">feof</a>(fp)) {</div>
+<div class="line"><a name="l01067"></a><span class="lineno"> 1067</span>&#160;            <span class="keywordtype">char</span> buff[0x100];</div>
+<div class="line"><a name="l01068"></a><span class="lineno"> 1068</span>&#160;            <span class="keywordtype">size_t</span> rn = fread(buff, 1, 0x100, fp);</div>
+<div class="line"><a name="l01069"></a><span class="lineno"> 1069</span>&#160;            <span class="keywordflow">if</span> (fwrite(buff, 1, rn, stderr) != rn)</div>
+<div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;        }</div>
+<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;</div>
+<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;        fclose(fp);</div>
+<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;\n\n&quot;</span>);</div>
+<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;        }</div>
+<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;    }</div>
+<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __linux__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160;<span class="preprocessor">#ifdef HAVE_LIBPROCSTAT</span></div>
+<div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160;<span class="preprocessor"># define MIB_KERN_PROC_PID_LEN 4</span></div>
+<div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;    <span class="keywordtype">int</span> mib[MIB_KERN_PROC_PID_LEN];</div>
+<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;    <span class="keyword">struct </span>kinfo_proc kp;</div>
+<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;    <span class="keywordtype">size_t</span> len = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>kinfo_proc);</div>
+<div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;    mib[0] = CTL_KERN;</div>
+<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;    mib[1] = KERN_PROC;</div>
+<div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;    mib[2] = KERN_PROC_PID;</div>
+<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;    mib[3] = getpid();</div>
+<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;    <span class="keywordflow">if</span> (sysctl(mib, MIB_KERN_PROC_PID_LEN, &amp;kp, &amp;len, <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 0) == -1) {</div>
+<div class="line"><a name="l01088"></a><span class="lineno"> 1088</span>&#160;        perror(<span class="stringliteral">&quot;sysctl&quot;</span>);</div>
+<div class="line"><a name="l01089"></a><span class="lineno"> 1089</span>&#160;    }</div>
+<div class="line"><a name="l01090"></a><span class="lineno"> 1090</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l01091"></a><span class="lineno"> 1091</span>&#160;        <span class="keyword">struct </span>procstat *prstat = procstat_open_sysctl();</div>
+<div class="line"><a name="l01092"></a><span class="lineno"> 1092</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;* Process memory map:\n\n&quot;</span>);</div>
+<div class="line"><a name="l01093"></a><span class="lineno"> 1093</span>&#160;        procstat_vm(prstat, &amp;kp);</div>
+<div class="line"><a name="l01094"></a><span class="lineno"> 1094</span>&#160;        procstat_close(prstat);</div>
+<div class="line"><a name="l01095"></a><span class="lineno"> 1095</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160;    }</div>
+<div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __FreeBSD__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;    }</div>
+<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;}</div>
+<div class="ttc" id="structrb__vm__struct_html_a0fabbe8c44aac34d9538388955e2b461"><div class="ttname"><a href="structrb__vm__struct.html#a0fabbe8c44aac34d9538388955e2b461">rb_vm_struct::progname</a></div><div class="ttdeci">VALUE progname</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00450">vm_core.h:450</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_af73150bfabe78bc05b3155c6fb82ce28"><div class="ttname"><a href="vm__dump_8c.html#af73150bfabe78bc05b3155c6fb82ce28">preface_dump</a></div><div class="ttdeci">static void preface_dump(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00942">vm_dump.c:942</a></div></div>
+<div class="ttc" id="struct____s_f_i_l_e_html"><div class="ttname"><a href="struct____s_f_i_l_e.html">__sFILE</a></div><div class="ttdef"><b>Definition:</b> <a href="vsnprintf_8c_source.html#l00169">vsnprintf.c:169</a></div></div>
+<div class="ttc" id="object_8c_html_a9338e4719b257b9dbe33c829306c317f"><div class="ttname"><a href="object_8c.html#a9338e4719b257b9dbe33c829306c317f">rb_obj_class</a></div><div class="ttdeci">VALUE rb_obj_class(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00226">object.c:226</a></div></div>
+<div class="ttc" id="structrb__vm__struct_html_adc9a2f20cba11e9a872bbe603b7db593"><div class="ttname"><a href="structrb__vm__struct.html#adc9a2f20cba11e9a872bbe603b7db593">rb_vm_struct::loaded_features</a></div><div class="ttdeci">VALUE loaded_features</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00427">vm_core.h:427</a></div></div>
+<div class="ttc" id="object_8c_html_ab9b3817b9557403438176f301fa11b93"><div class="ttname"><a href="object_8c.html#ab9b3817b9557403438176f301fa11b93">rb_class_real</a></div><div class="ttdeci">VALUE rb_class_real(VALUE cl)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00204">object.c:204</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a087782b21c9f1e04c5eef8185586542d"><div class="ttname"><a href="vm__dump_8c.html#a087782b21c9f1e04c5eef8185586542d">rb_print_backtrace</a></div><div class="ttdeci">void rb_print_backtrace(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00690">vm_dump.c:690</a></div></div>
+<div class="ttc" id="symbol_8c_html_a392c96a032ae411c09950e557dc4097e"><div class="ttname"><a href="symbol_8c.html#a392c96a032ae411c09950e557dc4097e">name</a></div><div class="ttdeci">const char name[3]</div><div class="ttdef"><b>Definition:</b> <a href="symbol_8c_source.html#l00056">symbol.c:56</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a508455efbb54ce25058830553d39ad2c"><div class="ttname"><a href="vm__dump_8c.html#a508455efbb54ce25058830553d39ad2c">rb_dump_machine_register</a></div><div class="ttdeci">#define rb_dump_machine_register(ctx)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00938">vm_dump.c:938</a></div></div>
+<div class="ttc" id="regenc_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00055">regenc.h:55</a></div></div>
+<div class="ttc" id="structrb__vm__struct_html"><div class="ttname"><a href="structrb__vm__struct.html">rb_vm_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00399">vm_core.h:399</a></div></div>
+<div class="ttc" id="internal_8h_html_a502328e0566286728cffab0fce8b1d98"><div class="ttname"><a href="internal_8h.html#a502328e0566286728cffab0fce8b1d98">rb_backtrace_print_as_bugreport</a></div><div class="ttdeci">void rb_backtrace_print_as_bugreport(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__backtrace_8c_source.html#l00761">vm_backtrace.c:761</a></div></div>
+<div class="ttc" id="vsnprintf_8c_html_ac752882e678e3368676e57e5eb4b9d86"><div class="ttname"><a href="vsnprintf_8c.html#ac752882e678e3368676e57e5eb4b9d86">feof</a></div><div class="ttdeci">#define feof(p)</div><div class="ttdef"><b>Definition:</b> <a href="vsnprintf_8c_source.html#l00212">vsnprintf.c:212</a></div></div>
+<div class="ttc" id="internal_8h_html_af5ac1a3529770cd52de40fc9fe765d74"><div class="ttname"><a href="internal_8h.html#af5ac1a3529770cd52de40fc9fe765d74">rb_search_class_path</a></div><div class="ttdeci">VALUE rb_search_class_path(VALUE)</div><div class="ttdef"><b>Definition:</b> <a href="variable_8c_source.html#l00334">variable.c:334</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_ad6a80f86a2270267d54d25899f51b98a"><div class="ttname"><a href="vm__dump_8c.html#ad6a80f86a2270267d54d25899f51b98a">LIMITED_NAME_LENGTH</a></div><div class="ttdeci">#define LIMITED_NAME_LENGTH(s)</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a10140e7b70a08eb48ba3befe9485ac42"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_debug_print_post </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *&#160;</td>
+          <td class="paramname"><em>cfp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00388">388</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;{</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="preprocessor">#if VMDEBUG &gt; 9</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    SDR2(cfp);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="preprocessor">#if VMDEBUG &gt; 3</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;        (2)&quot;</span>);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a>(th);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="comment">/* stack_dump_raw(th, cfp); */</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="preprocessor">#if VMDEBUG &gt; 2</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="comment">/* stack_dump_thobj(th); */</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    vm_stack_dump_each(th, th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="preprocessor">#if OPT_STACK_CACHING</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    {</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    VALUE rstr;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    rstr = <a class="code" href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a>(reg_a);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;  sc reg A: %s\n&quot;</span>, StringValueCStr(rstr));</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    rstr = <a class="code" href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a>(reg_b);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;  sc reg B: %s\n&quot;</span>, StringValueCStr(rstr));</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    }</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    printf</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    (<span class="stringliteral">&quot;--------------------------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="object_8c_html_a9e2095c762dfd7aa2710e49896687679"><div class="ttname"><a href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a></div><div class="ttdeci">VALUE rb_inspect(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00472">object.c:472</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a066f88891bb609fc5d137b4347038f40"><div class="ttname"><a href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a></div><div class="ttdeci">void rb_vmdebug_debug_print_register(rb_thread_t *th)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00330">vm_dump.c:330</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad5c2b08cb73028cde0c86d29d6011692"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_debug_print_pre </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *&#160;</td>
+          <td class="paramname"><em>cfp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE *&#160;</td>
+          <td class="paramname"><em>_pc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00359">359</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;{</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <a class="code" href="structrb__iseq__struct.html">rb_iseq_t</a> *iseq = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordflow">if</span> (iseq != 0) {</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    ptrdiff_t pc = _pc - iseq-&gt;<a class="code" href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">iseq_encoded</a>;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">for</span> (i=0; i&lt;(int)<a class="code" href="vm__dump_8c.html#acd3a62eaa8bfb2c0c2a59c2afa1179bb">VM_CFP_CNT</a>(th, cfp); i++) {</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        printf(<span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    }</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    printf(<span class="stringliteral">&quot;| &quot;</span>);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">if</span>(0)printf(<span class="stringliteral">&quot;[%03ld] &quot;</span>, (<span class="keywordtype">long</span>)(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">sp</a> - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>));</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="comment">/* printf(&quot;%3&quot;PRIdPTRDIFF&quot; &quot;, VM_CFP_CNT(th, cfp)); */</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">if</span> (pc &gt;= 0) {</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keyword">const</span> VALUE *iseq_original = <a class="code" href="compile_8c.html#a3440e594904861c6915f4ea8a7ad1b0d">rb_iseq_original_iseq</a>(iseq);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <a class="code" href="iseq_8c.html#a28f611dae7b0b49c8180ee40ea1d46ac">rb_iseq_disasm_insn</a>(0, iseq_original, (<span class="keywordtype">size_t</span>)pc, iseq, 0);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#if VMDEBUG &gt; 3</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;        (1)&quot;</span>);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <a class="code" href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a>(th);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;}</div>
+<div class="ttc" id="vm__dump_8c_html_acd3a62eaa8bfb2c0c2a59c2afa1179bb"><div class="ttname"><a href="vm__dump_8c.html#acd3a62eaa8bfb2c0c2a59c2afa1179bb">VM_CFP_CNT</a></div><div class="ttdeci">#define VM_CFP_CNT(th, cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00024">vm_dump.c:24</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a0e900de65ec08ba64df1125350b4071b"><div class="ttname"><a href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">rb_control_frame_struct::sp</a></div><div class="ttdeci">VALUE * sp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00521">vm_core.h:521</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a3fd7aab45a1c539bc9ca022acfc1ad51"><div class="ttname"><a href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">rb_thread_struct::stack</a></div><div class="ttdeci">VALUE * stack</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00620">vm_core.h:620</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a06a5a5485839fd92e3e274868f525bb2"><div class="ttname"><a href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">rb_control_frame_struct::iseq</a></div><div class="ttdeci">rb_iseq_t * iseq</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00523">vm_core.h:523</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a066f88891bb609fc5d137b4347038f40"><div class="ttname"><a href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a></div><div class="ttdeci">void rb_vmdebug_debug_print_register(rb_thread_t *th)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00330">vm_dump.c:330</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html_aa70f3e195a4350acbbc130f8a95c9958"><div class="ttname"><a href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">rb_iseq_struct::iseq_encoded</a></div><div class="ttdeci">VALUE * iseq_encoded</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00231">vm_core.h:231</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html"><div class="ttname"><a href="structrb__iseq__struct.html">rb_iseq_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00208">vm_core.h:208</a></div></div>
+<div class="ttc" id="compile_8c_html_a3440e594904861c6915f4ea8a7ad1b0d"><div class="ttname"><a href="compile_8c.html#a3440e594904861c6915f4ea8a7ad1b0d">rb_iseq_original_iseq</a></div><div class="ttdeci">VALUE * rb_iseq_original_iseq(rb_iseq_t *iseq)</div><div class="ttdef"><b>Definition:</b> <a href="compile_8c_source.html#l00606">compile.c:606</a></div></div>
+<div class="ttc" id="iseq_8c_html_a28f611dae7b0b49c8180ee40ea1d46ac"><div class="ttname"><a href="iseq_8c.html#a28f611dae7b0b49c8180ee40ea1d46ac">rb_iseq_disasm_insn</a></div><div class="ttdeci">int rb_iseq_disasm_insn(VALUE ret, const VALUE *iseq, size_t pos, const rb_iseq_t *iseqdat, VALUE child)</div><div class="ttdef"><b>Definition:</b> <a href="iseq_8c_source.html#l01270">iseq.c:1270</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a066f88891bb609fc5d137b4347038f40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_debug_print_register </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00330">330</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;{</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *cfp = th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    ptrdiff_t pc = -1;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    ptrdiff_t ep = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">ep</a> - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    ptrdiff_t cfpi;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">if</span> (RUBY_VM_NORMAL_ISEQ_P(cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>)) {</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    pc = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">pc</a> - cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">iseq</a>-&gt;<a class="code" href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">iseq_encoded</a>;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    }</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordflow">if</span> (ep &lt; 0 || (<span class="keywordtype">size_t</span>)ep &gt; th-&gt;<a class="code" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a>) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    ep = -1;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    }</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    cfpi = ((<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *)(th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a> + th-&gt;<a class="code" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a>)) - cfp;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;  [PC] %04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot;, [SP] %04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot;, [EP] %04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot;, [CFP] %04&quot;</span>PRIdPTRDIFF<span class="stringliteral">&quot;\n&quot;</span>,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        pc, (cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">sp</a> - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>), ep, cfpi);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a0e900de65ec08ba64df1125350b4071b"><div class="ttname"><a href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">rb_control_frame_struct::sp</a></div><div class="ttdeci">VALUE * sp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00521">vm_core.h:521</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a3fd7aab45a1c539bc9ca022acfc1ad51"><div class="ttname"><a href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">rb_thread_struct::stack</a></div><div class="ttdeci">VALUE * stack</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00620">vm_core.h:620</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a06a5a5485839fd92e3e274868f525bb2"><div class="ttname"><a href="structrb__control__frame__struct.html#a06a5a5485839fd92e3e274868f525bb2">rb_control_frame_struct::iseq</a></div><div class="ttdeci">rb_iseq_t * iseq</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00523">vm_core.h:523</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html"><div class="ttname"><a href="structrb__control__frame__struct.html">rb_control_frame_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00517">vm_core.h:517</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html_aa70f3e195a4350acbbc130f8a95c9958"><div class="ttname"><a href="structrb__iseq__struct.html#aa70f3e195a4350acbbc130f8a95c9958">rb_iseq_struct::iseq_encoded</a></div><div class="ttdeci">VALUE * iseq_encoded</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00231">vm_core.h:231</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a596de17ddc9fb186769848a9f27f3510"><div class="ttname"><a href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">rb_control_frame_struct::pc</a></div><div class="ttdeci">VALUE * pc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00519">vm_core.h:519</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a98749000ef85777099b645d7d755275d"><div class="ttname"><a href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">rb_control_frame_struct::ep</a></div><div class="ttdeci">VALUE * ep</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00531">vm_core.h:531</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a1f263d7b7ee19fc82ea14d83ed1dc7bd"><div class="ttname"><a href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">rb_thread_struct::stack_size</a></div><div class="ttdeci">size_t stack_size</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00621">vm_core.h:621</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a410ecb917b379a91325deaea5765d7ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_env_dump_raw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrb__env__t.html">rb_env_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE *&#160;</td>
+          <td class="paramname"><em>ep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00182">182</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- env --------------------\n&quot;</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">while</span> (env) {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;--\n&quot;</span>);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; env-&gt;<a class="code" href="structrb__env__t.html#a2a6f73bb292a79e0beed588fa6fabe6a">env_size</a>; i++) {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;%04d: %08&quot;</span>PRIxVALUE<span class="stringliteral">&quot; (%p)&quot;</span>, -env-&gt;<a class="code" href="structrb__env__t.html#a5babbdd0740bbdc371ae7d2f225e8b64">local_size</a> + i, env-&gt;<a class="code" href="structrb__env__t.html#a3873ddf67eb7b655cbed08d14a5130b6">env</a>[i],</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;           (<span class="keywordtype">void</span> *)&amp;env-&gt;<a class="code" href="structrb__env__t.html#a3873ddf67eb7b655cbed08d14a5130b6">env</a>[i]);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">if</span> (&amp;env-&gt;<a class="code" href="structrb__env__t.html#a3873ddf67eb7b655cbed08d14a5130b6">env</a>[i] == ep)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; &lt;- ep&quot;</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span> (env-&gt;<a class="code" href="structrb__env__t.html#aa0a172915cc02522f2c6a2fe88a18bad">prev_envval</a> != 0) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        GetEnvPtr(env-&gt;<a class="code" href="structrb__env__t.html#aa0a172915cc02522f2c6a2fe88a18bad">prev_envval</a>, env);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        env = 0;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;---------------------------\n&quot;</span>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="ttc" id="structrb__env__t_html_aa0a172915cc02522f2c6a2fe88a18bad"><div class="ttname"><a href="structrb__env__t.html#aa0a172915cc02522f2c6a2fe88a18bad">rb_env_t::prev_envval</a></div><div class="ttdeci">VALUE prev_envval</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00811">vm_core.h:811</a></div></div>
+<div class="ttc" id="structrb__env__t_html_a2a6f73bb292a79e0beed588fa6fabe6a"><div class="ttname"><a href="structrb__env__t.html#a2a6f73bb292a79e0beed588fa6fabe6a">rb_env_t::env_size</a></div><div class="ttdeci">int env_size</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00809">vm_core.h:809</a></div></div>
+<div class="ttc" id="structrb__env__t_html_a3873ddf67eb7b655cbed08d14a5130b6"><div class="ttname"><a href="structrb__env__t.html#a3873ddf67eb7b655cbed08d14a5130b6">rb_env_t::env</a></div><div class="ttdeci">VALUE env[1]</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00813">vm_core.h:813</a></div></div>
+<div class="ttc" id="structrb__env__t_html_a5babbdd0740bbdc371ae7d2f225e8b64"><div class="ttname"><a href="structrb__env__t.html#a5babbdd0740bbdc371ae7d2f225e8b64">rb_env_t::local_size</a></div><div class="ttdeci">int local_size</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00810">vm_core.h:810</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ab3e8c769e0c63ba229bd1b6338639512"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_proc_dump_raw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrb__proc__t.html">rb_proc_t</a> *&#160;</td>
+          <td class="paramname"><em>proc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00208">208</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;{</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <a class="code" href="structrb__env__t.html">rb_env_t</a> *env;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordtype">char</span> *selfstr;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    VALUE <a class="code" href="vm__exec_8c.html#adacaabc6bfe49e460c9efda114ac84c8">val</a> = <a class="code" href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a>(proc-&gt;<a class="code" href="structrb__proc__t.html#acf80b0e350012548c28cba1ea64a7a6e">block</a>.<a class="code" href="structrb__block__struct.html#ad54e1ec45ab21ef384fe9e4346570397">self</a>);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    selfstr = StringValueCStr(val);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- proc -------------------\n&quot;</span>);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;self: %s\n&quot;</span>, selfstr);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    GetEnvPtr(proc-&gt;<a class="code" href="structrb__proc__t.html#acdb9a8c85422bf299615f7942ffbc916">envval</a>, env);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="vm__dump_8c.html#a410ecb917b379a91325deaea5765d7ee">rb_vmdebug_env_dump_raw</a>(env, proc-&gt;<a class="code" href="structrb__proc__t.html#acf80b0e350012548c28cba1ea64a7a6e">block</a>.<a class="code" href="structrb__block__struct.html#a4b6a1d10dd8dc1167703ec7999b0fbf0">ep</a>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
+<div class="ttc" id="object_8c_html_a9e2095c762dfd7aa2710e49896687679"><div class="ttname"><a href="object_8c.html#a9e2095c762dfd7aa2710e49896687679">rb_inspect</a></div><div class="ttdeci">VALUE rb_inspect(VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="object_8c_source.html#l00472">object.c:472</a></div></div>
+<div class="ttc" id="structrb__block__struct_html_ad54e1ec45ab21ef384fe9e4346570397"><div class="ttname"><a href="structrb__block__struct.html#ad54e1ec45ab21ef384fe9e4346570397">rb_block_struct::self</a></div><div class="ttdeci">VALUE self</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00544">vm_core.h:544</a></div></div>
+<div class="ttc" id="structrb__proc__t_html_acdb9a8c85422bf299615f7942ffbc916"><div class="ttname"><a href="structrb__proc__t.html#acdb9a8c85422bf299615f7942ffbc916">rb_proc_t::envval</a></div><div class="ttdeci">VALUE envval</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00798">vm_core.h:798</a></div></div>
+<div class="ttc" id="vm__exec_8c_html_adacaabc6bfe49e460c9efda114ac84c8"><div class="ttname"><a href="vm__exec_8c.html#adacaabc6bfe49e460c9efda114ac84c8">val</a></div><div class="ttdeci">#define val</div></div>
+<div class="ttc" id="vm__dump_8c_html_a410ecb917b379a91325deaea5765d7ee"><div class="ttname"><a href="vm__dump_8c.html#a410ecb917b379a91325deaea5765d7ee">rb_vmdebug_env_dump_raw</a></div><div class="ttdeci">void rb_vmdebug_env_dump_raw(rb_env_t *env, VALUE *ep)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00182">vm_dump.c:182</a></div></div>
+<div class="ttc" id="structrb__proc__t_html_acf80b0e350012548c28cba1ea64a7a6e"><div class="ttname"><a href="structrb__proc__t.html#acf80b0e350012548c28cba1ea64a7a6e">rb_proc_t::block</a></div><div class="ttdeci">rb_block_t block</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00796">vm_core.h:796</a></div></div>
+<div class="ttc" id="structrb__block__struct_html_a4b6a1d10dd8dc1167703ec7999b0fbf0"><div class="ttname"><a href="structrb__block__struct.html#a4b6a1d10dd8dc1167703ec7999b0fbf0">rb_block_struct::ep</a></div><div class="ttdeci">VALUE * ep</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00546">vm_core.h:546</a></div></div>
+<div class="ttc" id="structrb__env__t_html"><div class="ttname"><a href="structrb__env__t.html">rb_env_t</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00808">vm_core.h:808</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a1dbfe98ae709e8806918bdd3121bf986"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_stack_dump_raw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *&#160;</td>
+          <td class="paramname"><em>cfp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00143">143</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    VALUE *sp = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">sp</a>, *ep = cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">ep</a>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    VALUE *p, *st, *t;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- stack frame ------------\n&quot;</span>);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">for</span> (p = st = th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>; p &lt; sp; p++) {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;%04ld (%p): %08&quot;</span>PRIxVALUE, (<span class="keywordtype">long</span>)(p - st), p, *p);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    t = (VALUE *)*p;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">if</span> (th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a> &lt;= t &amp;&amp; t &lt; sp) {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; (= %ld)&quot;</span>, (<span class="keywordtype">long</span>)((VALUE *)GC_GUARDED_PTR_REF(t) - th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a>));</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> (p == ep)</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot; &lt;- ep&quot;</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;-- Control frame information &quot;</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="stringliteral">&quot;-----------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">while</span> ((<span class="keywordtype">void</span> *)cfp &lt; (<span class="keywordtype">void</span> *)(th-&gt;<a class="code" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a> + th-&gt;<a class="code" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a>)) {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <a class="code" href="vm__dump_8c.html#ac8e45243b47b9a4d73d977c62c3e6975">control_frame_dump</a>(th, cfp);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    cfp++;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}</div>
+<div class="ttc" id="vm__dump_8c_html_ac8e45243b47b9a4d73d977c62c3e6975"><div class="ttname"><a href="vm__dump_8c.html#ac8e45243b47b9a4d73d977c62c3e6975">control_frame_dump</a></div><div class="ttdeci">static void control_frame_dump(rb_thread_t *th, rb_control_frame_t *cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00028">vm_dump.c:28</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a0e900de65ec08ba64df1125350b4071b"><div class="ttname"><a href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">rb_control_frame_struct::sp</a></div><div class="ttdeci">VALUE * sp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00521">vm_core.h:521</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a3fd7aab45a1c539bc9ca022acfc1ad51"><div class="ttname"><a href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">rb_thread_struct::stack</a></div><div class="ttdeci">VALUE * stack</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00620">vm_core.h:620</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a98749000ef85777099b645d7d755275d"><div class="ttname"><a href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">rb_control_frame_struct::ep</a></div><div class="ttdeci">VALUE * ep</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00531">vm_core.h:531</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html_a1f263d7b7ee19fc82ea14d83ed1dc7bd"><div class="ttname"><a href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">rb_thread_struct::stack_size</a></div><div class="ttdeci">size_t stack_size</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00621">vm_core.h:621</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a130d5c43a9da83c86a471cb88c28f080"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_stack_dump_raw_current </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00175">175</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;{</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <a class="code" href="structrb__thread__struct.html">rb_thread_t</a> *th = <a class="code" href="vm__core_8h.html#aec678927729c3dcca12b2fae241158b0">GET_THREAD</a>();</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <a class="code" href="vm__dump_8c.html#a1dbfe98ae709e8806918bdd3121bf986">rb_vmdebug_stack_dump_raw</a>(th, th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html"><div class="ttname"><a href="structrb__thread__struct.html">rb_thread_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00614">vm_core.h:614</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a1dbfe98ae709e8806918bdd3121bf986"><div class="ttname"><a href="vm__dump_8c.html#a1dbfe98ae709e8806918bdd3121bf986">rb_vmdebug_stack_dump_raw</a></div><div class="ttdeci">void rb_vmdebug_stack_dump_raw(rb_thread_t *th, rb_control_frame_t *cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00143">vm_dump.c:143</a></div></div>
+<div class="ttc" id="vm__core_8h_html_aec678927729c3dcca12b2fae241158b0"><div class="ttname"><a href="vm__core_8h.html#aec678927729c3dcca12b2fae241158b0">GET_THREAD</a></div><div class="ttdeci">static rb_thread_t * GET_THREAD(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l01058">vm_core.h:1058</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aaefbe89c8af3d369bde339711a6e8668"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_stack_dump_th </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>thval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00222">222</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="structrb__thread__struct.html">rb_thread_t</a> *th;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a>(thval, th);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="vm__dump_8c.html#a1dbfe98ae709e8806918bdd3121bf986">rb_vmdebug_stack_dump_raw</a>(th, th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html"><div class="ttname"><a href="structrb__thread__struct.html">rb_thread_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00614">vm_core.h:614</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a1dbfe98ae709e8806918bdd3121bf986"><div class="ttname"><a href="vm__dump_8c.html#a1dbfe98ae709e8806918bdd3121bf986">rb_vmdebug_stack_dump_raw</a></div><div class="ttdeci">void rb_vmdebug_stack_dump_raw(rb_thread_t *th, rb_control_frame_t *cfp)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00143">vm_dump.c:143</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a36e942386b2b43383c44e769bffe5808"><div class="ttname"><a href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a></div><div class="ttdeci">#define GetThreadPtr(obj, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00553">vm_core.h:553</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a2dcc677a7d7e5b4bebbbcf6afe5955fd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rb_vmdebug_thread_dump_regs </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>thval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00351">351</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;{</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <a class="code" href="structrb__thread__struct.html">rb_thread_t</a> *th;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <a class="code" href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a>(thval, th);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <a class="code" href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a>(th);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html"><div class="ttname"><a href="structrb__thread__struct.html">rb_thread_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00614">vm_core.h:614</a></div></div>
+<div class="ttc" id="vm__dump_8c_html_a066f88891bb609fc5d137b4347038f40"><div class="ttname"><a href="vm__dump_8c.html#a066f88891bb609fc5d137b4347038f40">rb_vmdebug_debug_print_register</a></div><div class="ttdeci">void rb_vmdebug_debug_print_register(rb_thread_t *th)</div><div class="ttdef"><b>Definition:</b> <a href="vm__dump_8c_source.html#l00330">vm_dump.c:330</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a36e942386b2b43383c44e769bffe5808"><div class="ttname"><a href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a></div><div class="ttdeci">#define GetThreadPtr(obj, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00553">vm_core.h:553</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a4829e1bba567279a3c7df1a8e0056c65"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_vmdebug_thread_dump_state </td>
+          <td>(</td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__dump_8c_source.html">vm_dump.c</a> の <a class="el" href="vm__dump_8c_source.html#l00423">423</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;{</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <a class="code" href="structrb__thread__struct.html">rb_thread_t</a> *th;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *cfp;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <a class="code" href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a>(<span class="keyword">self</span>, th);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    cfp = th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Thread state dump:\n&quot;</span>);</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;pc : %p, sp : %p\n&quot;</span>, (<span class="keywordtype">void</span> *)cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">pc</a>, (<span class="keywordtype">void</span> *)cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">sp</a>);</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;cfp: %p, ep : %p\n&quot;</span>, (<span class="keywordtype">void</span> *)cfp, (<span class="keywordtype">void</span> *)cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">ep</a>);</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">return</span> Qnil;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a0e900de65ec08ba64df1125350b4071b"><div class="ttname"><a href="structrb__control__frame__struct.html#a0e900de65ec08ba64df1125350b4071b">rb_control_frame_struct::sp</a></div><div class="ttdeci">VALUE * sp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00521">vm_core.h:521</a></div></div>
+<div class="ttc" id="structrb__thread__struct_html"><div class="ttname"><a href="structrb__thread__struct.html">rb_thread_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00614">vm_core.h:614</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html"><div class="ttname"><a href="structrb__control__frame__struct.html">rb_control_frame_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00517">vm_core.h:517</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a596de17ddc9fb186769848a9f27f3510"><div class="ttname"><a href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">rb_control_frame_struct::pc</a></div><div class="ttdeci">VALUE * pc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00519">vm_core.h:519</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a98749000ef85777099b645d7d755275d"><div class="ttname"><a href="structrb__control__frame__struct.html#a98749000ef85777099b645d7d755275d">rb_control_frame_struct::ep</a></div><div class="ttdeci">VALUE * ep</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00531">vm_core.h:531</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a36e942386b2b43383c44e769bffe5808"><div class="ttname"><a href="vm__core_8h.html#a36e942386b2b43383c44e769bffe5808">GetThreadPtr</a></div><div class="ttdeci">#define GetThreadPtr(obj, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00553">vm_core.h:553</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分08秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

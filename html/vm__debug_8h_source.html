@@ -1,0 +1,151 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: vm_debug.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">vm_debug.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="vm__debug_8h.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  vm_debug.h - YARV Debug function interface</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  $Author$</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  created at: 04/08/25 02:33:49 JST</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  Copyright (C) 2004-2007 Koichi Sasada</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">**********************************************************************/</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef RUBY_DEBUG_H</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define RUBY_DEBUG_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;ruby/ruby.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node_8h.html">node.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;RUBY_SYMBOL_EXPORT_BEGIN</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="vm__debug_8h.html#a778f64ccf5cd258dc0c2ab9125884418">   20</a></span>&#160;<span class="preprocessor">#define dpv(h,v) ruby_debug_print_value(-1, 0, (h), (v))</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="vm__debug_8h.html#a08a47aff6867e5ae146382e66d2cc26b">   21</a></span>&#160;<span class="preprocessor">#define dp(v)    ruby_debug_print_value(-1, 0, &quot;&quot;, (v))</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="vm__debug_8h.html#ad2adaf45a44e812dbc4f2f5e246854ab">   22</a></span>&#160;<span class="preprocessor">#define dpi(i)   ruby_debug_print_id(-1, 0, &quot;&quot;, (i))</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="vm__debug_8h.html#a3e3ea360feb3c2397cdfd175cb4d2ca9">   23</a></span>&#160;<span class="preprocessor">#define dpn(n)   ruby_debug_print_node(-1, 0, &quot;&quot;, (n))</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="vm__debug_8h.html#a1baecad7f27ccf1689612054ecf6a397">   25</a></span>&#160;<span class="preprocessor">#define bp()     ruby_debug_breakpoint()</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;VALUE <a class="code" href="vm__debug_8h.html#a54be51aee030249ff48f7f877baf6356">ruby_debug_print_value</a>(<span class="keywordtype">int</span> <a class="code" href="vm__exec_8c.html#ac9f9f25171ac0f6792558ac82ade4c3b">level</a>, <span class="keywordtype">int</span> debug_level, <span class="keyword">const</span> <span class="keywordtype">char</span> *header, VALUE v);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;ID    <a class="code" href="vm__debug_8h.html#aa78ae67ea355b1b4800d941176c21ae1">ruby_debug_print_id</a>(<span class="keywordtype">int</span> <a class="code" href="vm__exec_8c.html#ac9f9f25171ac0f6792558ac82ade4c3b">level</a>, <span class="keywordtype">int</span> debug_level, <span class="keyword">const</span> <span class="keywordtype">char</span> *header, ID <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="struct_r_node.html">NODE</a> *<a class="code" href="vm__debug_8h.html#acf7f8272ca437e0f59624d5256403cc9">ruby_debug_print_node</a>(<span class="keywordtype">int</span> <a class="code" href="vm__exec_8c.html#ac9f9f25171ac0f6792558ac82ade4c3b">level</a>, <span class="keywordtype">int</span> debug_level, <span class="keyword">const</span> <span class="keywordtype">char</span> *header, <span class="keyword">const</span> <a class="code" href="struct_r_node.html">NODE</a> *node);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">int</span>   <a class="code" href="vm__debug_8h.html#a285c8e0345d60e9b5ac9d40496f5ecf5">ruby_debug_print_indent</a>(<span class="keywordtype">int</span> <a class="code" href="vm__exec_8c.html#ac9f9f25171ac0f6792558ac82ade4c3b">level</a>, <span class="keywordtype">int</span> debug_level, <span class="keywordtype">int</span> indent_level);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span>  <a class="code" href="vm__debug_8h.html#a24cb90aeb25a0808baceb7f705bce9a9">ruby_debug_breakpoint</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span>  <a class="code" href="vm__debug_8h.html#a762ae7de1fd7307cb8ab39d128d307bb">ruby_debug_gc_check_func</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> <a class="code" href="vm__debug_8h.html#a56fc051dd6ff424457394fd78af77fdd">ruby_set_debug_option</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *str);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;RUBY_SYMBOL_EXPORT_END</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RUBY_DEBUG_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="vm__debug_8h_html_a762ae7de1fd7307cb8ab39d128d307bb"><div class="ttname"><a href="vm__debug_8h.html#a762ae7de1fd7307cb8ab39d128d307bb">ruby_debug_gc_check_func</a></div><div class="ttdeci">void ruby_debug_gc_check_func(void)</div></div>
+<div class="ttc" id="node_8h_html"><div class="ttname"><a href="node_8h.html">node.h</a></div></div>
+<div class="ttc" id="vm__exec_8c_html_ac9f9f25171ac0f6792558ac82ade4c3b"><div class="ttname"><a href="vm__exec_8c.html#ac9f9f25171ac0f6792558ac82ade4c3b">level</a></div><div class="ttdeci">#define level</div></div>
+<div class="ttc" id="vm__debug_8h_html_a56fc051dd6ff424457394fd78af77fdd"><div class="ttname"><a href="vm__debug_8h.html#a56fc051dd6ff424457394fd78af77fdd">ruby_set_debug_option</a></div><div class="ttdeci">void ruby_set_debug_option(const char *str)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00162">debug.c:162</a></div></div>
+<div class="ttc" id="vm__debug_8h_html_acf7f8272ca437e0f59624d5256403cc9"><div class="ttname"><a href="vm__debug_8h.html#acf7f8272ca437e0f59624d5256403cc9">ruby_debug_print_node</a></div><div class="ttdeci">NODE * ruby_debug_print_node(int level, int debug_level, const char *header, const NODE *node)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00125">debug.c:125</a></div></div>
+<div class="ttc" id="struct_r_node_html"><div class="ttname"><a href="struct_r_node.html">RNode</a></div><div class="ttdef"><b>Definition:</b> <a href="node_8h_source.html#l00233">node.h:233</a></div></div>
+<div class="ttc" id="vm__debug_8h_html_a285c8e0345d60e9b5ac9d40496f5ecf5"><div class="ttname"><a href="vm__debug_8h.html#a285c8e0345d60e9b5ac9d40496f5ecf5">ruby_debug_print_indent</a></div><div class="ttdeci">int ruby_debug_print_indent(int level, int debug_level, int indent_level)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00076">debug.c:76</a></div></div>
+<div class="ttc" id="vm__debug_8h_html_a54be51aee030249ff48f7f877baf6356"><div class="ttname"><a href="vm__debug_8h.html#a54be51aee030249ff48f7f877baf6356">ruby_debug_print_value</a></div><div class="ttdeci">VALUE ruby_debug_print_value(int level, int debug_level, const char *header, VALUE v)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00096">debug.c:96</a></div></div>
+<div class="ttc" id="vm__debug_8h_html_a24cb90aeb25a0808baceb7f705bce9a9"><div class="ttname"><a href="vm__debug_8h.html#a24cb90aeb25a0808baceb7f705bce9a9">ruby_debug_breakpoint</a></div><div class="ttdeci">void ruby_debug_breakpoint(void)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00135">debug.c:135</a></div></div>
+<div class="ttc" id="vm__debug_8h_html_aa78ae67ea355b1b4800d941176c21ae1"><div class="ttname"><a href="vm__debug_8h.html#aa78ae67ea355b1b4800d941176c21ae1">ruby_debug_print_id</a></div><div class="ttdeci">ID ruby_debug_print_id(int level, int debug_level, const char *header, ID id)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00115">debug.c:115</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分38秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

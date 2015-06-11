@@ -1,0 +1,316 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: vm_exec.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle">
+<div class="title">vm_exec.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="vm_8inc_source.html">vm.inc</a>&quot;</code><br />
+</div>
+<p><a href="vm__exec_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a6492c3a4f33f94cc6382edb4113ea223"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(type,  r,  reg)&#160;&#160;&#160;register type reg_##r</td></tr>
+<tr class="separator:a6492c3a4f33f94cc6382edb4113ea223"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a5f6167faed281f68dfb092bc052afacf"><td class="memItemLeft" align="right" valign="top">static VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8c.html#a5f6167faed281f68dfb092bc052afacf">vm_exec_core</a> (<a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *th, VALUE initial)</td></tr>
+<tr class="separator:a5f6167faed281f68dfb092bc052afacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f58965aa859cf690996c8f069e4449b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> void **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8c.html#a0f58965aa859cf690996c8f069e4449b">rb_vm_get_insns_address_table</a> (void)</td></tr>
+<tr class="separator:a0f58965aa859cf690996c8f069e4449b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="a6492c3a4f33f94cc6382edb4113ea223"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DECL_SC_REG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">r, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">reg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;register type reg_##r</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>レジスタに変数を割り当てる。 </p>
+
+<p> <a class="el" href="vm__exec_8c_source.html">vm_exec.c</a> の <a class="el" href="vm__exec_8c_source.html#l00034">34</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a0f58965aa859cf690996c8f069e4449b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> void** rb_vm_get_insns_address_table </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>命令のアドレステーブルを取得する。 </p>
+
+<p> <a class="el" href="vm__exec_8c_source.html">vm_exec.c</a> の <a class="el" href="vm__exec_8c_source.html#l00144">144</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">const</span> <span class="keywordtype">void</span> **)<a class="code" href="vm__exec_8c.html#a5f6167faed281f68dfb092bc052afacf">vm_exec_core</a>(0, 0);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="ttc" id="vm__exec_8c_html_a5f6167faed281f68dfb092bc052afacf"><div class="ttname"><a href="vm__exec_8c.html#a5f6167faed281f68dfb092bc052afacf">vm_exec_core</a></div><div class="ttdeci">static VALUE vm_exec_core(rb_thread_t *th, VALUE initial)</div><div class="ttdef"><b>Definition:</b> <a href="vm__exec_8c_source.html#l00054">vm_exec.c:54</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5f6167faed281f68dfb092bc052afacf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static VALUE vm_exec_core </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vm__core_8h.html#a70702992b3bf190c5dd8a4dffd79e2cd">rb_thread_t</a> *&#160;</td>
+          <td class="paramname"><em>th</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALUE&#160;</td>
+          <td class="paramname"><em>initial</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>VM 評価ループ。ここで Ruby の VM の 実行を行っている。実行方法は Direct Threaded Code。 </p>
+<p>This file is VM main loop. </p><hr/>
+<p> This file is auto generated by insns2vm.rb DO NOT TOUCH!</p>
+<p>If you want to fix something, you must edit 'insns.def'</p>
+
+<p> <a class="el" href="vm__exec_8c_source.html">vm_exec.c</a> の <a class="el" href="vm__exec_8c_source.html#l00054">54</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#if OPT_STACK_CACHING</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#elif __GNUC__ &amp;&amp; __x86_64__ &amp;&amp; !defined(__native_client__)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(VALUE, a, <span class="stringliteral">&quot;12&quot;</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(VALUE, b, <span class="stringliteral">&quot;13&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">register</span> VALUE reg_a;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">register</span> VALUE reg_b;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#if defined(__GNUC__) &amp;&amp; defined(__i386__)</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(VALUE *, pc, <span class="stringliteral">&quot;di&quot;</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *, cfp, <span class="stringliteral">&quot;si&quot;</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#define USE_MACHINE_REGS 1</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#elif defined(__GNUC__) &amp;&amp; defined(__x86_64__)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(VALUE *, pc, <span class="stringliteral">&quot;14&quot;</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor"># if defined(__native_client__)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *, cfp, <span class="stringliteral">&quot;13&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor"># else</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *, cfp, <span class="stringliteral">&quot;15&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"># endif</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define USE_MACHINE_REGS 1</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#elif defined(__GNUC__) &amp;&amp; defined(__powerpc64__)</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(VALUE *, pc, <span class="stringliteral">&quot;14&quot;</span>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a>(<a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *, cfp, <span class="stringliteral">&quot;15&quot;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#define USE_MACHINE_REGS 1</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">register</span> <a class="code" href="structrb__control__frame__struct.html">rb_control_frame_t</a> *reg_cfp;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    VALUE *reg_pc;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#if USE_MACHINE_REGS</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#undef  RESTORE_REGS</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define RESTORE_REGS() \</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">{ \</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">  REG_CFP = th-&gt;cfp; \</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">  reg_pc  = reg_cfp-&gt;pc; \</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">}</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#undef  REG_PC</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#define REG_PC reg_pc</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#undef  GET_PC</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define GET_PC() (reg_pc)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#undef  SET_PC</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#define SET_PC(x) (reg_cfp-&gt;pc = REG_PC = (x))</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#if OPT_TOKEN_THREADED_CODE || OPT_DIRECT_THREADED_CODE</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vmtc_8inc.html">vmtc.inc</a>&quot;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="internal_8h.html#ab10d0a221f4d7a706701b806c8135fd7">UNLIKELY</a>(th == 0)) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">/* rb_vm_get_insns_address_table 用 */</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span> (VALUE)insns_address_table;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    reg_cfp = th-&gt;<a class="code" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    reg_pc = reg_cfp-&gt;<a class="code" href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">pc</a>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#if OPT_STACK_CACHING</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    reg_a = initial;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    reg_b = 0;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  first:</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="comment">/* 命令分岐をする巨大な switch 文。命令実行後は return reg_cfp をする。 */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="vm__exec_8h.html#a88ca7299ee72ebe31bdae472faffebc3">INSN_DISPATCH</a>();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/*****************/</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"> #include &quot;<a class="code" href="vm_8inc.html">vm.inc</a>&quot;</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/*****************/</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="vm__exec_8h.html#aa94e8c83cda752f330730fffa0722e33">END_INSNS_DISPATCH</a>();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="comment">/* unreachable */</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">rb_bug</a>(<span class="stringliteral">&quot;vm_eval: unreachable&quot;</span>);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">goto</span> first;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
+<div class="ttc" id="structrb__thread__struct_html_a2ed7f694d58d876aa6f0fae6986bc921"><div class="ttname"><a href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">rb_thread_struct::cfp</a></div><div class="ttdeci">rb_control_frame_t * cfp</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00622">vm_core.h:622</a></div></div>
+<div class="ttc" id="vm__exec_8h_html_aa94e8c83cda752f330730fffa0722e33"><div class="ttname"><a href="vm__exec_8h.html#aa94e8c83cda752f330730fffa0722e33">END_INSNS_DISPATCH</a></div><div class="ttdeci">#define END_INSNS_DISPATCH()</div><div class="ttdef"><b>Definition:</b> <a href="vm__exec_8h_source.html#l00149">vm_exec.h:149</a></div></div>
+<div class="ttc" id="error_8c_html_a2d5fb28e54f792e7341b2c45f52f3860"><div class="ttname"><a href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">rb_bug</a></div><div class="ttdeci">void rb_bug(const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00396">error.c:396</a></div></div>
+<div class="ttc" id="vm_8inc_html"><div class="ttname"><a href="vm_8inc.html">vm.inc</a></div></div>
+<div class="ttc" id="vmtc_8inc_html"><div class="ttname"><a href="vmtc_8inc.html">vmtc.inc</a></div></div>
+<div class="ttc" id="internal_8h_html_ab10d0a221f4d7a706701b806c8135fd7"><div class="ttname"><a href="internal_8h.html#ab10d0a221f4d7a706701b806c8135fd7">UNLIKELY</a></div><div class="ttdeci">#define UNLIKELY(x)</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00032">internal.h:32</a></div></div>
+<div class="ttc" id="vm__exec_8c_html_a6492c3a4f33f94cc6382edb4113ea223"><div class="ttname"><a href="vm__exec_8c.html#a6492c3a4f33f94cc6382edb4113ea223">DECL_SC_REG</a></div><div class="ttdeci">#define DECL_SC_REG(type, r, reg)</div><div class="ttdef"><b>Definition:</b> <a href="vm__exec_8c_source.html#l00034">vm_exec.c:34</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html"><div class="ttname"><a href="structrb__control__frame__struct.html">rb_control_frame_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00517">vm_core.h:517</a></div></div>
+<div class="ttc" id="vm__exec_8h_html_a88ca7299ee72ebe31bdae472faffebc3"><div class="ttname"><a href="vm__exec_8h.html#a88ca7299ee72ebe31bdae472faffebc3">INSN_DISPATCH</a></div><div class="ttdeci">#define INSN_DISPATCH()</div><div class="ttdef"><b>Definition:</b> <a href="vm__exec_8h_source.html#l00145">vm_exec.h:145</a></div></div>
+<div class="ttc" id="structrb__control__frame__struct_html_a596de17ddc9fb186769848a9f27f3510"><div class="ttname"><a href="structrb__control__frame__struct.html#a596de17ddc9fb186769848a9f27f3510">rb_control_frame_struct::pc</a></div><div class="ttdeci">VALUE * pc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00519">vm_core.h:519</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分08秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

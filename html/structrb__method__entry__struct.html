@@ -1,0 +1,279 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: rb_method_entry_struct 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li class="current"><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>クラス一覧</span></a></li>
+      <li><a href="classes.html"><span>クラス索引</span></a></li>
+      <li><a href="functions.html"><span>クラスメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="structrb__method__entry__struct-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">rb_method_entry_struct 構造体</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="method_8h_source.html">method.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:aa6a162e0a0e73e1ad2efe2db0df7defd"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a></td></tr>
+<tr class="separator:aa6a162e0a0e73e1ad2efe2db0df7defd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6af33003dafab9238e2ffe5a0b287cf2"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:ad194ce74a8af32deebc102cfee58826c"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a330a2b37cfb35d26d2421befab028151"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a>&#160;&#160;&#160;<a class="el" href="structrb__method__entry__struct.html#ae50c11750c1187b268b60859c358bf47">visi</a>: 3</td></tr>
+<tr class="separator:a330a2b37cfb35d26d2421befab028151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83170ff3b969b57991fa8c207c55d21"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;unsigned int&#160;&#160;&#160;<a class="el" href="structrb__method__entry__struct.html#ab8a8403360e9dfd40527d36d78412306">safe</a>: 3</td></tr>
+<tr class="separator:ae83170ff3b969b57991fa8c207c55d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46204935b1722d1cdc2c002bd60377da"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;unsigned int&#160;&#160;&#160;<a class="el" href="structrb__method__entry__struct.html#a4728785230563a713a02d1ded87873eb">basic</a>: 1</td></tr>
+<tr class="separator:a46204935b1722d1cdc2c002bd60377da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad194ce74a8af32deebc102cfee58826c"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structrb__method__entry__struct.html#a28537e5e2fd4170e60f4385a022cf46d">flags</a></td></tr>
+<tr class="separator:ad194ce74a8af32deebc102cfee58826c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67be624da70c93d2f8e3ac45dad61ceb"><td class="memItemLeft" >&#160;&#160;&#160;VALUE&#160;&#160;&#160;<a class="el" href="structrb__method__entry__struct.html#a790607ceb6c16deb95e2277cb10eff05">v</a></td></tr>
+<tr class="separator:a67be624da70c93d2f8e3ac45dad61ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6af33003dafab9238e2ffe5a0b287cf2"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__method__entry__struct.html#a6af33003dafab9238e2ffe5a0b287cf2">attr</a></td></tr>
+<tr class="separator:a6af33003dafab9238e2ffe5a0b287cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfbd11627d0c08acb0469a7d14e6f943"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__method__definition__struct.html">rb_method_definition_struct</a> *<a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a></td></tr>
+<tr class="separator:acfbd11627d0c08acb0469a7d14e6f943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31439bd620e98940410ba59244a85eae"><td class="memItemLeft" align="right" valign="top">ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a></td></tr>
+<tr class="separator:a31439bd620e98940410ba59244a85eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32b6cfc6a34fb16d5e08b6d910db9ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a></td></tr>
+<tr class="separator:aa32b6cfc6a34fb16d5e08b6d910db9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock">
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00048">48</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">メンバ詳解</h2>
+<a class="anchor" id="a6af33003dafab9238e2ffe5a0b287cf2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union { ... }   rb_method_entry_struct::attr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4728785230563a713a02d1ded87873eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int rb_method_entry_struct::basic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00055">55</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a31439bd620e98940410ba59244a85eae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID rb_method_entry_struct::called_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00061">61</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="acfbd11627d0c08acb0469a7d14e6f943"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__method__definition__struct.html">rb_method_definition_struct</a>* <a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> rb_method_entry_struct::def</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00060">60</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa6a162e0a0e73e1ad2efe2db0df7defd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_method_entry_struct::flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00049">49</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a28537e5e2fd4170e60f4385a022cf46d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   rb_method_entry_struct::flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa32b6cfc6a34fb16d5e08b6d910db9ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> VALUE rb_method_entry_struct::klass</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00062">62</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab8a8403360e9dfd40527d36d78412306"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int rb_method_entry_struct::safe</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00054">54</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a790607ceb6c16deb95e2277cb10eff05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_method_entry_struct::v</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00057">57</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae50c11750c1187b268b60859c358bf47"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a> rb_method_entry_struct::visi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00053">53</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li><a class="el" href="method_8h_source.html">method.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

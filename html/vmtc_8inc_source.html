@@ -1,0 +1,199 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: vmtc.inc ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">vmtc.inc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="vmtc_8inc.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* -*-c-*- *********************************************************/</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/*******************************************************************/</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/*******************************************************************/</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">void</span> *<span class="keyword">const</span> insns_address_table[] = {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  LABEL_PTR(nop),</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  LABEL_PTR(getlocal),</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  LABEL_PTR(setlocal),</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  LABEL_PTR(getspecial),</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  LABEL_PTR(setspecial),</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  LABEL_PTR(getinstancevariable),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  LABEL_PTR(setinstancevariable),</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  LABEL_PTR(getclassvariable),</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  LABEL_PTR(setclassvariable),</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  LABEL_PTR(getconstant),</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  LABEL_PTR(setconstant),</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  LABEL_PTR(getglobal),</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  LABEL_PTR(setglobal),</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  LABEL_PTR(putnil),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  LABEL_PTR(putself),</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  LABEL_PTR(putobject),</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  LABEL_PTR(putspecialobject),</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  LABEL_PTR(putiseq),</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  LABEL_PTR(putstring),</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  LABEL_PTR(concatstrings),</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  LABEL_PTR(tostring),</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  LABEL_PTR(toregexp),</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  LABEL_PTR(newarray),</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  LABEL_PTR(duparray),</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  LABEL_PTR(expandarray),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  LABEL_PTR(concatarray),</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  LABEL_PTR(splatarray),</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  LABEL_PTR(newhash),</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  LABEL_PTR(newrange),</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  LABEL_PTR(pop),</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  LABEL_PTR(dup),</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  LABEL_PTR(dupn),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  LABEL_PTR(swap),</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  LABEL_PTR(reverse),</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  LABEL_PTR(reput),</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  LABEL_PTR(topn),</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  LABEL_PTR(setn),</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  LABEL_PTR(adjuststack),</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  LABEL_PTR(defined),</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  LABEL_PTR(checkmatch),</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  LABEL_PTR(checkkeyword),</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  LABEL_PTR(trace),</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  LABEL_PTR(defineclass),</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  LABEL_PTR(send),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  LABEL_PTR(opt_str_freeze),</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  LABEL_PTR(opt_send_without_block),</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  LABEL_PTR(invokesuper),</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  LABEL_PTR(invokeblock),</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  LABEL_PTR(leave),</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  LABEL_PTR(<span class="keywordflow">throw</span>),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  LABEL_PTR(jump),</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  LABEL_PTR(branchif),</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  LABEL_PTR(branchunless),</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  LABEL_PTR(getinlinecache),</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  LABEL_PTR(setinlinecache),</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  LABEL_PTR(once),</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  LABEL_PTR(opt_case_dispatch),</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  LABEL_PTR(opt_plus),</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  LABEL_PTR(opt_minus),</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  LABEL_PTR(opt_mult),</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  LABEL_PTR(opt_div),</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  LABEL_PTR(opt_mod),</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  LABEL_PTR(opt_eq),</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  LABEL_PTR(opt_neq),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  LABEL_PTR(opt_lt),</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  LABEL_PTR(opt_le),</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  LABEL_PTR(opt_gt),</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  LABEL_PTR(opt_ge),</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  LABEL_PTR(opt_ltlt),</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  LABEL_PTR(opt_aref),</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  LABEL_PTR(opt_aset),</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  LABEL_PTR(opt_aset_with),</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  LABEL_PTR(opt_aref_with),</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  LABEL_PTR(opt_length),</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  LABEL_PTR(opt_size),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  LABEL_PTR(opt_empty_p),</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  LABEL_PTR(opt_succ),</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  LABEL_PTR(opt_not),</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  LABEL_PTR(opt_regexpmatch1),</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  LABEL_PTR(opt_regexpmatch2),</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  LABEL_PTR(opt_call_c_function),</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  LABEL_PTR(bitblt),</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  LABEL_PTR(answer),</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  LABEL_PTR(getlocal_OP__WC__0),</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  LABEL_PTR(getlocal_OP__WC__1),</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  LABEL_PTR(setlocal_OP__WC__0),</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  LABEL_PTR(setlocal_OP__WC__1),</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  LABEL_PTR(putobject_OP_INT2FIX_O_0_C_),</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  LABEL_PTR(putobject_OP_INT2FIX_O_1_C_),</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分38秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

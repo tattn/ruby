@@ -1,0 +1,499 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: vm_exec.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#typedef-members">型定義</a>  </div>
+  <div class="headertitle">
+<div class="title">vm_exec.h ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="vm__exec_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a5d2fad7341a391c5721c500977048fd2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a5d2fad7341a391c5721c500977048fd2">PREFETCH</a>(pc)</td></tr>
+<tr class="separator:a5d2fad7341a391c5721c500977048fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ae3dfc8896ca7c87ed2aed1810db43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a72ae3dfc8896ca7c87ed2aed1810db43">debugs</a></td></tr>
+<tr class="separator:a72ae3dfc8896ca7c87ed2aed1810db43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a402f110478f7f36a24df5678645cfbeb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a402f110478f7f36a24df5678645cfbeb">DEBUG_ENTER_INSN</a>(insn)</td></tr>
+<tr class="separator:a402f110478f7f36a24df5678645cfbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2f16e72a108677fa3a55737d059860"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a9f2f16e72a108677fa3a55737d059860">DEBUG_END_INSN</a>()</td></tr>
+<tr class="separator:a9f2f16e72a108677fa3a55737d059860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac12a5b0a18b51759d3432ec32e4b7e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#aac12a5b0a18b51759d3432ec32e4b7e4">throwdebug</a>&#160;&#160;&#160;if(0)printf</td></tr>
+<tr class="separator:aac12a5b0a18b51759d3432ec32e4b7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a589dad8535724d9c398cf7b4aa341aa6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a589dad8535724d9c398cf7b4aa341aa6">INSN_ENTRY</a>(insn)&#160;&#160;&#160;case BIN(insn):</td></tr>
+<tr class="separator:a589dad8535724d9c398cf7b4aa341aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01d973c301bd852e6e193cc2862f6b0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a01d973c301bd852e6e193cc2862f6b0e">END_INSN</a>(insn)</td></tr>
+<tr class="separator:a01d973c301bd852e6e193cc2862f6b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ca7299ee72ebe31bdae472faffebc3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a88ca7299ee72ebe31bdae472faffebc3">INSN_DISPATCH</a>()</td></tr>
+<tr class="separator:a88ca7299ee72ebe31bdae472faffebc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94e8c83cda752f330730fffa0722e33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#aa94e8c83cda752f330730fffa0722e33">END_INSNS_DISPATCH</a>()</td></tr>
+<tr class="separator:aa94e8c83cda752f330730fffa0722e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af51fc459e0c050fde7a1b66eb63967fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#af51fc459e0c050fde7a1b66eb63967fb">NEXT_INSN</a>()&#160;&#160;&#160;goto first</td></tr>
+<tr class="separator:af51fc459e0c050fde7a1b66eb63967fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9da63f4c5f55a71f57463905a5a0cbac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a9da63f4c5f55a71f57463905a5a0cbac">VM_SP_CNT</a>(th,  sp)&#160;&#160;&#160;((sp) - (th)-&gt;stack)</td></tr>
+<tr class="separator:a9da63f4c5f55a71f57463905a5a0cbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa751a7e573494c26308d3eb308ac54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#acaa751a7e573494c26308d3eb308ac54">THROW_EXCEPTION</a>(exc)&#160;&#160;&#160;return (VALUE)(exc)</td></tr>
+<tr class="separator:acaa751a7e573494c26308d3eb308ac54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92acd668d8848206d939428740383418"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a92acd668d8848206d939428740383418">SCREG</a>(r)&#160;&#160;&#160;(reg_##r)</td></tr>
+<tr class="separator:a92acd668d8848206d939428740383418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a846f386bb34151c0856652b7df62317a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a846f386bb34151c0856652b7df62317a">VM_DEBUG_STACKOVERFLOW</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a846f386bb34151c0856652b7df62317a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6d04ef59aa126e4f478c9b62ca5fa5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a0e6d04ef59aa126e4f478c9b62ca5fa5">CHECK_VM_STACK_OVERFLOW_FOR_INSN</a>(cfp,  margin)</td></tr>
+<tr class="separator:a0e6d04ef59aa126e4f478c9b62ca5fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+型定義</h2></td></tr>
+<tr class="memitem:a5c13b0c1d74337351e01ed9554c35213"><td class="memItemLeft" align="right" valign="top">typedef long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a5c13b0c1d74337351e01ed9554c35213">OFFSET</a></td></tr>
+<tr class="separator:a5c13b0c1d74337351e01ed9554c35213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a6c543dc1d6de6eb1ee7707e9da650d"><td class="memItemLeft" align="right" valign="top">typedef unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#a0a6c543dc1d6de6eb1ee7707e9da650d">lindex_t</a></td></tr>
+<tr class="separator:a0a6c543dc1d6de6eb1ee7707e9da650d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbed2b613c7fc166e9d44768a35e9556"><td class="memItemLeft" align="right" valign="top">typedef VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#abbed2b613c7fc166e9d44768a35e9556">GENTRY</a></td></tr>
+<tr class="separator:abbed2b613c7fc166e9d44768a35e9556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5f32dbaa934e184388d63415186585"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="method_8h.html#ab6b4f5ac0a242e7c1816570c5e0f9266">rb_iseq_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__exec_8h.html#acc5f32dbaa934e184388d63415186585">ISEQ</a></td></tr>
+<tr class="separator:acc5f32dbaa934e184388d63415186585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a class="anchor" id="a0e6d04ef59aa126e4f478c9b62ca5fa5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_VM_STACK_OVERFLOW_FOR_INSN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cfp, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">margin&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00179">179</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f2f16e72a108677fa3a55737d059860"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_END_INSN</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00045">45</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a402f110478f7f36a24df5678645cfbeb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_ENTER_INSN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">insn</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00044">44</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a72ae3dfc8896ca7c87ed2aed1810db43"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define debugs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00043">43</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a01d973c301bd852e6e193cc2862f6b0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define END_INSN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">insn</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><a class="code" href="vm__exec_8h.html#a9f2f16e72a108677fa3a55737d059860">DEBUG_END_INSN</a>();                           \</div>
+<div class="line">  break;</div>
+<div class="ttc" id="vm__exec_8h_html_a9f2f16e72a108677fa3a55737d059860"><div class="ttname"><a href="vm__exec_8h.html#a9f2f16e72a108677fa3a55737d059860">DEBUG_END_INSN</a></div><div class="ttdeci">#define DEBUG_END_INSN()</div><div class="ttdef"><b>Definition:</b> <a href="vm__exec_8h_source.html#l00045">vm_exec.h:45</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00140">140</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa94e8c83cda752f330730fffa0722e33"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define END_INSNS_DISPATCH</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">default</span>:                        \</div>
+<div class="line">  SDR(); <a class="code" href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">\</a></div>
+<div class="line"><a class="code" href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">      rb_bug</a>(<span class="stringliteral">&quot;unknown insn: %ld&quot;</span>, <a class="code" href="vm__insnhelper_8h.html#a5ee393cc14cdeaf4493c8e28d9f22ff1">GET_CURRENT_INSN</a>());   \</div>
+<div class="line">    } <span class="comment">/* end of switch */</span>       \</div>
+<div class="line">  }   <span class="comment">/* end of while loop */</span>   \</div>
+<div class="ttc" id="error_8c_html_a2d5fb28e54f792e7341b2c45f52f3860"><div class="ttname"><a href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">rb_bug</a></div><div class="ttdeci">void rb_bug(const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00396">error.c:396</a></div></div>
+<div class="ttc" id="vm__insnhelper_8h_html_a5ee393cc14cdeaf4493c8e28d9f22ff1"><div class="ttname"><a href="vm__insnhelper_8h.html#a5ee393cc14cdeaf4493c8e28d9f22ff1">GET_CURRENT_INSN</a></div><div class="ttdeci">#define GET_CURRENT_INSN()</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8h_source.html#l00101">vm_insnhelper.h:101</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00149">149</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a88ca7299ee72ebe31bdae472faffebc3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INSN_DISPATCH</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">while</span> (1) {         \</div>
+<div class="line">    switch (<a class="code" href="vm__insnhelper_8h.html#a5ee393cc14cdeaf4493c8e28d9f22ff1">GET_CURRENT_INSN</a>()) {</div>
+<div class="ttc" id="vm__insnhelper_8h_html_a5ee393cc14cdeaf4493c8e28d9f22ff1"><div class="ttname"><a href="vm__insnhelper_8h.html#a5ee393cc14cdeaf4493c8e28d9f22ff1">GET_CURRENT_INSN</a></div><div class="ttdeci">#define GET_CURRENT_INSN()</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8h_source.html#l00101">vm_insnhelper.h:101</a></div></div>
+</div><!-- fragment -->
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00145">145</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a589dad8535724d9c398cf7b4aa341aa6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INSN_ENTRY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">insn</td><td>)</td>
+          <td>&#160;&#160;&#160;case BIN(insn):</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00137">137</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="af51fc459e0c050fde7a1b66eb63967fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEXT_INSN</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;goto first</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00156">156</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5d2fad7341a391c5721c500977048fd2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PREFETCH</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pc</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00024">24</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a92acd668d8848206d939428740383418"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SCREG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">r</td><td>)</td>
+          <td>&#160;&#160;&#160;(reg_##r)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00171">171</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="acaa751a7e573494c26308d3eb308ac54"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define THROW_EXCEPTION</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">exc</td><td>)</td>
+          <td>&#160;&#160;&#160;return (VALUE)(exc)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00168">168</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aac12a5b0a18b51759d3432ec32e4b7e4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define throwdebug&#160;&#160;&#160;if(0)printf</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00048">48</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a846f386bb34151c0856652b7df62317a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VM_DEBUG_STACKOVERFLOW&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00173">173</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9da63f4c5f55a71f57463905a5a0cbac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VM_SP_CNT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">th, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sp&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((sp) - (th)-&gt;stack)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00160">160</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">型定義詳解</h2>
+<a class="anchor" id="abbed2b613c7fc166e9d44768a35e9556"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef VALUE <a class="el" href="vm__exec_8h.html#abbed2b613c7fc166e9d44768a35e9556">GENTRY</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00017">17</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="acc5f32dbaa934e184388d63415186585"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="method_8h.html#ab6b4f5ac0a242e7c1816570c5e0f9266">rb_iseq_t</a>* <a class="el" href="vm__exec_8h.html#acc5f32dbaa934e184388d63415186585">ISEQ</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00018">18</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0a6c543dc1d6de6eb1ee7707e9da650d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned long <a class="el" href="vm__exec_8h.html#a0a6c543dc1d6de6eb1ee7707e9da650d">lindex_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00016">16</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5c13b0c1d74337351e01ed9554c35213"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef long <a class="el" href="vm__exec_8h.html#a5c13b0c1d74337351e01ed9554c35213">OFFSET</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__exec_8h_source.html">vm_exec.h</a> の <a class="el" href="vm__exec_8h_source.html#l00015">15</a> 行目に定義があります。</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分08秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

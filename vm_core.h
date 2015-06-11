@@ -511,18 +511,31 @@ typedef struct rb_vm_struct {
 #define VM_DEBUG_VERIFY_METHOD_CACHE 0
 #endif
 
+/**
+ * 実行情報を持つ構造体。メソッド内でブロックを参照する際にはこのポインタの中央へのポインタを利用することで malloc を減らす。
+ */
 typedef struct rb_control_frame_struct {
+	/*! 実行中の命令 */
     VALUE *pc;			/* cfp[0] */
+	/*! 現在のスタックトップ (stack pointer) */
     VALUE *sp;			/* cfp[1] */
+	/*! 命令中の情報 */
     rb_iseq_t *iseq;		/* cfp[2] */
+	/*! フレームの種類など。VM_FRAME_MAGIC で中身を取り出せる。 */
     VALUE flag;			/* cfp[3] */
+	/*! ブロックが最初に参照された際の self ポインタの値。ブロックの外側と同じオブジェクトコンテキストで実行するために必要。 */
     VALUE self;			/* cfp[4] / block[0] */
+	/*! 現在のオブジェクトのクラス */
     VALUE klass;		/* cfp[5] / block[1] */
+	/*! スタックフレームへのポインタ */
     VALUE *ep;			/* cfp[6] / block[2] */
+	/*! コード片 */
     rb_iseq_t *block_iseq;	/* cfp[7] / block[3] */
+	/*! ブロックから Proc オブジェクトを作成した際にこの値を使用する。 */
     VALUE proc;			/* cfp[8] / block[4] */
 
 #if VM_DEBUG_BP_CHECK
+	/*! sp の一つ前。(base pointer)
     VALUE *bp_check;		/* cfp[9] */
 #endif
 } rb_control_frame_t;
@@ -547,16 +560,21 @@ enum rb_thread_status {
     THREAD_KILLED
 };
 
+/*! jmp_buf か sigjmp_buf ? configure.in を参照
 typedef RUBY_JMP_BUF rb_jmpbuf_t;
 
-/*
+/**
   the members which are written in TH_PUSH_TAG() should be placed at
   the beginning and the end, so that entire region is accessible.
 */
 struct rb_vm_tag {
+	/*! nd_tag に関係ありそう */
     VALUE tag;
+	/*! nd_tval に関係ありそう */
     VALUE retval;
+	/*! setjmp 時に得たコンテキスト */
     rb_jmpbuf_t buf;
+	/*! ジャンプ元 */
     struct rb_vm_tag *prev;
 };
 

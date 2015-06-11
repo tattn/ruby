@@ -1,0 +1,1244 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: rb_thread_struct 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li class="current"><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>クラス一覧</span></a></li>
+      <li><a href="classes.html"><span>クラス索引</span></a></li>
+      <li><a href="functions.html"><span>クラスメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="structrb__thread__struct-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">rb_thread_struct 構造体</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="vm__core_8h_source.html">vm_core.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a5582463f246670caf25aceaa08aa9ea8"><td class="memItemLeft" align="right" valign="top">struct list_node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a5582463f246670caf25aceaa08aa9ea8">vmlt_node</a></td></tr>
+<tr class="separator:a5582463f246670caf25aceaa08aa9ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e712e6c5295a4173188139f1d6b7462"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a6e712e6c5295a4173188139f1d6b7462">self</a></td></tr>
+<tr class="separator:a6e712e6c5295a4173188139f1d6b7462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e7d0b05e2d73f324e70c735ba50739e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#ab6a8242588889813903cd5d577ed906e">rb_vm_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3e7d0b05e2d73f324e70c735ba50739e">vm</a></td></tr>
+<tr class="separator:a3e7d0b05e2d73f324e70c735ba50739e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd7aab45a1c539bc9ca022acfc1ad51"><td class="memItemLeft" align="right" valign="top">VALUE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3fd7aab45a1c539bc9ca022acfc1ad51">stack</a></td></tr>
+<tr class="separator:a3fd7aab45a1c539bc9ca022acfc1ad51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f263d7b7ee19fc82ea14d83ed1dc7bd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a1f263d7b7ee19fc82ea14d83ed1dc7bd">stack_size</a></td></tr>
+<tr class="separator:a1f263d7b7ee19fc82ea14d83ed1dc7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed7f694d58d876aa6f0fae6986bc921"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a2ed7f694d58d876aa6f0fae6986bc921">cfp</a></td></tr>
+<tr class="separator:a2ed7f694d58d876aa6f0fae6986bc921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5048ddde96e3ea2e6b22c3e58ce696"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#adc5048ddde96e3ea2e6b22c3e58ce696">safe_level</a></td></tr>
+<tr class="separator:adc5048ddde96e3ea2e6b22c3e58ce696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0783e8b1c2dcd0b9b7a82d68e975eff3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a0783e8b1c2dcd0b9b7a82d68e975eff3">raised_flag</a></td></tr>
+<tr class="separator:a0783e8b1c2dcd0b9b7a82d68e975eff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e6343202cb5994463c33da7ed38c4f"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a02e6343202cb5994463c33da7ed38c4f">last_status</a></td></tr>
+<tr class="separator:a02e6343202cb5994463c33da7ed38c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25bbafcd0a1e0f6f79b42cc29baf3eb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a25bbafcd0a1e0f6f79b42cc29baf3eb8">state</a></td></tr>
+<tr class="separator:a25bbafcd0a1e0f6f79b42cc29baf3eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddade0070cf5af8034e1549e30839fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a8ddade0070cf5af8034e1549e30839fb">waiting_fd</a></td></tr>
+<tr class="separator:a8ddade0070cf5af8034e1549e30839fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae680ba33fe514b2b0031d77ad1527e1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ae680ba33fe514b2b0031d77ad1527e1a">passed_block</a></td></tr>
+<tr class="separator:ae680ba33fe514b2b0031d77ad1527e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd90abda837f48c0c2fc6e14083bf6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#accd90abda837f48c0c2fc6e14083bf6c">passed_bmethod_me</a></td></tr>
+<tr class="separator:accd90abda837f48c0c2fc6e14083bf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc9dc6f06f87a7235ec99cd2c86089cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a2fa00248bd6bcdc20b376c1c2c449fdd">rb_call_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#adc9dc6f06f87a7235ec99cd2c86089cb">passed_ci</a></td></tr>
+<tr class="separator:adc9dc6f06f87a7235ec99cd2c86089cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ba34f711c43f831fe95e9a9434353f"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ac0ba34f711c43f831fe95e9a9434353f">top_self</a></td></tr>
+<tr class="separator:ac0ba34f711c43f831fe95e9a9434353f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63addaa5b39a83e287f7b8747398ab57"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a63addaa5b39a83e287f7b8747398ab57">top_wrapper</a></td></tr>
+<tr class="separator:a63addaa5b39a83e287f7b8747398ab57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6cc8c9d9f511c12cca5af8c8aa6e77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aad6cc8c9d9f511c12cca5af8c8aa6e77">base_block</a></td></tr>
+<tr class="separator:aad6cc8c9d9f511c12cca5af8c8aa6e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0edea360648d045d34bb60e4a91b218a"><td class="memItemLeft" align="right" valign="top">VALUE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a0edea360648d045d34bb60e4a91b218a">root_lep</a></td></tr>
+<tr class="separator:a0edea360648d045d34bb60e4a91b218a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f9d18a3b68b34238986fa27564ee498"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a7f9d18a3b68b34238986fa27564ee498">root_svar</a></td></tr>
+<tr class="separator:a7f9d18a3b68b34238986fa27564ee498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a744f5bac11851191900b971764eb5430"><td class="memItemLeft" align="right" valign="top">rb_nativethread_id_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a744f5bac11851191900b971764eb5430">thread_id</a></td></tr>
+<tr class="separator:a744f5bac11851191900b971764eb5430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e515186c1aa012ff4c8714e82c486df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#adcd7473a33a543d7f197bfc44515bc18">rb_thread_id_string_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a2e515186c1aa012ff4c8714e82c486df">thread_id_string</a></td></tr>
+<tr class="separator:a2e515186c1aa012ff4c8714e82c486df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647ed2a802789fff9e511bea4ada1239"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="vm__core_8h.html#a027718c64d1aa742ccdb9c1a68afaa75">rb_thread_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a647ed2a802789fff9e511bea4ada1239">status</a></td></tr>
+<tr class="separator:a647ed2a802789fff9e511bea4ada1239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3004e89225a07c08e78af212b40c0e3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3004e89225a07c08e78af212b40c0e3c">to_kill</a></td></tr>
+<tr class="separator:a3004e89225a07c08e78af212b40c0e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec8d3fa76bacce31680b55dd03eac0e9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aec8d3fa76bacce31680b55dd03eac0e9">priority</a></td></tr>
+<tr class="separator:aec8d3fa76bacce31680b55dd03eac0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee6880a07f5e4bf524af64d1ccf3ad0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="thread__pthread_8h.html#a1730b74045959e1db34dfb31caddc0eb">native_thread_data_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a1ee6880a07f5e4bf524af64d1ccf3ad0">native_thread_data</a></td></tr>
+<tr class="separator:a1ee6880a07f5e4bf524af64d1ccf3ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf8cb1dd54464d5c8e277a66f2c1a063"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aaf8cb1dd54464d5c8e277a66f2c1a063">blocking_region_buffer</a></td></tr>
+<tr class="separator:aaf8cb1dd54464d5c8e277a66f2c1a063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa7c7d516fe265dbbd215eed5da5a20"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3fa7c7d516fe265dbbd215eed5da5a20">thgroup</a></td></tr>
+<tr class="separator:a3fa7c7d516fe265dbbd215eed5da5a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b297be9273cc68bd7ec30eb99aada0f"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a1b297be9273cc68bd7ec30eb99aada0f">value</a></td></tr>
+<tr class="separator:a1b297be9273cc68bd7ec30eb99aada0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a173e2da61fa57c7044fd7874a8c7a924"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a173e2da61fa57c7044fd7874a8c7a924">errinfo</a></td></tr>
+<tr class="separator:a173e2da61fa57c7044fd7874a8c7a924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13410a81d8aae52384b90260f9953a09"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a13410a81d8aae52384b90260f9953a09">retval</a></td></tr>
+<tr class="separator:a13410a81d8aae52384b90260f9953a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafba3f4f103c0c0d4bf0ff37d278c856"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aafba3f4f103c0c0d4bf0ff37d278c856">pending_interrupt_queue</a></td></tr>
+<tr class="separator:aafba3f4f103c0c0d4bf0ff37d278c856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a979a16137dbb149acf7a8fd194946a24"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a979a16137dbb149acf7a8fd194946a24">pending_interrupt_mask_stack</a></td></tr>
+<tr class="separator:a979a16137dbb149acf7a8fd194946a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33cad2d14cf2e5e9e96385eafc14d2fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a33cad2d14cf2e5e9e96385eafc14d2fe">pending_interrupt_queue_checked</a></td></tr>
+<tr class="separator:a33cad2d14cf2e5e9e96385eafc14d2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0533270d757d45edf045b509cb9397d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ruby__atomic_8h.html#a872a86eed7f070b0ea35b7494fbd9b73">rb_atomic_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ad0533270d757d45edf045b509cb9397d">interrupt_flag</a></td></tr>
+<tr class="separator:ad0533270d757d45edf045b509cb9397d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbde881c028e6a14d7740757c9d1f27b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#abbde881c028e6a14d7740757c9d1f27b">interrupt_mask</a></td></tr>
+<tr class="separator:abbde881c028e6a14d7740757c9d1f27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d4e0ac407d2babd9e5e74bbbcb1225"><td class="memItemLeft" align="right" valign="top">rb_nativethread_lock_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a98d4e0ac407d2babd9e5e74bbbcb1225">interrupt_lock</a></td></tr>
+<tr class="separator:a98d4e0ac407d2babd9e5e74bbbcb1225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad04e9258ee723608388a8aa2009b2f65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="thread__pthread_8h.html#a3613e0afb21e5fe92d2c90b260aef6e8">rb_nativethread_cond_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ad04e9258ee723608388a8aa2009b2f65">interrupt_cond</a></td></tr>
+<tr class="separator:ad04e9258ee723608388a8aa2009b2f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8ee4d75d7d514449cf70ce7beca57e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__unblock__callback.html">rb_unblock_callback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a1e8ee4d75d7d514449cf70ce7beca57e">unblock</a></td></tr>
+<tr class="separator:a1e8ee4d75d7d514449cf70ce7beca57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0435aec1daf59ef6caceee7004a7cfb"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ab0435aec1daf59ef6caceee7004a7cfb">locking_mutex</a></td></tr>
+<tr class="separator:ab0435aec1daf59ef6caceee7004a7cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb11d95769dc97f821331399fd45a586"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__mutex__struct.html">rb_mutex_struct</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#adb11d95769dc97f821331399fd45a586">keeping_mutexes</a></td></tr>
+<tr class="separator:adb11d95769dc97f821331399fd45a586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5125f0aae753728da5c0a02d84fd7f23"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__vm__tag.html">rb_vm_tag</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a5125f0aae753728da5c0a02d84fd7f23">tag</a></td></tr>
+<tr class="separator:a5125f0aae753728da5c0a02d84fd7f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad8fbdd52a64077a09b01ba9e813226"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__vm__protect__tag.html">rb_vm_protect_tag</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#abad8fbdd52a64077a09b01ba9e813226">protect_tag</a></td></tr>
+<tr class="separator:abad8fbdd52a64077a09b01ba9e813226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e324c4b5cb18a52b2631f190c7436e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aa6e324c4b5cb18a52b2631f190c7436e">parse_in_eval</a></td></tr>
+<tr class="separator:aa6e324c4b5cb18a52b2631f190c7436e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67feb33455eaa2e31e3d890f9099020b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a67feb33455eaa2e31e3d890f9099020b">mild_compile_error</a></td></tr>
+<tr class="separator:a67feb33455eaa2e31e3d890f9099020b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ef1ecd85eec7b4809f81151ade5248"><td class="memItemLeft" align="right" valign="top">st_table *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#af1ef1ecd85eec7b4809f81151ade5248">local_storage</a></td></tr>
+<tr class="separator:af1ef1ecd85eec7b4809f81151ade5248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a2d8d88fd64ea0c442b0ca5dc9bfdef"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a9a2d8d88fd64ea0c442b0ca5dc9bfdef">local_storage_recursive_hash</a></td></tr>
+<tr class="separator:a9a2d8d88fd64ea0c442b0ca5dc9bfdef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba015eda69eb2c9fdba22ad7a210ff46"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aba015eda69eb2c9fdba22ad7a210ff46">local_storage_recursive_hash_for_trace</a></td></tr>
+<tr class="separator:aba015eda69eb2c9fdba22ad7a210ff46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c0e5bcba9d684be932ae89428fb218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a3e8a4455938c2be6f3e3a8a61557f50d">rb_thread_list_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a45c0e5bcba9d684be932ae89428fb218">join_list</a></td></tr>
+<tr class="separator:a45c0e5bcba9d684be932ae89428fb218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefaadd717ae62c44343b7bc767db6c5b"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aefaadd717ae62c44343b7bc767db6c5b">first_proc</a></td></tr>
+<tr class="separator:aefaadd717ae62c44343b7bc767db6c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0efa5cb7f18b285cc3415f47930c4e6"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ac0efa5cb7f18b285cc3415f47930c4e6">first_args</a></td></tr>
+<tr class="separator:ac0efa5cb7f18b285cc3415f47930c4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e88e845f2c9727cb5d52bd64134ec9"><td class="memItemLeft" align="right" valign="top">VALUE(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a02e88e845f2c9727cb5d52bd64134ec9">first_func</a> )(ANYARGS)</td></tr>
+<tr class="separator:a02e88e845f2c9727cb5d52bd64134ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c645801a08bebc8220d972a46a9a7a3"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:afe6926d6b8ec3a250d7436d1a4046c98"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a2089c00ce922cd71f5138156baec42a9">stack_start</a></td></tr>
+<tr class="separator:afe6926d6b8ec3a250d7436d1a4046c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dcf17445904fdfbfbbc6639b3e7661"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a17c5325fb6cbb331e29ab27d12c646ae">stack_end</a></td></tr>
+<tr class="separator:ad0dcf17445904fdfbfbbc6639b3e7661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62906f219c6b1bc1c7a060ecefb50404"><td class="memItemLeft" >&#160;&#160;&#160;size_t&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a1e01a8514defbbefaf4f31f30dc2dfd4">stack_maxsize</a></td></tr>
+<tr class="separator:a62906f219c6b1bc1c7a060ecefb50404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa499f03bf782692540b8e7b29e5ca17"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a109e37e222982d23d1061dc8b291d2a4">register_stack_start</a></td></tr>
+<tr class="separator:aaa499f03bf782692540b8e7b29e5ca17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b90ee9fe91511d8bae715d7272cc5c8"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#aaefab98f8c4563dabf06ec2f1a60832a">register_stack_end</a></td></tr>
+<tr class="separator:a2b90ee9fe91511d8bae715d7272cc5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5189c2f73552c39fc8c12896302e635f"><td class="memItemLeft" >&#160;&#160;&#160;size_t&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#add6728f95527fb12ac7ef6e97ff7e12b">register_stack_maxsize</a></td></tr>
+<tr class="separator:a5189c2f73552c39fc8c12896302e635f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac454abeaca88321fae72c64f6a012447"><td class="memItemLeft" >&#160;&#160;&#160;jmp_buf&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a69c9471d72eb4c408567ce1c9fca91cb">regs</a></td></tr>
+<tr class="separator:ac454abeaca88321fae72c64f6a012447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c645801a08bebc8220d972a46a9a7a3"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a9c645801a08bebc8220d972a46a9a7a3">machine</a></td></tr>
+<tr class="separator:a9c645801a08bebc8220d972a46a9a7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9e667590cfe18b655cbe812e04d643"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3c9e667590cfe18b655cbe812e04d643">stat_insn_usage</a></td></tr>
+<tr class="separator:a3c9e667590cfe18b655cbe812e04d643"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57e4067fa1528caf7c84ca2e5ef2bd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#acb68ac251ee81234695a55ddcdde006b">rb_hook_list_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ae57e4067fa1528caf7c84ca2e5ef2bd6">event_hooks</a></td></tr>
+<tr class="separator:ae57e4067fa1528caf7c84ca2e5ef2bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d1baf79e5db5de206a0c3dcf8e78e6"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrb__trace__arg__struct.html">rb_trace_arg_struct</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aa1d1baf79e5db5de206a0c3dcf8e78e6">trace_arg</a></td></tr>
+<tr class="separator:aa1d1baf79e5db5de206a0c3dcf8e78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93c4c0392bf0bee2240cc35cb93ab782"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a472bd020c7746bb9d079e432baa3380e">rb_fiber_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a93c4c0392bf0bee2240cc35cb93ab782">fiber</a></td></tr>
+<tr class="separator:a93c4c0392bf0bee2240cc35cb93ab782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc3db5209f029148069b77512f59665a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a472bd020c7746bb9d079e432baa3380e">rb_fiber_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#afc3db5209f029148069b77512f59665a">root_fiber</a></td></tr>
+<tr class="separator:afc3db5209f029148069b77512f59665a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a093205381d61933df048492029c5bb99"><td class="memItemLeft" align="right" valign="top">rb_jmpbuf_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a093205381d61933df048492029c5bb99">root_jmpbuf</a></td></tr>
+<tr class="separator:a093205381d61933df048492029c5bb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902e65a59d60355defde237425bc2d34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a6be58a3ecba0e7d9bb8655c6bf334386">rb_ensure_list_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a902e65a59d60355defde237425bc2d34">ensure_list</a></td></tr>
+<tr class="separator:a902e65a59d60355defde237425bc2d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c2bd40413d7e8e1fbfe99993a1387c"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="vm__core_8h.html#ab3cff15695910fdc06be3b9382b6892d">method_missing_reason</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a07c2bd40413d7e8e1fbfe99993a1387c">method_missing_reason</a></td></tr>
+<tr class="separator:a07c2bd40413d7e8e1fbfe99993a1387c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3688f0942a79e35b29bbbd289aad4976"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3688f0942a79e35b29bbbd289aad4976">abort_on_exception</a></td></tr>
+<tr class="separator:a3688f0942a79e35b29bbbd289aad4976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d730ea84f71bf866cfc130933ddafa"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ab2d730ea84f71bf866cfc130933ddafa">altstack</a></td></tr>
+<tr class="separator:ab2d730ea84f71bf866cfc130933ddafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7923750df23f56b0d7164d715af3fb"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ada7923750df23f56b0d7164d715af3fb">running_time_us</a></td></tr>
+<tr class="separator:ada7923750df23f56b0d7164d715af3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock">
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00614">614</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">メンバ詳解</h2>
+<a class="anchor" id="a3688f0942a79e35b29bbbd289aad4976"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::abort_on_exception</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00745">745</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab2d730ea84f71bf866cfc130933ddafa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* rb_thread_struct::altstack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00747">747</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aad6cc8c9d9f511c12cca5af8c8aa6e77"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a>* rb_thread_struct::base_block</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00646">646</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf8cb1dd54464d5c8e277a66f2c1a063"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* rb_thread_struct::blocking_region_buffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00661">661</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2ed7f694d58d876aa6f0fae6986bc921"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a2cdb749fcf848da335babcfcb85439cf">rb_control_frame_t</a>* rb_thread_struct::cfp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00622">622</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a902e65a59d60355defde237425bc2d34"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a6be58a3ecba0e7d9bb8655c6bf334386">rb_ensure_list_t</a>* rb_thread_struct::ensure_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00741">741</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a173e2da61fa57c7044fd7874a8c7a924"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::errinfo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00667">667</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae57e4067fa1528caf7c84ca2e5ef2bd6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#acb68ac251ee81234695a55ddcdde006b">rb_hook_list_t</a> rb_thread_struct::event_hooks</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00732">732</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a93c4c0392bf0bee2240cc35cb93ab782"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a472bd020c7746bb9d079e432baa3380e">rb_fiber_t</a>* rb_thread_struct::fiber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00736">736</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac0efa5cb7f18b285cc3415f47930c4e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::first_args</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00712">712</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a02e88e845f2c9727cb5d52bd64134ec9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE(* rb_thread_struct::first_func) (ANYARGS)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00713">713</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aefaadd717ae62c44343b7bc767db6c5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::first_proc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00711">711</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad04e9258ee723608388a8aa2009b2f65"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="thread__pthread_8h.html#a3613e0afb21e5fe92d2c90b260aef6e8">rb_nativethread_cond_t</a> rb_thread_struct::interrupt_cond</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00682">682</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0533270d757d45edf045b509cb9397d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ruby__atomic_8h.html#a872a86eed7f070b0ea35b7494fbd9b73">rb_atomic_t</a> rb_thread_struct::interrupt_flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00679">679</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a98d4e0ac407d2babd9e5e74bbbcb1225"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rb_nativethread_lock_t rb_thread_struct::interrupt_lock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00681">681</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="abbde881c028e6a14d7740757c9d1f27b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long rb_thread_struct::interrupt_mask</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00680">680</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a45c0e5bcba9d684be932ae89428fb218"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a3e8a4455938c2be6f3e3a8a61557f50d">rb_thread_list_t</a>* rb_thread_struct::join_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00709">709</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="adb11d95769dc97f821331399fd45a586"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__mutex__struct.html">rb_mutex_struct</a>* rb_thread_struct::keeping_mutexes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00685">685</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a02e6343202cb5994463c33da7ed38c4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::last_status</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00625">625</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="af1ef1ecd85eec7b4809f81151ade5248"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">st_table* rb_thread_struct::local_storage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00705">705</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9a2d8d88fd64ea0c442b0ca5dc9bfdef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::local_storage_recursive_hash</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00706">706</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aba015eda69eb2c9fdba22ad7a210ff46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::local_storage_recursive_hash_for_trace</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00707">707</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab0435aec1daf59ef6caceee7004a7cfb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::locking_mutex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00684">684</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c645801a08bebc8220d972a46a9a7a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   rb_thread_struct::machine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a07c2bd40413d7e8e1fbfe99993a1387c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="vm__core_8h.html#ab3cff15695910fdc06be3b9382b6892d">method_missing_reason</a> rb_thread_struct::method_missing_reason</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00744">744</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a67feb33455eaa2e31e3d890f9099020b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::mild_compile_error</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Thread-local state of compiling context.</p>
+<p>If non-zero, the parser does not automatically print error messages to stderr. </p>
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00702">702</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ee6880a07f5e4bf524af64d1ccf3ad0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="thread__pthread_8h.html#a1730b74045959e1db34dfb31caddc0eb">native_thread_data_t</a> rb_thread_struct::native_thread_data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00660">660</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa6e324c4b5cb18a52b2631f190c7436e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::parse_in_eval</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Thread-local state of evaluation context.</p>
+<p>If negative, this thread is evaluating the main program. If positive, this thread is evaluating a program under Kernel::eval family. </p>
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00696">696</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae680ba33fe514b2b0031d77ad1527e1a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a>* rb_thread_struct::passed_block</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00633">633</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="accd90abda837f48c0c2fc6e14083bf6c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vsnprintf_8c.html#a2c212835823e3c54a8ab6d95c652660e">const</a> <a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a>* rb_thread_struct::passed_bmethod_me</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00636">636</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="adc9dc6f06f87a7235ec99cd2c86089cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a2fa00248bd6bcdc20b376c1c2c449fdd">rb_call_info_t</a>* rb_thread_struct::passed_ci</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00639">639</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a979a16137dbb149acf7a8fd194946a24"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::pending_interrupt_mask_stack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00676">676</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aafba3f4f103c0c0d4bf0ff37d278c856"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::pending_interrupt_queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00675">675</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a33cad2d14cf2e5e9e96385eafc14d2fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::pending_interrupt_queue_checked</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00677">677</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aec8d3fa76bacce31680b55dd03eac0e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::priority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00658">658</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="abad8fbdd52a64077a09b01ba9e813226"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__vm__protect__tag.html">rb_vm_protect_tag</a>* rb_thread_struct::protect_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00688">688</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0783e8b1c2dcd0b9b7a82d68e975eff3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::raised_flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00624">624</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aaefab98f8c4563dabf06ec2f1a60832a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::register_stack_end</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00722">722</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="add6728f95527fb12ac7ef6e97ff7e12b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rb_thread_struct::register_stack_maxsize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00723">723</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a109e37e222982d23d1061dc8b291d2a4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::register_stack_start</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00721">721</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a69c9471d72eb4c408567ce1c9fca91cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">jmp_buf rb_thread_struct::regs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00725">725</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a13410a81d8aae52384b90260f9953a09"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::retval</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00671">671</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="afc3db5209f029148069b77512f59665a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#a472bd020c7746bb9d079e432baa3380e">rb_fiber_t</a>* rb_thread_struct::root_fiber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00737">737</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a093205381d61933df048492029c5bb99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rb_jmpbuf_t rb_thread_struct::root_jmpbuf</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00738">738</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0edea360648d045d34bb60e4a91b218a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::root_lep</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00648">648</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7f9d18a3b68b34238986fa27564ee498"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::root_svar</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00649">649</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ada7923750df23f56b0d7164d715af3fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long rb_thread_struct::running_time_us</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00749">749</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="adc5048ddde96e3ea2e6b22c3e58ce696"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::safe_level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00623">623</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a6e712e6c5295a4173188139f1d6b7462"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::self</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00616">616</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3fd7aab45a1c539bc9ca022acfc1ad51"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::stack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00620">620</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a17c5325fb6cbb331e29ab27d12c646ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::stack_end</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00718">718</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1e01a8514defbbefaf4f31f30dc2dfd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rb_thread_struct::stack_maxsize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00719">719</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1f263d7b7ee19fc82ea14d83ed1dc7bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rb_thread_struct::stack_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00621">621</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2089c00ce922cd71f5138156baec42a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE* rb_thread_struct::stack_start</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00717">717</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3c9e667590cfe18b655cbe812e04d643"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::stat_insn_usage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00729">729</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a25bbafcd0a1e0f6f79b42cc29baf3eb8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00628">628</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a647ed2a802789fff9e511bea4ada1239"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="vm__core_8h.html#a027718c64d1aa742ccdb9c1a68afaa75">rb_thread_status</a> rb_thread_struct::status</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00656">656</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5125f0aae753728da5c0a02d84fd7f23"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__vm__tag.html">rb_vm_tag</a>* rb_thread_struct::tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00687">687</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3fa7c7d516fe265dbbd215eed5da5a20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::thgroup</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00663">663</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a744f5bac11851191900b971764eb5430"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rb_nativethread_id_t rb_thread_struct::thread_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00652">652</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e515186c1aa012ff4c8714e82c486df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#adcd7473a33a543d7f197bfc44515bc18">rb_thread_id_string_t</a> rb_thread_struct::thread_id_string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00654">654</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3004e89225a07c08e78af212b40c0e3c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::to_kill</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00657">657</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac0ba34f711c43f831fe95e9a9434353f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::top_self</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00642">642</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a63addaa5b39a83e287f7b8747398ab57"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::top_wrapper</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00643">643</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1d1baf79e5db5de206a0c3dcf8e78e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__trace__arg__struct.html">rb_trace_arg_struct</a>* rb_thread_struct::trace_arg</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00733">733</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1e8ee4d75d7d514449cf70ce7beca57e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrb__unblock__callback.html">rb_unblock_callback</a> rb_thread_struct::unblock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00683">683</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1b297be9273cc68bd7ec30eb99aada0f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::value</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00664">664</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3e7d0b05e2d73f324e70c735ba50739e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vm__core_8h.html#ab6a8242588889813903cd5d577ed906e">rb_vm_t</a>* rb_thread_struct::vm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00617">617</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5582463f246670caf25aceaa08aa9ea8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct list_node rb_thread_struct::vmlt_node</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00615">615</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8ddade0070cf5af8034e1549e30839fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rb_thread_struct::waiting_fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00630">630</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li><a class="el" href="vm__core_8h_source.html">vm_core.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!-- HTML header for doxygen 1.8.9.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>CRuby Code Reading: main.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CRuby Code Reading
+   </div>
+   <div id="projectbrief">ruby 2.3.0dev (2015-06-09 codereading 50801) [x86_64-darwin14]last_commit=add doxygen utilitie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="usergroup0.html"><span>機能</span></a></li>
+      <li><a href="pages.html"><span>諸情報</span></a></li>
+      <li><a href="modules.html"><span>モジュール</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle">
+<div class="title">main.c ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;ruby.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="vm__debug_8h_source.html">vm_debug.h</a>&quot;</code><br />
+</div>
+<p><a href="main_8c_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int <a class="el" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, char **<a class="el" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="main_8c_source.html">main.c</a> の <a class="el" href="main_8c_source.html#l00023">23</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifdef RUBY_DEBUG_ENV</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="debug_8c.html#a56fc051dd6ff424457394fd78af77fdd">ruby_set_debug_option</a>(<a class="code" href="dir_8c.html#aee28fd8a0e40b6d958f7d20348e45368">getenv</a>(<span class="stringliteral">&quot;RUBY_DEBUG&quot;</span>));</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifdef HAVE_LOCALE_H</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    setlocale(LC_CTYPE, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="ruby_8c.html#aa939b6f824daf3e455785b9a8b202ec2">ruby_sysinit</a>(&amp;<a class="code" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, &amp;<a class="code" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    RUBY_INIT_STACK;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="eval_8c.html#a2fe207a5a5fd5da2bf5948cb084a1c5b">ruby_init</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="goruby_8c.html#a363efd3b81046ed07af9eeb1489bc30b">ruby_run_node</a>(<a class="code" href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a>(<a class="code" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="code" href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="ttc" id="eval_8c_html_a2fe207a5a5fd5da2bf5948cb084a1c5b"><div class="ttname"><a href="eval_8c.html#a2fe207a5a5fd5da2bf5948cb084a1c5b">ruby_init</a></div><div class="ttdeci">void ruby_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="eval_8c_source.html#l00076">eval.c:76</a></div></div>
+<div class="ttc" id="ruby_8c_html_ad1447518f4372828b8435ae82e48499e"><div class="ttname"><a href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00129">ruby.c:129</a></div></div>
+<div class="ttc" id="dir_8c_html_aee28fd8a0e40b6d958f7d20348e45368"><div class="ttname"><a href="dir_8c.html#aee28fd8a0e40b6d958f7d20348e45368">getenv</a></div><div class="ttdeci">char * getenv()</div></div>
+<div class="ttc" id="goruby_8c_html_a363efd3b81046ed07af9eeb1489bc30b"><div class="ttname"><a href="goruby_8c.html#a363efd3b81046ed07af9eeb1489bc30b">ruby_run_node</a></div><div class="ttdeci">#define ruby_run_node</div><div class="ttdef"><b>Definition:</b> <a href="goruby_8c_source.html#l00003">goruby.c:3</a></div></div>
+<div class="ttc" id="debug_8c_html_a56fc051dd6ff424457394fd78af77fdd"><div class="ttname"><a href="debug_8c.html#a56fc051dd6ff424457394fd78af77fdd">ruby_set_debug_option</a></div><div class="ttdeci">void ruby_set_debug_option(const char *str)</div><div class="ttdef"><b>Definition:</b> <a href="debug_8c_source.html#l00162">debug.c:162</a></div></div>
+<div class="ttc" id="goruby_8c_html_ad306a5b66e3f0a8431e5b32330252db3"><div class="ttname"><a href="goruby_8c.html#ad306a5b66e3f0a8431e5b32330252db3">ruby_options</a></div><div class="ttdeci">#define ruby_options</div><div class="ttdef"><b>Definition:</b> <a href="goruby_8c_source.html#l00002">goruby.c:2</a></div></div>
+<div class="ttc" id="ruby_8c_html_aa939b6f824daf3e455785b9a8b202ec2"><div class="ttname"><a href="ruby_8c.html#aa939b6f824daf3e455785b9a8b202ec2">ruby_sysinit</a></div><div class="ttdeci">void ruby_sysinit(int *argc, char ***argv)</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l02034">ruby.c:2034</a></div></div>
+<div class="ttc" id="ruby_8c_html_af2efa898e9eed6fe6715279cb1ec35b0"><div class="ttname"><a href="ruby_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00130">ruby.c:130</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.9.1-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年06月10日(水) 19時51分51秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>
