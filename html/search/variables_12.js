@@ -216,7 +216,7 @@ var searchData=
   ['ruby_5fencoding_5fmask',['RUBY_ENCODING_MASK',['../debug_8c.html#a932c720837ab90baf674a7cf04de2446',1,'debug.c']]],
   ['ruby_5fengine',['ruby_engine',['../version_8c.html#a1151526d314905de011e0703ff30cf64',1,'version.c']]],
   ['ruby_5fengine_5fname',['ruby_engine_name',['../internal_8h.html#aca7df2b4c101d2d9bc946de586de224c',1,'ruby_engine_name():&#160;version.c'],['../version_8c.html#aca7df2b4c101d2d9bc946de586de224c',1,'ruby_engine_name():&#160;version.c']]],
-  ['ruby_5fevent_5fflag_5fcount',['ruby_event_flag_count',['../vm__trace_8c.html#aa6f74e2eb9e5ca7b2abdc3eb17633e88',1,'vm_trace.c']]],
+  ['ruby_5fevent_5fflag_5fcount',['ruby_event_flag_count',['../vm__trace_8c.html#a353f18f4ee5882d1b0f735296d5c4e10',1,'vm_trace.c']]],
   ['ruby_5fexec_5fprefix',['ruby_exec_prefix',['../internal_8h.html#a30a92493e0f9155ec6ed13bc8e852f55',1,'ruby_exec_prefix():&#160;loadpath.c'],['../loadpath_8c.html#a30a92493e0f9155ec6ed13bc8e852f55',1,'ruby_exec_prefix():&#160;loadpath.c'],['../miniinit_8c.html#a30a92493e0f9155ec6ed13bc8e852f55',1,'ruby_exec_prefix():&#160;miniinit.c']]],
   ['ruby_5ffl_5fuser19',['RUBY_FL_USER19',['../debug_8c.html#aee17dc1bd82b4d89ff46ab4ae3217b08',1,'debug.c']]],
   ['ruby_5fgc_5fdebug_5findent',['ruby_gc_debug_indent',['../gc_8c.html#a8416510f5605ae0367ca55ac8ee09aeb',1,'gc.c']]],

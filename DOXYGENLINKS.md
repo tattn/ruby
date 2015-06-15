@@ -14,9 +14,30 @@
 			* Init_frozen_strings() [eval.c] - frozen string の初期化
 			* rb_call_inits() [eval.c] - 組み込みクラスのイニシャライザ呼び出し
 			* ruby_prog_init() [ruby.c] - 組み込み変数の作成
-	* ruby_options() [eval.c] - コマンドラインオプションの処理と、ソースのコンパイル
+	* ruby_options() [eval.c] - コマンドラインオプションの処理と、ソースのパース
 		* ruby_init_stack() [thread_pthread.c]
-		* ruby_process_options() [ruby.c]
+		* ruby_process_options() [ruby.c] - スクリプト名の設定とパース
+			* cmdline_options_init() [ruby.c] - コマンドライン引数の初期化
+			* process_options() [ruby.c] - 実際のコマンドライン引数の処理と抽象木の作成
+				* e オプションが付いている時
+					* rb_parser_compile_string()
+				* e オプションが付いていない時
+					* load_file() [ruby.c]
+						* rb_ensure() [eval.c]
+							* load_file_internal() [ruby.c] - OS ごとに合わせたファイル読み込み
+								* rb_protect() [eval.c] - 第１引数の関数実行中にエラーが起きた場合に復帰できる
+									* load_file_internal2() [ruby.c] - ファイル読み込みとパース (エンコード関係が複雑すぎる)
+										* rb_parser_compile_string_path() [ripper.c]
+											* parser_compile_string() [ripper.c] - パースして AST を返す。
+
+	* ruby_run_node() [main.c]
+		* ruby_executable_node() [eval.c] - パースがうまく行ったかを調べる
+			* ruby_exec_node() [eval.c]
+				* ruby_exec_internal() [eval.c] - エラー処理と実行
+					* rb_iseq_eval_main() [vm.c] - スタックフレームのセットアップ
+					* vm_exec() [vm.c] - VM のループとエラーハンドリング
+						* vm_exec_core() [vm_exec.c]  - VM の実行!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 
@@ -37,5 +58,5 @@
 
 Copyright (C) 2015 Tatsuya Tanaka
 
-created at: 2015-06-15 14:28:26 +0900
+created at: 2015-06-15 18:46:27 +0900
 

@@ -14,7 +14,7 @@ var searchData=
   ['generator_5fdata_5ftype',['generator_data_type',['../enumerator_8c.html#a3f3f620337c7b6304abbbf82612fcacb',1,'enumerator.c']]],
   ['generic_5fiv_5ftbl',['generic_iv_tbl',['../variable_8c.html#a1b04b3c1b88bc870583281eb40e03b1d',1,'variable.c']]],
   ['generic_5fiv_5ftbl_5fcompat',['generic_iv_tbl_compat',['../variable_8c.html#aaa485e1d40245ede9228b582a89c46a7',1,'variable.c']]],
-  ['getter',['getter',['../structrb__global__variable.html#ac721e50b27f94a8ea86c3a4a02c01c2c',1,'rb_global_variable']]],
+  ['getter',['getter',['../structglobal__variable.html#aa9e144d805e9777820d1f56fd5b78533',1,'global_variable']]],
   ['gid',['gid',['../structrb__execarg.html#a1439d2d0b7dc011996823aee79b398bf',1,'rb_execarg']]],
   ['gid_5fgiven',['gid_given',['../structrb__execarg.html#aa5f2fe11f8cc3bee753ec384d0474ee0',1,'rb_execarg']]],
   ['giga_5fcount',['giga_count',['../structtimetick.html#a8e88dd6e3ec9ac8a29e954b8bf75a8f2',1,'timetick']]],

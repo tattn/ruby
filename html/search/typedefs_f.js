@@ -1,6 +1,7 @@
 var searchData=
 [
   ['search_5fpath_5fqueue_5ft',['search_path_queue_t',['../transcode_8c.html#a87ee806b90e4c1c1a0a4dd6a1bcae542',1,'transcode.c']]],
+  ['sighandler_5ft',['sighandler_t',['../signal_8c.html#ab469a2a0a5b0594f3430de4c864e79e3',1,'signal.c']]],
   ['signed_5fwidevalue',['SIGNED_WIDEVALUE',['../time_8c.html#a47648cb019704f9886e2572491d98a7f',1,'time.c']]],
   ['sip_5finterface',['sip_interface',['../siphash_8h.html#abf9f37d428f980144ce70af01a094a39',1,'siphash.h']]],
   ['st_5fforeach_5ffunc',['st_foreach_func',['../hash_8c.html#a876bcddcc148ad36ab20f5446a8db90b',1,'hash.c']]],
@@ -8,18 +9,5 @@ var searchData=
   ['st_5ftable_5fentry',['st_table_entry',['../st_8c.html#a4bafc81982b39c3f3fa20e5f7b3dbbf5',1,'st.c']]],
   ['stack_5fchunk_5ft',['stack_chunk_t',['../gc_8c.html#a01750cb4f5bfe84223be3556b33e7dbf',1,'gc.c']]],
   ['stack_5ftype',['stack_type',['../parse_8c.html#ae6eb774b9546aae79b207c7bae8d7253',1,'parse.c']]],
-  ['statechecknumtype',['StateCheckNumType',['../regint_8h.html#aa877bee333a03d69077236a4bb72710c',1,'regint.h']]],
-  ['static_5fassert_5fbdigit_5fdbl_5fsigned_5fsignedness_5fcheck',['static_assert_bdigit_dbl_signed_signedness_check',['../bignum_8c.html#abcce8fa849658342e6f35a5cad8d5a50',1,'bignum.c']]],
-  ['static_5fassert_5fbdigit_5fdbl_5fsignedness_5fcheck',['static_assert_bdigit_dbl_signedness_check',['../bignum_8c.html#a7f589f536be5d84db0698c723057f076',1,'bignum.c']]],
-  ['static_5fassert_5fbdigit_5fsignedness_5fcheck',['static_assert_bdigit_signedness_check',['../bignum_8c.html#aa4ee8b260f7dfec56b18e978a1835a98',1,'bignum.c']]],
-  ['static_5fassert_5fminmax_5ft_5fcheck',['static_assert_minmax_t_check',['../enum_8c.html#a6103b5dbdadcc4936fc1c5719a878721',1,'enum.c']]],
-  ['static_5fassert_5fop_5ftbl_5fname_5fsize_5fcheck',['static_assert_op_tbl_name_size_check',['../symbol_8c.html#a31df64ec136cdba3b0f7c1ef36c7d88c',1,'symbol.c']]],
-  ['static_5fassert_5frbignum_5fembed_5flen_5fmax_5fcheck',['static_assert_rbignum_embed_len_max_check',['../bignum_8c.html#a0d748de43d3a3160bc074138fb8f9398',1,'bignum.c']]],
-  ['static_5fassert_5fsizeof_5fbdigit_5fand_5fdbl_5fcheck',['static_assert_sizeof_bdigit_and_dbl_check',['../bignum_8c.html#a60ab41a93a372077c213a4918e49ebd6',1,'bignum.c']]],
-  ['static_5fassert_5fsizeof_5fbdigit_5fcheck',['static_assert_sizeof_bdigit_check',['../bignum_8c.html#ae3595b27b55122d0a72ea2ebfa900cbb',1,'bignum.c']]],
-  ['static_5fassert_5fsizeof_5fbdigit_5fdbl_5fcheck',['static_assert_sizeof_bdigit_dbl_check',['../bignum_8c.html#a79ca4d36875551a13358bca578056712',1,'bignum.c']]],
-  ['static_5fassert_5fsizeof_5fbdigit_5fdbl_5fsigned_5fcheck',['static_assert_sizeof_bdigit_dbl_signed_check',['../bignum_8c.html#abd22ff344f76915759f585cf6d4dacec',1,'bignum.c']]],
-  ['static_5fassert_5fsizeof_5flong_5fand_5fsizeof_5fbdigit_5fcheck',['static_assert_sizeof_long_and_sizeof_bdigit_check',['../bignum_8c.html#ab4d31dee204595e7c55d72f0c19f9b11',1,'bignum.c']]],
-  ['static_5fassert_5fst_5fpacked_5fbins_5fcheck',['static_assert_st_packed_bins_check',['../st_8c.html#ae77ee5e3004a1463b942def9eceda560',1,'st.c']]],
-  ['static_5fassert_5fst_5fpacked_5fentry_5fcheck',['static_assert_st_packed_entry_check',['../st_8c.html#ac41783ef8cefab9c067b8ea2006089b9',1,'st.c']]]
+  ['statechecknumtype',['StateCheckNumType',['../regint_8h.html#aa877bee333a03d69077236a4bb72710c',1,'regint.h']]]
 ];

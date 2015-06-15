@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['def_5fexpr',['DEF_EXPR',['../parse_8c.html#a41ef384dc1649a65b158dd68d3b8c389a2d6ab6b4c0156017a56ec9dbb750de33',1,'parse.c']]],
   ['defined_5fasgn',['DEFINED_ASGN',['../iseq_8h.html#a92be74fce09c828c57a7007d1b4a406ea707b223a06139f718d640238531beae4',1,'iseq.h']]],
   ['defined_5fconst',['DEFINED_CONST',['../iseq_8h.html#a92be74fce09c828c57a7007d1b4a406ea3253b64b67b618aa26c7bca9fceb2c41',1,'iseq.h']]],
   ['defined_5fcvar',['DEFINED_CVAR',['../iseq_8h.html#a92be74fce09c828c57a7007d1b4a406eaf18ae2b53145b17e1822de15e9d1564e',1,'iseq.h']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['u64to8_5fle',['u64to8_le',['../siphash_8c.html#ae884b5a2f6356ab7b05458220552ecbd',1,'siphash.c']]],
-  ['u8to64_5fle',['u8to64_le',['../siphash_8c.html#ac657c12afa90af1ec03451b40a4a4bb9',1,'siphash.c']]],
+  ['u64to8_5fle',['u64to8_le',['../siphash_8c.html#aa361f0b52a4dc6bf331851f0728f0c4f',1,'siphash.c']]],
+  ['u8to64_5fle',['u8to64_le',['../siphash_8c.html#a75e3655650d82e4f12963e92c7b34c8e',1,'siphash.c']]],
   ['ulong_5fto_5fnum_5fplus_5f1',['ulong_to_num_plus_1',['../random_8c.html#a0c03f165e08e9a087be1761a8a67ee94',1,'random.c']]],
   ['ulp',['ulp',['../util_8c.html#a2cc18d072422c680e603ff5ee1d44e31',1,'util.c']]],
   ['umethod_5fbind',['umethod_bind',['../proc_8c.html#aa11ac7837645a53ac91bf1ee5a0739fa',1,'proc.c']]],
@@ -9,6 +9,9 @@ var searchData=
   ['uncaught_5fthrow_5ftag',['uncaught_throw_tag',['../vm__eval_8c.html#a3f9b48c4a8d5a6d4b90acf804e927ba7',1,'vm_eval.c']]],
   ['uncaught_5fthrow_5fto_5fs',['uncaught_throw_to_s',['../vm__eval_8c.html#a554586558e3e8d530b695bc49e6a87be',1,'vm_eval.c']]],
   ['uncaught_5fthrow_5fvalue',['uncaught_throw_value',['../vm__eval_8c.html#add2083ce2d6b5f1ecc28d52054fe8abf',1,'vm_eval.c']]],
+  ['undef_5fgetter',['undef_getter',['../variable_8c.html#a9d81333a49c609b6c5e8977bda51fee3',1,'variable.c']]],
+  ['undef_5fmarker',['undef_marker',['../variable_8c.html#a5955d8bd14032587804599cd6ef37f6e',1,'variable.c']]],
+  ['undef_5fsetter',['undef_setter',['../variable_8c.html#a619753341c7c570b193a6e712401e2e7',1,'variable.c']]],
   ['undefine_5ffinal',['undefine_final',['../gc_8c.html#ae243ea45416037ff231f619e26c3cf4e',1,'gc.c']]],
   ['unescape_5fescaped_5fnonascii',['unescape_escaped_nonascii',['../re_8c.html#aac141d9cf262faab6d3426ff2cc7c66b',1,'re.c']]],
   ['unescape_5fnonascii',['unescape_nonascii',['../re_8c.html#ad3cfe8d96e17c487e53c25fcfa252cda',1,'re.c']]],
@@ -35,6 +38,6 @@ var searchData=
   ['using_5fmodule_5frecursive',['using_module_recursive',['../eval_8c.html#ac2fad8ef388c9bc9421e43ddcebb3f27',1,'eval.c']]],
   ['using_5frefinement',['using_refinement',['../eval_8c.html#a7916166a947d2a259303ce0bca833e1c',1,'eval.c']]],
   ['utc_5foffset_5farg',['utc_offset_arg',['../time_8c.html#ab569ecfa13ab23f4066dd0360e532123',1,'time.c']]],
-  ['utf8_5fto_5fuv',['utf8_to_uv',['../pack_8c.html#af5486696d49eda881dc03ff113431bc5',1,'pack.c']]],
+  ['utf8_5fto_5fuv',['utf8_to_uv',['../pack_8c.html#abf92c613d67bb39e1eb12b25c7272f44',1,'pack.c']]],
   ['utime_5finternal',['utime_internal',['../file_8c.html#aa8f7600174345d2ce3d66a11f8a21d59',1,'file.c']]]
 ];

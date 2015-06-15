@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zds',['zds',['../structbig__div__struct.html#a6d3b2cd28a1b6200c9e26565d0c77bcb',1,'big_div_struct']]],
+  ['zds',['zds',['../structbig__div__struct.html#a31f53f81bca8f1059e39877a91c98134',1,'big_div_struct']]],
   ['zero',['ZERO',['../complex_8c.html#ac328e551bde3d39b6d7b8cc9e048d941',1,'ZERO():&#160;complex.c'],['../rational_8c.html#ac328e551bde3d39b6d7b8cc9e048d941',1,'ZERO():&#160;rational.c']]],
   ['zero_5ffilled',['zero_filled',['../string_8c.html#a7a3b6b1f4f37822c1e351f72c77f6cc2',1,'string.c']]],
   ['zerobt',['ZERObt',['../transcode__data_8h.html#a6122456f802bd1c9ddf1dd02e7cb08c1',1,'transcode_data.h']]],

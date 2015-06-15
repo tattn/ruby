@@ -33,7 +33,7 @@ var searchData=
   ['warn_5fprint_5fstr',['warn_print_str',['../eval__error_8c.html#ab4337f5a3ba6c77ea2961de50e9ecc3c',1,'eval_error.c']]],
   ['warn_5fprintf',['warn_printf',['../eval__error_8c.html#a6dcd8084483016da9ae3be01ae42bcbd',1,'eval_error.c']]],
   ['warn_5funless_5fe_5foption',['warn_unless_e_option',['../parse_8c.html#ac1292d5338dbd82db26c883f45326560',1,'parse.c']]],
-  ['warn_5funused_5fresult',['WARN_UNUSED_RESULT',['../internal_8h.html#add8de467e88d80526481845fe9d77d99',1,'internal.h']]],
+  ['warn_5funused_5fresult',['WARN_UNUSED_RESULT',['../internal_8h.html#add8de467e88d80526481845fe9d77d99',1,'WARN_UNUSED_RESULT():&#160;internal.h'],['../symbol_8c.html#a4dd6bb7716a0b7d97709ce2aecde02e9',1,'WARN_UNUSED_RESULT(static VALUE dsymbol_alloc(const VALUE klass, const VALUE str, rb_encoding *const enc, const ID type)):&#160;symbol.c'],['../symbol_8c.html#a15e78e6a9b5cfe95c02795a981285782',1,'WARN_UNUSED_RESULT(static VALUE dsymbol_check(const VALUE sym)):&#160;symbol.c'],['../symbol_8c.html#a1cf83384f336098bdd0ddbeaebdc36e5',1,'WARN_UNUSED_RESULT(static ID lookup_str_id(VALUE str)):&#160;symbol.c'],['../symbol_8c.html#aba8d0f8ba986c9d00377d3494f9e56f2',1,'WARN_UNUSED_RESULT(static VALUE lookup_str_sym(const VALUE str)):&#160;symbol.c'],['../symbol_8c.html#a3a7b64e736210f367cd8c88e11c4fcce',1,'WARN_UNUSED_RESULT(static VALUE lookup_id_str(ID id)):&#160;symbol.c'],['../symbol_8c.html#a5ba048a9e7c27c8d044edfd62e67d045',1,'WARN_UNUSED_RESULT(static ID attrsetname_to_attr(VALUE name)):&#160;symbol.c'],['../symbol_8c.html#acb8896abb6477e276902521b9afe8f33',1,'WARN_UNUSED_RESULT(static ID intern_str(VALUE str, int mutable)):&#160;symbol.c']]],
   ['warn_5funused_5fvar',['warn_unused_var',['../parse_8c.html#a4fd43c338a5f66f2d33305d45580ea1d',1,'parse.c']]],
   ['warning_5fargs',['warning_args',['../structwarning__args.html',1,'']]],
   ['warning_5fstring',['warning_string',['../error_8c.html#a69b8e6b9095d1a803c49d134705cd0f3',1,'error.c']]],
@@ -47,8 +47,8 @@ var searchData=
   ['wds',['wds',['../struct_bigint.html#aa737992ebddb9d6a7e2d23bfecdb080e',1,'Bigint']]],
   ['weakmap',['weakmap',['../structweakmap.html',1,'']]],
   ['weakmap_5ftype',['weakmap_type',['../gc_8c.html#a08579748ed4be8c97f15ab5988122b10',1,'gc.c']]],
-  ['weeknumber',['weeknumber',['../strftime_8c.html#a2336132e2082c0886f5e306e5b935146',1,'weeknumber():&#160;strftime.c'],['../strftime_8c.html#a90cbe21f9b83850065623a57c9f62536',1,'weeknumber(struct tm *timeptr, int firstweekday):&#160;strftime.c']]],
-  ['weeknumber_5fv',['weeknumber_v',['../strftime_8c.html#a5badadd56e3f6811d6a2fc2574523ede',1,'weeknumber_v():&#160;strftime.c'],['../strftime_8c.html#a55defeeb87cc2c33478b0c9a548d2dbc',1,'weeknumber_v(struct vtm *vtm, int firstweekday):&#160;strftime.c']]],
+  ['weeknumber',['weeknumber',['../strftime_8c.html#a2336132e2082c0886f5e306e5b935146',1,'weeknumber():&#160;strftime.c'],['../strftime_8c.html#ab832f4de6d00ccd3aab24498103277ad',1,'weeknumber(const struct tm *timeptr, int firstweekday):&#160;strftime.c']]],
+  ['weeknumber_5fv',['weeknumber_v',['../strftime_8c.html#af6c733b46f310d25e0a6ccd0f5470c2f',1,'strftime.c']]],
   ['weq',['weq',['../time_8c.html#a486e9104165f6f90c0da2f746f569721',1,'time.c']]],
   ['wexitstatus',['WEXITSTATUS',['../error_8c.html#a77f17ed4771a558a0f16e5f3aecee222',1,'WEXITSTATUS():&#160;error.c'],['../process_8c.html#ae7700c010e70c0004dd332624e03122a',1,'WEXITSTATUS():&#160;process.c']]],
   ['wge',['wge',['../time_8c.html#a0a2dbd8d248d725cc82aea8eb231a48f',1,'time.c']]],
@@ -128,5 +128,5 @@ var searchData=
   ['wstopsig',['WSTOPSIG',['../process_8c.html#aa92e07a0d3579b31e516f96335889bc7',1,'process.c']]],
   ['wsub',['wsub',['../time_8c.html#a9ea3f1c21d8979e55888161d2e113d68',1,'time.c']]],
   ['wtermsig',['WTERMSIG',['../process_8c.html#acaeb2e652dc908353c472ed40707495c',1,'process.c']]],
-  ['wv2timet',['WV2TIMET',['../time_8c.html#a18c2a4a407928e1a58aa606511ed7c82',1,'WV2TIMET():&#160;time.c'],['../time_8c.html#af4e045068becd8eaeb1e572ba29fc9cb',1,'wv2timet(wideval_t w):&#160;time.c']]]
+  ['wv2timet',['wv2timet',['../time_8c.html#af4e045068becd8eaeb1e572ba29fc9cb',1,'wv2timet(wideval_t w):&#160;time.c'],['../time_8c.html#a18c2a4a407928e1a58aa606511ed7c82',1,'WV2TIMET():&#160;time.c']]]
 ];

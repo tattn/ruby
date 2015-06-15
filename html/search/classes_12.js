@@ -28,7 +28,6 @@ var searchData=
   ['rb_5ff_5fp_5farg',['rb_f_p_arg',['../structrb__f__p__arg.html',1,'']]],
   ['rb_5ffiber_5fstruct',['rb_fiber_struct',['../structrb__fiber__struct.html',1,'']]],
   ['rb_5fglobal_5fentry',['rb_global_entry',['../structrb__global__entry.html',1,'']]],
-  ['rb_5fglobal_5fvariable',['rb_global_variable',['../structrb__global__variable.html',1,'']]],
   ['rb_5fglobal_5fvm_5flock_5fstruct',['rb_global_vm_lock_struct',['../structrb__global__vm__lock__struct.html',1,'']]],
   ['rb_5fheap_5fstruct',['rb_heap_struct',['../structrb__heap__struct.html',1,'']]],
   ['rb_5fhook_5flist_5fstruct',['rb_hook_list_struct',['../structrb__hook__list__struct.html',1,'']]],

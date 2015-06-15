@@ -12,7 +12,7 @@ var searchData=
   ['xmemmove',['xmemmove',['../regint_8h.html#ac2dfd444f373185cce0ffecb8dfc5c79',1,'regint.h']]],
   ['xmemset',['xmemset',['../regint_8h.html#a607e563e4f7194e9c7c1168d0b76a028',1,'regint.h']]],
   ['xor64_5fint',['XOR64_INT',['../siphash_8c.html#a1be02abb1a5b9515cb63eb676c0aed59',1,'siphash.c']]],
-  ['xor64_5fto',['XOR64_TO',['../siphash_8c.html#a236a0312d506df147808e24f3cbb3c49',1,'XOR64_TO():&#160;siphash.c'],['../siphash_8c.html#aac50cf5cf78af132df0c6be197e6f8bc',1,'xor64_to(sip_uint64_t *v, const sip_uint64_t s):&#160;siphash.c']]],
+  ['xor64_5fto',['xor64_to',['../siphash_8c.html#a292687a63de7e6a94c5650323d75cdcc',1,'xor64_to(uint64_t *v, const uint64_t s):&#160;siphash.c'],['../siphash_8c.html#a236a0312d506df147808e24f3cbb3c49',1,'XOR64_TO():&#160;siphash.c']]],
   ['xrealloc',['xrealloc',['../regint_8h.html#a40740062faf2d95d4935112447c464ef',1,'xrealloc():&#160;regint.h'],['../dln_8c.html#ad2a5210288fa2b909883f2b6c10b8992',1,'xrealloc():&#160;dln.c']]],
   ['xvsnprintf',['xvsnprintf',['../regint_8h.html#add41ce77cb7395ebdbbd6483a038b964',1,'regint.h']]]
 ];

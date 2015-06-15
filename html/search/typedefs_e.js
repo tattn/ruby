@@ -22,7 +22,7 @@ var searchData=
   ['rb_5fglobal_5fvm_5flock_5ft',['rb_global_vm_lock_t',['../thread__pthread_8h.html#af6180b2b92edd0c7033a86693246010b',1,'rb_global_vm_lock_t():&#160;thread_pthread.h'],['../thread__win32_8h.html#af6180b2b92edd0c7033a86693246010b',1,'rb_global_vm_lock_t():&#160;thread_win32.h']]],
   ['rb_5fheap_5ft',['rb_heap_t',['../gc_8c.html#aaad5635ae2c440af5209751b03769719',1,'gc.c']]],
   ['rb_5fhook_5flist_5ft',['rb_hook_list_t',['../vm__core_8h.html#acb68ac251ee81234695a55ddcdde006b',1,'vm_core.h']]],
-  ['rb_5finsn_5ffunc_5ft',['rb_insn_func_t',['../vm__core_8h.html#a106f1b2c745db5ddb80e30b36f4daa5c',1,'vm_core.h']]],
+  ['rb_5finsn_5ffunc_5ft',['rb_insn_func_t',['../vm__core_8h.html#a52fa6faac5918e5d5271f640aa8d0b26',1,'vm_core.h']]],
   ['rb_5fiseq_5flocation_5ft',['rb_iseq_location_t',['../vm__core_8h.html#a48a51e0737eb3a42f25f20ba57b01b1f',1,'vm_core.h']]],
   ['rb_5fiseq_5ft',['rb_iseq_t',['../method_8h.html#ab6b4f5ac0a242e7c1816570c5e0f9266',1,'method.h']]],
   ['rb_5fjmpbuf_5ft',['rb_jmpbuf_t',['../vm__core_8h.html#aaacd8bc40d781eb8daece677943a8132',1,'vm_core.h']]],
@@ -54,9 +54,8 @@ var searchData=
   ['regoff_5ft',['regoff_t',['../regexec_8c.html#a5b34995b47432512ee4ffa32b836e65f',1,'regexec.c']]],
   ['reladdrtype',['RelAddrType',['../regint_8h.html#a9d058c40ebc713355574e3d4579bbd2a',1,'regint.h']]],
   ['repeatnumtype',['RepeatNumType',['../regint_8h.html#a098b0e36ae6953729b5315c91a01662e',1,'regint.h']]],
-  ['ruby_5fcheck_5fmarshal_5fviral_5fflags',['ruby_check_marshal_viral_flags',['../marshal_8c.html#a14ac46b5930c99266757c799cd55d4db',1,'marshal.c']]],
-  ['ruby_5flib_5fversion_5fstring',['ruby_lib_version_string',['../loadpath_8c.html#a2212c7a51201a31c83e00a8958abdfd1',1,'loadpath.c']]],
+  ['ruby_5fcheck_5fmarshal_5fviral_5fflags',['ruby_check_marshal_viral_flags',['../marshal_8c.html#af02a5e31598a9539cd0c0852a31cf8c1',1,'marshal.c']]],
+  ['ruby_5flib_5fversion_5fstring',['ruby_lib_version_string',['../loadpath_8c.html#a69e4c189013c7a5065febdb4aea866c5',1,'loadpath.c']]],
   ['ruby_5fsigaction_5ft',['ruby_sigaction_t',['../signal_8c.html#a6808f2ad3436fc96e0d30320dafbfeaa',1,'signal.c']]],
-  ['ruby_5fsighandler_5ft',['ruby_sighandler_t',['../signal_8c.html#adbcb188603716939a70f9a881d5b27f1',1,'signal.c']]],
   ['rvalue',['RVALUE',['../gc_8c.html#a6e5ae2b22e282bcdfa45c9a7e7db16bb',1,'gc.c']]]
 ];

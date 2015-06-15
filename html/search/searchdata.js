@@ -30,16 +30,16 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "全て",
-  1: "クラス",
-  2: "ファイル",
-  3: "関数",
-  4: "変数",
-  5: "型定義",
-  6: "列挙型",
-  7: "列挙値",
-  8: "マクロ定義",
-  9: "グループ",
-  10: "ページ"
+  0: "All",
+  1: "Classes",
+  2: "Files",
+  3: "Functions",
+  4: "Variables",
+  5: "Typedefs",
+  6: "Enumerations",
+  7: "Enumerator",
+  8: "Macros",
+  9: "Modules",
+  10: "Pages"
 };
 

@@ -1,6 +1,9 @@
 var searchData=
 [
   ['v2w',['v2w',['../time_8c.html#af2c19355a3875969794fc543d36e7fd2',1,'time.c']]],
+  ['val_5fgetter',['val_getter',['../variable_8c.html#acd3cbcd8d90f118041443cc7832204e4',1,'variable.c']]],
+  ['val_5fmarker',['val_marker',['../variable_8c.html#acfc48099df1ddd3fa7e140c459f09342',1,'variable.c']]],
+  ['val_5fsetter',['val_setter',['../variable_8c.html#ae411d835896be71640b0f7c54b625a41',1,'variable.c']]],
   ['validate_5fenc_5fbinmode',['validate_enc_binmode',['../io_8c.html#aa9b7bb2abeafdd599f98d4b7db988f1b',1,'io.c']]],
   ['validate_5finteger_5fpack_5fformat',['validate_integer_pack_format',['../bignum_8c.html#ac9da14bc98da512a3886cccc1695ee17',1,'bignum.c']]],
   ['validate_5flabel',['validate_label',['../compile_8c.html#a9fb1c0472b0a8fdd61bb60233faccd7a',1,'compile.c']]],
@@ -10,9 +13,12 @@ var searchData=
   ['validate_5fzone_5fname',['validate_zone_name',['../time_8c.html#ac36e20b91c2f719264f6967c80d9ff87',1,'time.c']]],
   ['value_5fexpr_5fgen',['value_expr_gen',['../parse_8c.html#a728b3dd8bdacd9371911b53fc5645386',1,'parse.c']]],
   ['values_5fi',['values_i',['../hash_8c.html#a860d13ed6d777e537502c5cddcae7881',1,'hash.c']]],
+  ['var_5fgetter',['var_getter',['../variable_8c.html#a9f27b9ff89b600550d8aa563d0790c38',1,'variable.c']]],
+  ['var_5fmarker',['var_marker',['../variable_8c.html#adbdac8a363c16b50d37f9ed4bc2575f3',1,'variable.c']]],
+  ['var_5fsetter',['var_setter',['../variable_8c.html#ab30fdf47c4bf348c433091214d2c4307',1,'variable.c']]],
   ['verbose_5fsetter',['verbose_setter',['../ruby_8c.html#a84ab8b02bd412174055520a9d33db7dd',1,'ruby.c']]],
   ['verify_5finternal_5fconsistency_5fi',['verify_internal_consistency_i',['../gc_8c.html#ac56e67f5fc1410b06cba125d99997ee7',1,'gc.c']]],
-  ['verify_5flist',['verify_list',['../compile_8c.html#a1e13d0bab9cbac35bc3483b656b173fc',1,'compile.c']]],
+  ['verify_5flist',['verify_list',['../compile_8c.html#a729411c47b67655aa1b56fd37fad90ae',1,'compile.c']]],
   ['vm_5fbacktrace_5fprint',['vm_backtrace_print',['../vm__backtrace_8c.html#aaaa27784a597dd05de78450e74547589',1,'vm_backtrace.c']]],
   ['vm_5fbacktrace_5fto_5fary',['vm_backtrace_to_ary',['../vm__backtrace_8c.html#a27be76330823602326c404ad1a608c9c',1,'vm_backtrace.c']]],
   ['vm_5fbase_5fptr',['vm_base_ptr',['../vm__insnhelper_8c.html#ad8c4d3e68920abf7fe2a84cffde3be1b',1,'vm_insnhelper.c']]],
@@ -125,7 +131,7 @@ var searchData=
   ['vtable_5fincluded',['vtable_included',['../parse_8c.html#a64634944fc97b322eccc73273cbfe233',1,'parse.c']]],
   ['vtable_5fpop',['vtable_pop',['../parse_8c.html#ae29b31a3d5335c7770021de8b908f3ce',1,'parse.c']]],
   ['vtable_5fsize',['vtable_size',['../parse_8c.html#ae4e8077b70dff93cf67cfcf5348620e3',1,'parse.c']]],
-  ['vtm2tm_5fnoyear',['vtm2tm_noyear',['../strftime_8c.html#a0de7024228b170d993d1129f8b40acd1',1,'strftime.c']]],
+  ['vtm2tm_5fnoyear',['vtm2tm_noyear',['../strftime_8c.html#a31833d8f43847ff1cced5323a50d250c',1,'strftime.c']]],
   ['vtm_5fadd_5foffset',['vtm_add_offset',['../time_8c.html#a5446e5606136a3b563472e1ca9e4b74c',1,'time.c']]],
   ['vtmcmp',['vtmcmp',['../time_8c.html#a91f31ba962dc2bd96f2bb75732c00751',1,'time.c']]]
 ];

@@ -22,6 +22,5 @@ var searchData=
   ['_5f_5fsstr',['__SSTR',['../vsnprintf_8c.html#a7934343459dfe68ced51599a7b9a316f',1,'vsnprintf.c']]],
   ['_5f_5fswr',['__SWR',['../vsnprintf_8c.html#af08f227b04a8833c49ce8b798ca7f403',1,'vsnprintf.c']]],
   ['_5f_5fuse_5ffortify_5flevel',['__USE_FORTIFY_LEVEL',['../thread_8c.html#a845f4d4fd9325a9ea97f7d47cd38bd20',1,'thread.c']]],
-  ['_5fbsd_5fva_5flist_5f',['_BSD_VA_LIST_',['../vsnprintf_8c.html#a05c3802edeacd3436c01fe12c00c0976',1,'vsnprintf.c']]],
-  ['_5fnoreturn',['_Noreturn',['../parse_8c.html#afdc60192553b70b37149691b71022d5a',1,'parse.c']]]
+  ['_5fbsd_5fva_5flist_5f',['_BSD_VA_LIST_',['../vsnprintf_8c.html#a05c3802edeacd3436c01fe12c00c0976',1,'vsnprintf.c']]]
 ];

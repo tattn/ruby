@@ -9,5 +9,6 @@ var searchData=
   ['givar_5fcopy',['givar_copy',['../structgivar__copy.html',1,'']]],
   ['glob_5fargs',['glob_args',['../structglob__args.html',1,'']]],
   ['glob_5fpattern',['glob_pattern',['../structglob__pattern.html',1,'']]],
+  ['global_5fvariable',['global_variable',['../structglobal__variable.html',1,'']]],
   ['groupnumremap',['GroupNumRemap',['../struct_group_num_remap.html',1,'']]]
 ];
