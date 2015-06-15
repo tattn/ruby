@@ -4975,6 +4975,48 @@ static time_t filetime_to_unixtime(const FILETIME *ft);
 static WCHAR *name_for_stat(WCHAR *buf, const WCHAR *path);
 static DWORD stati64_handle(HANDLE h, struct stati64 *st);
 
+/* License: Ruby's */
+static void
+stati64_set_inode(PBY_HANDLE_FILE_INFORMATION pinfo, struct stati64 *st)
+{
+    /* struct stati64 layout
+     *
+     * dev: 0-3
+     * ino: 4-5
+     * mode: 6-7
+     * nlink: 8-9
+     * uid: 10-11
+     * gid: 12-13
+     * _: 14-15
+     * rdev: 16-19
+     * _: 20-23
+     * size: 24-31
+     * atime: 32-39
+     * mtime: 40-47
+     * ctime: 48-55
+     *
+     */
+    unsigned short *p2 = (unsigned short *)st;
+    unsigned int *p4 = (unsigned int *)st;
+    DWORD high = pinfo->nFileIndexHigh;
+    p2[2] = high >> 16;
+    p2[7] = high & 0xFFFF;
+    p4[5] = pinfo->nFileIndexLow;
+}
+
+/* License: Ruby's */
+static DWORD
+stati64_set_inode_handle(HANDLE h, struct stati64 *st)
+{
+    BY_HANDLE_FILE_INFORMATION info;
+    DWORD attr = (DWORD)-1;
+
+    if (GetFileInformationByHandle(h, &info)) {
+	stati64_set_inode(&info, st);
+    }
+    return attr;
+}
+
 #undef fstat
 /* License: Ruby's */
 int
@@ -5000,7 +5042,11 @@ rb_w32_fstati64(int fd, struct stati64 *st)
     struct stat tmp;
     int ret;
 
-    if (GetEnvironmentVariableW(L"TZ", NULL, 0) == 0 && GetLastError() == ERROR_ENVVAR_NOT_FOUND) return _fstati64(fd, st);
+    if (GetEnvironmentVariableW(L"TZ", NULL, 0) == 0 && GetLastError() == ERROR_ENVVAR_NOT_FOUND) {
+	ret = _fstati64(fd, st);
+	stati64_set_inode_handle((HANDLE)_get_osfhandle(fd), st);
+	return ret;
+    }
     ret = fstat(fd, &tmp);
 
     if (ret) return ret;
@@ -5023,6 +5069,7 @@ stati64_handle(HANDLE h, struct stati64 *st)
 	st->st_ctime = filetime_to_unixtime(&info.ftCreationTime);
 	st->st_nlink = info.nNumberOfLinks;
 	attr = info.dwFileAttributes;
+	stati64_set_inode(&info, st);
     }
     return attr;
 }
@@ -5775,6 +5822,7 @@ rb_w32_open(const char *file, int oflag, ...)
     va_end(arg);
 
     if ((oflag & O_TEXT) || !(oflag & O_BINARY)) {
+	oflag &= ~O_SHARE_DELETE;
 	ret = _open(file, oflag, pmode);
 	if (ret == -1 && errno == EACCES) check_if_dir(file);
 	return ret;
@@ -5797,7 +5845,10 @@ rb_w32_wopen(const WCHAR *file, int oflag, ...)
     DWORD attr = FILE_ATTRIBUTE_NORMAL;
     SECURITY_ATTRIBUTES sec;
     HANDLE h;
+    int share_delete;
 
+    share_delete = oflag & O_SHARE_DELETE ? FILE_SHARE_DELETE : 0;
+    oflag &= ~O_SHARE_DELETE;
     if ((oflag & O_TEXT) || !(oflag & O_BINARY)) {
 	va_list arg;
 	int pmode;
@@ -5919,8 +5970,7 @@ rb_w32_wopen(const WCHAR *file, int oflag, ...)
 	_set_osfhnd(fd, (intptr_t)INVALID_HANDLE_VALUE);
 	_set_osflags(fd, 0);
 
-	h = CreateFileW(file, access, FILE_SHARE_READ | FILE_SHARE_WRITE, &sec,
-			create, attr, NULL);
+	h = CreateFileW(file, access, FILE_SHARE_READ | FILE_SHARE_WRITE | share_delete, &sec, create, attr, NULL);
 	if (h == INVALID_HANDLE_VALUE) {
 	    DWORD e = GetLastError();
 	    if (e != ERROR_ACCESS_DENIED || !check_if_wdir(file))

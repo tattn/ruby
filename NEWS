@@ -18,11 +18,23 @@ with all sufficient information, see the ChangeLog file.
 * Enumerable
 
   * Enumerable#grep_v is added as inverse version of Enumerable#grep.
+    [Feature #11049]
+  * Enumerable#chunk_while [Feature #10769]
 
 * Numeric
 
   * Numeric#positive? and Numeric#negative? are added, which return
     true when the receiver is positive and negative respectively.
+    [Feature #11151]
+
+* IO
+
+  * new mode flag File::SHARE_DELETE is available.
+    this flag means to permit deleting opened file on Windows, but currently
+    this affect only files opened as binary.  [Feature #11218]
+
+* Thread
+  * Thread#name, Thread#name are added to handle thread names [Feature #11251]
 
 === Core classes compatibility issues (excluding feature bug fixes)
 
@@ -39,8 +51,16 @@ with all sufficient information, see the ChangeLog file.
     initial_state argument.  [Feature #10958]
     Use a local variable instead to maintain a state.
 
+* File::Stat
+  * On Windows File::Stat#ino always returned 0, but now returns
+    BY_HANDLE_FILE_INFORMATION.nFileIndexHigh/Low.
+
 * IO
   * IO#close doesn't raise when the IO object is closed.  [Feature #10718]
+
+* pack/unpack (Array/String)
+  * j and J directives for pointer width integer type.  [Feature #11215]
+
 
 === Stdlib updates (outstanding ones only)
 
@@ -57,6 +77,10 @@ with all sufficient information, see the ChangeLog file.
 * OpenSSL
   * OpenSSL::SSL::SSLSocket#accept_nonblock and
     OpenSSL::SSL::SSLSocket#connect_nonblock supports `exception: false`.
+
+* Pathname
+  * Pathname#descend and Pathname#ascend supported blockless form.
+    [Feature #11052]
 
 * io/wait
   * IO#wait_readable no longer checks FIONREAD, it may be used for

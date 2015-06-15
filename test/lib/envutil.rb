@@ -329,7 +329,8 @@ module Test
           if message and !message.empty?
             full_message << message << "\n"
           end
-          full_message << "pid #{pid} killed by #{sigdesc}"
+          full_message << "pid #{pid}"
+          full_message << " killed by #{sigdesc}" if sigdesc
           if out and !out.empty?
             full_message << "\n#{out.gsub(/^/, '| ')}"
             full_message << "\n" if /\n\z/ !~ full_message
@@ -425,9 +426,9 @@ eom
         # really is it succeed?
         unless ignore_stderr
           # the body of assert_separately must not output anything to detect error
-          assert_equal("", stderr, "assert_separately failed with error message")
+          assert(stderr.empty?, FailDesc[status, "assert_separately failed with error message", stderr])
         end
-        assert_equal(0, status, "assert_separately failed: '#{stderr}'")
+        assert(status.success?, FailDesc[status, "assert_separately failed", stderr])
         raise marshal_error if marshal_error
       end
 
@@ -493,7 +494,7 @@ eom
         _, err, status = EnvUtil.invoke_ruby(args, cmd, true, true, **opt)
         before = err.sub!(/^#{token_re}START=(\{.*\})\n/, '') && Memory::Status.parse($1)
         after = err.sub!(/^#{token_re}FINAL=(\{.*\})\n/, '') && Memory::Status.parse($1)
-        assert_equal([true, ""], [status.success?, err], message)
+        assert(status.success?, FailDesc[status, message, err])
         ([:size, (rss && :rss)] & after.members).each do |n|
           b = before[n]
           a = after[n]

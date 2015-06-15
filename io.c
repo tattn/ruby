@@ -4893,10 +4893,6 @@ io_encname_bom_p(const char *name, long len)
 {
     static const char bom_prefix[] = "bom|utf-";
     enum {bom_prefix_len = (int)sizeof(bom_prefix) - 1};
-    if (!len) {
-	const char *p = strchr(name, ':');
-	len = p ? (long)(p - name) : (long)strlen(name);
-    }
     return len > bom_prefix_len && STRNCASECMP(name, bom_prefix, bom_prefix_len) == 0;
 }
 
@@ -4935,7 +4931,9 @@ rb_io_modestr_fmode(const char *modestr)
 	  default:
             goto error;
 	  case ':':
-	    p = m;
+	    p = strchr(m, ':');
+	    if (io_encname_bom_p(m, p ? (long)(p - m) : (long)strlen(m)))
+		fmode |= FMODE_SETENC_BY_BOM;
             goto finished;
         }
     }
@@ -4943,8 +4941,6 @@ rb_io_modestr_fmode(const char *modestr)
   finished:
     if ((fmode & FMODE_BINMODE) && (fmode & FMODE_TEXTMODE))
         goto error;
-    if (p && io_encname_bom_p(p, 0))
-	fmode |= FMODE_SETENC_BY_BOM;
 
     return fmode;
 }
@@ -9905,7 +9901,16 @@ rb_io_s_binread(int argc, VALUE *argv, VALUE io)
     arg.argv = argv+1;
     arg.argc = (argc > 1) ? 1 : 0;
     if (!NIL_P(offset)) {
-	rb_io_seek(arg.io, offset, SEEK_SET);
+	struct seek_arg sarg;
+	int state = 0;
+	sarg.io = arg.io;
+	sarg.offset = offset;
+	sarg.mode = SEEK_SET;
+	rb_protect(seek_before_access, (VALUE)&sarg, &state);
+	if (state) {
+	    rb_io_close(arg.io);
+	    rb_jump_tag(state);
+	}
     }
     return rb_ensure(io_s_read, (VALUE)&arg, rb_io_close, arg.io);
 }

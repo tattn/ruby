@@ -26,6 +26,7 @@
 #include "internal.h"
 #include "ruby/io.h"
 #include "ruby/util.h"
+#include "ruby/thread.h"
 #include "dln.h"
 
 #ifdef HAVE_UNISTD_H
@@ -548,7 +549,18 @@ rb_stat_dev_minor(VALUE self)
 static VALUE
 rb_stat_ino(VALUE self)
 {
-#if SIZEOF_STRUCT_STAT_ST_INO > SIZEOF_LONG
+#ifdef _WIN32
+    struct stat *st = get_stat(self);
+    unsigned short *p2 = (unsigned short *)st;
+    unsigned int *p4 = (unsigned int *)st;
+    uint64_t r;
+    r = p2[2];
+    r <<= 16;
+    r |= p2[7];
+    r <<= 32;
+    r |= p4[5];
+    return ULL2NUM(r);
+#elif SIZEOF_STRUCT_STAT_ST_INO > SIZEOF_LONG
     return ULL2NUM(get_stat(self)->st_ino);
 #else
     return ULONG2NUM(get_stat(self)->st_ino);
@@ -5610,11 +5622,19 @@ rb_path_check(const char *path)
 }
 
 #ifndef _WIN32
+static void *
+loadopen_func(void *arg)
+{
+    return (void *)(VALUE)rb_cloexec_open((const char *)arg, O_RDONLY, 0);
+}
+
 int
 rb_file_load_ok(const char *path)
 {
     int ret = 1;
-    int fd = rb_cloexec_open(path, O_RDONLY, 0);
+    int fd;
+
+    fd = (int)(VALUE)rb_thread_call_without_gvl(loadopen_func, (void *)path, RUBY_UBF_IO, 0);
     if (fd == -1) return 0;
     rb_update_max_fd(fd);
 #if !defined DOSISH
@@ -5982,6 +6002,11 @@ Init_File(void)
 #endif
     /* disable line code conversion */
     rb_define_const(rb_mFConst, "BINARY", INT2FIX(O_BINARY));
+#ifndef O_SHARE_DELETE
+# define O_SHARE_DELETE 0
+#endif
+    /* can delete opened file */
+    rb_define_const(rb_mFConst, "SHARE_DELETE", INT2FIX(O_SHARE_DELETE));
 #ifdef O_SYNC
     /* any write operation perform synchronously */
     rb_define_const(rb_mFConst, "SYNC", INT2FIX(O_SYNC));

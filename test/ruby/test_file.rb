@@ -342,6 +342,10 @@ class TestFile < Test::Unit::TestCase
   rescue NotImplementedError
   end
 
+  def test_stat_inode
+    assert_not_equal 0, File.stat(__FILE__).ino
+  end
+
   def test_chmod_m17n
     bug5671 = '[ruby-dev:44898]'
     Dir.mktmpdir('test-file-chmod-m17n-') do |tmpdir|
@@ -373,6 +377,19 @@ class TestFile < Test::Unit::TestCase
     assert_raise_with_message(ArgumentError, 'mode specified twice') {
       File.open("a", 'w', :mode => 'rw+')
     }
+  end
+
+  def test_file_share_delete
+    Dir.mktmpdir(__method__.to_s) do |tmpdir|
+      tmp = File.join(tmpdir, 'x')
+      File.open(tmp, mode: IO::WRONLY | IO::CREAT | IO::BINARY | IO::SHARE_DELETE) do |f|
+        assert_file.exist?(tmp)
+        assert_nothing_raised do
+          File.unlink(tmp)
+        end
+      end
+      assert_file.not_exist?(tmp)
+    end
   end
 
   def test_conflicting_encodings

@@ -44,7 +44,7 @@ rb_vm_search_cf_from_ep(const rb_thread_t * const th, rb_control_frame_t *cfp, c
 	    cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(cfp);
 	}
 
-	rb_bug("rb_vm_search_cf_from_ep: no corresponding cfp");
+	return NULL;
     }
 }
 
@@ -1201,6 +1201,12 @@ vm_iter_break(rb_thread_t *th, VALUE val)
     VALUE *ep = VM_CF_PREV_EP(cfp);
     rb_control_frame_t *target_cfp = rb_vm_search_cf_from_ep(th, cfp, ep);
 
+#if 0				/* raise LocalJumpError */
+    if (!target_cfp) {
+	rb_vm_localjump_error("unexpected break", val, TAG_BREAK);
+    }
+#endif
+
     th->state = TAG_BREAK;
     th->errinfo = (VALUE)THROW_DATA_NEW(val, target_cfp, TAG_BREAK);
     TH_JUMP_TAG(th, TAG_BREAK);
@@ -2130,6 +2136,8 @@ rb_thread_mark(void *ptr)
 				 sizeof(th->machine.regs) / sizeof(VALUE));
 	}
 
+	RUBY_MARK_UNLESS_NULL(th->name);
+
 	rb_vm_trace_mark_event_hooks(&th->event_hooks);
     }
 
@@ -2266,6 +2274,7 @@ th_init(rb_thread_t *th, VALUE self)
 #if OPT_CALL_THREADED_CODE
     th->retval = Qundef;
 #endif
+    th->name = Qnil;
 }
 
 static VALUE
