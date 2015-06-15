@@ -14,6 +14,7 @@ var searchData=
   ['wexitstatus',['WEXITSTATUS',['../error_8c.html#a77f17ed4771a558a0f16e5f3aecee222',1,'WEXITSTATUS():&#160;error.c'],['../process_8c.html#ae7700c010e70c0004dd332624e03122a',1,'WEXITSTATUS():&#160;process.c']]],
   ['wge',['wge',['../time_8c.html#a0a2dbd8d248d725cc82aea8eb231a48f',1,'time.c']]],
   ['wgt',['wgt',['../time_8c.html#a0fa5af9104aba3f12fd220625afaab91',1,'time.c']]],
+  ['when_5fvm_5fstack_5foverflowed',['WHEN_VM_STACK_OVERFLOWED',['../vm__core_8h.html#a8a5905b81a29858271c10ac9c177b891',1,'vm_core.h']]],
   ['whole_5fmatch_5fp',['whole_match_p',['../parse_8c.html#adcf02626de924b0ed8c7a5927a443c21',1,'parse.c']]],
   ['wideint_5fmax',['WIDEINT_MAX',['../time_8c.html#a52141d16af872f330de3e3314ccc9ffc',1,'time.c']]],
   ['wideint_5fmin',['WIDEINT_MIN',['../time_8c.html#a64ed673b619b848f517ce1153dcaef1c',1,'time.c']]],

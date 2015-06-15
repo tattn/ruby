@@ -194,7 +194,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:a6e956367a06f8220d1efb6ee40145dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f13fcafbe296c518cb5f81a4e1cae48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__insnhelper_8h.html#a2f13fcafbe296c518cb5f81a4e1cae48">CI_SET_FASTPATH</a>(ci,  func,  enabled)</td></tr>
 <tr class="separator:a2f13fcafbe296c518cb5f81a4e1cae48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35f59ea441f0ea4b942b31adc9dc0057"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__insnhelper_8h.html#a35f59ea441f0ea4b942b31adc9dc0057">GET_BLOCK_PTR</a>()&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *)(GC_GUARDED_PTR_REF(<a class="el" href="vm__insnhelper_8h.html#ac1619423dd4b69dc798fce3140d767f6">GET_LEP</a>()[0])))</td></tr>
+<tr class="memitem:a35f59ea441f0ea4b942b31adc9dc0057"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__insnhelper_8h.html#a35f59ea441f0ea4b942b31adc9dc0057">GET_BLOCK_PTR</a>()&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *)(<a class="el" href="vm__core_8h.html#a373f1cafd944ff9e99986582d0fd695b">GC_GUARDED_PTR_REF</a>(<a class="el" href="vm__insnhelper_8h.html#ac1619423dd4b69dc798fce3140d767f6">GET_LEP</a>()[0])))</td></tr>
 <tr class="separator:a35f59ea441f0ea4b942b31adc9dc0057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac23cd192527ba40e3e504aca789f9c9a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vm__insnhelper_8h.html#ac23cd192527ba40e3e504aca789f9c9a">FIXNUM_2_P</a>(a,  b)&#160;&#160;&#160;((a) &amp; (b) &amp; 1)</td></tr>
 <tr class="separator:ac23cd192527ba40e3e504aca789f9c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,7 +325,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a class="code" href="vm__insnhelper_8h.html#ac5df35146d7cef9c82d01ecd33b73345">    CALL_METHOD</a>(ci); \</div>
 <div class="line">} <span class="keywordflow">while</span> (0)</div>
 <div class="ttc" id="vm__insnhelper_8h_html_ac5df35146d7cef9c82d01ecd33b73345"><div class="ttname"><a href="vm__insnhelper_8h.html#ac5df35146d7cef9c82d01ecd33b73345">CALL_METHOD</a></div><div class="ttdeci">#define CALL_METHOD(ci)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8h_source.html#l00167">vm_insnhelper.h:167</a></div></div>
-<div class="ttc" id="vm__insnhelper_8c_html_a87d1e4053c58f911ce9d5f25c402b459"><div class="ttname"><a href="vm__insnhelper_8c.html#a87d1e4053c58f911ce9d5f25c402b459">vm_search_method</a></div><div class="ttdeci">static void vm_search_method(rb_call_info_t *ci, VALUE recv)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8c_source.html#l01034">vm_insnhelper.c:1034</a></div></div>
+<div class="ttc" id="vm__insnhelper_8c_html_a87d1e4053c58f911ce9d5f25c402b459"><div class="ttname"><a href="vm__insnhelper_8c.html#a87d1e4053c58f911ce9d5f25c402b459">vm_search_method</a></div><div class="ttdeci">static void vm_search_method(rb_call_info_t *ci, VALUE recv)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8c_source.html#l01032">vm_insnhelper.c:1032</a></div></div>
 </div><!-- fragment -->
 <p> <a class="el" href="vm__insnhelper_8h_source.html">vm_insnhelper.h</a> の <a class="el" href="vm__insnhelper_8h_source.html#l00217">217</a> 行目に定義があります。</p>
 
@@ -363,7 +363,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <b>値:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
 <div class="line">    if (<a class="code" href="internal_8h.html#affde14445f49f65ff4f5b592e44ee71a">LIKELY</a>(enabled)) ((ci)-&gt;call = (<a class="code" href="structvm__ifunc.html#a99d148fa3fb4bcb14cc6a423bd02658c">func</a>)); \</div>
 <div class="line">} <span class="keywordflow">while</span> (0)</div>
-<div class="ttc" id="structvm__ifunc_html_a99d148fa3fb4bcb14cc6a423bd02658c"><div class="ttname"><a href="structvm__ifunc.html#a99d148fa3fb4bcb14cc6a423bd02658c">vm_ifunc::func</a></div><div class="ttdeci">VALUE(* func)(ANYARGS)</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00577">internal.h:577</a></div></div>
+<div class="ttc" id="structvm__ifunc_html_a99d148fa3fb4bcb14cc6a423bd02658c"><div class="ttname"><a href="structvm__ifunc.html#a99d148fa3fb4bcb14cc6a423bd02658c">vm_ifunc::func</a></div><div class="ttdeci">VALUE(* func)(ANYARGS)</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00585">internal.h:585</a></div></div>
 <div class="ttc" id="internal_8h_html_affde14445f49f65ff4f5b592e44ee71a"><div class="ttname"><a href="internal_8h.html#affde14445f49f65ff4f5b592e44ee71a">LIKELY</a></div><div class="ttdeci">#define LIKELY(x)</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00031">internal.h:31</a></div></div>
 </div><!-- fragment -->
 <p> <a class="el" href="vm__insnhelper_8h_source.html">vm_insnhelper.h</a> の <a class="el" href="vm__insnhelper_8h_source.html#l00187">187</a> 行目に定義があります。</p>
@@ -651,7 +651,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
           <td class="memname">#define GET_BLOCK_PTR</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *)(GC_GUARDED_PTR_REF(<a class="el" href="vm__insnhelper_8h.html#ac1619423dd4b69dc798fce3140d767f6">GET_LEP</a>()[0])))</td>
+          <td>&#160;&#160;&#160;((<a class="el" href="vm__core_8h.html#ac84a14e9feffcd21af2f0ace60a475e7">rb_block_t</a> *)(<a class="el" href="vm__core_8h.html#a373f1cafd944ff9e99986582d0fd695b">GC_GUARDED_PTR_REF</a>(<a class="el" href="vm__insnhelper_8h.html#ac1619423dd4b69dc798fce3140d767f6">GET_LEP</a>()[0])))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1526,7 +1526,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">return</span> obj-&gt;<a class="code" href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">catch_frame</a>;</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;}</div>
-<div class="ttc" id="structvm__throw__data_html_a290e98746168f0f8ff9a7d4c91cbab24"><div class="ttname"><a href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">vm_throw_data::catch_frame</a></div><div class="ttdeci">const struct rb_control_frame_struct * catch_frame</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00566">internal.h:566</a></div></div>
+<div class="ttc" id="structvm__throw__data_html_a290e98746168f0f8ff9a7d4c91cbab24"><div class="ttname"><a href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">vm_throw_data::catch_frame</a></div><div class="ttdeci">const struct rb_control_frame_struct * catch_frame</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00574">internal.h:574</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1566,7 +1566,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;{</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    obj-&gt;<a class="code" href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">catch_frame</a> = cfp;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
-<div class="ttc" id="structvm__throw__data_html_a290e98746168f0f8ff9a7d4c91cbab24"><div class="ttname"><a href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">vm_throw_data::catch_frame</a></div><div class="ttdeci">const struct rb_control_frame_struct * catch_frame</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00566">internal.h:566</a></div></div>
+<div class="ttc" id="structvm__throw__data_html_a290e98746168f0f8ff9a7d4c91cbab24"><div class="ttname"><a href="structvm__throw__data.html#a290e98746168f0f8ff9a7d4c91cbab24">vm_throw_data::catch_frame</a></div><div class="ttdeci">const struct rb_control_frame_struct * catch_frame</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00574">internal.h:574</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1613,7 +1613,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">struct</span> <a class="code" href="structvm__throw__data.html">vm_throw_data</a> *)<a class="code" href="gc_8c.html#ac284f1febae22010d9e5615fe6ef2847">rb_imemo_new</a>(<a class="code" href="internal_8h.html#aaca65e5fb338de799690f580d6fcbb50ad20de6086ba3a98b971296efe2b7061d">imemo_throw_data</a>, <a class="code" href="vm__exec_8c.html#adacaabc6bfe49e460c9efda114ac84c8">val</a>, (VALUE)cf, st, 0);</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
 <div class="ttc" id="gc_8c_html_ac284f1febae22010d9e5615fe6ef2847"><div class="ttname"><a href="gc_8c.html#ac284f1febae22010d9e5615fe6ef2847">rb_imemo_new</a></div><div class="ttdeci">VALUE rb_imemo_new(enum imemo_type type, VALUE v1, VALUE v2, VALUE v3, VALUE v0)</div><div class="ttdef"><b>Definition:</b> <a href="gc_8c_source.html#l01819">gc.c:1819</a></div></div>
-<div class="ttc" id="structvm__throw__data_html"><div class="ttname"><a href="structvm__throw__data.html">vm_throw_data</a></div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00562">internal.h:562</a></div></div>
+<div class="ttc" id="structvm__throw__data_html"><div class="ttname"><a href="structvm__throw__data.html">vm_throw_data</a></div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00570">internal.h:570</a></div></div>
 <div class="ttc" id="vm__exec_8c_html_adacaabc6bfe49e460c9efda114ac84c8"><div class="ttname"><a href="vm__exec_8c.html#adacaabc6bfe49e460c9efda114ac84c8">val</a></div><div class="ttdeci">#define val</div></div>
 <div class="ttc" id="internal_8h_html_aaca65e5fb338de799690f580d6fcbb50ad20de6086ba3a98b971296efe2b7061d"><div class="ttname"><a href="internal_8h.html#aaca65e5fb338de799690f580d6fcbb50ad20de6086ba3a98b971296efe2b7061d">imemo_throw_data</a></div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00535">internal.h:535</a></div></div>
 </div><!-- fragment -->
@@ -1645,7 +1645,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;{</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)obj-&gt;<a class="code" href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">throw_state</a>;</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;}</div>
-<div class="ttc" id="structvm__throw__data_html_a73963e02968b56773c0bc42ac145c365"><div class="ttname"><a href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">vm_throw_data::throw_state</a></div><div class="ttdeci">VALUE throw_state</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00567">internal.h:567</a></div></div>
+<div class="ttc" id="structvm__throw__data_html_a73963e02968b56773c0bc42ac145c365"><div class="ttname"><a href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">vm_throw_data::throw_state</a></div><div class="ttdeci">VALUE throw_state</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00575">internal.h:575</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1685,7 +1685,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;{</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    obj-&gt;<a class="code" href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">throw_state</a> = (VALUE)st;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}</div>
-<div class="ttc" id="structvm__throw__data_html_a73963e02968b56773c0bc42ac145c365"><div class="ttname"><a href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">vm_throw_data::throw_state</a></div><div class="ttdeci">VALUE throw_state</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00567">internal.h:567</a></div></div>
+<div class="ttc" id="structvm__throw__data_html_a73963e02968b56773c0bc42ac145c365"><div class="ttname"><a href="structvm__throw__data.html#a73963e02968b56773c0bc42ac145c365">vm_throw_data::throw_state</a></div><div class="ttdeci">VALUE throw_state</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00575">internal.h:575</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1715,7 +1715,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordflow">return</span> obj-&gt;<a class="code" href="structvm__throw__data.html#a7a608fd379101f22403e568d1d12e808">throw_obj</a>;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}</div>
-<div class="ttc" id="structvm__throw__data_html_a7a608fd379101f22403e568d1d12e808"><div class="ttname"><a href="structvm__throw__data.html#a7a608fd379101f22403e568d1d12e808">vm_throw_data::throw_obj</a></div><div class="ttdeci">const VALUE throw_obj</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00565">internal.h:565</a></div></div>
+<div class="ttc" id="structvm__throw__data_html_a7a608fd379101f22403e568d1d12e808"><div class="ttname"><a href="structvm__throw__data.html#a7a608fd379101f22403e568d1d12e808">vm_throw_data::throw_obj</a></div><div class="ttdeci">const VALUE throw_obj</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00573">internal.h:573</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1730,7 +1730,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm_8c_source.html">vm.c</a> の <a class="el" href="vm_8c_source.html#l00165">165</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm_8c_source.html">vm.c</a> の <a class="el" href="vm_8c_source.html#l00163">163</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1738,7 +1738,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時52分08秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時29分02秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -51,6 +51,9 @@ var searchData=
   ['ewouldblock',['EWOULDBLOCK',['../io_8c.html#a4a3a0b3605fd3b2336455062ee8e25f0',1,'io.c']]],
   ['exception_5ferror',['exception_error',['../eval_8c.html#a8a9edae7f9045c2c18fb899dc8823e68',1,'eval.c']]],
   ['excl',['EXCL',['../range_8c.html#aed4b776f2d8d143c9d418a1534e3295d',1,'range.c']]],
+  ['exec_5fevent_5fhook',['EXEC_EVENT_HOOK',['../vm__core_8h.html#aaf6f79a9848eb27bfb82ac0d3ea8e0d9',1,'vm_core.h']]],
+  ['exec_5fevent_5fhook_5fand_5fpop_5fframe',['EXEC_EVENT_HOOK_AND_POP_FRAME',['../vm__core_8h.html#a0f06f3e387d32f67b38a70d2a0da2ecc',1,'vm_core.h']]],
+  ['exec_5fevent_5fhook_5forig',['EXEC_EVENT_HOOK_ORIG',['../vm__core_8h.html#abd49c0243cf577c56d891de74e27ea8c',1,'vm_core.h']]],
   ['exec_5ftag',['EXEC_TAG',['../eval__intern_8h.html#a3441e3967c633da99c3dcd025494053e',1,'eval_intern.h']]],
   ['exit_5ffailure',['EXIT_FAILURE',['../eval__intern_8h.html#a73efe787c131b385070f25d18b7c9aa4',1,'EXIT_FAILURE():&#160;eval_intern.h'],['../process_8c.html#a73efe787c131b385070f25d18b7c9aa4',1,'EXIT_FAILURE():&#160;process.c']]],
   ['exit_5fsuccess',['EXIT_SUCCESS',['../error_8c.html#a687984f47d8cce148d1b914d2b79612a',1,'EXIT_SUCCESS():&#160;error.c'],['../eval__intern_8h.html#a687984f47d8cce148d1b914d2b79612a',1,'EXIT_SUCCESS():&#160;eval_intern.h'],['../process_8c.html#a687984f47d8cce148d1b914d2b79612a',1,'EXIT_SUCCESS():&#160;process.c'],['../version_8c.html#a687984f47d8cce148d1b914d2b79612a',1,'EXIT_SUCCESS():&#160;version.c']]],
@@ -68,5 +71,6 @@ var searchData=
   ['expand_5fstring_5fmax_5flength',['EXPAND_STRING_MAX_LENGTH',['../regcomp_8c.html#a1f3377878b4402017780f5457f3e2ca5',1,'regcomp.c']]],
   ['export_5fdup',['EXPORT_DUP',['../process_8c.html#acabfef41a6dfddeab06521aadfaebf89',1,'process.c']]],
   ['export_5fstr',['EXPORT_STR',['../process_8c.html#adf2c278d78caadc7570cd064165cf85b',1,'process.c']]],
-  ['external_5fprefix',['EXTERNAL_PREFIX',['../dln_8c.html#a72cbf7680b3ffeba3daaafc346eece79',1,'dln.c']]]
+  ['external_5fprefix',['EXTERNAL_PREFIX',['../dln_8c.html#a72cbf7680b3ffeba3daaafc346eece79',1,'dln.c']]],
+  ['extract_5fkwarg',['extract_kwarg',['../class_8c.html#afc56a3e6b5ef852074e5562c5dd51013',1,'class.c']]]
 ];

@@ -19,5 +19,5 @@ class reference の略。cref 構造体はレキシカルスコープを表現�
 
 Copyright (C) 2015 Tatsuya Tanaka
 
-created at: 2015-06-10 19:51:33 +0900
+created at: 2015-06-15 14:28:26 +0900
 

@@ -5,7 +5,18 @@
 * main() [main.c] - メイン関数
 	* ruby_sysinit() [ruby.c] - 引数の初期化
 	* RUBY_INIT_STACK [ruby.h]
-	* ruby_init()
+	* ruby_init() [eval.c]
+		* ruby_setup() [eval.c] - Ruby 全般の初期化
+			* ruby_init_stack() [thread_pthread.c]
+			* Init_BareVM() [vm.c] - vm や thread のメモリ確保など
+			* Init_heap() [gc.c] - ObjectSpace の初期化
+			* Init_vm_objects() [vm.c] - vm の内部オブジェクトの確保
+			* Init_frozen_strings() [eval.c] - frozen string の初期化
+			* rb_call_inits() [eval.c] - 組み込みクラスのイニシャライザ呼び出し
+			* ruby_prog_init() [ruby.c] - 組み込み変数の作成
+	* ruby_options() [eval.c] - コマンドラインオプションの処理と、ソースのコンパイル
+		* ruby_init_stack() [thread_pthread.c]
+		* ruby_process_options() [ruby.c]
 
 
 
@@ -26,5 +37,5 @@
 
 Copyright (C) 2015 Tatsuya Tanaka
 
-created at: 2015-06-10 19:51:33 +0900
+created at: 2015-06-15 14:28:26 +0900
 

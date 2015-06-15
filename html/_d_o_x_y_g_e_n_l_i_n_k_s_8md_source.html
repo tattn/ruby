@@ -94,26 +94,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="contents">
 <a href="_d_o_x_y_g_e_n_l_i_n_k_s_8md.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;@page quick_links クイックリンク</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;## 機能別クイックリンク</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;## CFG 別クイックリンク</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;### VM 系</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;* VM の実行メインループ (vm_exec.c, vm_exec.h)</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;* VM のメインループ呼び出しとエラーハンドリング (vm.c[vm_exec()])</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;---</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;Copyright (C) 2015 Tatsuya Tanaka</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;created at: 2015-06-10 19:51:33 +0900</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;* main() [main.c] - メイン関数</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;   * ruby_sysinit() [ruby.c] - 引数の初期化</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;   * RUBY_INIT_STACK [ruby.h]</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;   * ruby_init() [eval.c]</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;       * ruby_setup() [eval.c] - Ruby 全般の初期化</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;           * ruby_init_stack() [thread_pthread.c]</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;           * Init_BareVM() [vm.c] - vm や thread のメモリ確保など</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;           * Init_heap() [gc.c] - ObjectSpace の初期化</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;           * Init_vm_objects() [vm.c] - vm の内部オブジェクトの確保</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;           * Init_frozen_strings() [eval.c] - frozen string の初期化</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;           * rb_call_inits() [eval.c] - 組み込みクラスのイニシャライザ呼び出し</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;           * ruby_prog_init() [ruby.c] - 組み込み変数の作成</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;   * ruby_options() [eval.c] - コマンドラインオプションの処理と、ソースのコンパイル</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;       * ruby_init_stack() [thread_pthread.c]</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;       * ruby_process_options() [ruby.c]</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;## 機能別クイックリンク</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;### VM 系</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;* VM の実行メインループ (vm_exec.c, vm_exec.h)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;* VM のメインループ呼び出しとエラーハンドリング (vm.c[vm_exec()])</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;### 字句解析・構文解析系</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;* ファイル名や行数を保存して、コンパイル処理を呼び出す (ext/ripper/ripper.c[yycompile()])</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;---</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;Copyright (C) 2015 Tatsuya Tanaka</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;created at: 2015-06-15 14:28:26 +0900</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時51分35秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時28分28秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -40,6 +40,8 @@ var searchData=
   ['check_5fstack_5foverflow',['CHECK_STACK_OVERFLOW',['../signal_8c.html#a1c897ec7b8d9956634a2a81abc990ec5',1,'signal.c']]],
   ['check_5fstring',['CHECK_STRING',['../iseq_8c.html#a4400e8d5834ed2b57be2f8e5f9812ae8',1,'iseq.c']]],
   ['check_5fsymbol',['CHECK_SYMBOL',['../compile_8c.html#af8023bbefbf7c0d3c961106acf8dec2a',1,'CHECK_SYMBOL():&#160;compile.c'],['../iseq_8c.html#af8023bbefbf7c0d3c961106acf8dec2a',1,'CHECK_SYMBOL():&#160;iseq.c']]],
+  ['check_5fvm_5fstack_5foverflow',['CHECK_VM_STACK_OVERFLOW',['../vm__core_8h.html#aa05b3d2e0f35045c65f2dbba67c5b5b2',1,'vm_core.h']]],
+  ['check_5fvm_5fstack_5foverflow0',['CHECK_VM_STACK_OVERFLOW0',['../vm__core_8h.html#ac269026a496712c0c14f89e44bec542a',1,'vm_core.h']]],
   ['check_5fvm_5fstack_5foverflow_5ffor_5finsn',['CHECK_VM_STACK_OVERFLOW_FOR_INSN',['../vm__exec_8h.html#a0e6d04ef59aa126e4f478c9b62ca5fa5',1,'vm_exec.h']]],
   ['checknamearg',['CHECKNAMEARG',['../sprintf_8c.html#a909e848665b0c5f1d4283a8de2f0d73f',1,'sprintf.c']]],
   ['child_5ferrmsg_5fbuflen',['CHILD_ERRMSG_BUFLEN',['../process_8c.html#a229025aa79235ee6060984a655912494',1,'process.c']]],

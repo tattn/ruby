@@ -141,8 +141,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:a7f9d18a3b68b34238986fa27564ee498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a744f5bac11851191900b971764eb5430"><td class="memItemLeft" align="right" valign="top">rb_nativethread_id_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a744f5bac11851191900b971764eb5430">thread_id</a></td></tr>
 <tr class="separator:a744f5bac11851191900b971764eb5430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e515186c1aa012ff4c8714e82c486df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#adcd7473a33a543d7f197bfc44515bc18">rb_thread_id_string_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a2e515186c1aa012ff4c8714e82c486df">thread_id_string</a></td></tr>
-<tr class="separator:a2e515186c1aa012ff4c8714e82c486df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647ed2a802789fff9e511bea4ada1239"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="vm__core_8h.html#a027718c64d1aa742ccdb9c1a68afaa75">rb_thread_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a647ed2a802789fff9e511bea4ada1239">status</a></td></tr>
 <tr class="separator:a647ed2a802789fff9e511bea4ada1239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3004e89225a07c08e78af212b40c0e3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3004e89225a07c08e78af212b40c0e3c">to_kill</a></td></tr>
@@ -159,8 +157,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:a1b297be9273cc68bd7ec30eb99aada0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a173e2da61fa57c7044fd7874a8c7a924"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a173e2da61fa57c7044fd7874a8c7a924">errinfo</a></td></tr>
 <tr class="separator:a173e2da61fa57c7044fd7874a8c7a924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13410a81d8aae52384b90260f9953a09"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a13410a81d8aae52384b90260f9953a09">retval</a></td></tr>
-<tr class="separator:a13410a81d8aae52384b90260f9953a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafba3f4f103c0c0d4bf0ff37d278c856"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#aafba3f4f103c0c0d4bf0ff37d278c856">pending_interrupt_queue</a></td></tr>
 <tr class="separator:aafba3f4f103c0c0d4bf0ff37d278c856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a979a16137dbb149acf7a8fd194946a24"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a979a16137dbb149acf7a8fd194946a24">pending_interrupt_mask_stack</a></td></tr>
@@ -203,23 +199,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:ac0efa5cb7f18b285cc3415f47930c4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e88e845f2c9727cb5d52bd64134ec9"><td class="memItemLeft" align="right" valign="top">VALUE(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a02e88e845f2c9727cb5d52bd64134ec9">first_func</a> )(ANYARGS)</td></tr>
 <tr class="separator:a02e88e845f2c9727cb5d52bd64134ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c645801a08bebc8220d972a46a9a7a3"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:afe6926d6b8ec3a250d7436d1a4046c98"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a2089c00ce922cd71f5138156baec42a9">stack_start</a></td></tr>
-<tr class="separator:afe6926d6b8ec3a250d7436d1a4046c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0dcf17445904fdfbfbbc6639b3e7661"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a17c5325fb6cbb331e29ab27d12c646ae">stack_end</a></td></tr>
-<tr class="separator:ad0dcf17445904fdfbfbbc6639b3e7661"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62906f219c6b1bc1c7a060ecefb50404"><td class="memItemLeft" >&#160;&#160;&#160;size_t&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a1e01a8514defbbefaf4f31f30dc2dfd4">stack_maxsize</a></td></tr>
-<tr class="separator:a62906f219c6b1bc1c7a060ecefb50404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa499f03bf782692540b8e7b29e5ca17"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a109e37e222982d23d1061dc8b291d2a4">register_stack_start</a></td></tr>
-<tr class="separator:aaa499f03bf782692540b8e7b29e5ca17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b90ee9fe91511d8bae715d7272cc5c8"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#aaefab98f8c4563dabf06ec2f1a60832a">register_stack_end</a></td></tr>
-<tr class="separator:a2b90ee9fe91511d8bae715d7272cc5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5189c2f73552c39fc8c12896302e635f"><td class="memItemLeft" >&#160;&#160;&#160;size_t&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#add6728f95527fb12ac7ef6e97ff7e12b">register_stack_maxsize</a></td></tr>
-<tr class="separator:a5189c2f73552c39fc8c12896302e635f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac454abeaca88321fae72c64f6a012447"><td class="memItemLeft" >&#160;&#160;&#160;jmp_buf&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a69c9471d72eb4c408567ce1c9fca91cb">regs</a></td></tr>
-<tr class="separator:ac454abeaca88321fae72c64f6a012447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c645801a08bebc8220d972a46a9a7a3"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a9c645801a08bebc8220d972a46a9a7a3">machine</a></td></tr>
-<tr class="separator:a9c645801a08bebc8220d972a46a9a7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f9dc59dc4c1d9dd5f559ea6c28bd05"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a41bef2810655e21b384573b3c0738e70"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a2089c00ce922cd71f5138156baec42a9">stack_start</a></td></tr>
+<tr class="separator:a41bef2810655e21b384573b3c0738e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e193235a25ede67aead9c24b0435ef"><td class="memItemLeft" >&#160;&#160;&#160;VALUE *&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a17c5325fb6cbb331e29ab27d12c646ae">stack_end</a></td></tr>
+<tr class="separator:af6e193235a25ede67aead9c24b0435ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d64b18bd9d105b99cc5abe6f84232b"><td class="memItemLeft" >&#160;&#160;&#160;size_t&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a1e01a8514defbbefaf4f31f30dc2dfd4">stack_maxsize</a></td></tr>
+<tr class="separator:a93d64b18bd9d105b99cc5abe6f84232b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2198bb4610e8ae159c5fb36d6f163331"><td class="memItemLeft" >&#160;&#160;&#160;jmp_buf&#160;&#160;&#160;<a class="el" href="structrb__thread__struct.html#a69c9471d72eb4c408567ce1c9fca91cb">regs</a></td></tr>
+<tr class="separator:a2198bb4610e8ae159c5fb36d6f163331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f9dc59dc4c1d9dd5f559ea6c28bd05"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a01f9dc59dc4c1d9dd5f559ea6c28bd05">machine</a></td></tr>
+<tr class="separator:a01f9dc59dc4c1d9dd5f559ea6c28bd05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9e667590cfe18b655cbe812e04d643"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3c9e667590cfe18b655cbe812e04d643">stat_insn_usage</a></td></tr>
 <tr class="separator:a3c9e667590cfe18b655cbe812e04d643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57e4067fa1528caf7c84ca2e5ef2bd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#acb68ac251ee81234695a55ddcdde006b">rb_hook_list_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ae57e4067fa1528caf7c84ca2e5ef2bd6">event_hooks</a></td></tr>
@@ -230,7 +220,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:a93c4c0392bf0bee2240cc35cb93ab782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc3db5209f029148069b77512f59665a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a472bd020c7746bb9d079e432baa3380e">rb_fiber_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#afc3db5209f029148069b77512f59665a">root_fiber</a></td></tr>
 <tr class="separator:afc3db5209f029148069b77512f59665a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a093205381d61933df048492029c5bb99"><td class="memItemLeft" align="right" valign="top">rb_jmpbuf_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a093205381d61933df048492029c5bb99">root_jmpbuf</a></td></tr>
+<tr class="memitem:a093205381d61933df048492029c5bb99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#aaacd8bc40d781eb8daece677943a8132">rb_jmpbuf_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a093205381d61933df048492029c5bb99">root_jmpbuf</a></td></tr>
 <tr class="separator:a093205381d61933df048492029c5bb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a902e65a59d60355defde237425bc2d34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vm__core_8h.html#a6be58a3ecba0e7d9bb8655c6bf334386">rb_ensure_list_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a902e65a59d60355defde237425bc2d34">ensure_list</a></td></tr>
 <tr class="separator:a902e65a59d60355defde237425bc2d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,14 +228,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <tr class="separator:a07c2bd40413d7e8e1fbfe99993a1387c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3688f0942a79e35b29bbbd289aad4976"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a3688f0942a79e35b29bbbd289aad4976">abort_on_exception</a></td></tr>
 <tr class="separator:a3688f0942a79e35b29bbbd289aad4976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2d730ea84f71bf866cfc130933ddafa"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ab2d730ea84f71bf866cfc130933ddafa">altstack</a></td></tr>
-<tr class="separator:ab2d730ea84f71bf866cfc130933ddafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada7923750df23f56b0d7164d715af3fb"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#ada7923750df23f56b0d7164d715af3fb">running_time_us</a></td></tr>
 <tr class="separator:ada7923750df23f56b0d7164d715af3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8c51180396190f882b5a32892e2bff"><td class="memItemLeft" align="right" valign="top">VALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrb__thread__struct.html#a8d8c51180396190f882b5a32892e2bff">name</a></td></tr>
+<tr class="separator:a8d8c51180396190f882b5a32892e2bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00614">614</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00630">630</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">メンバ詳解</h2>
 <a class="anchor" id="a3688f0942a79e35b29bbbd289aad4976"></a>
 <div class="memitem">
@@ -257,21 +247,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00745">745</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="ab2d730ea84f71bf866cfc130933ddafa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* rb_thread_struct::altstack</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00747">747</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00761">761</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -285,7 +261,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00646">646</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00662">662</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -299,7 +275,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00661">661</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00677">677</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -313,7 +289,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00622">622</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00638">638</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -327,7 +303,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00741">741</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00757">757</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -341,7 +317,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00667">667</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00683">683</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -355,7 +331,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00732">732</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00748">748</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -369,7 +345,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00736">736</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00752">752</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -383,7 +359,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00712">712</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00728">728</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -397,7 +373,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00713">713</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00729">729</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -411,7 +387,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00711">711</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00727">727</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -425,7 +401,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00682">682</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00698">698</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -439,7 +415,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00679">679</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00695">695</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -453,7 +429,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00681">681</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00697">697</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -467,7 +443,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00680">680</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00696">696</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -481,7 +457,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00709">709</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00725">725</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -495,7 +471,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00685">685</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00701">701</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -509,7 +485,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00625">625</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00641">641</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -523,7 +499,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00705">705</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00721">721</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -537,7 +513,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00706">706</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00722">722</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -551,7 +527,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00707">707</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00723">723</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -565,11 +541,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00684">684</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00700">700</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a class="anchor" id="a9c645801a08bebc8220d972a46a9a7a3"></a>
+<a class="anchor" id="a01f9dc59dc4c1d9dd5f559ea6c28bd05"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -591,7 +567,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00744">744</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00760">760</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -607,7 +583,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <p>Thread-local state of compiling context.</p>
 <p>If non-zero, the parser does not automatically print error messages to stderr. </p>
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00702">702</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00718">718</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8d8c51180396190f882b5a32892e2bff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VALUE rb_thread_struct::name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00766">766</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -621,7 +611,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00660">660</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00676">676</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -637,7 +627,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <p>Thread-local state of evaluation context.</p>
 <p>If negative, this thread is evaluating the main program. If positive, this thread is evaluating a program under Kernel::eval family. </p>
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00696">696</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00712">712</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -651,7 +641,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00633">633</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00649">649</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -665,7 +655,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00636">636</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00652">652</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -679,7 +669,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00639">639</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00655">655</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -693,7 +683,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00676">676</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00692">692</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -707,7 +697,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00675">675</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00691">691</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -721,7 +711,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00677">677</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00693">693</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -735,7 +725,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00658">658</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00674">674</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -749,7 +739,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00688">688</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00704">704</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -763,49 +753,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00624">624</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="aaefab98f8c4563dabf06ec2f1a60832a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VALUE* rb_thread_struct::register_stack_end</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00722">722</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="add6728f95527fb12ac7ef6e97ff7e12b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t rb_thread_struct::register_stack_maxsize</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00723">723</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="a109e37e222982d23d1061dc8b291d2a4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VALUE* rb_thread_struct::register_stack_start</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00721">721</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00640">640</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -819,21 +767,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00725">725</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="a13410a81d8aae52384b90260f9953a09"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VALUE rb_thread_struct::retval</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00671">671</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00741">741</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -847,7 +781,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00737">737</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00753">753</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -856,12 +790,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">rb_jmpbuf_t rb_thread_struct::root_jmpbuf</td>
+          <td class="memname"><a class="el" href="vm__core_8h.html#aaacd8bc40d781eb8daece677943a8132">rb_jmpbuf_t</a> rb_thread_struct::root_jmpbuf</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00738">738</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00754">754</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -875,7 +809,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00648">648</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00664">664</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -889,7 +823,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00649">649</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00665">665</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -903,7 +837,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00749">749</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00765">765</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -917,7 +851,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00623">623</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00639">639</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -931,7 +865,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00616">616</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00632">632</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -945,7 +879,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00620">620</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00636">636</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -959,7 +893,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00718">718</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00734">734</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -973,7 +907,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00719">719</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00735">735</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -987,7 +921,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00621">621</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00637">637</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1001,7 +935,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00717">717</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00733">733</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1015,7 +949,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00729">729</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00745">745</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1029,7 +963,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00628">628</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00644">644</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1043,7 +977,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00656">656</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00672">672</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1057,7 +991,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00687">687</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00703">703</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1071,7 +1005,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00663">663</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00679">679</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1085,21 +1019,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00652">652</a> 行目に定義があります。</p>
-
-</div>
-</div>
-<a class="anchor" id="a2e515186c1aa012ff4c8714e82c486df"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="vm__core_8h.html#adcd7473a33a543d7f197bfc44515bc18">rb_thread_id_string_t</a> rb_thread_struct::thread_id_string</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00654">654</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00668">668</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1113,7 +1033,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00657">657</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00673">673</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1127,7 +1047,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00642">642</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00658">658</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1141,7 +1061,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00643">643</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00659">659</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1155,7 +1075,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00733">733</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00749">749</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1169,7 +1089,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00683">683</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00699">699</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1183,7 +1103,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00664">664</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00680">680</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1197,7 +1117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00617">617</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00633">633</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1211,7 +1131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00615">615</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00631">631</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1225,7 +1145,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00630">630</a> 行目に定義があります。</p>
+<p> <a class="el" href="vm__core_8h_source.html">vm_core.h</a> の <a class="el" href="vm__core_8h_source.html#l00646">646</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -1236,7 +1156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時52分09秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時29分03秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -391,6 +391,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <li>rb_thread_raised_set
 : <a class="el" href="eval__intern_8h.html#a19275cde4c1d1413887ef2e1c948aa88">eval_intern.h</a>
 </li>
+<li>rb_thread_set_current
+: <a class="el" href="vm__core_8h.html#addad24839d7483095151e91b3b83aed6">vm_core.h</a>
+</li>
+<li>rb_thread_set_current_raw
+: <a class="el" href="vm__core_8h.html#a189286b1d291cc780c5205d00e1b47e6">vm_core.h</a>
+</li>
 <li>rb_thread_shield_waiting
 : <a class="el" href="thread_8c.html#ab09a399c6570cd6696043c9c2abefc6b">thread.c</a>
 </li>
@@ -742,6 +748,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <li>RUBY_CLOCK_BASED_CLOCK_PROCESS_CPUTIME_ID
 : <a class="el" href="process_8c.html#a5429659809e360c8027248c02d4d9c01">process.c</a>
 </li>
+<li>RUBY_CONST_ASSERT
+: <a class="el" href="vm__core_8h.html#a257c7bf932b87acd968b7675776d6857">vm_core.h</a>
+</li>
 <li>RUBY_COPYRIGHT
 : <a class="el" href="version_8h.html#a4eee0197122e23ec33fcb191c0beb87c">version.h</a>
 </li>
@@ -1041,8 +1050,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 : <a class="el" href="verconf_8h.html#a8894141e9b3785bcfa9ecbdf21da47af">verconf.h</a>
 </li>
 <li>ruby_sourcefile
-: <a class="el" href="parse_8c.html#aca52b28c4504720708a4fab8675dc407">parse.c</a>
-, <a class="el" href="compile_8c.html#aca52b28c4504720708a4fab8675dc407">compile.c</a>
+: <a class="el" href="compile_8c.html#aca52b28c4504720708a4fab8675dc407">compile.c</a>
+, <a class="el" href="parse_8c.html#aca52b28c4504720708a4fab8675dc407">parse.c</a>
 </li>
 <li>ruby_sourcefile_string
 : <a class="el" href="parse_8c.html#a82aa34973916ee076ef76ae88b492749">parse.c</a>
@@ -1146,6 +1155,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <li>RUBY_VERSION_NAME
 : <a class="el" href="verconf_8h.html#a5860393ad7077275d3b996d0a99f7113">verconf.h</a>
 </li>
+<li>RUBY_VM_CHECK_INTS
+: <a class="el" href="vm__core_8h.html#aa901d11cf0deaed13a18e08e3d03d1d9">vm_core.h</a>
+</li>
+<li>RUBY_VM_CHECK_INTS_BLOCKING
+: <a class="el" href="vm__core_8h.html#afa7e853c53a486b266fd303558782c2d">vm_core.h</a>
+</li>
+<li>RUBY_VM_CONTROL_FRAME_STACK_OVERFLOW_P
+: <a class="el" href="vm__core_8h.html#ac3cef3df2cc03d3090ad49220cb453d5">vm_core.h</a>
+</li>
+<li>RUBY_VM_END_CONTROL_FRAME
+: <a class="el" href="vm__core_8h.html#a0a82c3322af87ad5e0eb5854d7f98d3b">vm_core.h</a>
+</li>
 <li>RUBY_VM_FIBER_MACHINE_STACK_SIZE
 : <a class="el" href="vm__core_8h.html#ab1cfcff8df45b32519fdb36b07d4681f">vm_core.h</a>
 </li>
@@ -1158,8 +1179,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <li>RUBY_VM_FIBER_VM_STACK_SIZE_MIN
 : <a class="el" href="vm__core_8h.html#ad2a7bb01f06d60963eb3b379a4804e86">vm_core.h</a>
 </li>
+<li>RUBY_VM_GET_BLOCK_PTR_IN_CFP
+: <a class="el" href="vm__core_8h.html#acfa2a173f2b08fdbe1045d2c990200d3">vm_core.h</a>
+</li>
+<li>RUBY_VM_GET_CFP_FROM_BLOCK_PTR
+: <a class="el" href="vm__core_8h.html#a2cc1c838fecda2400fa9f2fb5fad3618">vm_core.h</a>
+</li>
+<li>RUBY_VM_IFUNC_P
+: <a class="el" href="vm__core_8h.html#aa933aeb7a703c7cc2d136492acbbef22">vm_core.h</a>
+</li>
+<li>RUBY_VM_INTERRUPTED
+: <a class="el" href="vm__core_8h.html#a0556a5a4763f36a45f81053a30570f3d">vm_core.h</a>
+</li>
+<li>RUBY_VM_INTERRUPTED_ANY
+: <a class="el" href="vm__core_8h.html#aeef41fb1faaed079b8be51e66331750c">vm_core.h</a>
+</li>
+<li>RUBY_VM_NEXT_CONTROL_FRAME
+: <a class="el" href="vm__core_8h.html#a456e0e30a5829a029128bcb785ff6933">vm_core.h</a>
+</li>
+<li>RUBY_VM_NORMAL_ISEQ_P
+: <a class="el" href="vm__core_8h.html#a79d03ad9b9cf8b7a8ca2b849e495a74f">vm_core.h</a>
+</li>
+<li>RUBY_VM_PREVIOUS_CONTROL_FRAME
+: <a class="el" href="vm__core_8h.html#af087c881c3c493e3a4e326852e8ed2a9">vm_core.h</a>
+</li>
 <li>ruby_vm_redefined_flag
 : <a class="el" href="vm_8c.html#af4782f3a2d124114048cb804cdbf46e3">vm.c</a>
+</li>
+<li>RUBY_VM_SET_INTERRUPT
+: <a class="el" href="vm__core_8h.html#ab555b1a4987c4b9085e703c3d7ac6470">vm_core.h</a>
+</li>
+<li>RUBY_VM_SET_POSTPONED_JOB_INTERRUPT
+: <a class="el" href="vm__core_8h.html#ade8c43bd8d4362b611b41ebc7e7831c0">vm_core.h</a>
+</li>
+<li>RUBY_VM_SET_TIMER_INTERRUPT
+: <a class="el" href="vm__core_8h.html#a478d1279e4f797cf2d315d91a0cba111">vm_core.h</a>
+</li>
+<li>RUBY_VM_SET_TRAP_INTERRUPT
+: <a class="el" href="vm__core_8h.html#a9fb7475bee85e7c0d63ebb3ccca483ab">vm_core.h</a>
 </li>
 <li>RUBY_VM_SIZE_ALIGN
 : <a class="el" href="vm__core_8h.html#a7ed91548b5889d3bc60890748089f77e">vm_core.h</a>
@@ -1179,8 +1236,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <li>RUBY_VM_THREAD_VM_STACK_SIZE_MIN
 : <a class="el" href="vm__core_8h.html#a074931868d4dfd6c2d7b307e8d547d23">vm_core.h</a>
 </li>
+<li>RUBY_VM_VALID_CONTROL_FRAME_P
+: <a class="el" href="vm__core_8h.html#aa9e5e350ea2fe026133e2e648c6951e9">vm_core.h</a>
+</li>
 <li>rubylib_path_new
 : <a class="el" href="ruby_8c.html#af1021ffb1593ea84236b8132d4dfa3dd">ruby.c</a>
+</li>
+<li>RUBYVM_CFUNC_FRAME_P
+: <a class="el" href="vm__core_8h.html#ae154762699bf1f722bdf05c22026d678">vm_core.h</a>
 </li>
 <li>RUNNING_THREAD_ONCE_DONE
 : <a class="el" href="vm__exec_8c.html#abf3a56e53ed06ac4c90ac8009f5f949f">vm_exec.c</a>
@@ -1205,7 +1268,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時52分10秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時29分04秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

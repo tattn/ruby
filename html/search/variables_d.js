@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['machine',['machine',['../structrb__context__struct.html#a14dbb839cade4ddf29177272a0248245',1,'rb_context_struct::machine()'],['../structrb__thread__struct.html#a9c645801a08bebc8220d972a46a9a7a3',1,'rb_thread_struct::machine()']]],
+  ['machine',['machine',['../structrb__context__struct.html#a14dbb839cade4ddf29177272a0248245',1,'rb_context_struct::machine()'],['../structrb__thread__struct.html#a01f9dc59dc4c1d9dd5f559ea6c28bd05',1,'rb_thread_struct::machine()']]],
   ['magic_5fcomments',['magic_comments',['../parse_8c.html#a2c9edf8515bdcfcff48d24d79011a04e',1,'parse.c']]],
   ['main_5fthread',['main_thread',['../structrb__vm__struct.html#a55af19560794b67c09c608a8464e47c9',1,'rb_vm_struct']]],
   ['malloc_5flimit_5fgrowth_5ffactor',['malloc_limit_growth_factor',['../structruby__gc__params__t.html#a7b9d69cb275c0ee693b0fcb15e8e4fa6',1,'ruby_gc_params_t']]],
@@ -28,7 +28,7 @@ var searchData=
   ['maxwds',['maxwds',['../struct_bigint.html#a5ffcac6f95ded3bc1fc23204f46f10d0',1,'Bigint']]],
   ['mbuf',['mbuf',['../struct_c_class_node.html#a599db43b8eea536a4e4d08400fa445cb',1,'CClassNode']]],
   ['me',['me',['../struct_m_e_t_h_o_d.html#a5599a8345cd172cd419037fd8a15f87d',1,'METHOD::me()'],['../structrb__call__info__struct.html#ab976a0d1974ded5980978511571b7616',1,'rb_call_info_struct::me()'],['../structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf',1,'cache_entry::me()']]],
-  ['mem',['mem',['../struct___onig_stack_type.html#ad3fdde6094a2363bd7aa943959274f16',1,'_OnigStackType']]],
+  ['mem',['mem',['../struct___onig_stack_type.html#a0926c5b208721fbcd078e9f7708094df',1,'_OnigStackType']]],
   ['mem_5falloc',['mem_alloc',['../struct_scan_env.html#a1b33d2c6358d1d9340f021de7cabc851',1,'ScanEnv']]],
   ['mem_5fnodes_5fdynamic',['mem_nodes_dynamic',['../struct_scan_env.html#a30ed89b85be2facc439996abf09ebb46',1,'ScanEnv']]],
   ['mem_5fnodes_5fstatic',['mem_nodes_static',['../struct_scan_env.html#a7a11757e69fb9623e1e02f71a13a338b',1,'ScanEnv']]],

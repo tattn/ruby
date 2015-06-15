@@ -238,7 +238,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;のアーキテクチャが`setjmp()`または`getcontext()`によって全てのレジスタを `jmp_buf` や `ucontext_t`</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;に格納することと， `jmp_buf` や `ucontext_t` とスタックが32bitアラインメントされていることを仮定</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;しています．特に前者が成立しない場合の対応は非常に困難でしょう． 後者の解決は比較的簡単で， `gc.c` でスタックをマークしている</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;部分にアラインメントのバイト数だけずらしてマークするコードを追加するだけで済みます．`defined(_\*mc68000*\_)`で括られてい</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;部分にアラインメントのバイト数だけずらしてマークするコードを追加するだけで済みます．`defined(__mc68000__)`で括られてい</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;る部分を参考にしてください．</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;レジスタウィンドウを持つCPUでは，レジスタウィンドウをスタックにフラッシュするアセンブラコードを追加する必要があるかもしれません．</div>
@@ -267,7 +267,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時51分37秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時28分30秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

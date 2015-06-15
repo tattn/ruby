@@ -93,6 +93,7 @@ var searchData=
   ['enum_5fany',['enum_any',['../enum_8c.html#aef3178030b0d60a2b6c72a70e9d7cb65',1,'enum.c']]],
   ['enum_5fany_5ffunc',['enum_any_func',['../enum_8c.html#a8e2b00ac2815a00351cc5063e7ee1828',1,'enum.c']]],
   ['enum_5fchunk',['enum_chunk',['../enum_8c.html#a242d5d1d56911878e45d3f1880989b0a',1,'enum.c']]],
+  ['enum_5fchunk_5fwhile',['enum_chunk_while',['../enum_8c.html#a652cd7ac1eec084e80267028a175f760',1,'enum.c']]],
   ['enum_5fcollect',['enum_collect',['../enum_8c.html#abb55ef3b39a4c4ed017dfaaa524f7761',1,'enum.c']]],
   ['enum_5fcount',['enum_count',['../enum_8c.html#a350ff66e263888d8580aa037d8a747cf',1,'enum.c']]],
   ['enum_5fcycle',['enum_cycle',['../enum_8c.html#a9a5a0f08477df8316bf529d24b2ea9f0',1,'enum.c']]],

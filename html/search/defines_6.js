@@ -112,6 +112,7 @@ var searchData=
   ['fspace',['FSPACE',['../sprintf_8c.html#ac75b4c53ed7ed1329eb5156e6ef5c396',1,'sprintf.c']]],
   ['fun1',['fun1',['../complex_8c.html#ae40bc05991cdee182b5646b58ef0ea40',1,'fun1():&#160;complex.c'],['../rational_8c.html#ae40bc05991cdee182b5646b58ef0ea40',1,'fun1():&#160;rational.c']]],
   ['fun2',['fun2',['../complex_8c.html#af061beecb4d5bf7aaecb23580a6cec20',1,'fun2():&#160;complex.c'],['../rational_8c.html#af061beecb4d5bf7aaecb23580a6cec20',1,'fun2():&#160;rational.c']]],
+  ['func_5ffastcall',['FUNC_FASTCALL',['../vm__core_8h.html#a8acc64c1a1caa911f62c931479f935fc',1,'vm_core.h']]],
   ['funcname_5fprefix',['FUNCNAME_PREFIX',['../dln_8c.html#adbf476b739ea9ada7b39c9848eddc51c',1,'dln.c']]],
   ['funii',['FUNii',['../transcode__data_8h.html#ae9f94907fe5a667e2a45332aacb2bba7',1,'transcode_data.h']]],
   ['funio',['FUNio',['../transcode__data_8h.html#a2113b2ceeff14f517c363f82dc714193',1,'transcode_data.h']]],

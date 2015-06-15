@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['v',['v',['../structrb__method__entry__struct.html#a790607ceb6c16deb95e2277cb10eff05',1,'rb_method_entry_struct::v()'],['../structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e',1,'sip_state::v()']]],
+  ['v',['v',['../structsip__state.html#a40f42158d4db0ba89ea99b8f935e742e',1,'sip_state']]],
   ['v0',['v0',['../struct_r_i_memo.html#a1aa04a0dfd2a7990d7c8f931098729e9',1,'RIMemo']]],
   ['v1',['v1',['../struct_r_v_a_l_u_e.html#a5d4a19a6e1887dde90bca52da6edd38b',1,'RVALUE::v1()'],['../struct_r_i_memo.html#ad2bf04cbb407d838c166e4e18715ad8c',1,'RIMemo::v1()'],['../struct_m_e_m_o.html#ab37552f3642d43bae946163be3e287d7',1,'MEMO::v1()'],['../structio__encoding__set__args.html#ab2feddd204c6dd76dd3d80fa16088dc8',1,'io_encoding_set_args::v1()']]],
   ['v2',['v2',['../struct_r_v_a_l_u_e.html#abe8acc469c0851337b25804cce12387e',1,'RVALUE::v2()'],['../struct_r_i_memo.html#a409ccbc59369c500c1dc21d8aaeb52a2',1,'RIMemo::v2()'],['../struct_m_e_m_o.html#a24ab6795439ca9dc9fe0abbf7f793a4e',1,'MEMO::v2()'],['../structio__encoding__set__args.html#a524f062f3a13c1b204e2246770cc0424',1,'io_encoding_set_args::v2()']]],
@@ -16,7 +16,6 @@ var searchData=
   ['vars',['vars',['../structlocal__vars.html#ad9631be9731c9795af6172ee32cd5e97',1,'local_vars::vars()'],['../union_y_y_s_t_y_p_e.html#af877a6158aada488e6ce3f5661961399',1,'YYSTYPE::vars()']]],
   ['verbose',['verbose',['../structcmdline__options.html#a473a2d767a06b33c82cf4e5f4d3a41f8',1,'cmdline_options::verbose()'],['../structrb__vm__struct.html#a4cc71b049515a53a03926b2bfba329e6',1,'rb_vm_struct::verbose()']]],
   ['vextra',['vextra',['../struct____s_f_i_l_e.html#abf72bfbdfd7ad45e7de5d4a3186907fc',1,'__sFILE']]],
-  ['visi',['visi',['../structrb__method__entry__struct.html#ae50c11750c1187b268b60859c358bf47',1,'rb_method_entry_struct']]],
   ['visited',['visited',['../structsearch__path__bfs__t.html#a3111865e63aadaec38b6c221ec79f1b4',1,'search_path_bfs_t']]],
   ['vm',['vm',['../structrb__thread__struct.html#a3e7d0b05e2d73f324e70c735ba50739e',1,'rb_thread_struct']]],
   ['vm_5fdata_5ftype',['vm_data_type',['../vm_8c.html#a118ab0087779e3d649f8db8fac1dfc4d',1,'vm.c']]],

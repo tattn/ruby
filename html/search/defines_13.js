@@ -20,6 +20,8 @@ var searchData=
   ['scanenv_5fmem_5fnodes',['SCANENV_MEM_NODES',['../regparse_8h.html#a82066fdd1d2abdcc23ae01f55bfbe321',1,'regparse.h']]],
   ['scanenv_5fmemnodes_5fsize',['SCANENV_MEMNODES_SIZE',['../regparse_8h.html#ae4cc7b2a733830bc255401582bbb6dfc',1,'regparse.h']]],
   ['screg',['SCREG',['../vm__exec_8h.html#a92acd668d8848206d939428740383418',1,'vm_exec.h']]],
+  ['sdr',['SDR',['../vm__core_8h.html#ac33c371d81972685538097cb4f49181f',1,'vm_core.h']]],
+  ['sdr2',['SDR2',['../vm__core_8h.html#ab913ccb5c8b4c3065335169b15925411',1,'vm_core.h']]],
   ['seek_5fcur',['SEEK_CUR',['../io_8c.html#a4c8d0b76b470ba65a43ca46a88320f39',1,'io.c']]],
   ['seek_5fend',['SEEK_END',['../io_8c.html#ad2a2e6c114780c3071efd24f16c7f7d8',1,'io.c']]],
   ['seek_5fset',['SEEK_SET',['../io_8c.html#a0d112bae8fd35be772185b6ec6bcbe64',1,'io.c']]],
@@ -320,5 +322,6 @@ var searchData=
   ['syn_5fposix_5fcommon_5fop',['SYN_POSIX_COMMON_OP',['../regint_8h.html#a8e7b0eb439877bb2184153a800251612',1,'regint.h']]],
   ['sys_5fenc_5fwarning_5fin',['sys_enc_warning_in',['../dir_8c.html#a4cca798af1bb05a34330db7389dcc040',1,'dir.c']]],
   ['sys_5fwarning',['sys_warning',['../dir_8c.html#aafebf5609803cbd1aaf7904577b4c78e',1,'dir.c']]],
+  ['sysstack_5ferror',['sysstack_error',['../vm__core_8h.html#a7acad2ca9baf84e4d6cb6e68cd3da73f',1,'vm_core.h']]],
   ['sysv_5fext',['SYSV_EXT',['../strftime_8c.html#a1ec4dac983eb89c24c0df1ae9e409154',1,'strftime.c']]]
 ];

@@ -647,7 +647,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;        <span class="keywordflow">case</span> BIN(send):{</div>
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;          <span class="keywordtype">int</span> inc = 0;</div>
 <div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        <a class="code" href="structrb__call__info__struct.html">CALL_INFO</a> ci = (<a class="code" href="vm__core_8h.html#abe8cec9a98d87a7508d603e5faf9bb99">CALL_INFO</a>)(opes[0]);</div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        inc += - (int)(ci-&gt;<a class="code" href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">orig_argc</a> + ((ci-&gt;<a class="code" href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">flag</a> &amp; VM_CALL_ARGS_BLOCKARG) ? 1 : 0));;</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        inc += - (int)(ci-&gt;<a class="code" href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">orig_argc</a> + ((ci-&gt;<a class="code" href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">flag</a> &amp; <a class="code" href="vm__core_8h.html#a28a30f6936167beb39d71623d5aa0b94">VM_CALL_ARGS_BLOCKARG</a>) ? 1 : 0));;</div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;        <span class="keywordflow">return</span> depth + inc;</div>
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;        }</div>
 <div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;        <span class="keywordflow">case</span> BIN(opt_str_freeze):{</div>
@@ -662,7 +662,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;        <span class="keywordflow">case</span> BIN(invokesuper):{</div>
 <div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;          <span class="keywordtype">int</span> inc = 0;</div>
 <div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;        <a class="code" href="structrb__call__info__struct.html">CALL_INFO</a> ci = (<a class="code" href="vm__core_8h.html#abe8cec9a98d87a7508d603e5faf9bb99">CALL_INFO</a>)(opes[0]);</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        inc += - (int)(ci-&gt;<a class="code" href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">orig_argc</a> + ((ci-&gt;<a class="code" href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">flag</a> &amp; VM_CALL_ARGS_BLOCKARG) ? 1 : 0));;</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        inc += - (int)(ci-&gt;<a class="code" href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">orig_argc</a> + ((ci-&gt;<a class="code" href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">flag</a> &amp; <a class="code" href="vm__core_8h.html#a28a30f6936167beb39d71623d5aa0b94">VM_CALL_ARGS_BLOCKARG</a>) ? 1 : 0));;</div>
 <div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;        <span class="keywordflow">return</span> depth + inc;</div>
 <div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;        }</div>
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;        <span class="keywordflow">case</span> BIN(invokeblock):{</div>
@@ -843,17 +843,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;  <span class="keywordflow">return</span> insn_stack_push_num_info[(int)insn];</div>
 <div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;}</div>
 <div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="vm__core_8h_html_a28a30f6936167beb39d71623d5aa0b94"><div class="ttname"><a href="vm__core_8h.html#a28a30f6936167beb39d71623d5aa0b94">VM_CALL_ARGS_BLOCKARG</a></div><div class="ttdeci">#define VM_CALL_ARGS_BLOCKARG</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00857">vm_core.h:857</a></div></div>
 <div class="ttc" id="error_8c_html_a2d5fb28e54f792e7341b2c45f52f3860"><div class="ttname"><a href="error_8c.html#a2d5fb28e54f792e7341b2c45f52f3860">rb_bug</a></div><div class="ttdeci">void rb_bug(const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00396">error.c:396</a></div></div>
-<div class="ttc" id="structrb__call__info__struct_html_aba9d372268d271c27550cc2eff36f0bb"><div class="ttname"><a href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">rb_call_info_struct::flag</a></div><div class="ttdeci">unsigned int flag</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00159">vm_core.h:159</a></div></div>
-<div class="ttc" id="structrb__call__info__struct_html_ad29df69d5179bae8dd226602473b6c75"><div class="ttname"><a href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">rb_call_info_struct::orig_argc</a></div><div class="ttdeci">int orig_argc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00160">vm_core.h:160</a></div></div>
-<div class="ttc" id="vm__core_8h_html_abe8cec9a98d87a7508d603e5faf9bb99"><div class="ttname"><a href="vm__core_8h.html#abe8cec9a98d87a7508d603e5faf9bb99">CALL_INFO</a></div><div class="ttdeci">rb_call_info_t * CALL_INFO</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00890">vm_core.h:890</a></div></div>
-<div class="ttc" id="structrb__call__info__struct_html"><div class="ttname"><a href="structrb__call__info__struct.html">rb_call_info_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00155">vm_core.h:155</a></div></div>
+<div class="ttc" id="structrb__call__info__struct_html_aba9d372268d271c27550cc2eff36f0bb"><div class="ttname"><a href="structrb__call__info__struct.html#aba9d372268d271c27550cc2eff36f0bb">rb_call_info_struct::flag</a></div><div class="ttdeci">unsigned int flag</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00175">vm_core.h:175</a></div></div>
+<div class="ttc" id="structrb__call__info__struct_html_ad29df69d5179bae8dd226602473b6c75"><div class="ttname"><a href="structrb__call__info__struct.html#ad29df69d5179bae8dd226602473b6c75">rb_call_info_struct::orig_argc</a></div><div class="ttdeci">int orig_argc</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00176">vm_core.h:176</a></div></div>
+<div class="ttc" id="vm__core_8h_html_abe8cec9a98d87a7508d603e5faf9bb99"><div class="ttname"><a href="vm__core_8h.html#abe8cec9a98d87a7508d603e5faf9bb99">CALL_INFO</a></div><div class="ttdeci">rb_call_info_t * CALL_INFO</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00907">vm_core.h:907</a></div></div>
+<div class="ttc" id="structrb__call__info__struct_html"><div class="ttname"><a href="structrb__call__info__struct.html">rb_call_info_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00171">vm_core.h:171</a></div></div>
 <div class="ttc" id="signal_8c_html_afdeca1fb89f6e44ef8cdc3677ac293c8"><div class="ttname"><a href="signal_8c.html#afdeca1fb89f6e44ef8cdc3677ac293c8">cnt</a></div><div class="ttdeci">rb_atomic_t cnt[(_SIGMAX+1)]</div><div class="ttdef"><b>Definition:</b> <a href="signal_8c_source.html#l00523">signal.c:523</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時51分36秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時28分29秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -11,7 +11,7 @@ var searchData=
   ['word_5farray_5flength',['word_array_length',['../structrb__transcoder.html#a714dfe48c163f9ffff6c0e97bd9c00ae',1,'rb_transcoder']]],
   ['word_5fsize',['word_size',['../structrb__transcoder.html#a4c0147ba97fdebfa5e275fbdc4e79dc9',1,'rb_transcoder']]],
   ['write',['write',['../structselect__args.html#a8eb87b49d6bafb9368cad5dc27718c11',1,'select_args::write()'],['../structselect__args.html#a829b236e1a6b593a513030b60f4a77a1',1,'select_args::write()']]],
-  ['writebuf',['writebuf',['../structrb__transcoding.html#a6ff564718ff220e59eaaad28c8e77cf2',1,'rb_transcoding']]],
+  ['writebuf',['writebuf',['../structrb__transcoding.html#af96553591fc1f2f73a4c9793ad0b8bf7',1,'rb_transcoding']]],
   ['writebuf_5flen',['writebuf_len',['../structrb__transcoding.html#a829bec6102fbf1f8670412aa8354c799',1,'rb_transcoding']]],
   ['writebuf_5foff',['writebuf_off',['../structrb__transcoding.html#afb83f2ba03f3b9050623abd8d7cd80e4',1,'rb_transcoding']]]
 ];

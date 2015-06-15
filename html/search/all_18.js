@@ -54,6 +54,7 @@ var searchData=
   ['wge',['wge',['../time_8c.html#a0a2dbd8d248d725cc82aea8eb231a48f',1,'time.c']]],
   ['wgt',['wgt',['../time_8c.html#a0fa5af9104aba3f12fd220625afaab91',1,'time.c']]],
   ['when_5fvals',['when_vals',['../compile_8c.html#ae16cd5b5b2533c41174fdb96e1df72a5',1,'compile.c']]],
+  ['when_5fvm_5fstack_5foverflowed',['WHEN_VM_STACK_OVERFLOWED',['../vm__core_8h.html#a8a5905b81a29858271c10ac9c177b891',1,'vm_core.h']]],
   ['whole_5fmatch_5fp',['whole_match_p',['../parse_8c.html#adcf02626de924b0ed8c7a5927a443c21',1,'parse.c']]],
   ['wi_5fmul',['wi_mul',['../time_8c.html#a4d00a18ee38d476a4225411d8c0612cd',1,'time.c']]],
   ['wideint_5fmax',['WIDEINT_MAX',['../time_8c.html#a52141d16af872f330de3e3314ccc9ffc',1,'time.c']]],
@@ -121,11 +122,11 @@ var searchData=
   ['write_5farg',['write_arg',['../structwrite__arg.html',1,'']]],
   ['write_5fconst',['WRITE_CONST',['../error_8c.html#afca333f56561767da0aded8491aa152a',1,'error.c']]],
   ['write_5for_5fabort',['write_or_abort',['../error_8c.html#ae2a4f4eb0f806a4d9858c1e6c9e17624',1,'error.c']]],
-  ['writebuf',['writebuf',['../structrb__transcoding.html#a6ff564718ff220e59eaaad28c8e77cf2',1,'rb_transcoding']]],
+  ['writebuf',['writebuf',['../structrb__transcoding.html#af96553591fc1f2f73a4c9793ad0b8bf7',1,'rb_transcoding']]],
   ['writebuf_5flen',['writebuf_len',['../structrb__transcoding.html#a829bec6102fbf1f8670412aa8354c799',1,'rb_transcoding::writebuf_len()'],['../transcode_8c.html#a01a2293e9796b648363189ee1a0c091c',1,'writebuf_len():&#160;transcode.c']]],
   ['writebuf_5foff',['writebuf_off',['../structrb__transcoding.html#afb83f2ba03f3b9050623abd8d7cd80e4',1,'rb_transcoding::writebuf_off()'],['../transcode_8c.html#af2e23d44edf7a7ea7394c5373491f947',1,'writebuf_off():&#160;transcode.c']]],
   ['wstopsig',['WSTOPSIG',['../process_8c.html#aa92e07a0d3579b31e516f96335889bc7',1,'process.c']]],
   ['wsub',['wsub',['../time_8c.html#a9ea3f1c21d8979e55888161d2e113d68',1,'time.c']]],
   ['wtermsig',['WTERMSIG',['../process_8c.html#acaeb2e652dc908353c472ed40707495c',1,'process.c']]],
-  ['wv2timet',['wv2timet',['../time_8c.html#af4e045068becd8eaeb1e572ba29fc9cb',1,'wv2timet(wideval_t w):&#160;time.c'],['../time_8c.html#a18c2a4a407928e1a58aa606511ed7c82',1,'WV2TIMET():&#160;time.c']]]
+  ['wv2timet',['WV2TIMET',['../time_8c.html#a18c2a4a407928e1a58aa606511ed7c82',1,'WV2TIMET():&#160;time.c'],['../time_8c.html#af4e045068becd8eaeb1e572ba29fc9cb',1,'wv2timet(wideval_t w):&#160;time.c']]]
 ];

@@ -127,11 +127,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 マクロ定義</h2></td></tr>
 <tr class="memitem:afa7840a585cb0f817a0c6bb51c3cd710"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#afa7840a585cb0f817a0c6bb51c3cd710">END_OF_ENUMERATION</a>(<a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>)&#160;&#160;&#160;END_OF_##<a class="el" href="random_8c.html#a742229490b6759a90ece7ba82ba129d5">key</a>##_PLACEHOLDER = 0</td></tr>
 <tr class="separator:afa7840a585cb0f817a0c6bb51c3cd710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd970a9b5e868330b32046ade2131bf4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a>(me)&#160;&#160;&#160;(me)-&gt;attr.flags.visi</td></tr>
+<tr class="memitem:afd970a9b5e868330b32046ade2131bf4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a>(me)&#160;&#160;&#160;(<a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a>)(((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a> | <a class="el" href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a>)) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+0))</td></tr>
 <tr class="separator:afd970a9b5e868330b32046ade2131bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcbcc00e2d8c3be9617cd9df368bec47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#afcbcc00e2d8c3be9617cd9df368bec47">METHOD_ENTRY_BASIC</a>(me)&#160;&#160;&#160;(me)-&gt;attr.flags.basic</td></tr>
+<tr class="memitem:afcbcc00e2d8c3be9617cd9df368bec47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#afcbcc00e2d8c3be9617cd9df368bec47">METHOD_ENTRY_BASIC</a>(me)&#160;&#160;&#160;(int)                   (((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a>                 )) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+2))</td></tr>
 <tr class="separator:afcbcc00e2d8c3be9617cd9df368bec47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9dab61d7011f95f090a103aa35d17ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#ae9dab61d7011f95f090a103aa35d17ab">METHOD_ENTRY_SAFE</a>(me)&#160;&#160;&#160;(me)-&gt;attr.flags.safe</td></tr>
+<tr class="memitem:ae9dab61d7011f95f090a103aa35d17ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#ae9dab61d7011f95f090a103aa35d17ab">METHOD_ENTRY_SAFE</a>(me)&#160;&#160;&#160;(int)                   (((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a> | <a class="el" href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a>)) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+3))</td></tr>
 <tr class="separator:ae9dab61d7011f95f090a103aa35d17ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa8e7bfb9a59a81763a11e426287f124"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)&#160;&#160;&#160;(!(me) || !(me)-&gt;def || (me)-&gt;def-&gt;type == <a class="el" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a>)</td></tr>
 <tr class="separator:aaa8e7bfb9a59a81763a11e426287f124"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +192,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 関数</h2></td></tr>
+<tr class="memitem:ad62dbc7b68e674184e91ddee16867e4d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#ad62dbc7b68e674184e91ddee16867e4d">METHOD_ENTRY_VISI_SET</a> (<a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *me, <a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a> visi)</td></tr>
+<tr class="separator:ad62dbc7b68e674184e91ddee16867e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80b531dab965c7203d60e6741e0e683"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#ae80b531dab965c7203d60e6741e0e683">METHOD_ENTRY_BASIC_SET</a> (<a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *me, int basic)</td></tr>
+<tr class="separator:ae80b531dab965c7203d60e6741e0e683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8af4e1f0f819d3e7389d3aa7dc7c655"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#ae8af4e1f0f819d3e7389d3aa7dc7c655">METHOD_ENTRY_SAFE_SET</a> (<a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *me, int safe)</td></tr>
+<tr class="separator:ae8af4e1f0f819d3e7389d3aa7dc7c655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a958b508b74bdcbc0aa2d07e611fc38"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#a4a958b508b74bdcbc0aa2d07e611fc38">METHOD_ENTRY_FLAGS_SET</a> (<a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *me, <a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a> visi, int basic, int safe)</td></tr>
+<tr class="separator:a4a958b508b74bdcbc0aa2d07e611fc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adec8455c334b6f14931ef49df6ee346e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#adec8455c334b6f14931ef49df6ee346e">rb_add_method_cfunc</a> (VALUE klass, ID mid, VALUE(*func)(ANYARGS), int <a class="el" href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a> visi)</td></tr>
 <tr class="separator:adec8455c334b6f14931ef49df6ee346e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea4051e9712af493e6ebaeaccdd41e22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="method_8h.html#aea4051e9712af493e6ebaeaccdd41e22">rb_add_method_iseq</a> (VALUE klass, ID mid, VALUE iseqval, <a class="el" href="method_8h.html#a4d817fbdaa6079104f5dc42583519227">rb_cref_t</a> *cref, <a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a> visi)</td></tr>
@@ -267,12 +275,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">me</td><td>)</td>
-          <td>&#160;&#160;&#160;(me)-&gt;attr.flags.basic</td>
+          <td>&#160;&#160;&#160;(int)                   (((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a>                 )) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+2))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00066">66</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00057">57</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -285,12 +293,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">me</td><td>)</td>
-          <td>&#160;&#160;&#160;(me)-&gt;attr.flags.safe</td>
+          <td>&#160;&#160;&#160;(int)                   (((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a> | <a class="el" href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a>)) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+3))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00067">67</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00058">58</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -303,12 +311,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">me</td><td>)</td>
-          <td>&#160;&#160;&#160;(me)-&gt;attr.flags.visi</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a>)(((me)-&gt;flags &amp; (<a class="el" href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a> | <a class="el" href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a>)) &gt;&gt; (<a class="el" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+0))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00065">65</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00056">56</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -326,7 +334,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00135">135</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00155">155</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -345,10 +353,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 </div><div class="memdoc">
 <b>値:</b><div class="fragment"><div class="line">((def)-&gt;type == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a> &amp;&amp; \</div>
 <div class="line">     <a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>((def)-&gt;body.refined.orig_me))</div>
-<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00135">method.h:135</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
+<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00155">method.h:155</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
 </div><!-- fragment -->
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00136">136</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00156">156</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -375,7 +383,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00086">86</a> 行目に定義があります。</p>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00106">106</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -514,37 +522,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 </td></tr>
 </table>
 
-<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00069">69</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;             {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a>,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a>,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b">VM_METHOD_TYPE_ATTRSET</a>,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e">VM_METHOD_TYPE_IVAR</a>,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0">VM_METHOD_TYPE_BMETHOD</a>,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1">VM_METHOD_TYPE_ZSUPER</a>,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986">VM_METHOD_TYPE_ALIAS</a>,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a>,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5">VM_METHOD_TYPE_NOTIMPLEMENTED</a>,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a">VM_METHOD_TYPE_OPTIMIZED</a>, <span class="comment">/* Kernel#send, Proc#call, etc */</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8">VM_METHOD_TYPE_MISSING</a>,   <span class="comment">/* wrapper for method_missing(id) */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="method_8h.html#afa7840a585cb0f817a0c6bb51c3cd710">END_OF_ENUMERATION</a>(VM_METHOD_TYPE)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687a">rb_method_type_t</a>;</div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8">VM_METHOD_TYPE_MISSING</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00080">method.h:80</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00070">method.h:70</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986">VM_METHOD_TYPE_ALIAS</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00076">method.h:76</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0">VM_METHOD_TYPE_BMETHOD</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00074">method.h:74</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00077">method.h:77</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5">VM_METHOD_TYPE_NOTIMPLEMENTED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00078">method.h:78</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687a"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687a">rb_method_type_t</a></div><div class="ttdeci">rb_method_type_t</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00069">method.h:69</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b">VM_METHOD_TYPE_ATTRSET</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00072">method.h:72</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a">VM_METHOD_TYPE_OPTIMIZED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00079">method.h:79</a></div></div>
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00089">89</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;             {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a>,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a>,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b">VM_METHOD_TYPE_ATTRSET</a>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e">VM_METHOD_TYPE_IVAR</a>,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0">VM_METHOD_TYPE_BMETHOD</a>,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1">VM_METHOD_TYPE_ZSUPER</a>,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986">VM_METHOD_TYPE_ALIAS</a>,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a>,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5">VM_METHOD_TYPE_NOTIMPLEMENTED</a>,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a">VM_METHOD_TYPE_OPTIMIZED</a>, <span class="comment">/* Kernel#send, Proc#call, etc */</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8">VM_METHOD_TYPE_MISSING</a>,   <span class="comment">/* wrapper for method_missing(id) */</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="method_8h.html#afa7840a585cb0f817a0c6bb51c3cd710">END_OF_ENUMERATION</a>(VM_METHOD_TYPE)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;} <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687a">rb_method_type_t</a>;</div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa63a0d73143740232b3482d940bfe52f8">VM_METHOD_TYPE_MISSING</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00100">method.h:100</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00090">method.h:90</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aab27617c29e7e0c42c21ee477e6bf3986">VM_METHOD_TYPE_ALIAS</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00096">method.h:96</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa851a2c8d2c25891b7d1ce87759b31de0">VM_METHOD_TYPE_BMETHOD</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00094">method.h:94</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00097">method.h:97</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa5d67e9c72f82a6988ec1a37a93ee55b5">VM_METHOD_TYPE_NOTIMPLEMENTED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00098">method.h:98</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687a"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687a">rb_method_type_t</a></div><div class="ttdeci">rb_method_type_t</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00089">method.h:89</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa0afa124f1dfc47ee89ab883b2591573b">VM_METHOD_TYPE_ATTRSET</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00092">method.h:92</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa2eada169dedcc0ee758832fca8dffd2a">VM_METHOD_TYPE_OPTIMIZED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00099">method.h:99</a></div></div>
 <div class="ttc" id="method_8h_html_afa7840a585cb0f817a0c6bb51c3cd710"><div class="ttname"><a href="method_8h.html#afa7840a585cb0f817a0c6bb51c3cd710">END_OF_ENUMERATION</a></div><div class="ttdeci">#define END_OF_ENUMERATION(key)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00020">method.h:20</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00071">method.h:71</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e">VM_METHOD_TYPE_IVAR</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00073">method.h:73</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1">VM_METHOD_TYPE_ZSUPER</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00075">method.h:75</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00091">method.h:91</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa876dfcf064e4f083567badb52e606e0e">VM_METHOD_TYPE_IVAR</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00093">method.h:93</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaa25014eba914ecd4478a515ff4690aa1">VM_METHOD_TYPE_ZSUPER</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00095">method.h:95</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -584,6 +592,204 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 </div>
 </div>
 <h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="ae80b531dab965c7203d60e6741e0e683"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void METHOD_ENTRY_BASIC_SET </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>basic</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00067">67</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(basic &lt;= 1);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> = (me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> &amp; ~(<a class="code" href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a>                 )) | (basic &lt;&lt; <a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+2);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="ttc" id="internal_8h_html_ae82ada5f5499c16324f129d25894bf77"><div class="ttname"><a href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a></div><div class="ttdeci">#define IMEMO_FL_USER2</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00552">internal.h:552</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a4d1e4a4957ced2a927dd274e79a4a7c6"><div class="ttname"><a href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a></div><div class="ttdeci">#define VM_ASSERT(expr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00028">vm_core.h:28</a></div></div>
+<div class="ttc" id="internal_8h_html_a792ed20fb24ef4a83552eb31adf8d779"><div class="ttname"><a href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a></div><div class="ttdeci">#define IMEMO_FL_USHIFT</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00549">internal.h:549</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa6a162e0a0e73e1ad2efe2db0df7defd"><div class="ttname"><a href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">rb_method_entry_struct::flags</a></div><div class="ttdeci">VALUE flags</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00049">method.h:49</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a4a958b508b74bdcbc0aa2d07e611fc38"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void METHOD_ENTRY_FLAGS_SET </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a>&#160;</td>
+          <td class="paramname"><em>visi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>basic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>safe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00079">79</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(visi &lt;= 3);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(basic &lt;= 1);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(safe &lt;= 3);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> =</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      (me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> &amp; ~(<a class="code" href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a>|<a class="code" href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a>|<a class="code" href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a>|<a class="code" href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a>|<a class="code" href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a>)) |</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    ((visi &lt;&lt; <a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+0) | (basic &lt;&lt; (<a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+2)) | (safe &lt;&lt; <a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+3));</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="ttc" id="internal_8h_html_a1f8193ce077d26021ff23a04c93f74e1"><div class="ttname"><a href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a></div><div class="ttdeci">#define IMEMO_FL_USER1</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00551">internal.h:551</a></div></div>
+<div class="ttc" id="internal_8h_html_a73d466551a3156f126a86eb1d8d23db9"><div class="ttname"><a href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a></div><div class="ttdeci">#define IMEMO_FL_USER4</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00554">internal.h:554</a></div></div>
+<div class="ttc" id="internal_8h_html_ae82ada5f5499c16324f129d25894bf77"><div class="ttname"><a href="internal_8h.html#ae82ada5f5499c16324f129d25894bf77">IMEMO_FL_USER2</a></div><div class="ttdeci">#define IMEMO_FL_USER2</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00552">internal.h:552</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a4d1e4a4957ced2a927dd274e79a4a7c6"><div class="ttname"><a href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a></div><div class="ttdeci">#define VM_ASSERT(expr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00028">vm_core.h:28</a></div></div>
+<div class="ttc" id="internal_8h_html_a6116e40441273e2c29d57b17d39adf3d"><div class="ttname"><a href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a></div><div class="ttdeci">#define IMEMO_FL_USER0</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00550">internal.h:550</a></div></div>
+<div class="ttc" id="internal_8h_html_a792ed20fb24ef4a83552eb31adf8d779"><div class="ttname"><a href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a></div><div class="ttdeci">#define IMEMO_FL_USHIFT</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00549">internal.h:549</a></div></div>
+<div class="ttc" id="internal_8h_html_abb1c98c1755c3cb5b2d621dfb3a33fa3"><div class="ttname"><a href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a></div><div class="ttdeci">#define IMEMO_FL_USER3</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00553">internal.h:553</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa6a162e0a0e73e1ad2efe2db0df7defd"><div class="ttname"><a href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">rb_method_entry_struct::flags</a></div><div class="ttdeci">VALUE flags</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00049">method.h:49</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae8af4e1f0f819d3e7389d3aa7dc7c655"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void METHOD_ENTRY_SAFE_SET </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>safe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00073">73</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(safe &lt;= 3);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> = (me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> &amp; ~(<a class="code" href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a> | <a class="code" href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a>)) | (safe &lt;&lt; <a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+3);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="ttc" id="internal_8h_html_a73d466551a3156f126a86eb1d8d23db9"><div class="ttname"><a href="internal_8h.html#a73d466551a3156f126a86eb1d8d23db9">IMEMO_FL_USER4</a></div><div class="ttdeci">#define IMEMO_FL_USER4</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00554">internal.h:554</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a4d1e4a4957ced2a927dd274e79a4a7c6"><div class="ttname"><a href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a></div><div class="ttdeci">#define VM_ASSERT(expr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00028">vm_core.h:28</a></div></div>
+<div class="ttc" id="internal_8h_html_a792ed20fb24ef4a83552eb31adf8d779"><div class="ttname"><a href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a></div><div class="ttdeci">#define IMEMO_FL_USHIFT</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00549">internal.h:549</a></div></div>
+<div class="ttc" id="internal_8h_html_abb1c98c1755c3cb5b2d621dfb3a33fa3"><div class="ttname"><a href="internal_8h.html#abb1c98c1755c3cb5b2d621dfb3a33fa3">IMEMO_FL_USER3</a></div><div class="ttdeci">#define IMEMO_FL_USER3</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00553">internal.h:553</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa6a162e0a0e73e1ad2efe2db0df7defd"><div class="ttname"><a href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">rb_method_entry_struct::flags</a></div><div class="ttdeci">VALUE flags</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00049">method.h:49</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad62dbc7b68e674184e91ddee16867e4d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void METHOD_ENTRY_VISI_SET </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a9f49c3e8b85990ebe52659a6b4f6d5b1">rb_method_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06e">rb_method_visibility_t</a>&#160;</td>
+          <td class="paramname"><em>visi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="method_8h_source.html">method.h</a> の <a class="el" href="method_8h_source.html#l00061">61</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(visi &lt;= 3);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> = (me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">flags</a> &amp; ~(<a class="code" href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a> | <a class="code" href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a>)) | (visi &lt;&lt; <a class="code" href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a>+0);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="ttc" id="internal_8h_html_a1f8193ce077d26021ff23a04c93f74e1"><div class="ttname"><a href="internal_8h.html#a1f8193ce077d26021ff23a04c93f74e1">IMEMO_FL_USER1</a></div><div class="ttdeci">#define IMEMO_FL_USER1</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00551">internal.h:551</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a4d1e4a4957ced2a927dd274e79a4a7c6"><div class="ttname"><a href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a></div><div class="ttdeci">#define VM_ASSERT(expr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00028">vm_core.h:28</a></div></div>
+<div class="ttc" id="internal_8h_html_a6116e40441273e2c29d57b17d39adf3d"><div class="ttname"><a href="internal_8h.html#a6116e40441273e2c29d57b17d39adf3d">IMEMO_FL_USER0</a></div><div class="ttdeci">#define IMEMO_FL_USER0</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00550">internal.h:550</a></div></div>
+<div class="ttc" id="internal_8h_html_a792ed20fb24ef4a83552eb31adf8d779"><div class="ttname"><a href="internal_8h.html#a792ed20fb24ef4a83552eb31adf8d779">IMEMO_FL_USHIFT</a></div><div class="ttdeci">#define IMEMO_FL_USHIFT</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00549">internal.h:549</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa6a162e0a0e73e1ad2efe2db0df7defd"><div class="ttname"><a href="structrb__method__entry__struct.html#aa6a162e0a0e73e1ad2efe2db0df7defd">rb_method_entry_struct::flags</a></div><div class="ttdeci">VALUE flags</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00049">method.h:49</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="a4bd0c12f23998788ec120cfd3fa5ab26"></a>
 <div class="memitem">
 <div class="memproto">
@@ -626,33 +832,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00528">528</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;{</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    <a class="code" href="structrb__method__definition__struct.html">rb_method_definition_t</a> *def = <a class="code" href="vm__method_8c.html#a082cbf04549cbfd21029281387c5ebbb">rb_method_definition_create</a>(type, mid, opts);</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a2c5e21bd15877795ebb4f7597fd12bba">rb_method_entry_make</a>(klass, mid, type, def, visi, klass);</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <span class="keywordflow">if</span> (me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a> &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a3ac4e685045e0eabc045f32c11860654">body</a>.<a class="code" href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">refined</a>.<a class="code" href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">orig_me</a>) { <span class="comment">/* TODO: really needed? */</span></div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a3ac4e685045e0eabc045f32c11860654">body</a>.<a class="code" href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">refined</a>.<a class="code" href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">orig_me</a>, def);</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    }</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    <span class="keywordflow">if</span> (type != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a> &amp;&amp; type != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <a class="code" href="vm__method_8c.html#ac8d8ab49bd1b130b9a38177c8c615d10">method_added</a>(klass, mid);</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    }</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    <span class="keywordflow">return</span> me;</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;}</div>
-<div class="ttc" id="structrb__method__definition__struct_html"><div class="ttname"><a href="structrb__method__definition__struct.html">rb_method_definition_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00112">method.h:112</a></div></div>
-<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00113">method.h:113</a></div></div>
-<div class="ttc" id="structrb__method__definition__struct_html_a3ac4e685045e0eabc045f32c11860654"><div class="ttname"><a href="structrb__method__definition__struct.html#a3ac4e685045e0eabc045f32c11860654">rb_method_definition_struct::body</a></div><div class="ttdeci">union rb_method_definition_struct::@29 body</div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00526">526</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;{</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    <a class="code" href="structrb__method__definition__struct.html">rb_method_definition_t</a> *def = <a class="code" href="vm__method_8c.html#a082cbf04549cbfd21029281387c5ebbb">rb_method_definition_create</a>(type, mid, opts);</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a2c5e21bd15877795ebb4f7597fd12bba">rb_method_entry_make</a>(klass, mid, type, def, visi, klass);</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    <span class="keywordflow">if</span> (me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a> &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a81ddebc5a85347196620cef676e41bd2">body</a>.<a class="code" href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">refined</a>.<a class="code" href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">orig_me</a>) { <span class="comment">/* TODO: really needed? */</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a81ddebc5a85347196620cef676e41bd2">body</a>.<a class="code" href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">refined</a>.<a class="code" href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">orig_me</a>, def);</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    }</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    <span class="keywordflow">if</span> (type != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a> &amp;&amp; type != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    <a class="code" href="vm__method_8c.html#ac8d8ab49bd1b130b9a38177c8c615d10">method_added</a>(klass, mid);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    }</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="keywordflow">return</span> me;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;}</div>
+<div class="ttc" id="structrb__method__definition__struct_html"><div class="ttname"><a href="structrb__method__definition__struct.html">rb_method_definition_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00132">method.h:132</a></div></div>
+<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00133">method.h:133</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a082cbf04549cbfd21029281387c5ebbb"><div class="ttname"><a href="vm__method_8c.html#a082cbf04549cbfd21029281387c5ebbb">rb_method_definition_create</a></div><div class="ttdeci">static rb_method_definition_t * rb_method_definition_create(rb_method_type_t type, ID mid, void *opts)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00290">vm_method.c:290</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00077">method.h:77</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aaffd01b8301fa1cc0cbd6a6aca6583153">VM_METHOD_TYPE_UNDEF</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00097">method.h:97</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
+<div class="ttc" id="structrb__method__definition__struct_html_a81ddebc5a85347196620cef676e41bd2"><div class="ttname"><a href="structrb__method__definition__struct.html#a81ddebc5a85347196620cef676e41bd2">rb_method_definition_struct::body</a></div><div class="ttdeci">union rb_method_definition_struct::@27 body</div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
 <div class="ttc" id="vm__method_8c_html_ab460bade36250cd86d732d6db269ff50"><div class="ttname"><a href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a></div><div class="ttdeci">static void rb_method_definition_reset(const rb_method_entry_t *me, rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00300">vm_method.c:300</a></div></div>
-<div class="ttc" id="vm__method_8c_html_ac8d8ab49bd1b130b9a38177c8c615d10"><div class="ttname"><a href="vm__method_8c.html#ac8d8ab49bd1b130b9a38177c8c615d10">method_added</a></div><div class="ttdeci">static void method_added(VALUE klass, ID mid)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00520">vm_method.c:520</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a2c5e21bd15877795ebb4f7597fd12bba"><div class="ttname"><a href="vm__method_8c.html#a2c5e21bd15877795ebb4f7597fd12bba">rb_method_entry_make</a></div><div class="ttdeci">static rb_method_entry_t * rb_method_entry_make(VALUE klass, ID mid, rb_method_type_t type, rb_method_definition_t *def, rb_method_visibility_t visi, VALUE defined_class)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00394">vm_method.c:394</a></div></div>
-<div class="ttc" id="structrb__method__refined__struct_html_a88fa1940fd5278626e4a20ccc71312a4"><div class="ttname"><a href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">rb_method_refined_struct::orig_me</a></div><div class="ttdeci">const struct rb_method_entry_struct * orig_me</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00109">method.h:109</a></div></div>
-<div class="ttc" id="structrb__method__definition__struct_html_ae398a180c1b1f0ebbd1ff63142ac1817"><div class="ttname"><a href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">rb_method_definition_struct::refined</a></div><div class="ttdeci">rb_method_refined_t refined</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00121">method.h:121</a></div></div>
+<div class="ttc" id="vm__method_8c_html_ac8d8ab49bd1b130b9a38177c8c615d10"><div class="ttname"><a href="vm__method_8c.html#ac8d8ab49bd1b130b9a38177c8c615d10">method_added</a></div><div class="ttdeci">static void method_added(VALUE klass, ID mid)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00518">vm_method.c:518</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a2c5e21bd15877795ebb4f7597fd12bba"><div class="ttname"><a href="vm__method_8c.html#a2c5e21bd15877795ebb4f7597fd12bba">rb_method_entry_make</a></div><div class="ttdeci">static rb_method_entry_t * rb_method_entry_make(VALUE klass, ID mid, rb_method_type_t type, rb_method_definition_t *def, rb_method_visibility_t visi, VALUE defined_class)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00392">vm_method.c:392</a></div></div>
+<div class="ttc" id="structrb__method__refined__struct_html_a88fa1940fd5278626e4a20ccc71312a4"><div class="ttname"><a href="structrb__method__refined__struct.html#a88fa1940fd5278626e4a20ccc71312a4">rb_method_refined_struct::orig_me</a></div><div class="ttdeci">const struct rb_method_entry_struct * orig_me</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00129">method.h:129</a></div></div>
+<div class="ttc" id="structrb__method__definition__struct_html_ae398a180c1b1f0ebbd1ff63142ac1817"><div class="ttname"><a href="structrb__method__definition__struct.html#ae398a180c1b1f0ebbd1ff63142ac1817">rb_method_definition_struct::refined</a></div><div class="ttdeci">rb_method_refined_t refined</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00141">method.h:141</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -711,15 +917,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="vm__method_8c.html#ae099b454b3b3e6a314c0d2a0b47f5add">rb_define_notimplement_method_id</a>(klass, mid, visi);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
-<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00528">vm_method.c:528</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00526">vm_method.c:526</a></div></div>
 <div class="ttc" id="error_8c_html_a0f771a2840561f1838169b3d7d4616f3"><div class="ttname"><a href="error_8c.html#a0f771a2840561f1838169b3d7d4616f3">rb_raise</a></div><div class="ttdeci">void rb_raise(VALUE exc, const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l01932">error.c:1932</a></div></div>
 <div class="ttc" id="vm__method_8c_html_ae099b454b3b3e6a314c0d2a0b47f5add"><div class="ttname"><a href="vm__method_8c.html#ae099b454b3b3e6a314c0d2a0b47f5add">rb_define_notimplement_method_id</a></div><div class="ttdeci">static void rb_define_notimplement_method_id(VALUE mod, ID id, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00113">vm_method.c:113</a></div></div>
-<div class="ttc" id="structrb__method__cfunc__struct_html_a1f7a9ee0ee4ac74e422517923d65c6ed"><div class="ttname"><a href="structrb__method__cfunc__struct.html#a1f7a9ee0ee4ac74e422517923d65c6ed">rb_method_cfunc_struct::argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00096">method.h:96</a></div></div>
+<div class="ttc" id="structrb__method__cfunc__struct_html_a1f7a9ee0ee4ac74e422517923d65c6ed"><div class="ttname"><a href="structrb__method__cfunc__struct.html#a1f7a9ee0ee4ac74e422517923d65c6ed">rb_method_cfunc_struct::argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00116">method.h:116</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a4346a9c75f246fccc97fed2cf40850c8"><div class="ttname"><a href="vm__method_8c.html#a4346a9c75f246fccc97fed2cf40850c8">rb_f_notimplement</a></div><div class="ttdeci">VALUE rb_f_notimplement(int argc, const VALUE *argv, VALUE obj)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00105">vm_method.c:105</a></div></div>
 <div class="ttc" id="ruby_8c_html_ad1447518f4372828b8435ae82e48499e"><div class="ttname"><a href="ruby_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition:</b> <a href="ruby_8c_source.html#l00129">ruby.c:129</a></div></div>
-<div class="ttc" id="structrb__method__cfunc__struct_html"><div class="ttname"><a href="structrb__method__cfunc__struct.html">rb_method_cfunc_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00093">method.h:93</a></div></div>
-<div class="ttc" id="structrb__method__cfunc__struct_html_a5a413d5048a825ca069c594d36f53f17"><div class="ttname"><a href="structrb__method__cfunc__struct.html#a5a413d5048a825ca069c594d36f53f17">rb_method_cfunc_struct::func</a></div><div class="ttdeci">VALUE(* func)(ANYARGS)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00094">method.h:94</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00071">method.h:71</a></div></div>
+<div class="ttc" id="structrb__method__cfunc__struct_html"><div class="ttname"><a href="structrb__method__cfunc__struct.html">rb_method_cfunc_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00113">method.h:113</a></div></div>
+<div class="ttc" id="structrb__method__cfunc__struct_html_a5a413d5048a825ca069c594d36f53f17"><div class="ttname"><a href="structrb__method__cfunc__struct.html#a5a413d5048a825ca069c594d36f53f17">rb_method_cfunc_struct::func</a></div><div class="ttdeci">VALUE(* func)(ANYARGS)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00114">method.h:114</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa1691810af54507b018d2639b60e8057d">VM_METHOD_TYPE_CFUNC</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00091">method.h:91</a></div></div>
 <div class="ttc" id="error_8c_html_ab5e2a9fec766c75176fbb262bfe6a596"><div class="ttname"><a href="error_8c.html#ab5e2a9fec766c75176fbb262bfe6a596">rb_eArgError</a></div><div class="ttdeci">VALUE rb_eArgError</div><div class="ttdef"><b>Definition:</b> <a href="error_8c_source.html#l00623">error.c:623</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -766,24 +972,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00544">544</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;{</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    <a class="code" href="structrb__iseq__struct.html">rb_iseq_t</a> *iseq;</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    <span class="keyword">struct </span>{ <span class="comment">/* should be same fields with rb_method_iseq_struct */</span></div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    <a class="code" href="structrb__iseq__struct.html">rb_iseq_t</a> *iseqptr;</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;    <a class="code" href="structrb__cref__struct.html">rb_cref_t</a> *cref;</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    } iseq_body;</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <a class="code" href="vm__core_8h.html#a5e6a3515e0ad9b9d6a4c0ab577dc50b6">GetISeqPtr</a>(iseqval, iseq);</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    iseq_body.iseqptr = iseq;</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;    iseq_body.cref = cref;</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;    <a class="code" href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a>(klass, mid, <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a>, &amp;iseq_body, visi);</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;}</div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00070">method.h:70</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00528">vm_method.c:528</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00542">542</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;{</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    <a class="code" href="structrb__iseq__struct.html">rb_iseq_t</a> *iseq;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    <span class="keyword">struct </span>{ <span class="comment">/* should be same fields with rb_method_iseq_struct */</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    <a class="code" href="structrb__iseq__struct.html">rb_iseq_t</a> *iseqptr;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    <a class="code" href="structrb__cref__struct.html">rb_cref_t</a> *cref;</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    } iseq_body;</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    <a class="code" href="vm__core_8h.html#a5e6a3515e0ad9b9d6a4c0ab577dc50b6">GetISeqPtr</a>(iseqval, iseq);</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;    iseq_body.iseqptr = iseq;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    iseq_body.cref = cref;</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    <a class="code" href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a>(klass, mid, <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a>, &amp;iseq_body, visi);</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;}</div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa09fd70c8c3426502348b7df7c121e505">VM_METHOD_TYPE_ISEQ</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00090">method.h:90</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00526">vm_method.c:526</a></div></div>
 <div class="ttc" id="structrb__cref__struct_html"><div class="ttname"><a href="structrb__cref__struct.html">rb_cref_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00038">method.h:38</a></div></div>
-<div class="ttc" id="structrb__iseq__struct_html"><div class="ttname"><a href="structrb__iseq__struct.html">rb_iseq_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00208">vm_core.h:208</a></div></div>
-<div class="ttc" id="vm__core_8h_html_a5e6a3515e0ad9b9d6a4c0ab577dc50b6"><div class="ttname"><a href="vm__core_8h.html#a5e6a3515e0ad9b9d6a4c0ab577dc50b6">GetISeqPtr</a></div><div class="ttdeci">#define GetISeqPtr(obj, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00195">vm_core.h:195</a></div></div>
+<div class="ttc" id="structrb__iseq__struct_html"><div class="ttname"><a href="structrb__iseq__struct.html">rb_iseq_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00224">vm_core.h:224</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a5e6a3515e0ad9b9d6a4c0ab577dc50b6"><div class="ttname"><a href="vm__core_8h.html#a5e6a3515e0ad9b9d6a4c0ab577dc50b6">GetISeqPtr</a></div><div class="ttdeci">#define GetISeqPtr(obj, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00211">vm_core.h:211</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -811,24 +1017,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00380">380</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;{</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a>(refined_class, mid);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordflow">if</span> (me) {</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <a class="code" href="vm__method_8c.html#a8d514aa548e91f692c3752c215e8b41e">make_method_entry_refined</a>(me);</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <a class="code" href="vm__method_8c.html#a27eae48337d6e90efb39d64b2a3f7c6b">rb_clear_method_cache_by_class</a>(refined_class);</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <a class="code" href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a>(refined_class, mid, <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>, 0, <a class="code" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06ea8e303e9c9112963aae47191b1d373fda">METHOD_VISI_PUBLIC</a>);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;}</div>
-<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00528">vm_method.c:528</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00378">378</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;{</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a>(refined_class, mid);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">if</span> (me) {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <a class="code" href="vm__method_8c.html#a8d514aa548e91f692c3752c215e8b41e">make_method_entry_refined</a>(me);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <a class="code" href="vm__method_8c.html#a27eae48337d6e90efb39d64b2a3f7c6b">rb_clear_method_cache_by_class</a>(refined_class);</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <a class="code" href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a>(refined_class, mid, <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>, 0, <a class="code" href="method_8h.html#a68ea0793c131f3a484c08a77d116f06ea8e303e9c9112963aae47191b1d373fda">METHOD_VISI_PUBLIC</a>);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;}</div>
+<div class="ttc" id="vm__method_8c_html_a96a088451c89be3d91674883b3787be3"><div class="ttname"><a href="vm__method_8c.html#a96a088451c89be3d91674883b3787be3">rb_add_method</a></div><div class="ttdeci">rb_method_entry_t * rb_add_method(VALUE klass, ID mid, rb_method_type_t type, void *opts, rb_method_visibility_t visi)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00526">vm_method.c:526</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a4ffc4bc8bee52f083d59af614bd61034"><div class="ttname"><a href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a></div><div class="ttdeci">static rb_method_entry_t * lookup_method_table(VALUE klass, ID id)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00161">vm_method.c:161</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
 <div class="ttc" id="method_8h_html_a68ea0793c131f3a484c08a77d116f06ea8e303e9c9112963aae47191b1d373fda"><div class="ttname"><a href="method_8h.html#a68ea0793c131f3a484c08a77d116f06ea8e303e9c9112963aae47191b1d373fda">METHOD_VISI_PUBLIC</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00028">method.h:28</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a8d514aa548e91f692c3752c215e8b41e"><div class="ttname"><a href="vm__method_8c.html#a8d514aa548e91f692c3752c215e8b41e">make_method_entry_refined</a></div><div class="ttdeci">static void make_method_entry_refined(rb_method_entry_t *me)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00366">vm_method.c:366</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a8d514aa548e91f692c3752c215e8b41e"><div class="ttname"><a href="vm__method_8c.html#a8d514aa548e91f692c3752c215e8b41e">make_method_entry_refined</a></div><div class="ttdeci">static void make_method_entry_refined(rb_method_entry_t *me)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00364">vm_method.c:364</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a27eae48337d6e90efb39d64b2a3f7c6b"><div class="ttname"><a href="vm__method_8c.html#a27eae48337d6e90efb39d64b2a3f7c6b">rb_clear_method_cache_by_class</a></div><div class="ttdeci">void rb_clear_method_cache_by_class(VALUE klass)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00086">vm_method.c:86</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -851,7 +1057,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="fragment"><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;{</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <a class="code" href="vm__method_8c.html#aa83d8bf0e8c390b9f36f89c0163c0a5e">rb_method_definition_release</a>(me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="vm__method_8c_html_aa83d8bf0e8c390b9f36f89c0163c0a5e"><div class="ttname"><a href="vm__method_8c.html#aa83d8bf0e8c390b9f36f89c0163c0a5e">rb_method_definition_release</a></div><div class="ttdeci">static void rb_method_definition_release(rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00134">vm_method.c:134</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -880,12 +1086,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l01347">1347</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;{</div>
-<div class="line"><a name="l01349"></a><span class="lineno"> 1349</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a22257457340f7561aacc438351ddbc98">rb_hash_method_definition</a>(<a class="code" href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a>, me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
-<div class="line"><a name="l01350"></a><span class="lineno"> 1350</span>&#160;}</div>
-<div class="ttc" id="vm__method_8c_html_a22257457340f7561aacc438351ddbc98"><div class="ttname"><a href="vm__method_8c.html#a22257457340f7561aacc438351ddbc98">rb_hash_method_definition</a></div><div class="ttdeci">static st_index_t rb_hash_method_definition(st_index_t hash, const rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l01313">vm_method.c:1313</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l01345">1345</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l01346"></a><span class="lineno"> 1346</span>&#160;{</div>
+<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a22257457340f7561aacc438351ddbc98">rb_hash_method_definition</a>(<a class="code" href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a>, me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
+<div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;}</div>
+<div class="ttc" id="vm__method_8c_html_a22257457340f7561aacc438351ddbc98"><div class="ttname"><a href="vm__method_8c.html#a22257457340f7561aacc438351ddbc98">rb_hash_method_definition</a></div><div class="ttdeci">static st_index_t rb_hash_method_definition(st_index_t hash, const rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l01311">vm_method.c:1311</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="lex_8c_html_a5541f85ce416df233cce93949f0eeeca"><div class="ttname"><a href="lex_8c.html#a5541f85ce416df233cce93949f0eeeca">hash</a></div><div class="ttdeci">static unsigned int hash(const char *str, unsigned int len)</div><div class="ttdef"><b>Definition:</b> <a href="lex_8c_source.html#l00056">lex.c:56</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -920,25 +1126,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00678">678</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;{</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="preprocessor">#if OPT_GLOBAL_METHOD_CACHE</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    <span class="keyword">struct </span><a class="code" href="structcache__entry.html">cache_entry</a> *ent;</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    ent = <a class="code" href="vm__method_8c.html#abd8a2e0d3f5d643563d8149eb79c66c2">GLOBAL_METHOD_CACHE</a>(klass, <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <span class="keywordflow">if</span> (ent-&gt;<a class="code" href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">method_state</a> == <a class="code" href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a>() &amp;&amp;</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    ent-&gt;<a class="code" href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">class_serial</a> == <a class="code" href="internal_8h.html#a41577ace1dbd7a99b3ac89fa4c8d857b">RCLASS_SERIAL</a>(klass) &amp;&amp;</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    ent-&gt;<a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a> == <span class="keywordtype">id</span>) {</div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;        *defined_class_ptr = ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="preprocessor">#if VM_DEBUG_VERIFY_METHOD_CACHE</span></div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    verify_method_cache(klass, <span class="keywordtype">id</span>, ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>, ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>);</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    <span class="keywordflow">return</span> ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    }</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a39040bc91f7a0ce41e027ad299b5d54a">rb_method_entry_get_without_cache</a>(klass, <span class="keywordtype">id</span>, defined_class_ptr);</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00676">676</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;{</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="preprocessor">#if OPT_GLOBAL_METHOD_CACHE</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    <span class="keyword">struct </span><a class="code" href="structcache__entry.html">cache_entry</a> *ent;</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    ent = <a class="code" href="vm__method_8c.html#abd8a2e0d3f5d643563d8149eb79c66c2">GLOBAL_METHOD_CACHE</a>(klass, <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    <span class="keywordflow">if</span> (ent-&gt;<a class="code" href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">method_state</a> == <a class="code" href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a>() &amp;&amp;</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    ent-&gt;<a class="code" href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">class_serial</a> == <a class="code" href="internal_8h.html#a41577ace1dbd7a99b3ac89fa4c8d857b">RCLASS_SERIAL</a>(klass) &amp;&amp;</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    ent-&gt;<a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a> == <span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;        *defined_class_ptr = ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="preprocessor">#if VM_DEBUG_VERIFY_METHOD_CACHE</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    verify_method_cache(klass, <span class="keywordtype">id</span>, ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>, ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>);</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    <span class="keywordflow">return</span> ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    }</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a39040bc91f7a0ce41e027ad299b5d54a">rb_method_entry_get_without_cache</a>(klass, <span class="keywordtype">id</span>, defined_class_ptr);</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;}</div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="structcache__entry_html_a2fcd70ecb9773579dd2cea7e488b54a3"><div class="ttname"><a href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">cache_entry::method_state</a></div><div class="ttdeci">rb_serial_t method_state</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00043">vm_method.c:43</a></div></div>
 <div class="ttc" id="structcache__entry_html_ac5dad3694c11106a1068af7dd17a0c9c"><div class="ttname"><a href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">cache_entry::defined_class</a></div><div class="ttdeci">VALUE defined_class</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00047">vm_method.c:47</a></div></div>
@@ -946,7 +1152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="ttc" id="vm__insnhelper_8h_html_af5fbc2eedf053b931909003166b6ad5e"><div class="ttname"><a href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a></div><div class="ttdeci">#define GET_GLOBAL_METHOD_STATE()</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8h_source.html#l00224">vm_insnhelper.h:224</a></div></div>
 <div class="ttc" id="structcache__entry_html_a31dcd512faa42262267fb6f9a6bb9d7a"><div class="ttname"><a href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">cache_entry::class_serial</a></div><div class="ttdeci">rb_serial_t class_serial</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00044">vm_method.c:44</a></div></div>
 <div class="ttc" id="vm__method_8c_html_abd8a2e0d3f5d643563d8149eb79c66c2"><div class="ttname"><a href="vm__method_8c.html#abd8a2e0d3f5d643563d8149eb79c66c2">GLOBAL_METHOD_CACHE</a></div><div class="ttdeci">#define GLOBAL_METHOD_CACHE(c, m)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00023">vm_method.c:23</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a39040bc91f7a0ce41e027ad299b5d54a"><div class="ttname"><a href="vm__method_8c.html#a39040bc91f7a0ce41e027ad299b5d54a">rb_method_entry_get_without_cache</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry_get_without_cache(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00630">vm_method.c:630</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a39040bc91f7a0ce41e027ad299b5d54a"><div class="ttname"><a href="vm__method_8c.html#a39040bc91f7a0ce41e027ad299b5d54a">rb_method_entry_get_without_cache</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry_get_without_cache(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00628">vm_method.c:628</a></div></div>
 <div class="ttc" id="internal_8h_html_a41577ace1dbd7a99b3ac89fa4c8d857b"><div class="ttname"><a href="internal_8h.html#a41577ace1dbd7a99b3ac89fa4c8d857b">RCLASS_SERIAL</a></div><div class="ttdeci">#define RCLASS_SERIAL(c)</div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00483">internal.h:483</a></div></div>
 <div class="ttc" id="structcache__entry_html_a599b4a91bce5b7210250ee9beaff4c60"><div class="ttname"><a href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">cache_entry::mid</a></div><div class="ttdeci">ID mid</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00045">vm_method.c:45</a></div></div>
 </div><!-- fragment -->
@@ -1001,10 +1207,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00618">618</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;{</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a>(klass, <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00616">616</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;{</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a>(klass, <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;}</div>
 <div class="ttc" id="vm__method_8c_html_a4ffc4bc8bee52f083d59af614bd61034"><div class="ttname"><a href="vm__method_8c.html#a4ffc4bc8bee52f083d59af614bd61034">lookup_method_table</a></div><div class="ttdeci">static rb_method_entry_t * lookup_method_table(VALUE klass, ID id)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00161">vm_method.c:161</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1023,18 +1229,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00349">349</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;{</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a3b0085e7bd07a6a6c88324bfe7ace7be">rb_method_entry_create</a>(src_me-&gt;called_id, src_me-&gt;klass,</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                           <a class="code" href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a>(src_me),</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                           <a class="code" href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a>(src_me-&gt;def));</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00347">347</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;{</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *me = <a class="code" href="vm__method_8c.html#a3b0085e7bd07a6a6c88324bfe7ace7be">rb_method_entry_create</a>(src_me-&gt;called_id, src_me-&gt;klass,</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                           <a class="code" href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a>(src_me),</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                           <a class="code" href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a>(src_me-&gt;def));</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;}</div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a112f31aeaebdb8389fde926d1256b059"><div class="ttname"><a href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a></div><div class="ttdeci">static rb_method_definition_t * rb_method_definition_addref(rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00327">vm_method.c:327</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a3b0085e7bd07a6a6c88324bfe7ace7be"><div class="ttname"><a href="vm__method_8c.html#a3b0085e7bd07a6a6c88324bfe7ace7be">rb_method_entry_create</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry_create(ID called_id, VALUE klass, rb_method_visibility_t visi, rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00335">vm_method.c:335</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
-<div class="ttc" id="method_8h_html_afd970a9b5e868330b32046ade2131bf4"><div class="ttname"><a href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a></div><div class="ttdeci">#define METHOD_ENTRY_VISI(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00065">method.h:65</a></div></div>
+<div class="ttc" id="method_8h_html_afd970a9b5e868330b32046ade2131bf4"><div class="ttname"><a href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a></div><div class="ttdeci">#define METHOD_ENTRY_VISI(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00056">method.h:56</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1062,16 +1268,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00358">358</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;{</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(dst, <a class="code" href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a>(src-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>));</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    dst-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a> = src-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a>;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    RB_OBJ_WRITE((VALUE)dst, &amp;dst-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>, src-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00356">356</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;{</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(dst, <a class="code" href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a>(src-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>));</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    dst-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a> = src-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a>;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    RB_OBJ_WRITE((VALUE)dst, &amp;dst-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>, src-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}</div>
 <div class="ttc" id="vm__method_8c_html_a112f31aeaebdb8389fde926d1256b059"><div class="ttname"><a href="vm__method_8c.html#a112f31aeaebdb8389fde926d1256b059">rb_method_definition_addref</a></div><div class="ttdeci">static rb_method_definition_t * rb_method_definition_addref(rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00327">vm_method.c:327</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_aa32b6cfc6a34fb16d5e08b6d910db9ab"><div class="ttname"><a href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">rb_method_entry_struct::klass</a></div><div class="ttdeci">const VALUE klass</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00062">method.h:62</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_a31439bd620e98940410ba59244a85eae"><div class="ttname"><a href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">rb_method_entry_struct::called_id</a></div><div class="ttdeci">ID called_id</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00061">method.h:61</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa32b6cfc6a34fb16d5e08b6d910db9ab"><div class="ttname"><a href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">rb_method_entry_struct::klass</a></div><div class="ttdeci">const VALUE klass</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00053">method.h:53</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_a31439bd620e98940410ba59244a85eae"><div class="ttname"><a href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">rb_method_entry_struct::called_id</a></div><div class="ttdeci">ID called_id</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00052">method.h:52</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="vm__method_8c_html_ab460bade36250cd86d732d6db269ff50"><div class="ttname"><a href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a></div><div class="ttdeci">static void rb_method_definition_reset(const rb_method_entry_t *me, rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00300">vm_method.c:300</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1115,25 +1321,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00335">335</a> 行目に定義があります。</p>
 <div class="fragment"><div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;{</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = (<a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *)<a class="code" href="gc_8c.html#ac284f1febae22010d9e5615fe6ef2847">rb_imemo_new</a>(<a class="code" href="internal_8h.html#aaca65e5fb338de799690f580d6fcbb50a2b7c50208a9c7277fdcea4a1cabe8eab">imemo_ment</a>, (VALUE)<a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, (VALUE)called_id, (VALUE)klass, 0);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <a class="code" href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a>(me) = visi;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <a class="code" href="method_8h.html#afcbcc00e2d8c3be9617cd9df368bec47">METHOD_ENTRY_BASIC</a>(me) = <a class="code" href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a> ? <a class="code" href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a> : <a class="code" href="regenc_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <a class="code" href="method_8h.html#ae9dab61d7011f95f090a103aa35d17ab">METHOD_ENTRY_SAFE</a>(me) = <a class="code" href="safe_8c.html#ab0c493934f850e8e533656b3ae640154">rb_safe_level</a>();</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(me, def);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <a class="code" href="method_8h.html#a4a958b508b74bdcbc0aa2d07e611fc38">METHOD_ENTRY_FLAGS_SET</a>(me, visi, <a class="code" href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a> ? <a class="code" href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a> : <a class="code" href="regenc_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>, <a class="code" href="safe_8c.html#ab0c493934f850e8e533656b3ae640154">rb_safe_level</a>());</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <a class="code" href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a>(me, def);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <a class="code" href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a>(def != <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    assert(def != <a class="code" href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    return me;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;}</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    return me;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;}</div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="gc_8c_html_ac284f1febae22010d9e5615fe6ef2847"><div class="ttname"><a href="gc_8c.html#ac284f1febae22010d9e5615fe6ef2847">rb_imemo_new</a></div><div class="ttdeci">VALUE rb_imemo_new(enum imemo_type type, VALUE v1, VALUE v2, VALUE v3, VALUE v0)</div><div class="ttdef"><b>Definition:</b> <a href="gc_8c_source.html#l01819">gc.c:1819</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a9947479a6dbdc46fd2d91430966acff3"><div class="ttname"><a href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a></div><div class="ttdeci">#define ruby_running</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00061">vm_method.c:61</a></div></div>
+<div class="ttc" id="method_8h_html_a4a958b508b74bdcbc0aa2d07e611fc38"><div class="ttname"><a href="method_8h.html#a4a958b508b74bdcbc0aa2d07e611fc38">METHOD_ENTRY_FLAGS_SET</a></div><div class="ttdeci">static void METHOD_ENTRY_FLAGS_SET(rb_method_entry_t *me, rb_method_visibility_t visi, int basic, int safe)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00079">method.h:79</a></div></div>
 <div class="ttc" id="regenc_8h_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00063">regenc.h:63</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
 <div class="ttc" id="vm__method_8c_html_ab460bade36250cd86d732d6db269ff50"><div class="ttname"><a href="vm__method_8c.html#ab460bade36250cd86d732d6db269ff50">rb_method_definition_reset</a></div><div class="ttdeci">static void rb_method_definition_reset(const rb_method_entry_t *me, rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00300">vm_method.c:300</a></div></div>
 <div class="ttc" id="internal_8h_html_aaca65e5fb338de799690f580d6fcbb50a2b7c50208a9c7277fdcea4a1cabe8eab"><div class="ttname"><a href="internal_8h.html#aaca65e5fb338de799690f580d6fcbb50a2b7c50208a9c7277fdcea4a1cabe8eab">imemo_ment</a></div><div class="ttdef"><b>Definition:</b> <a href="internal_8h_source.html#l00538">internal.h:538</a></div></div>
-<div class="ttc" id="method_8h_html_ae9dab61d7011f95f090a103aa35d17ab"><div class="ttname"><a href="method_8h.html#ae9dab61d7011f95f090a103aa35d17ab">METHOD_ENTRY_SAFE</a></div><div class="ttdeci">#define METHOD_ENTRY_SAFE(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00067">method.h:67</a></div></div>
-<div class="ttc" id="method_8h_html_afd970a9b5e868330b32046ade2131bf4"><div class="ttname"><a href="method_8h.html#afd970a9b5e868330b32046ade2131bf4">METHOD_ENTRY_VISI</a></div><div class="ttdeci">#define METHOD_ENTRY_VISI(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00065">method.h:65</a></div></div>
-<div class="ttc" id="method_8h_html_afcbcc00e2d8c3be9617cd9df368bec47"><div class="ttname"><a href="method_8h.html#afcbcc00e2d8c3be9617cd9df368bec47">METHOD_ENTRY_BASIC</a></div><div class="ttdeci">#define METHOD_ENTRY_BASIC(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00066">method.h:66</a></div></div>
+<div class="ttc" id="vm__core_8h_html_a4d1e4a4957ced2a927dd274e79a4a7c6"><div class="ttname"><a href="vm__core_8h.html#a4d1e4a4957ced2a927dd274e79a4a7c6">VM_ASSERT</a></div><div class="ttdeci">#define VM_ASSERT(expr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__core_8h_source.html#l00028">vm_core.h:28</a></div></div>
 <div class="ttc" id="safe_8c_html_ab0c493934f850e8e533656b3ae640154"><div class="ttname"><a href="safe_8c.html#ab0c493934f850e8e533656b3ae640154">rb_safe_level</a></div><div class="ttdeci">int rb_safe_level(void)</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00037">safe.c:37</a></div></div>
 <div class="ttc" id="regenc_8h_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="regenc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00055">regenc.h:55</a></div></div>
 <div class="ttc" id="regenc_8h_html_aa8cecfc5c5c054d2875c03e77b7be15d"><div class="ttname"><a href="regenc_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a></div><div class="ttdeci">#define TRUE</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00059">regenc.h:59</a></div></div>
@@ -1164,12 +1367,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l01248">1248</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;{</div>
-<div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af7b82c3e403f96616d1495d6624a2868">rb_method_definition_eq</a>(m1-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>, m2-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
-<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;}</div>
-<div class="ttc" id="vm__method_8c_html_af7b82c3e403f96616d1495d6624a2868"><div class="ttname"><a href="vm__method_8c.html#af7b82c3e403f96616d1495d6624a2868">rb_method_definition_eq</a></div><div class="ttdeci">static int rb_method_definition_eq(const rb_method_definition_t *d1, const rb_method_definition_t *d2)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l01276">vm_method.c:1276</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l01246">1246</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160;{</div>
+<div class="line"><a name="l01248"></a><span class="lineno"> 1248</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af7b82c3e403f96616d1495d6624a2868">rb_method_definition_eq</a>(m1-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>, m2-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
+<div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;}</div>
+<div class="ttc" id="vm__method_8c_html_af7b82c3e403f96616d1495d6624a2868"><div class="ttname"><a href="vm__method_8c.html#af7b82c3e403f96616d1495d6624a2868">rb_method_definition_eq</a></div><div class="ttdeci">static int rb_method_definition_eq(const rb_method_definition_t *d1, const rb_method_definition_t *d2)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l01274">vm_method.c:1274</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1203,45 +1406,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00630">630</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;{</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ad976b5c40d587f5d9bba995671c23977">search_method</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a>) {</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="vm__opts_8h.html#a01f738747a067be52d1a3bef96153a1f">OPT_GLOBAL_METHOD_CACHE</a>) {</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        <span class="keyword">struct </span><a class="code" href="structcache__entry.html">cache_entry</a> *ent;</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        ent = <a class="code" href="vm__method_8c.html#abd8a2e0d3f5d643563d8149eb79c66c2">GLOBAL_METHOD_CACHE</a>(klass, <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">class_serial</a> = <a class="code" href="internal_8h.html#a41577ace1dbd7a99b3ac89fa4c8d857b">RCLASS_SERIAL</a>(klass);</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">method_state</a> = <a class="code" href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a>();</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a> = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a> = id;</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = 0;</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        me = 0;</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;        }</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        }</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;    }</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        me = 0;</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;    }</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    }</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;    *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;}</div>
-<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00135">method.h:135</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00628">628</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;{</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ad976b5c40d587f5d9bba995671c23977">search_method</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a>) {</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="vm__opts_8h.html#a01f738747a067be52d1a3bef96153a1f">OPT_GLOBAL_METHOD_CACHE</a>) {</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        <span class="keyword">struct </span><a class="code" href="structcache__entry.html">cache_entry</a> *ent;</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;        ent = <a class="code" href="vm__method_8c.html#abd8a2e0d3f5d643563d8149eb79c66c2">GLOBAL_METHOD_CACHE</a>(klass, <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">class_serial</a> = <a class="code" href="internal_8h.html#a41577ace1dbd7a99b3ac89fa4c8d857b">RCLASS_SERIAL</a>(klass);</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">method_state</a> = <a class="code" href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a>();</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a> = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a> = id;</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = 0;</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        me = 0;</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;        }</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;        ent-&gt;<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        }</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    }</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;        me = 0;</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    }</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    }</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;}</div>
+<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00155">method.h:155</a></div></div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="structcache__entry_html_a2fcd70ecb9773579dd2cea7e488b54a3"><div class="ttname"><a href="structcache__entry.html#a2fcd70ecb9773579dd2cea7e488b54a3">cache_entry::method_state</a></div><div class="ttdeci">rb_serial_t method_state</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00043">vm_method.c:43</a></div></div>
 <div class="ttc" id="structcache__entry_html_ac5dad3694c11106a1068af7dd17a0c9c"><div class="ttname"><a href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">cache_entry::defined_class</a></div><div class="ttdeci">VALUE defined_class</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00047">vm_method.c:47</a></div></div>
 <div class="ttc" id="vm__method_8c_html_a9947479a6dbdc46fd2d91430966acff3"><div class="ttname"><a href="vm__method_8c.html#a9947479a6dbdc46fd2d91430966acff3">ruby_running</a></div><div class="ttdeci">#define ruby_running</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00061">vm_method.c:61</a></div></div>
 <div class="ttc" id="structcache__entry_html"><div class="ttname"><a href="structcache__entry.html">cache_entry</a></div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00042">vm_method.c:42</a></div></div>
 <div class="ttc" id="vm__insnhelper_8h_html_af5fbc2eedf053b931909003166b6ad5e"><div class="ttname"><a href="vm__insnhelper_8h.html#af5fbc2eedf053b931909003166b6ad5e">GET_GLOBAL_METHOD_STATE</a></div><div class="ttdeci">#define GET_GLOBAL_METHOD_STATE()</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8h_source.html#l00224">vm_insnhelper.h:224</a></div></div>
-<div class="ttc" id="vm__method_8c_html_ad976b5c40d587f5d9bba995671c23977"><div class="ttname"><a href="vm__method_8c.html#ad976b5c40d587f5d9bba995671c23977">search_method</a></div><div class="ttdeci">static rb_method_entry_t * search_method(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00604">vm_method.c:604</a></div></div>
+<div class="ttc" id="vm__method_8c_html_ad976b5c40d587f5d9bba995671c23977"><div class="ttname"><a href="vm__method_8c.html#ad976b5c40d587f5d9bba995671c23977">search_method</a></div><div class="ttdeci">static rb_method_entry_t * search_method(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00602">vm_method.c:602</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
 <div class="ttc" id="vm__opts_8h_html_a01f738747a067be52d1a3bef96153a1f"><div class="ttname"><a href="vm__opts_8h.html#a01f738747a067be52d1a3bef96153a1f">OPT_GLOBAL_METHOD_CACHE</a></div><div class="ttdeci">#define OPT_GLOBAL_METHOD_CACHE</div><div class="ttdef"><b>Definition:</b> <a href="vm__opts_8h_source.html#l00044">vm_opts.h:44</a></div></div>
 <div class="ttc" id="structcache__entry_html_a31dcd512faa42262267fb6f9a6bb9d7a"><div class="ttname"><a href="structcache__entry.html#a31dcd512faa42262267fb6f9a6bb9d7a">cache_entry::class_serial</a></div><div class="ttdeci">rb_serial_t class_serial</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00044">vm_method.c:44</a></div></div>
@@ -1270,7 +1473,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <div class="line"><a name="l02240"></a><span class="lineno"> 2240</span>&#160;    <span class="keywordflow">if</span> (!me) <span class="keywordflow">return</span> Qnil;</div>
 <div class="line"><a name="l02241"></a><span class="lineno"> 2241</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="proc_8c.html#a56baa787f444116342953fd208c2cf9b">method_def_location</a>(me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>);</div>
 <div class="line"><a name="l02242"></a><span class="lineno"> 2242</span>&#160;}</div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="proc_8c_html_a56baa787f444116342953fd208c2cf9b"><div class="ttname"><a href="proc_8c.html#a56baa787f444116342953fd208c2cf9b">method_def_location</a></div><div class="ttdeci">static VALUE method_def_location(const rb_method_definition_t *def)</div><div class="ttdef"><b>Definition:</b> <a href="proc_8c_source.html#l02227">proc.c:2227</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1311,12 +1514,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00570">570</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;{</div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a7bcafc0ee629d2ec627fffd45e860d70">method_entry_set</a>(klass, <a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a>, <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>, visi, klass);</div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00568">568</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;{</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#a7bcafc0ee629d2ec627fffd45e860d70">method_entry_set</a>(klass, <a class="code" href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">mid</a>, <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>, visi, klass);</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;}</div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a7bcafc0ee629d2ec627fffd45e860d70"><div class="ttname"><a href="vm__method_8c.html#a7bcafc0ee629d2ec627fffd45e860d70">method_entry_set</a></div><div class="ttdeci">static rb_method_entry_t * method_entry_set(VALUE klass, ID mid, const rb_method_entry_t *me, rb_method_visibility_t visi, VALUE defined_class)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00559">vm_method.c:559</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a7bcafc0ee629d2ec627fffd45e860d70"><div class="ttname"><a href="vm__method_8c.html#a7bcafc0ee629d2ec627fffd45e860d70">method_entry_set</a></div><div class="ttdeci">static rb_method_entry_t * method_entry_set(VALUE klass, ID mid, const rb_method_entry_t *me, rb_method_visibility_t visi, VALUE defined_class)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00557">vm_method.c:557</a></div></div>
 <div class="ttc" id="structcache__entry_html_a599b4a91bce5b7210250ee9beaff4c60"><div class="ttname"><a href="structcache__entry.html#a599b4a91bce5b7210250ee9beaff4c60">cache_entry::mid</a></div><div class="ttdeci">ID mid</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00045">vm_method.c:45</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1351,33 +1554,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00749">749</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;{</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__cref__struct.html">rb_cref_t</a> *cref = <a class="code" href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a>();</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    VALUE refinements = cref ? <a class="code" href="eval__intern_8h.html#ab1d9490c27c6e8e5812b0709a2b0c555">CREF_REFINEMENTS</a>(cref) : Qnil;</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    me = <a class="code" href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a>(refinements, me, &amp;defined_class);</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    }</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00747">747</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;{</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__cref__struct.html">rb_cref_t</a> *cref = <a class="code" href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a>();</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    VALUE refinements = cref ? <a class="code" href="eval__intern_8h.html#ab1d9490c27c6e8e5812b0709a2b0c555">CREF_REFINEMENTS</a>(cref) : Qnil;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    me = <a class="code" href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a>(refinements, me, &amp;defined_class);</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    }</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr) *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
 <div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr) *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;}</div>
-<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00113">method.h:113</a></div></div>
-<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00678">vm_method.c:678</a></div></div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;}</div>
+<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00133">method.h:133</a></div></div>
+<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00676">vm_method.c:676</a></div></div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="structcache__entry_html_ac5dad3694c11106a1068af7dd17a0c9c"><div class="ttname"><a href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">cache_entry::defined_class</a></div><div class="ttdeci">VALUE defined_class</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00047">vm_method.c:47</a></div></div>
 <div class="ttc" id="eval__intern_8h_html_ab1d9490c27c6e8e5812b0709a2b0c555"><div class="ttname"><a href="eval__intern_8h.html#ab1d9490c27c6e8e5812b0709a2b0c555">CREF_REFINEMENTS</a></div><div class="ttdeci">static VALUE CREF_REFINEMENTS(const rb_cref_t *cref)</div><div class="ttdef"><b>Definition:</b> <a href="eval__intern_8h_source.html#l00248">eval_intern.h:248</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a0c69e51af426fbce5ed164bf8fd8876e"><div class="ttname"><a href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a></div><div class="ttdeci">const rb_method_entry_t * rb_resolve_refined_method(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00721">vm_method.c:721</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a0c69e51af426fbce5ed164bf8fd8876e"><div class="ttname"><a href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a></div><div class="ttdeci">const rb_method_entry_t * rb_resolve_refined_method(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00719">vm_method.c:719</a></div></div>
 <div class="ttc" id="structrb__cref__struct_html"><div class="ttname"><a href="structrb__cref__struct.html">rb_cref_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00038">method.h:38</a></div></div>
-<div class="ttc" id="eval__intern_8h_html_a6df4dea220523fc5f4334d8c1af240a2"><div class="ttname"><a href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a></div><div class="ttdeci">rb_cref_t * rb_vm_cref(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm_8c_source.html#l01068">vm.c:1068</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_a6df4dea220523fc5f4334d8c1af240a2"><div class="ttname"><a href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a></div><div class="ttdeci">rb_cref_t * rb_vm_cref(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm_8c_source.html#l01066">vm.c:1066</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1411,32 +1614,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00768">768</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;{</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    me = <a class="code" href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a>(Qnil, me, &amp;defined_class);</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    }</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    }</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    }</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;}</div>
-<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00135">method.h:135</a></div></div>
-<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00113">method.h:113</a></div></div>
-<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00678">vm_method.c:678</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00766">766</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;{</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    VALUE <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    <span class="keyword">const</span> <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a> = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(klass, <span class="keywordtype">id</span>, &amp;defined_class);</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    me = <a class="code" href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a>(Qnil, me, &amp;defined_class);</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    }</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    <span class="keywordflow">if</span> (defined_class_ptr)</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    *defined_class_ptr = <a class="code" href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">defined_class</a>;</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a>(me)) {</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    }</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;    }</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;}</div>
+<div class="ttc" id="method_8h_html_aaa8e7bfb9a59a81763a11e426287f124"><div class="ttname"><a href="method_8h.html#aaa8e7bfb9a59a81763a11e426287f124">UNDEFINED_METHOD_ENTRY_P</a></div><div class="ttdeci">#define UNDEFINED_METHOD_ENTRY_P(me)</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00155">method.h:155</a></div></div>
+<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00133">method.h:133</a></div></div>
+<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00676">vm_method.c:676</a></div></div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
 <div class="ttc" id="structcache__entry_html_ac5dad3694c11106a1068af7dd17a0c9c"><div class="ttname"><a href="structcache__entry.html#ac5dad3694c11106a1068af7dd17a0c9c">cache_entry::defined_class</a></div><div class="ttdeci">VALUE defined_class</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00047">vm_method.c:47</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
-<div class="ttc" id="vm__method_8c_html_a0c69e51af426fbce5ed164bf8fd8876e"><div class="ttname"><a href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a></div><div class="ttdeci">const rb_method_entry_t * rb_resolve_refined_method(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00721">vm_method.c:721</a></div></div>
+<div class="ttc" id="vm__method_8c_html_a0c69e51af426fbce5ed164bf8fd8876e"><div class="ttname"><a href="vm__method_8c.html#a0c69e51af426fbce5ed164bf8fd8876e">rb_resolve_refined_method</a></div><div class="ttdeci">const rb_method_entry_t * rb_resolve_refined_method(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00719">vm_method.c:719</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1539,40 +1742,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00721">721</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;{</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;    VALUE refinement;</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *tmp_me;</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    refinement = <a class="code" href="vm__insnhelper_8c.html#a865592c3f0bf56f6265790a8b066fec6">find_refinement</a>(refinements, me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>);</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;    <span class="keywordflow">if</span> (NIL_P(refinement)) {</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a>(refinements, me,</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;                         defined_class_ptr);</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    }</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    tmp_me = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(refinement, me-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a>,</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;                 defined_class_ptr);</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keywordflow">if</span> (tmp_me &amp;&amp; tmp_me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="keywordflow">return</span> tmp_me;</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    }</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a>(refinements, me,</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;                         defined_class_ptr);</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    }</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    }</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *)<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;    }</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;}</div>
-<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00113">method.h:113</a></div></div>
-<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00678">vm_method.c:678</a></div></div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00719">719</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;{</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    <span class="keywordflow">if</span> (me &amp;&amp; me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> == <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;    VALUE refinement;</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *tmp_me;</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    refinement = <a class="code" href="vm__insnhelper_8c.html#a865592c3f0bf56f6265790a8b066fec6">find_refinement</a>(refinements, me-&gt;<a class="code" href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">klass</a>);</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;    <span class="keywordflow">if</span> (NIL_P(refinement)) {</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a>(refinements, me,</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;                         defined_class_ptr);</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    }</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;    tmp_me = <a class="code" href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a>(refinement, me-&gt;<a class="code" href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">called_id</a>,</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                 defined_class_ptr);</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    <span class="keywordflow">if</span> (tmp_me &amp;&amp; tmp_me-&gt;<a class="code" href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">def</a>-&gt;<a class="code" href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">type</a> != <a class="code" href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a>) {</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;        <span class="keywordflow">return</span> tmp_me;</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    }</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a>(refinements, me,</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;                         defined_class_ptr);</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    }</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    }</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structrb__method__entry__struct.html">rb_method_entry_t</a> *)<a class="code" href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">me</a>;</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    }</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;}</div>
+<div class="ttc" id="structrb__method__definition__struct_html_a60ad63aa9037403df6e773853973c41b"><div class="ttname"><a href="structrb__method__definition__struct.html#a60ad63aa9037403df6e773853973c41b">rb_method_definition_struct::type</a></div><div class="ttdeci">rb_method_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00133">method.h:133</a></div></div>
+<div class="ttc" id="vm__method_8c_html_ac3fd0538686236ea9b7fc84f99775874"><div class="ttname"><a href="vm__method_8c.html#ac3fd0538686236ea9b7fc84f99775874">rb_method_entry</a></div><div class="ttdeci">rb_method_entry_t * rb_method_entry(VALUE klass, ID id, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00676">vm_method.c:676</a></div></div>
 <div class="ttc" id="structcache__entry_html_a3ec144dc707ebcc059d1c25a7dbe9eaf"><div class="ttname"><a href="structcache__entry.html#a3ec144dc707ebcc059d1c25a7dbe9eaf">cache_entry::me</a></div><div class="ttdeci">rb_method_entry_t * me</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00046">vm_method.c:46</a></div></div>
-<div class="ttc" id="vm__insnhelper_8c_html_a865592c3f0bf56f6265790a8b066fec6"><div class="ttname"><a href="vm__insnhelper_8c.html#a865592c3f0bf56f6265790a8b066fec6">find_refinement</a></div><div class="ttdeci">static VALUE find_refinement(VALUE refinements, VALUE klass)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8c_source.html#l01849">vm_insnhelper.c:1849</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_aa32b6cfc6a34fb16d5e08b6d910db9ab"><div class="ttname"><a href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">rb_method_entry_struct::klass</a></div><div class="ttdeci">const VALUE klass</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00062">method.h:62</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_a31439bd620e98940410ba59244a85eae"><div class="ttname"><a href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">rb_method_entry_struct::called_id</a></div><div class="ttdeci">ID called_id</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00061">method.h:61</a></div></div>
-<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00081">method.h:81</a></div></div>
-<div class="ttc" id="vm__method_8c_html_af753fbfb37f3c45e1db9756186453099"><div class="ttname"><a href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a></div><div class="ttdeci">static const rb_method_entry_t * get_original_method_entry(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00699">vm_method.c:699</a></div></div>
-<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00060">method.h:60</a></div></div>
+<div class="ttc" id="vm__insnhelper_8c_html_a865592c3f0bf56f6265790a8b066fec6"><div class="ttname"><a href="vm__insnhelper_8c.html#a865592c3f0bf56f6265790a8b066fec6">find_refinement</a></div><div class="ttdeci">static VALUE find_refinement(VALUE refinements, VALUE klass)</div><div class="ttdef"><b>Definition:</b> <a href="vm__insnhelper_8c_source.html#l01847">vm_insnhelper.c:1847</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_aa32b6cfc6a34fb16d5e08b6d910db9ab"><div class="ttname"><a href="structrb__method__entry__struct.html#aa32b6cfc6a34fb16d5e08b6d910db9ab">rb_method_entry_struct::klass</a></div><div class="ttdeci">const VALUE klass</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00053">method.h:53</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_a31439bd620e98940410ba59244a85eae"><div class="ttname"><a href="structrb__method__entry__struct.html#a31439bd620e98940410ba59244a85eae">rb_method_entry_struct::called_id</a></div><div class="ttdeci">ID called_id</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00052">method.h:52</a></div></div>
+<div class="ttc" id="method_8h_html_a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d"><div class="ttname"><a href="method_8h.html#a88a981f6cc69187ed9c2de2630a1687aa3005b11856cb15e1bdcfface3ac0151d">VM_METHOD_TYPE_REFINED</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00101">method.h:101</a></div></div>
+<div class="ttc" id="vm__method_8c_html_af753fbfb37f3c45e1db9756186453099"><div class="ttname"><a href="vm__method_8c.html#af753fbfb37f3c45e1db9756186453099">get_original_method_entry</a></div><div class="ttdeci">static const rb_method_entry_t * get_original_method_entry(VALUE refinements, const rb_method_entry_t *me, VALUE *defined_class_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="vm__method_8c_source.html#l00697">vm_method.c:697</a></div></div>
+<div class="ttc" id="structrb__method__entry__struct_html_acfbd11627d0c08acb0469a7d14e6f943"><div class="ttname"><a href="structrb__method__entry__struct.html#acfbd11627d0c08acb0469a7d14e6f943">rb_method_entry_struct::def</a></div><div class="ttdeci">struct rb_method_definition_struct *const def</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00051">method.h:51</a></div></div>
 <div class="ttc" id="structrb__method__entry__struct_html"><div class="ttname"><a href="structrb__method__entry__struct.html">rb_method_entry_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00048">method.h:48</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1591,17 +1794,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
       </table>
 </div><div class="memdoc">
 
-<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00940">940</a> 行目に定義があります。</p>
-<div class="fragment"><div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;{</div>
-<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;    <a class="code" href="structrb__scope__visi__struct.html">rb_scope_visibility_t</a> *scope_visi = &amp;<a class="code" href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a>()-&gt;<a class="code" href="structrb__cref__struct.html#ac500107c12b2cf8b2bfce2b684298d2d">scope_visi</a>;</div>
-<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;    scope_visi-&gt;<a class="code" href="structrb__scope__visi__struct.html#afe2fbb4218342914da0a24455b046f4b">method_visi</a> = visi;</div>
-<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;    scope_visi-&gt;<a class="code" href="structrb__scope__visi__struct.html#aea12e5716fdda9291161ce563e88bc6a">module_func</a> = <a class="code" href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
-<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;}</div>
+<p> <a class="el" href="vm__method_8c_source.html">vm_method.c</a> の <a class="el" href="vm__method_8c_source.html#l00938">938</a> 行目に定義があります。</p>
+<div class="fragment"><div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;{</div>
+<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;    <a class="code" href="structrb__scope__visi__struct.html">rb_scope_visibility_t</a> *scope_visi = &amp;<a class="code" href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a>()-&gt;<a class="code" href="structrb__cref__struct.html#ac500107c12b2cf8b2bfce2b684298d2d">scope_visi</a>;</div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;    scope_visi-&gt;<a class="code" href="structrb__scope__visi__struct.html#afe2fbb4218342914da0a24455b046f4b">method_visi</a> = visi;</div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;    scope_visi-&gt;<a class="code" href="structrb__scope__visi__struct.html#aea12e5716fdda9291161ce563e88bc6a">module_func</a> = <a class="code" href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;}</div>
 <div class="ttc" id="structrb__cref__struct_html_ac500107c12b2cf8b2bfce2b684298d2d"><div class="ttname"><a href="structrb__cref__struct.html#ac500107c12b2cf8b2bfce2b684298d2d">rb_cref_struct::scope_visi</a></div><div class="ttdeci">rb_scope_visibility_t scope_visi</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00043">method.h:43</a></div></div>
 <div class="ttc" id="regenc_8h_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="regenc_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition:</b> <a href="regenc_8h_source.html#l00063">regenc.h:63</a></div></div>
 <div class="ttc" id="structrb__scope__visi__struct_html"><div class="ttname"><a href="structrb__scope__visi__struct.html">rb_scope_visi_struct</a></div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00033">method.h:33</a></div></div>
 <div class="ttc" id="structrb__scope__visi__struct_html_afe2fbb4218342914da0a24455b046f4b"><div class="ttname"><a href="structrb__scope__visi__struct.html#afe2fbb4218342914da0a24455b046f4b">rb_scope_visi_struct::method_visi</a></div><div class="ttdeci">rb_method_visibility_t method_visi</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00034">method.h:34</a></div></div>
-<div class="ttc" id="eval__intern_8h_html_a6df4dea220523fc5f4334d8c1af240a2"><div class="ttname"><a href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a></div><div class="ttdeci">rb_cref_t * rb_vm_cref(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm_8c_source.html#l01068">vm.c:1068</a></div></div>
+<div class="ttc" id="eval__intern_8h_html_a6df4dea220523fc5f4334d8c1af240a2"><div class="ttname"><a href="eval__intern_8h.html#a6df4dea220523fc5f4334d8c1af240a2">rb_vm_cref</a></div><div class="ttdeci">rb_cref_t * rb_vm_cref(void)</div><div class="ttdef"><b>Definition:</b> <a href="vm_8c_source.html#l01066">vm.c:1066</a></div></div>
 <div class="ttc" id="structrb__scope__visi__struct_html_aea12e5716fdda9291161ce563e88bc6a"><div class="ttname"><a href="structrb__scope__visi__struct.html#aea12e5716fdda9291161ce563e88bc6a">rb_scope_visi_struct::module_func</a></div><div class="ttdeci">unsigned int module_func</div><div class="ttdef"><b>Definition:</b> <a href="method_8h_source.html#l00035">method.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1626,7 +1829,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'検索');
 <!-- HTML footer for doxygen 1.8.9.1-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-2015年06月10日(水) 19時51分52秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+2015年06月15日(月) 14時28分45秒作成 - CRuby Code Reading / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
