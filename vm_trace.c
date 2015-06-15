@@ -382,6 +382,7 @@ rb_threadptr_exec_event_hooks(rb_trace_arg_t *trace_arg)
     rb_threadptr_exec_event_hooks_orig(trace_arg, 0);
 }
 
+/*! Ruby のトレースを抑制する */
 VALUE
 rb_suppress_tracing(VALUE (*func)(VALUE), VALUE arg)
 {

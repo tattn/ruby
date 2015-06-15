@@ -576,7 +576,7 @@ enum rb_thread_status {
     THREAD_KILLED
 };
 
-/*! jmp_buf か sigjmp_buf ? configure.in を参照
+/*! jmp_buf か sigjmp_buf ? configure.in を参照 */
 typedef RUBY_JMP_BUF rb_jmpbuf_t;
 
 /**
