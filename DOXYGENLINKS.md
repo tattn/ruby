@@ -1,5 +1,14 @@
 @page quick_links クイックリンク
 
+## CFG 別クイックリンク
+
+* main() [main.c] - メイン関数
+	* ruby_sysinit() [ruby.c] - 引数の初期化
+	* RUBY_INIT_STACK [ruby.h]
+	* ruby_init()
+
+
+
 ## 機能別クイックリンク
 
 ### VM 系
