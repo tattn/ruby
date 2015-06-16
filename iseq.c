@@ -254,6 +254,9 @@ rb_iseq_add_mark_object(rb_iseq_t *iseq, VALUE obj)
     rb_ary_push(iseq->mark_ary, obj);
 }
 
+/**
+ * iseq の初期化
+ */
 static VALUE
 prepare_iseq_build(rb_iseq_t *iseq,
 		   VALUE name, VALUE path, VALUE absolute_path, VALUE first_lineno,

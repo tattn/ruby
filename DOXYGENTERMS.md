@@ -11,6 +11,15 @@ CRuby の用語集
 class reference の略。cref 構造体はレキシカルスコープを表現するのに使用。クラスへのポインタ (nd_clss) と親のレキシカルスコープへのポインタ (nd_next) を含む。
 - - -
 
+#### call, fcall, vcall
+
+
+call:  obj.method(...)
+
+fcall: func(...)
+
+vcall: func
+- - -
 
 
 

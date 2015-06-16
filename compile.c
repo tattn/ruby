@@ -466,6 +466,9 @@ validate_labels(rb_iseq_t *iseq, st_table *labels_table)
     }
 }
 
+/**
+ * ノードの種類と self に合わせてコンパイルの準備を行う
+ */
 VALUE
 rb_iseq_compile_node(VALUE self, NODE *node)
 {

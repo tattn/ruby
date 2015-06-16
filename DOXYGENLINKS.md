@@ -29,6 +29,11 @@
 									* load_file_internal2() [ruby.c] - ファイル読み込みとパース (エンコード関係が複雑すぎる)
 										* rb_parser_compile_string_path() [ripper.c]
 											* parser_compile_string() [ripper.c] - パースして AST を返す。
+				* rb_iseq_new_main() [iseq.c]
+					* rb_iseq_new_with_opt() [iseq.c]
+						* prepare_iseq_build() [iseq.c] - iseq の初期化
+						* rb_iseq_compile_node() [compile.c] - ノードの種類と self に合わせてコンパイルの準備を行う
+							* iseq_compile_each() [compile.c]
 
 	* ruby_run_node() [main.c]
 		* ruby_executable_node() [eval.c] - パースがうまく行ったかを調べる
