@@ -17,7 +17,7 @@ hdrdir = $(srcdir)/include
 PLATFORM_DIR = @PLATFORM_DIR@
 
 CC = @CC@
-CPP = @CPP@
+CPP = clang++ #@CPP@
 LD = @LD@
 YACC = bison
 PURIFY =
@@ -72,6 +72,8 @@ CPPFLAGS = @CPPFLAGS@ $(INCFLAGS)
 LDFLAGS = @STATIC@ $(CFLAGS) @LDFLAGS@
 EXTLDFLAGS = @EXTLDFLAGS@
 XLDFLAGS = @XLDFLAGS@ $(EXTLDFLAGS)
+LLVMFLAGS = @LLVMFLAGS@
+LDLLVMFLAGS = @LDLLVMFLAGS@
 EXTLIBS =
 LIBS = @LIBS@ $(EXTLIBS)
 MISSING = @LIBOBJS@ @ALLOCA@
@@ -207,7 +209,7 @@ DESTDIR       = @DESTDIR@
 configure_args = @configure_args@
 #### End of variables
 
-.SUFFIXES: .inc .h .c .y .i .$(DTRACE_EXT)
+.SUFFIXES: .inc .h .c .cpp .y .i .$(DTRACE_EXT)
 
 all:
 
@@ -217,12 +219,12 @@ all:
 miniruby$(EXEEXT):
 		@-if test -f $@; then $(MV) -f $@ $@.old; $(RM) $@.old; fi
 		$(ECHO) linking $@
-		$(Q) $(PURIFY) $(CC) $(LDFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG)$@
+		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(LDLLVMFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(JITOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG)$@
 
 $(PROGRAM):
 		@$(RM) $@
 		$(ECHO) linking $@
-		$(Q) $(PURIFY) $(CC) $(LDFLAGS) $(XLDFLAGS) $(MAINOBJ) $(EXTOBJS) $(LIBRUBYARG) $(MAINLIBS) $(LIBS) $(EXTLIBS) $(OUTFLAG)$@
+		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(LDLLVMFLAGS) $(MAINOBJ) $(EXTOBJS) $(LIBRUBYARG) $(MAINLIBS) $(LIBS) $(EXTLIBS) $(OUTFLAG)$@
 		$(Q) $(POSTLINK)
 
 # We must `rm' the library each time this rule is invoked because "updating" a
@@ -234,7 +236,7 @@ $(LIBRUBY_A):
 		$(Q) $(AR) $(ARFLAGS) $@ $(LIBRUBY_A_OBJS) $(INITOBJS)
 		@-$(RANLIB) $@ 2> /dev/null || true
 		$(ECHO) verifying static-library $@
-		@$(PURIFY) $(CC) $(LDFLAGS) $(XLDFLAGS) $(MAINOBJ) $(LIBRUBY_A) $(MAINLIBS) $(EXTLIBS) $(LIBS) $(OUTFLAG)conftest$(EXEEXT)
+		@$(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(LDLLVMFLAGS) $(MAINOBJ) $(LIBRUBY_A) $(MAINLIBS) $(EXTLIBS) $(LIBS) $(OUTFLAG)conftest$(EXEEXT)
 		@$(RM) conftest$(EXEEXT) conftest.c
 
 $(LIBRUBY_SO):
@@ -361,6 +363,10 @@ enc/jis/props.h: enc/jis/props.kwd
 	  $(CP) $? $(?:.kwd=.src) && \
 	  $(CP) $@ $(?:.kwd=.h.blt); \
 	fi
+
+.cpp.@OBJEXT@:
+	@$(ECHO) compiling $< as c++
+	$(Q) $(CPP) $(CFLAGS) $(LLVMFLAGS) $(XCFLAGS) $(CPPFLAGS) $(COUTFLAG)$@ -c $<
 
 .c.@OBJEXT@:
 	@$(ECHO) compiling $<

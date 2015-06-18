@@ -18,6 +18,7 @@
 #include "eval_intern.h"
 #include "probes.h"
 #include "probes_helper.h"
+#include "jit.h"
 
 static inline VALUE *
 VM_EP_LEP(VALUE *ep)
@@ -260,7 +261,7 @@ vm_set_top_stack(rb_thread_t *th, VALUE iseqval)
 		  iseq->iseq_encoded, th->cfp->sp, iseq->local_size, iseq->stack_max);
 }
 
-static void
+void
 vm_set_eval_stack(rb_thread_t * th, VALUE iseqval, const rb_cref_t *cref, rb_block_t *base_block)
 {
     rb_iseq_t *iseq;
@@ -1479,6 +1480,8 @@ vm_exec(rb_thread_t *th)
     VALUE initial = 0;
     struct vm_throw_data *err;
 
+	jit_insn_to_llvm(th);
+
     TH_PUSH_TAG(th);
     _tag.retval = Qnil;
     if ((state = EXEC_TAG()) == 0) {
@@ -1730,7 +1733,9 @@ rb_iseq_eval_main(VALUE iseqval)
 
     vm_set_main_stack(th, iseqval);
 
+	is_jit_tracing = 1;
     val = vm_exec(th);
+	if (getenv("RUBY_JIT_DEBUG")) jit_trace_dump(th);
     RB_GC_GUARD(iseqval); /* prohibit tail call optimization */
     return val;
 }
@@ -2227,7 +2232,7 @@ thread_alloc(VALUE klass)
     return obj;
 }
 
-static void
+void
 th_init(rb_thread_t *th, VALUE self)
 {
     th->self = self;

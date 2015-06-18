@@ -18,6 +18,7 @@
 #include "ruby/vm.h"
 #include "vm_core.h"
 #include "probes_helper.h"
+#include "jit.h"
 
 NORETURN(void rb_raise_jump(VALUE, VALUE));
 
@@ -56,6 +57,7 @@ ruby_setup(void)
     Init_heap();
     Init_vm_objects();
     Init_frozen_strings();
+	/* ruby_jit_init(); */
 
     PUSH_TAG();
     if ((state = EXEC_TAG()) == 0) {

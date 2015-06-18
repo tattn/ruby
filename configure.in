@@ -31,6 +31,14 @@ rm() {
 }
 ])])])
 
+CPPLLVM=`/usr/local/Cellar/llvm/3.6.0/bin/llvm-config --libs --cflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker | tr '\n' ' '`
+ # -lncurses: _del_curterm _set_curterm _setupterm _tigetnum -lz: zlib for LLVMSupport.a
+AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`/usr/local/Cellar/llvm/3.6.0/bin/llvm-config --cflags | tr '\n' ' '`)
+AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -lncurses -lz")
+AC_SUBST(CFLAGS,"-Wno-error=shorten-64-to-32 -Wshift-op-parentheses") #-Wno-error=shorten-64-to-32 must be required
+# OUTFLAG="-x c -o"
+# COUTFLAG="-x c -o"
+
 { # environment section
 
 AC_ARG_WITH(baseruby,
@@ -467,7 +475,7 @@ fi
 RUBY_NACL
 AS_CASE(["$host_os:$build_os"],
 [darwin*:darwin*], [
-    AC_CHECK_TOOLS(CC, [clang gcc cc])
+    AC_CHECK_TOOLS(CC, [clang gcc]) #changed
     # Following Apple deployed clang are broken
     # clang version 1.0 (http://llvm.org/svn/llvm-project/cfe/tags/Apple/clang-23 exported)
     # Apple clang version 2.0 (tags/Apple/clang-137) (based on LLVM 2.9svn)
@@ -481,7 +489,7 @@ SRC
     fi
 ])
 if test x"${build}" != x"${host}"; then
-  AC_CHECK_TOOL(CC, gcc)
+  AC_CHECK_TOOL(CC, g++) #changed
 fi
 
 AC_PROG_CC
@@ -727,33 +735,33 @@ else
   unset ac_c_werror_flag
 fi])
 
-RUBY_WERROR_FLAG([
-    AC_MSG_CHECKING([whether CFLAGS is valid])
-    AC_TRY_COMPILE([], [],
-	[AC_MSG_RESULT(yes)],
-	[
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([something wrong with CFLAGS="$CFLAGS"])
-	]
-    )
-    AC_MSG_CHECKING([whether LDFLAGS is valid])
-    {
-	mkdir tmp.$$.try_link &&
-	cd tmp.$$.try_link &&
-	cp ../confdefs.h . &&
-	echo '<?xml?><plist><dict><key>CFBundleIdentifier</key><string></string></dict></plist>' > Info.plist &&
-	:
-    } || AC_MSG_ERROR([faild to make temporary directory])
-    AC_TRY_LINK([], [],
-	[AC_MSG_RESULT(yes)],
-	[
-	cd .. && rm -fr tmp.$$.try_link
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([something wrong with LDFLAGS="$LDFLAGS"])
-	]
-    )
-    cd .. && rm -fr tmp.$$.try_link
-])
+# RUBY_WERROR_FLAG([
+#     AC_MSG_CHECKING([whether CFLAGS is valid])
+#     AC_TRY_COMPILE([], [],
+# 	[AC_MSG_RESULT(yes)],
+# 	[
+# 	AC_MSG_RESULT(no)
+# 	AC_MSG_ERROR([something wrong with CFLAGS="$CFLAGS"])
+# 	]
+#     )
+#     AC_MSG_CHECKING([whether LDFLAGS is valid])
+#     {
+# 	mkdir tmp.$$.try_link &&
+# 	cd tmp.$$.try_link &&
+# 	cp ../confdefs.h . &&
+# 	echo '<?xml?><plist><dict><key>CFBundleIdentifier</key><string></string></dict></plist>' > Info.plist &&
+# 	:
+#     } || AC_MSG_ERROR([faild to make temporary directory])
+#     AC_TRY_LINK([], [],
+# 	[AC_MSG_RESULT(yes)],
+# 	[
+# 	cd .. && rm -fr tmp.$$.try_link
+# 	AC_MSG_RESULT(no)
+# 	AC_MSG_ERROR([something wrong with LDFLAGS="$LDFLAGS"])
+# 	]
+#     )
+#     cd .. && rm -fr tmp.$$.try_link
+# ])
 
 AC_DEFUN([RUBY_TRY_CFLAGS], [
     AC_MSG_CHECKING([whether ]$1[ is accepted as CFLAGS])
@@ -4330,3 +4338,4 @@ AC_CONFIG_FILES($ruby_pc:template/ruby.pc.in,
 AC_OUTPUT
 }
 }
+

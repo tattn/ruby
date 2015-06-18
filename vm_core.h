@@ -221,22 +221,23 @@ typedef struct rb_iseq_location_struct {
 
 struct rb_iseq_struct;
 
+enum iseq_type {
+ISEQ_TYPE_TOP,
+ISEQ_TYPE_METHOD,
+ISEQ_TYPE_BLOCK,
+ISEQ_TYPE_CLASS,
+ISEQ_TYPE_RESCUE,
+ISEQ_TYPE_ENSURE,
+ISEQ_TYPE_EVAL,
+ISEQ_TYPE_MAIN,
+ISEQ_TYPE_DEFINED_GUARD
+};
 struct rb_iseq_struct {
     /***************/
     /* static data */
     /***************/
 
-    enum iseq_type {
-	ISEQ_TYPE_TOP,
-	ISEQ_TYPE_METHOD,
-	ISEQ_TYPE_BLOCK,
-	ISEQ_TYPE_CLASS,
-	ISEQ_TYPE_RESCUE,
-	ISEQ_TYPE_ENSURE,
-	ISEQ_TYPE_EVAL,
-	ISEQ_TYPE_MAIN,
-	ISEQ_TYPE_DEFINED_GUARD
-    } type;              /* instruction sequence type */
+    enum iseq_type  type;              /* instruction sequence type */
 #if defined(WORDS_BIGENDIAN) && (SIZEOF_VALUE > SIZEOF_INT)
     char dummy[SIZEOF_VALUE - SIZEOF_INT]; /* [Bug #10037][ruby-core:63721] */
 #endif
@@ -776,8 +777,14 @@ VALUE rb_iseq_new_with_opt(NODE*, VALUE, VALUE, VALUE, VALUE, VALUE, enum iseq_t
 /* src -> iseq */
 VALUE rb_iseq_compile(VALUE src, VALUE file, VALUE line);
 VALUE rb_iseq_compile_on_base(VALUE src, VALUE file, VALUE line, rb_block_t *base_block);
+#if defined(__cplusplus)
+extern "C"
+#endif /* __cplusplus */
 VALUE rb_iseq_compile_with_option(VALUE src, VALUE file, VALUE absolute_path, VALUE line, rb_block_t *base_block, VALUE opt);
 
+#if defined(__cplusplus)
+extern "C"
+#endif /* __cplusplus */
 VALUE rb_iseq_disasm(VALUE self);
 int rb_iseq_disasm_insn(VALUE str, const VALUE *iseqval, size_t pos, const rb_iseq_t *iseq, VALUE child);
 const char *ruby_node_name(int node);
