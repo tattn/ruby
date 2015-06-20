@@ -47,7 +47,7 @@ end
 
 
 def update_timestamp
-	files = ['DOXYGENREADME.md', 'DOXYGENTERMS.md', 'DOXYGENLINKS.md']
+	files = ['DOXYGENREADME.md', 'DOXYGENTERMS.md', 'DOXYGENLINKS.md', 'DOXYGENMICROSCOPE.md']
 	files.each do |file|
 		replace_line file, /(created at: )/ do |m|
 			"#{m[1]}#{Time.now}\n"

@@ -6,6 +6,7 @@
 	<tab type="usergroup" title="機能">
 		<tab type="user" visible="yes" url="@ref cruby_terms" title="用語集"/>
 		<tab type="user" visible="yes" url="@ref quick_links" title="クイックリンク"/>
+		<tab type="user" visible="yes" url="@ref microscope" title="Ruby のしくみ"/>
 	</tab>
     <tab type="pages" visible="yes" title="" intro=""/>
     <tab type="modules" visible="yes" title="" intro=""/>

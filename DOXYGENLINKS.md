@@ -1,6 +1,6 @@
 @page quick_links クイックリンク
 
-## CFG 別クイックリンク
+## 呼び出し順クイックリンク
 
 * main() [main.c] - メイン関数
 	* ruby_sysinit() [ruby.c] - 引数の初期化
@@ -34,6 +34,18 @@
 						* prepare_iseq_build() [iseq.c] - iseq の初期化
 						* rb_iseq_compile_node() [compile.c] - ノードの種類と self に合わせてコンパイルの準備を行う
 							* iseq_compile_each() [compile.c]
+							* iseq_setup() [compile.c] - node を rb_iseq_t に変換、その際に最適化を適用
+								* iseq_optimize() [compile.c] - 最適化の適用
+									* iseq_peephole_optimize()
+									* iseq_specialized_instruction()
+									* insn_operands_unification()
+								* iseq_insns_unification() [compile.c]
+								* iseq_set_sequence_stackcaching() [compile.c]
+								* iseq_set_sequence() [compile.c] - node のリストを rb_iseq_t::iseq_encoded に変換
+								* iseq_set_exception_table() [compile.c] - 例外処理を表引き法で行うための設定
+								* iseq_set_optargs_table() [compile.c] - 名前付き引数のために引数テーブルにインデックスを設定
+								* rb_iseq_translate_threaded_code() [compile.c] - iseq_encoded に格納された命令 ID を命令へのラベルのポインタに変換
+
 
 	* ruby_run_node() [main.c]
 		* ruby_executable_node() [eval.c] - パースがうまく行ったかを調べる
@@ -48,20 +60,30 @@
 
 ## 機能別クイックリンク
 
+
+### Makefile 系
+
+* 自動生成用 Makefile [common.mk, Makefile.in]
+* 環境チェックと自動設定 [configure.in]
+
+
 ### VM 系
 
-* VM の実行メインループ (vm_exec.c, vm_exec.h)
-* VM のメインループ呼び出しとエラーハンドリング (vm.c[vm_exec()])
+* VM の実行メインループ [vm_exec.c, vm_exec.h]
+* VM のメインループ呼び出しとエラーハンドリング [vm_exec() in vm.c]
+* バイトコードの命令の定義 [insns.def]
+* 実際に実行するバイトコードの命令 [vm.inc]
+
 
 
 ### 字句解析・構文解析系
 
-* ファイル名や行数を保存して、コンパイル処理を呼び出す (ext/ripper/ripper.c[yycompile()])
+* ファイル名や行数を保存して、コンパイル処理を呼び出す [yycompile() in ext/ripper/ripper.c]
 
 
 ---
 
 Copyright (C) 2015 Tatsuya Tanaka
 
-created at: 2015-06-15 18:46:27 +0900
+created at: 2015-06-21 16:45:27 +0900
 
