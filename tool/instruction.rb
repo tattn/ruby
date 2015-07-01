@@ -1265,17 +1265,185 @@ class RubyVM
     end
   end
 
+  ###################################################################
+  # jit_codegen.inc
+  class JitCodegenIncGenerator < VmBodyGenerator
+    def generate
+      codegen_table = build_string do
+        @insns.each{|insn|
+					commit "case BIN(#{insn.name}): {"
+					case insn.name
+					when 'putself'
+						make_insn_def insn do
+							commit "    val = rb_mJit->valueVal(th->cfp->self);"
+						end
+					when 'putobject'
+						make_insn_def insn
+					when 'opt_plus'
+						make_insn_def insn do
+							commit "    Value *obj2 = rb_mJit->builder->CreateAnd(obj, -2);"
+							commit "    val = rb_mJit->builder->CreateAdd(recv, obj2);"
+						end
+					when 'opt_send_without_block'
+						commit '    Type *llvm_call_info_ptr_t = rb_mJit->module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();'
+						commit "    CALL_INFO rb_ci = (CALL_INFO)insn->operands[0];"
+						commit "    Value *ci = rb_mJit->builder->CreateIntToPtr(rb_mJit->valueVal((VALUE)rb_ci), llvm_call_info_ptr_t);"
+
+						commit "    // rb_mJit->builder->CreateCall4(llvm_caller_setup_arg_block, arg_th, arg_cfp, ci, rb_mJit->int32Zero); // need for block arg"
+
+						commit "    // PUSH"
+						commit "    Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);"
+						commit "    Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);"
+						commit "    rb_mJit->builder->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();"
+						commit "    Value *sp_incptr = rb_mJit->builder->CreateGEP(sp, rb_mJit->valueOne);"
+						commit "    rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);"
+
+						commit "    // vm_search_method(ci, ci->recv = TOPN(ci->argc));"
+						commit "    rb_ci->argc = rb_ci->orig_argc;"
+						commit "    Value *self = JIT_STACK.front();" # putself が実行されてない場合はここで落ちる
+						commit "    rb_mJit->builder->CreateCall2(llvm_search_method, ci, self);"
+						commit ""
+						commit "    Value *ci_call_elmptr = rb_mJit->builder->CreateStructGEP(ci, 14);"
+						commit "    Value *ci_call = rb_mJit->builder->CreateLoad(ci_call_elmptr);"
+						commit "    rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci);"
+						end
+						commit "    break; }"
+				}
+      end
+
+      ERB.new(vpath.read('template/jit_codegen.inc.tmpl')).result(binding)
+    end
+
+    def make_header_stack_val insn
+      vars = insn.opes + insn.pops + insn.defopes.map{|e| e[0]}
+
+			@val_alloca = true
+      insn.rets.each{|var|
+        if vars.all?{|e| e[1] != var[1]} && var[1] != '...'
+					if var[0] == 'VALUE'
+						commit "    Value *#{var[1]};"
+						@val_alloca = false
+					else
+						commit "  #{var[0]} #{var[1]};"
+					end
+        end
+      }
+    end
+
+		def make_header_operands insn
+			vars = insn.opes
+			n = 0
+			ops = []
+
+			vars.each_with_index{|(type, var), i|
+				break if type == '...'
+
+				re = /\b#{var}\b/n
+				if re =~ insn.body or re =~ insn.sp_inc or insn.rets.any?{|t, v| re =~ v} or re =~ 'ic' or re =~ 'ci'
+					if type == 'VALUE'
+						ops << "    Value *#{var} = rb_mJit->builder->CreateAlloca(rb_mJit->valueTy);"
+						ops << "    rb_mJit->builder->CreateStore(rb_mJit->valueVal(insn->operands[#{i}]), #{var});"
+					elsif type == 'CALL_INFO'
+						ops << '    Type *llvm_call_info_ptr_t = rb_mJit->module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();'
+						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->operands[#{i}];"
+						ops << "    Value *#{var} = rb_mJit->builder->CreateIntToPtr(rb_mJit->valueVal((VALUE)rb_ci), llvm_call_info_ptr_t);"
+					else
+						ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
+					end
+				end
+
+				n   += 1
+			}
+			@opn = n
+
+			# # reverse or not?
+			# # ops.join
+			# commit ops.reverse
+			commit ops
+		end
+
+    def make_header_stack_pops insn
+      n = 0
+      pops = []
+      vars = insn.pops
+      vars.each_with_index{|iter, i|
+        type, var, r = *iter
+        break if type == '...'
+        if r
+          pops << "  #{type} #{var} = SCREG(#{r});"
+        else
+					if type == "VALUE"
+						pops << "    Value *#{var} = TOPN(#{n});"
+					else
+						pops << "  #{type} #{var} = TOPN(#{n});"
+					end
+          n += 1
+        end
+      }
+      @popn = n
+
+      # reverse or not?
+      commit pops.reverse
+    end
+
+    #### def make_header_popn insn
+
+    def make_footer_stack_val insn
+      each_footer_stack_val(insn){|v|
+        if v[2]
+          commit "  SCREG(#{v[2]}) = #{v[1]};"
+        else
+					if @val_alloca
+						commit "    Value *pushVal = rb_mJit->builder->CreateLoad(#{v[1]});"
+						commit "    PUSH(pushVal);"
+					else
+						commit "    PUSH(#{v[1]});"
+					end
+        end
+      }
+    end
+
+    def make_header insn
+      make_header_stack_val  insn
+      # make_header_default_operands insn
+      make_header_operands   insn
+      make_header_stack_pops insn
+      # make_header_temporary_vars insn
+      #
+      # make_header_debug insn
+      # make_header_trace insn
+      # make_header_pc insn
+      make_header_popn insn
+      # make_header_defines insn
+      # make_header_analysis insn
+    end
+
+    def make_footer insn
+      make_footer_stack_val insn
+      # make_footer_default_operands insn
+      # make_footer_undefs insn
+    end
+
+		def make_insn_def insn
+			make_header insn
+			yield if block_given?
+			make_footer(insn)
+		end
+
+  end
+
   class SourceCodeGenerator
     Files = { # codes
-      'vm.inc'         => VmBodyGenerator,
-      'vmtc.inc'       => VmTCIncGenerator,
-      'insns.inc'      => InsnsIncGenerator,
-      'insns_info.inc' => InsnsInfoIncGenerator,
-    # 'minsns.inc'     => MInsnsIncGenerator,
-      'optinsn.inc'    => OptInsnIncGenerator,
-      'optunifs.inc'   => OptUnifsIncGenerator,
-      'opt_sc.inc'     => OptSCIncGenerator,
-      'yasmdata.rb'    => YASMDataRbGenerator,
+      'vm.inc'          => VmBodyGenerator,
+      'vmtc.inc'        => VmTCIncGenerator,
+      'insns.inc'       => InsnsIncGenerator,
+      'insns_info.inc'  => InsnsInfoIncGenerator,
+    # 'minsns.inc'      => MInsnsIncGenerator,
+      'optinsn.inc'     => OptInsnIncGenerator,
+      'optunifs.inc'    => OptUnifsIncGenerator,
+      'opt_sc.inc'      => OptSCIncGenerator,
+      'yasmdata.rb'     => YASMDataRbGenerator,
+      'jit_codegen.inc' => JitCodegenIncGenerator,
     }
 
     def generate args = []

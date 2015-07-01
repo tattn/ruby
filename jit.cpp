@@ -4,13 +4,6 @@
 #include "vm_core.h"
 #include "jit.h"
 
-#include <llvm-c/Core.h>
-#include <llvm-c/Analysis.h>
-#include <llvm-c/ExecutionEngine.h>
-#include <llvm-c/Target.h>
-#include <llvm-c/Transforms/Scalar.h>
-#include <llvm-c/BitWriter.h>
-
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/GenericValue.h"
 #include "llvm/ExecutionEngine/Interpreter.h"
@@ -27,10 +20,8 @@
 
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/Analysis/Passes.h"
-// #include "llvm/IR/PassManager.h"
 #include "llvm/Transforms/Scalar.h"
 
-// #include "llvm/LinkAllPasses.h"
 #include "llvm/Support/ManagedStatic.h"
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Support/raw_ostream.h"
@@ -81,10 +72,6 @@ public:
 
 	Value* valueVal(VALUE val) { return builder->getInt64(val); }
 
-	// rb_thread_t
-	// rb_control_frame_t
-	Type *cfpTy;
-
 	Value *valueOne;
 
 	Value *int32Zero;
@@ -110,97 +97,9 @@ public:
 			.setErrorStr(&error)
 			.create());
 
-		/*
-		   VALUE *pc;
-		   VALUE *sp
-		   rb_iseq_t *iseq;
-		   VALUE flag;
-		   VALUE self;
-		   VALUE klass;
-		   VALUE *ep
-		   rb_iseq_t *block_iseq;
-		   VALUE proc;
-		   VALUE *bp_check;
-		   */
-		cfpTy = StructType::create("rb_control_frame_t",
-				valuePtrTy,
-				valuePtrTy,
-				ptrTy,
-				valueTy,
-				valueTy,
-				valueTy,
-				valuePtrTy,
-				ptrTy,
-				valueTy,
-				valuePtrTy, nullptr);
-
-		const char *bitcode = R"STR(
-%struct.rb_thread_struct = type { %struct.list_node, i64, %struct.rb_vm_struct*, i64*, i64, %struct.rb_control_frame_struct*, i32, i32, i64, i32, i32, %struct.rb_block_struct*, %struct.rb_method_entry_struct*, %struct.rb_call_info_struct*, i64, i64, %struct.rb_block_struct*, i64*, i64, %struct._opaque_pthread_t*, i32, i32, i32, %struct.native_thread_data_struct, i8*, i64, i64, i64, i64, i64, i32, i32, i64, %struct._opaque_pthread_mutex_t, %struct.rb_thread_cond_struct, %struct.rb_unblock_callback, i64, %struct.rb_mutex_struct*, %struct.rb_vm_tag*, %struct.rb_vm_protect_tag*, i32, i32, %struct.st_table*, i64, i64, %struct.rb_thread_list_struct*, i64, i64, i64 (...)*, %struct.anon.12, i64, %struct.rb_hook_list_struct, %struct.rb_trace_arg_struct*, %struct.rb_fiber_struct*, %struct.rb_fiber_struct*, [37 x i32], %struct.rb_ensure_list*, i32, i32, i8*, i64, i64 }
-%struct.list_node = type { %struct.list_node*, %struct.list_node* }
-%struct.rb_vm_struct = type { i64, %struct.rb_global_vm_lock_struct, %struct._opaque_pthread_mutex_t, %struct.rb_thread_struct*, %struct.rb_thread_struct*, %struct.list_head, i64, i64, i32, i32, i32, i32, i64, [4 x i64], i64, i64, i64, i64, i64, i64, i64, %struct.st_table*, %struct.st_table*, [32 x %struct.anon.1], %struct.rb_hook_list_struct, %struct.st_table*, %struct.rb_postponed_job_struct*, i32, i32, i64, i64, i64, i64, i64, i64, %struct.rb_objspace*, %struct.RArray, i64*, %struct.st_table*, %struct.anon.5, [22 x i16] }
-%struct.rb_global_vm_lock_struct = type { i64, %struct._opaque_pthread_mutex_t, i64, %struct.rb_thread_cond_struct, %struct.rb_thread_cond_struct, %struct.rb_thread_cond_struct, i32, i32 }
-%struct.list_head = type { %struct.list_node }
-%struct.anon.1 = type { i64, i32 }
-%struct.rb_postponed_job_struct = type opaque
-%struct.rb_objspace = type opaque
-%struct.RArray = type { %struct.RBasic, %union.anon.2 }
-%struct.RBasic = type { i64, i64 }
-%union.anon.2 = type { %struct.anon.3 }
-%struct.anon.3 = type { i64, %union.anon.4, i64* }
-%union.anon.4 = type { i64 }
-%struct.anon.5 = type { i64, i64, i64, i64 }
-%struct.rb_method_entry_struct = type { i64, i64, %struct.rb_method_definition_struct*, i64, i64 }
-%struct.rb_method_definition_struct = type { i32, i32, %union.anon.8, i64 }
-%union.anon.8 = type { %struct.rb_method_cfunc_struct }
-%struct.rb_method_cfunc_struct = type { i64 (...)*, i64 (i64 (...)*, i64, i32, i64*)*, i32 }
-%struct.rb_call_info_struct = type { i64, i32, i32, %struct.rb_iseq_struct*, %struct.rb_call_info_kw_arg_struct*, i64, i64, i64, %struct.rb_method_entry_struct*, i64, %struct.rb_block_struct*, i64, i32, %union.anon.9, i64 (%struct.rb_thread_struct*, %struct.rb_control_frame_struct*, %struct.rb_call_info_struct*)* }
-%struct.rb_iseq_struct = type { i32, i32, %struct.rb_iseq_location_struct, i64*, i32, i32, i64, i64, %struct.iseq_line_info_entry*, i64*, i32, i32, %union.iseq_inline_storage_entry*, i32, i32, %struct.rb_call_info_struct*, %struct.anon.10, %struct.iseq_catch_table*, %struct.rb_iseq_struct*, %struct.rb_iseq_struct*, i64, i64, i64, i64, i64, %struct.iseq_compile_data*, i64* }
-%struct.rb_iseq_location_struct = type { i64, i64, i64, i64, i64 }
-%struct.iseq_line_info_entry = type opaque
-%union.iseq_inline_storage_entry = type { %struct.iseq_inline_cache_entry }
-%struct.iseq_inline_cache_entry = type { i64, %struct.rb_cref_struct*, %union.anon.7 }
-%struct.rb_cref_struct = type { i64, i64, i64, %struct.rb_cref_struct*, %struct.rb_scope_visi_struct }
-%struct.rb_scope_visi_struct = type { i8, [3 x i8] }
-%union.anon.7 = type { i64 }
-%struct.anon.10 = type { %struct.anon.11, i32, i32, i32, i32, i32, i32, i32, i64*, %struct.rb_iseq_param_keyword* }
-%struct.anon.11 = type { i8, [3 x i8] }
-%struct.rb_iseq_param_keyword = type { i32, i32, i32, i32, i64*, i64* }
-%struct.iseq_catch_table = type opaque
-%struct.iseq_compile_data = type opaque
-%struct.rb_call_info_kw_arg_struct = type { i32, [1 x i64] }
-%union.anon.9 = type { i32 }
-%struct.rb_block_struct = type { i64, i64, i64*, %struct.rb_iseq_struct*, i64 }
-%struct._opaque_pthread_t = type { i64, %struct.__darwin_pthread_handler_rec*, [8176 x i8] }
-%struct.__darwin_pthread_handler_rec = type { void (i8*)*, i8*, %struct.__darwin_pthread_handler_rec* }
-%struct.native_thread_data_struct = type { i8*, %struct.rb_thread_cond_struct }
-%struct._opaque_pthread_mutex_t = type { i64, [56 x i8] }
-%struct.rb_thread_cond_struct = type { %struct._opaque_pthread_cond_t }
-%struct._opaque_pthread_cond_t = type { i64, [40 x i8] }
-%struct.rb_unblock_callback = type { void (i8*)*, i8* }
-%struct.rb_mutex_struct = type opaque
-%struct.rb_vm_tag = type { i64, i64, [37 x i32], %struct.rb_vm_tag* }
-%struct.rb_vm_protect_tag = type { %struct.rb_vm_protect_tag* }
-%struct.st_table = type { %struct.st_hash_type*, i64, i64, %union.anon }
-%struct.st_hash_type = type { i32 (...)*, i64 (...)* }
-%union.anon = type { %struct.anon }
-%struct.anon = type { %struct.st_table_entry**, %struct.st_table_entry*, %struct.st_table_entry* }
-%struct.st_table_entry = type opaque
-%struct.rb_thread_list_struct = type { %struct.rb_thread_list_struct*, %struct.rb_thread_struct* }
-%struct.anon.12 = type { i64*, i64*, i64, [37 x i32] }
-%struct.rb_hook_list_struct = type { %struct.rb_event_hook_struct*, i32, i32 }
-%struct.rb_event_hook_struct = type opaque
-%struct.rb_trace_arg_struct = type { i32, %struct.rb_thread_struct*, %struct.rb_control_frame_struct*, i64, i64, i64, i64, i32, i32, i64 }
-%struct.rb_fiber_struct = type opaque
-%struct.rb_ensure_list = type { %struct.rb_ensure_list*, %struct.rb_ensure_entry }
-%struct.rb_ensure_entry = type { i64, i64 (...)*, i64 }
-%struct.rb_control_frame_struct = type { i64*, i64*, %struct.rb_iseq_struct*, i64, i64, i64, i64*, %struct.rb_iseq_struct*, i64 }
-
-
-declare void @vm_caller_setup_arg_block(%struct.rb_thread_struct*, %struct.rb_control_frame_struct*, %struct.rb_call_info_struct*, i32) #1
-declare void @vm_search_method(%struct.rb_call_info_struct*, i64)
-		)STR";
-
-		parseAndLink(bitcode);
+		const char *ruby_module =
+			#include "tool/jit/jit_typedef.inc"
+		parseAndLink(ruby_module);
 	}
 
 	~JitCompiler()
@@ -263,7 +162,6 @@ extern "C"
 void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 {
-	// jit_insn_t *insn = (jit_insn_t*)malloc(sizeof(jit_insn_t));
 	jit_insn_t *insn = new jit_insn_t;
 	jit_insn_init(insn, th, cfp, pc);
 	// TODO: トレースするかを実行回数などで判定
@@ -275,57 +173,21 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 			insn->operands.push_back(pc[1]);
 			break;
 		case BIN(opt_plus):
-			// insn->operands.push_back(trace.reg_stack.back()); trace.reg_stack.pop_back(); // obj
-			// insn->operands.push_back(trace.reg_stack.back()); trace.reg_stack.pop_back(); // recv
+			insn->operands.push_back(pc[1]);
 			break;
 		case BIN(opt_send_without_block):
-			CALL_INFO ci = (CALL_INFO)pc[1];
-			ci->argc = ci->orig_argc;
 			insn->operands.push_back(pc[1]);
 			break;
 	}
-	// if (insn->opecode == BIN(opt_plus)) {
-	// 	rb_mJit->engine->finalizeObject();
-	// 	Function *jit_opt_plus = rb_mJit->module->getFunction("jit_opt_plus");
-	// 	void* pfptr = rb_mJit->engine->getPointerToFunction(jit_opt_plus);
-	// 	void (* fptr)(rb_control_frame_t*) = (void (*)(rb_control_frame_t*))pfptr;
-	// 	try {
-	// 	fptr(cfp);
-	// 	} catch(...){}
-	// }
 }
 
 extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
 {
-	JIT_DEBUG_LOG2("=== Start trace dump (length: %d) ===", rb_mJit->trace.insns.size());
+	JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns.size());
 	for (auto insn : rb_mJit->trace.insns) {
 		JIT_DEBUG_LOG2("trace: %s(%d)", insn_name(insn->opecode), insn->opecode);
-		// switch (insn->opecode) {
-		// 	case BIN(trace):
-		// 		JIT_DEBUG_LOG2("trace: trace(%d)", insn->opecode);
-		// 		break;
-		// 	case BIN(putself):
-		// 		JIT_DEBUG_LOG2("trace: putself(%d)", insn->opecode);
-        //
-		// 		break;
-		// 	case BIN(putobject):
-		// 		JIT_DEBUG_LOG2("trace: putobject(%d)", insn->opecode);
-        //
-		// 		break;
-		// 	case BIN(opt_plus):
-		// 		JIT_DEBUG_LOG2("trace: opt_plus(%d)", insn->opecode);
-        //
-		// 		// recv & obj がFixnum なら最適化
-		// 		break;
-		// 	case BIN(opt_send_without_block):
-		// 		JIT_DEBUG_LOG2("trace: opt_send_without_block(%d)", insn->opecode);
-        //
-		// 		break;
-		// 	default:
-		// 		JIT_DEBUG_LOG2("trace: unknown[%d(%s)]", insn->opecode, insn_name(insn->opecode));
-		// }
 	}
 	JIT_DEBUG_LOG("=== End trace dump ===");
 	void jit_codegen(rb_thread_t *th);
@@ -339,7 +201,7 @@ jit_codegen(rb_thread_t *th)
 #ifdef  JIT_DEBUG_SET_NAME_MODE
 #define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
 #else
-// #define JIT_LLVM_SET_NAME(v, name)
+#define JIT_LLVM_SET_NAME(v, name)
 #endif
 
 	Type *llvm_thread_t = rb_mJit->module->getTypeByName("struct.rb_thread_struct")->getPointerTo();
@@ -351,7 +213,6 @@ jit_codegen(rb_thread_t *th)
 
 
 	FunctionType* jit_trace_func_t = FunctionType::get(rb_mJit->voidTy, { llvm_thread_t, llvm_control_frame }, false);
-	// Function *jit_trace_func = Function::Create(jit_trace_func_t, GlobalValue::ExternalLinkage, "jit_trace_func1", m);
 	Function *jit_trace_func = Function::Create(jit_trace_func_t, GlobalValue::ExternalLinkage, "jit_trace_func1", rb_mJit->module);
 	jit_trace_func->setCallingConv(CallingConv::C);
 
@@ -363,60 +224,30 @@ jit_codegen(rb_thread_t *th)
 	BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", jit_trace_func);
 	rb_mJit->builder->SetInsertPoint(entry);
 
-	std::deque<int> _stack;
-	int reg_no = 0;
-
 	std::deque<Value*> __stack;
-	Value *self;
+#define JIT_STACK __stack
+
+#define JIT_CHECK_STACK_SIZE
+#define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
+#undef TOPN
+#ifdef JIT_CHECK_STACK_SIZE
+#define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
+#else
+#define TOPN(x) (JIT_STACK[x])
+#endif
+#undef POPN
+#ifdef JIT_CHECK_STACK_SIZE
+#define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
+#else
+#define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
+#endif
+#undef PUSH
+#define PUSH(x) JIT_STACK.push_front(x)
+#undef JIT_CHECK_STACK_SIZE
 
 	for (auto insn : rb_mJit->trace.insns) {
 		switch (insn->opecode) {
-			case BIN(trace):
-				break;
-			case BIN(putself):
-				self = rb_mJit->valueVal(th->cfp->self);
-				break;
-			case BIN(putobject):
-				{
-					Value *alloca = rb_mJit->builder->CreateAlloca(rb_mJit->valueTy);
-					rb_mJit->builder->CreateStore(rb_mJit->valueVal(insn->operands[0]), alloca);
-					Value *putVal = rb_mJit->builder->CreateLoad(alloca);
-					__stack.push_back(putVal);
-				}
-				break;
-			case BIN(opt_plus):
-				{
-					Value *recv = __stack.back(); __stack.pop_back();
-					Value *obj = __stack.back(); __stack.pop_back();
-					Value *obj2 = rb_mJit->builder->CreateAnd(obj, -2);
-					Value *result = rb_mJit->builder->CreateAdd(recv, obj2);
-					__stack.push_back(result);
-				}
-				break;
-			case BIN(opt_send_without_block):
-				{
-					Type *llvm_call_info_ptr_t = rb_mJit->module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();
-					VALUE rb_ci = insn->operands[0];
-					Value *ci = rb_mJit->builder->CreateIntToPtr(rb_mJit->valueVal(rb_ci), llvm_call_info_ptr_t);
-
-					// rb_mJit->builder->CreateCall4(llvm_caller_setup_arg_block, arg_th, arg_cfp, ci, rb_mJit->int32Zero); // ブロック引数時に必要
-
-					Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);
-					Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);
-					rb_mJit->builder->CreateStore(__stack.back(), sp); __stack.pop_back();
-					Value *sp_incptr = rb_mJit->builder->CreateGEP(sp, rb_mJit->valueOne);
-					rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);
-
-					// vm_search_method(ci, ci->recv = TOPN(ci->argc));
-					rb_mJit->builder->CreateCall2(llvm_search_method, ci, self);
-
-					Value *ci_call_elmptr = rb_mJit->builder->CreateStructGEP(ci, 14);
-					Value *ci_call = rb_mJit->builder->CreateLoad(ci_call_elmptr);
-					rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci);
-				}
-				break;
-			default:
-				JIT_DEBUG_LOG2("trace: unknown[%d(%s)]", insn->opecode, insn_name(insn->opecode));
+#include "jit_codegen.inc"
 		}
 	}
 
@@ -457,60 +288,6 @@ ruby_jit_test(void)
 {
 }
 
-extern "C"
-VALUE
-jit_testadd(VALUE self, VALUE left, VALUE right)
-{
-	char *llvm_error = 0;
-	LLVMModuleRef module = LLVMModuleCreateWithName("LLVM Ruby module");
-	LLVMTypeRef fmain_args[] = { LLVMInt64Type(), LLVMInt64Type() };
-	LLVMValueRef fmain = LLVMAddFunction(module, "main", LLVMFunctionType(LLVMInt64Type(), fmain_args, 2, 0));
-	LLVMSetFunctionCallConv(fmain, LLVMCCallConv);
-	LLVMValueRef arg1 = LLVMGetParam(fmain, 0);
-	LLVMValueRef arg2 = LLVMGetParam(fmain, 1);
-	LLVMBasicBlockRef entry = LLVMAppendBasicBlock(fmain, "entry");
-	LLVMBuilderRef builder = LLVMCreateBuilder();
-	LLVMPositionBuilderAtEnd(builder, entry);
-	LLVMValueRef add = LLVMBuildAdd(builder, arg1, arg2, "result");
-	LLVMBuildRet(builder, add);
-	LLVMVerifyModule(module, LLVMAbortProcessAction, &llvm_error);
-	LLVMDisposeMessage(llvm_error);
-
-	LLVMExecutionEngineRef engine;
-	LLVMModuleProviderRef provider = LLVMCreateModuleProviderForExistingModule(module);
-	llvm_error = NULL;
-	if(LLVMCreateJITCompiler(&engine, provider, 2, &llvm_error) != 0) {
-		fprintf(stderr, "%s\n", llvm_error);
-		LLVMDisposeMessage(llvm_error);
-		abort();
-	}
-
-	LLVMPassManagerRef pass = LLVMCreatePassManager();
-	LLVMAddTargetData(LLVMGetExecutionEngineTargetData(engine), pass);
-	LLVMAddConstantPropagationPass(pass);
-	LLVMAddInstructionCombiningPass(pass);
-	LLVMAddPromoteMemoryToRegisterPass(pass);
-	LLVMAddGVNPass(pass);
-	LLVMAddCFGSimplificationPass(pass);
-	LLVMRunPassManager(pass, module);
-
-	LLVMDumpModule(module);
-
-
-	int l = NUM2INT(left);
-	int r = NUM2INT(right);
-	printf("%d + %d\n", l, r);
-	void *f = LLVMGetPointerToGlobal(engine, fmain);
-	int (* fjit_add)(int, int) = (int (*)(int, int))f;
-	fprintf(stderr, "%d\n", fjit_add(l, r));
-
-	LLVMDisposePassManager(pass);
-	LLVMDisposeBuilder(builder);
-	LLVMDisposeExecutionEngine(engine);
-
-	return Qtrue;
-}
-
 // extern "C"
 // VALUE
 // rb_jit_compile_node(VALUE self, NODE *node)
@@ -544,12 +321,6 @@ jit_insn_to_llvm(rb_thread_t *th)
 	}
 #endif
 }
-
-// extern "C"
-// VALUE
-// jit_debug_compile(VALUE self, VALUE code)
-// {
-// }
 
 static VALUE
 jit_compile(VALUE self, VALUE code)
@@ -607,8 +378,6 @@ jit_compile(VALUE self, VALUE code)
 
 		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", jit_main_func);
 		rb_mJit->builder->SetInsertPoint(entry);
-		// rb_mJit->builder->CreateRetVoid();
-		// rb_mJit->builder->SetInsertPoint(entry, --entry->end());
 	}
 
 	for (unsigned int i = 0; i < iseq->iseq_size; /* */ ) {
@@ -700,7 +469,6 @@ Init_JIT(void)
 {
 	ruby_jit_init();
 	VALUE rb_mJIT = rb_define_module("JIT");
-	rb_define_singleton_method(rb_mJIT, "add", RUBY_METHOD_FUNC(jit_testadd), 2);
 	rb_define_singleton_method(rb_mJIT, "compile", RUBY_METHOD_FUNC(jit_compile), 1);
 	// rb_define_singleton_method(rb_mJIT, "trace_dump", RUBY_METHOD_FUNC(jit_trace_dump), 0);
 }
