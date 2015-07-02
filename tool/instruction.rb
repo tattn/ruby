@@ -61,6 +61,10 @@ class RubyVM
       @optimized << insn
     end
 
+		def clear_rets
+			@rets = []
+		end
+
     def sp_increase_c_expr
       if(pops.any?{|t, v| v == '...'} ||
          rets.any?{|t, v| v == '...'})
@@ -1281,33 +1285,29 @@ class RubyVM
 						make_insn_def insn
 					when 'opt_plus'
 						make_insn_def insn do
-							commit "    Value *obj2 = rb_mJit->builder->CreateAnd(obj, -2);"
-							commit "    val = rb_mJit->builder->CreateAdd(recv, obj2);"
+							commit "    Value *tmp = rb_mJit->builder->CreateAnd(obj, -2);"
+							commit "    val = rb_mJit->builder->CreateAdd(recv, tmp);"
 						end
 					when 'opt_send_without_block'
-						commit '    Type *llvm_call_info_ptr_t = rb_mJit->module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();'
-						commit "    CALL_INFO rb_ci = (CALL_INFO)insn->operands[0];"
-						commit "    Value *ci = rb_mJit->builder->CreateIntToPtr(rb_mJit->valueVal((VALUE)rb_ci), llvm_call_info_ptr_t);"
+						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
+						make_insn_def insn do
+							commit "    // rb_mJit->builder->CreateCall4(llvm_caller_setup_arg_block, arg_th, arg_cfp, ci, rb_mJit->int32Zero); // need for block arg"
 
-						commit "    // rb_mJit->builder->CreateCall4(llvm_caller_setup_arg_block, arg_th, arg_cfp, ci, rb_mJit->int32Zero); // need for block arg"
+							# commit "    // pop stack & push vm's stack"
+							# commit "    POP2VM();"
 
-						commit "    // PUSH"
-						commit "    Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);"
-						commit "    Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);"
-						commit "    rb_mJit->builder->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();"
-						commit "    Value *sp_incptr = rb_mJit->builder->CreateGEP(sp, rb_mJit->valueOne);"
-						commit "    rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);"
-
-						commit "    // vm_search_method(ci, ci->recv = TOPN(ci->argc));"
-						commit "    rb_ci->argc = rb_ci->orig_argc;"
-						commit "    Value *self = JIT_STACK.front();" # putself が実行されてない場合はここで落ちる
-						commit "    rb_mJit->builder->CreateCall2(llvm_search_method, ci, self);"
-						commit ""
-						commit "    Value *ci_call_elmptr = rb_mJit->builder->CreateStructGEP(ci, 14);"
-						commit "    Value *ci_call = rb_mJit->builder->CreateLoad(ci_call_elmptr);"
-						commit "    rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci);"
+							commit "    // vm_search_method(ci, ci->recv = TOPN(ci->argc));"
+							commit "    rb_ci->argc = rb_ci->orig_argc;"
+							commit "    Value *self = TOPN(rb_ci->argc);" # putself が実行されてない場合はここで落ちる
+							commit "    rb_mJit->builder->CreateCall2(llvm_search_method, ci, self);" # rb_ci->self = self
+							commit ""
+							commit "    Value *ci_call_elmptr = rb_mJit->builder->CreateStructGEP(ci, 14);"
+							commit "    Value *ci_call = rb_mJit->builder->CreateLoad(ci_call_elmptr);"
+							# commit "    rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci);"
+							commit "    CALL_METHOD(ci);"
 						end
-						commit "    break; }"
+					end
+					commit "    break; }"
 				}
       end
 
@@ -1373,7 +1373,7 @@ class RubyVM
           pops << "  #{type} #{var} = SCREG(#{r});"
         else
 					if type == "VALUE"
-						pops << "    Value *#{var} = TOPN(#{n});"
+						pops << "    Value *#{var} = TOPN(#{n+1});"
 					else
 						pops << "  #{type} #{var} = TOPN(#{n});"
 					end
@@ -1427,7 +1427,7 @@ class RubyVM
 		def make_insn_def insn
 			make_header insn
 			yield if block_given?
-			make_footer(insn)
+			make_footer insn
 		end
 
   end

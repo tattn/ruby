@@ -71,10 +71,13 @@ public:
 	Type *valuePtrTy = PointerType::getUnqual(int64Ty);
 
 	Value* valueVal(VALUE val) { return builder->getInt64(val); }
+	Value *signedVal(int val) { return llvm::ConstantInt::getSigned(int64Ty, val); }
 
 	Value *valueOne;
 
 	Value *int32Zero;
+
+	Value *valueQundef;
 
 	jit_trace_t trace;
 
@@ -84,6 +87,7 @@ public:
 
 		valueOne = builder->getInt64(1);
 		int32Zero = builder->getInt32(0);
+		valueQundef = builder->getInt64(Qundef);
 
 		auto Owner = make_unique<Module>("Ruby LLVM Module", getGlobalContext());
 		module = Owner.get();
@@ -130,8 +134,37 @@ public:
 
 	void optimizeFunction(Function& f)
 	{
+		//https://github.com/WestleyArgentum/pass-optimizer/blob/master/codegen/pass_setup.cpp
 		legacy::FunctionPassManager fpm(module);
-		// fpm.addPass(new DataLayout(*engine->getDataLayout()));
+		/////// fpm.addPass(new DataLayout(*engine->getDataLayout()));
+		fpm.add(createTypeBasedAliasAnalysisPass());
+		fpm.add(createPromoteMemoryToRegisterPass());
+		fpm.add(createJumpThreadingPass());
+		fpm.add(createReassociatePass());
+		fpm.add(createEarlyCSEPass());
+		fpm.add(createLoopIdiomPass());
+		fpm.add(createLoopRotatePass());
+		// fpm.add(createLowerSimdLoopPass());
+		fpm.add(createLICMPass());
+		fpm.add(createIndVarSimplifyPass());
+		fpm.add(createLoopDeletionPass());
+		// fpm.add(createLoopVectorizePass());
+		fpm.add(createSCCPPass());
+		fpm.add(createSinkingPass());
+		fpm.add(createInstructionSimplifierPass());
+		fpm.add(createDeadStoreEliminationPass());
+		fpm.add(createScalarizerPass());
+		fpm.add(createAggressiveDCEPass());
+		fpm.add(createConstantPropagationPass());
+		fpm.add(createDeadInstEliminationPass());
+		fpm.add(createDeadCodeEliminationPass());
+		fpm.add(createLoopStrengthReducePass());
+		fpm.add(createTailCallEliminationPass());
+		fpm.add(createMemCpyOptPass());
+		fpm.add(createLowerAtomicPass());
+		fpm.add(createCorrelatedValuePropagationPass());
+		fpm.add(createLowerExpectIntrinsicPass());
+
 		fpm.add(createBasicAliasAnalysisPass());
 		fpm.add(createInstructionCombiningPass());
 		fpm.add(createReassociatePass());
@@ -230,20 +263,69 @@ jit_codegen(rb_thread_t *th)
 #define JIT_CHECK_STACK_SIZE
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
 #undef TOPN
-#ifdef JIT_CHECK_STACK_SIZE
-#define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
-#else
-#define TOPN(x) (JIT_STACK[x])
-#endif
+#define TOPN(x)\
+	[&]{\
+	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
+	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
+	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->signedVal(-x));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
+	return rb_mJit->builder->CreateLoad(sp_incptr);}()
+// #ifdef JIT_CHECK_STACK_SIZE
+// #define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
+// #else
+// #define TOPN(x) (JIT_STACK[x])
+// #endif
 #undef POPN
-#ifdef JIT_CHECK_STACK_SIZE
-#define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
-#else
-#define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
-#endif
+#define POPN(x) {\
+	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
+	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
+	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->signedVal(-x));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
+	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);}
+// #ifdef JIT_CHECK_STACK_SIZE
+// #define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
+// #else
+// #define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
+// #endif
 #undef PUSH
-#define PUSH(x) JIT_STACK.push_front(x)
+#define PUSH(x) {\
+	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
+	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
+	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	rb_mJit->builder->CreateStore((x), sp);\
+	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->valueOne);\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
+	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);}
+// #define PUSH(x) JIT_STACK.push_front(x)
+
+#define POP2VM() \
+	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
+	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
+	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	rb_mJit->builder->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();\
+	Value *sp_incptr = rb_mJit->builder->CreateGEP(sp, rb_mJit->valueOne);\
+	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);
+
+#undef CALL_METHOD
+#define CALL_METHOD(ci) do { \
+	Value *v = rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci); \
+	Value *cond_v = rb_mJit->builder->CreateICmpNE(v, rb_mJit->valueQundef, "ifcond");\
+    BasicBlock *then_block = BasicBlock::Create(getGlobalContext(), "then", jit_trace_func);\
+    BasicBlock *else_block = BasicBlock::Create(getGlobalContext(), "else", jit_trace_func);\
+    rb_mJit->builder->CreateCondBr(cond_v, then_block, else_block);\
+	rb_mJit->builder->SetInsertPoint(then_block);\
+	PUSH(v);\
+	rb_mJit->builder->CreateBr(else_block);\
+	rb_mJit->builder->SetInsertPoint(else_block);\
+} while (0)
 #undef JIT_CHECK_STACK_SIZE
+
 
 	for (auto insn : rb_mJit->trace.insns) {
 		switch (insn->opecode) {
