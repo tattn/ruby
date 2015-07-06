@@ -1273,39 +1273,18 @@ class RubyVM
   # jit_codegen.inc
   class JitCodegenIncGenerator < VmBodyGenerator
     def generate
+      load_insns_llvm_def 'insns_llvm.def'
+
       codegen_table = build_string do
         @insns.each{|insn|
 					commit "case BIN(#{insn.name}): {"
 					case insn.name
-					when 'putself'
-						make_insn_def insn do
-							commit "    val = rb_mJit->valueVal(th->cfp->self);"
-						end
-					when 'putobject'
-						make_insn_def insn
-					when 'opt_plus'
-						make_insn_def insn do
-							commit "    Value *tmp = rb_mJit->builder->CreateAnd(obj, -2);"
-							commit "    val = rb_mJit->builder->CreateAdd(recv, tmp);"
-						end
 					when 'opt_send_without_block'
 						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
-						make_insn_def insn do
-							commit "    // rb_mJit->builder->CreateCall4(llvm_caller_setup_arg_block, arg_th, arg_cfp, ci, rb_mJit->int32Zero); // need for block arg"
-
-							# commit "    // pop stack & push vm's stack"
-							# commit "    POP2VM();"
-
-							commit "    // vm_search_method(ci, ci->recv = TOPN(ci->argc));"
-							commit "    rb_ci->argc = rb_ci->orig_argc;"
-							commit "    Value *self = TOPN(rb_ci->argc);" # putself が実行されてない場合はここで落ちる
-							commit "    rb_mJit->builder->CreateCall2(llvm_search_method, ci, self);" # rb_ci->self = self
-							commit ""
-							commit "    Value *ci_call_elmptr = rb_mJit->builder->CreateStructGEP(ci, 14);"
-							commit "    Value *ci_call = rb_mJit->builder->CreateLoad(ci_call_elmptr);"
-							# commit "    rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci);"
-							commit "    CALL_METHOD(ci);"
-						end
+						make_insn_def(insn)
+					else
+						# @val_alloca = false if insn.optimized
+						make_insn_def insn
 					end
 					commit "    break; }"
 				}
@@ -1314,18 +1293,39 @@ class RubyVM
       ERB.new(vpath.read('template/jit_codegen.inc.tmpl')).result(binding)
     end
 
+		def make_header_basic_block
+			commit '    if (!insn->bb) insn->bb = BasicBlock::Create(CONTEXT, "insn", JIT_TRACE_FUNC);'
+			commit '    BUILDER->CreateBr(insn->bb);'
+			commit '    BUILDER->SetInsertPoint(insn->bb);'
+		end
+
+		def make_footer_basic_block
+		end
+
     def make_header_stack_val insn
       vars = insn.opes + insn.pops + insn.defopes.map{|e| e[0]}
 
-			@val_alloca = true
       insn.rets.each{|var|
         if vars.all?{|e| e[1] != var[1]} && var[1] != '...'
 					if var[0] == 'VALUE'
 						commit "    Value *#{var[1]};"
-						@val_alloca = false
 					else
 						commit "  #{var[0]} #{var[1]};"
 					end
+        end
+      }
+    end
+
+    def make_header_default_operands insn
+      vars = insn.defopes
+
+      vars.each{|e|
+        next if e[1] == '*'
+        if use_const?
+          commit "  const #{e[0][0]} #{e[0][1]} = #{e[1]};"
+        else
+					llvm_val = "#{$1}(RB_JIT->valueVal(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
+          commit "  #define #{e[0][1]} #{llvm_val}"
         end
       }
     end
@@ -1335,18 +1335,22 @@ class RubyVM
 			n = 0
 			ops = []
 
+			@val_alloca = false
+
 			vars.each_with_index{|(type, var), i|
 				break if type == '...'
 
 				re = /\b#{var}\b/n
 				if re =~ insn.body or re =~ insn.sp_inc or insn.rets.any?{|t, v| re =~ v} or re =~ 'ic' or re =~ 'ci'
 					if type == 'VALUE'
-						ops << "    Value *#{var} = rb_mJit->builder->CreateAlloca(rb_mJit->valueTy);"
-						ops << "    rb_mJit->builder->CreateStore(rb_mJit->valueVal(insn->operands[#{i}]), #{var});"
+						ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->valueTy);"
+						ops << "    BUILDER->CreateStore(RB_JIT->valueVal(insn->pc[#{i+1}]), #{var});"
+						@val_alloca = true
 					elsif type == 'CALL_INFO'
-						ops << '    Type *llvm_call_info_ptr_t = rb_mJit->module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();'
-						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->operands[#{i}];"
-						ops << "    Value *#{var} = rb_mJit->builder->CreateIntToPtr(rb_mJit->valueVal((VALUE)rb_ci), llvm_call_info_ptr_t);"
+						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
+						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->valueVal((VALUE)rb_ci), RB_JIT->llvm_call_info_t);"
+					elsif type == 'lindex_t' or type == 'rb_num_t'
+						ops << "    Value *#{var} = RB_JIT->valueVal(insn->pc[#{i+1}]);"
 					else
 						ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
 					end
@@ -1359,7 +1363,7 @@ class RubyVM
 			# # reverse or not?
 			# # ops.join
 			# commit ops.reverse
-			commit ops
+			commit ops unless ops.empty?
 		end
 
     def make_header_stack_pops insn
@@ -1382,8 +1386,7 @@ class RubyVM
       }
       @popn = n
 
-      # reverse or not?
-      commit pops.reverse
+      commit pops.reverse unless pops.empty?
     end
 
     #### def make_header_popn insn
@@ -1394,8 +1397,7 @@ class RubyVM
           commit "  SCREG(#{v[2]}) = #{v[1]};"
         else
 					if @val_alloca
-						commit "    Value *pushVal = rb_mJit->builder->CreateLoad(#{v[1]});"
-						commit "    PUSH(pushVal);"
+						commit "    PUSH(BUILDER->CreateLoad(#{v[1]}));"
 					else
 						commit "    PUSH(#{v[1]});"
 					end
@@ -1404,8 +1406,9 @@ class RubyVM
     end
 
     def make_header insn
+			make_header_basic_block
       make_header_stack_val  insn
-      # make_header_default_operands insn
+      make_header_default_operands insn
       make_header_operands   insn
       make_header_stack_pops insn
       # make_header_temporary_vars insn
@@ -1420,15 +1423,58 @@ class RubyVM
 
     def make_footer insn
       make_footer_stack_val insn
-      # make_footer_default_operands insn
+      make_footer_default_operands insn
       # make_footer_undefs insn
+			make_footer_basic_block
     end
 
 		def make_insn_def insn
+			return unless @insns_llvm[insn.name]
+
 			make_header insn
-			yield if block_given?
+
+			if body = @insns_llvm[insn.name].body
+				commit body.chomp unless body.empty?
+			else
+				commit insn.body.chomp unless insn.body.empty?
+			end
+
 			make_footer insn
 		end
+
+    def load_insns_llvm_def file
+      insn = insn_in = nil
+      body = ''
+			@insns_llvm = {}
+
+			llvm_inst = Struct.new(:body)
+
+      vpath.open(file) {|f|
+        while line = f.gets
+					line.chomp!
+					case line
+
+					when /^\$(\w+)\s*\{/
+						insn = $1
+						insn_in = true
+
+          when /^\$(\w+)\s*/
+						insn = $1
+						@insns_llvm[insn] = llvm_inst.new(nil)
+
+					when /^\}/
+						@insns_llvm[insn] = llvm_inst.new(body)
+						insn_in = false
+						body = ''
+
+          else
+            if insn_in
+              body << line + "\n"
+            end
+          end
+        end
+      }
+    end
 
   end
 

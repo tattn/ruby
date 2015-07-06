@@ -1,0 +1,120 @@
+$nop
+$putself
+$putobject
+$putobject_OP_INT2FIX_O_0_C_
+$putobject_OP_INT2FIX_O_1_C_
+
+$getspecial {
+    // val = vm_getspecial(th, GET_LEP(), key, type);
+}
+
+$opt_plus {
+	Value *tmp = BUILDER->CreateAnd(obj, -2);
+	val = BUILDER->CreateAdd(recv, tmp);
+}
+
+$opt_minus {
+	Value *a, *b, *c;
+
+	a = FIX2LONG(recv);
+	b = FIX2LONG(obj);
+	c = BUILDER->CreateSub(a, b);
+	val = LONG2FIX(c);
+}
+
+$opt_mult {
+	Value *a, *b;
+
+	a = FIX2LONG(recv);
+	b = FIX2LONG(obj);
+	val = LONG2FIX(BUILDER->CreateMul(a, b));
+}
+
+$opt_div {
+	Value *x, *y, *div;
+
+	x = FIX2LONG(recv);
+	y = FIX2LONG(obj);
+	div = BUILDER->CreateSDiv(x, y);
+	val = LONG2NUM(div);
+}
+
+$opt_send_without_block {
+	rb_ci->argc = rb_ci->orig_argc;
+	BUILDER->CreateCall2(RB_JIT->llvm_search_method, ci, TOPN(rb_ci->argc));
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(ci, 14);
+	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
+	CALL_METHOD(ci);
+}
+
+$setlocal {
+/*
+    int i, lev = (int)level;
+    VALUE *ep = GET_EP();
+
+    for (i = 0; i < lev; i++) {
+	ep = GET_PREV_EP(ep);
+    }
+    *(ep - idx) = val;
+*/
+}
+
+$setlocal_OP__WC__0 {
+	Value *ep = GET_EP();
+
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->valueZero, idx));
+	BUILDER->CreateStore(val, idx_ep);
+}
+
+$getlocal {
+/*
+    int i, lev = (int)level;
+    VALUE *ep = GET_EP();
+
+    for (i = 0; i < lev; i++) {
+	ep = GET_PREV_EP(ep);
+    }
+    val = *(ep - idx);
+*/
+}
+
+$getlocal_OP__WC__0 {
+	Value *ep = GET_EP();
+
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->valueZero, idx));
+	val = BUILDER->CreateLoad(idx_ep);
+}
+
+$branchunless {
+	printf("########## %ld\n", dst);
+	printf("########## %d\n", insn->index + insn->len + dst);
+
+/*
+    if (!RTEST(val)) {
+	RUBY_VM_CHECK_INTS(th);
+	JUMP(dst);
+    }
+*/
+	Value *test = RTEST(val);
+
+/*
+	BasicBlock *bb_begin = BasicBlock::Create(CONTEXT, "unless", jit_trace_func);
+	BasicBlock *bb_end = BasicBlock::Create(CONTEXT, "unless_end", jit_trace_func);
+	BUILDER->CreateCondBr(test, bb_begin, bb_end);
+	BUILDER->SetInsertPoint(bb_begin);
+	BUILDER->CreateBr(bb_end);
+	BUILDER->SetInsertPoint(bb_end);
+	*/
+
+	dst = insn->index + insn->len + dst;
+	BasicBlock *bb_dst = insns[dst]->bb;
+	if (!bb_dst) {
+		bb_dst = BasicBlock::Create(CONTEXT, "unless", JIT_TRACE_FUNC);
+		insns[dst]->bb = bb_dst;
+	}
+	// BranchInst::Create(nullptr, bb_dst, test);
+	// BUILDER->CreateCondBr(test, bb_begin, bb_dst);
+
+
+
+}

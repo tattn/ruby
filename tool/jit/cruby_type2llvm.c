@@ -11,4 +11,8 @@ void vm_search_method(rb_call_info_t *ci, VALUE recv);
 void function(rb_thread_t *th, rb_control_frame_t *cfp) {
 	vm_caller_setup_arg_block(0, 0, 0, 0);
 	vm_search_method(0, 0);
+
+	VALUE idx = 6;
+
+    *(cfp->ep - idx) = 100;
 }

@@ -1480,8 +1480,6 @@ vm_exec(rb_thread_t *th)
     VALUE initial = 0;
     struct vm_throw_data *err;
 
-	jit_insn_to_llvm(th);
-
     TH_PUSH_TAG(th);
     _tag.retval = Qnil;
     if ((state = EXEC_TAG()) == 0) {
@@ -1733,7 +1731,8 @@ rb_iseq_eval_main(VALUE iseqval)
 
     vm_set_main_stack(th, iseqval);
 
-	is_jit_tracing = 1;
+	jit_trace_start(th);
+
     val = vm_exec(th);
 	if (getenv("RUBY_JIT_DEBUG")) jit_trace_dump(th);
     RB_GC_GUARD(iseqval); /* prohibit tail call optimization */

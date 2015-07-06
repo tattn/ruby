@@ -932,7 +932,8 @@ typedef rb_control_frame_t *
 VALUE *rb_vm_ep_local_ep(VALUE *ep);
 rb_block_t *rb_vm_control_frame_block_ptr(const rb_control_frame_t *cfp);
 
-#define RUBY_VM_PREVIOUS_CONTROL_FRAME(cfp) ((cfp)+1)
+// #define RUBY_VM_PREVIOUS_CONTROL_FRAME(cfp) ((cfp)+1)
+#define RUBY_VM_PREVIOUS_CONTROL_FRAME(cfp) (is_jit_tracing? jit_pop_trace(), ((cfp)+1) : ((cfp)+1))
 #define RUBY_VM_NEXT_CONTROL_FRAME(cfp) ((cfp)-1)
 #define RUBY_VM_END_CONTROL_FRAME(th) \
   ((rb_control_frame_t *)((th)->stack + (th)->stack_size))
@@ -1185,5 +1186,7 @@ extern void rb_reset_coverages(void);
 void rb_postponed_job_flush(rb_vm_t *vm);
 
 RUBY_SYMBOL_EXPORT_END
+
+#include "jit.h"
 
 #endif /* RUBY_VM_CORE_H */

@@ -5,7 +5,6 @@
 #include "jit.h"
 
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
-#include "llvm/ExecutionEngine/GenericValue.h"
 #include "llvm/ExecutionEngine/Interpreter.h"
 #include "llvm/ExecutionEngine/RTDyldMemoryManager.h"
 #include "llvm/ExecutionEngine/MCJIT.h"
@@ -36,7 +35,12 @@
 #include <deque>
 #include <sstream>
 
+
 using namespace llvm;
+
+extern "C" {
+void vm_search_method(rb_call_info_t *ci, VALUE recv);
+}
 
 #define JIT_DEBUG_LOG(format) do{ fprintf(stderr, format "\n"); }while(0)
 #define JIT_DEBUG_LOG2(format, ...) do{ fprintf(stderr, format "\n", __VA_ARGS__); }while(0)
@@ -48,11 +52,16 @@ typedef struct jit_insn_struct {
 	rb_control_frame_t *cfp;
 	VALUE *pc;
 	int opecode;
-	std::vector<VALUE> operands;
+	int index;
+	int len;
+	BasicBlock *bb;
 } jit_insn_t;
 
 typedef struct jit_trace_struct {
 	std::deque<jit_insn_t*> insns;
+	// jit_insn_t **insns = nullptr;
+	unsigned insns_size = 0;
+	// unsigned insns_iterator = 0;
 } jit_trace_t;
 
 class JitCompiler
@@ -73,11 +82,16 @@ public:
 	Value* valueVal(VALUE val) { return builder->getInt64(val); }
 	Value *signedVal(int val) { return llvm::ConstantInt::getSigned(int64Ty, val); }
 
+	Value *valueZero;
 	Value *valueOne;
-
 	Value *int32Zero;
-
 	Value *valueQundef;
+
+	Type *llvm_thread_t;
+	Type *llvm_control_frame_t;
+	Type *llvm_call_info_t;
+
+	Function *llvm_search_method;
 
 	jit_trace_t trace;
 
@@ -85,6 +99,7 @@ public:
 	: builder(std::unique_ptr<IRBuilder<>>(new IRBuilder<>(getGlobalContext())))
 	{
 
+		valueZero = builder->getInt64(0);
 		valueOne = builder->getInt64(1);
 		int32Zero = builder->getInt32(0);
 		valueQundef = builder->getInt64(Qundef);
@@ -104,11 +119,17 @@ public:
 		const char *ruby_module =
 			#include "tool/jit/jit_typedef.inc"
 		parseAndLink(ruby_module);
+
+		llvm_thread_t = module->getTypeByName("struct.rb_thread_struct")->getPointerTo();
+		llvm_control_frame_t = module->getTypeByName("struct.rb_control_frame_struct")->getPointerTo();
+		llvm_call_info_t = module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();
+
+		llvm_search_method = module->getFunction("vm_search_method");
+		sys::DynamicLibrary::AddSymbol("_vm_search_method", (void *)vm_search_method); // addGlobalMapping was failed in MCJIT
 	}
 
 	~JitCompiler()
 	{
-
 	}
 
 	void dump()
@@ -174,18 +195,44 @@ public:
 		fpm.run(f);
 	}
 
-
 };
 
 std::unique_ptr<JitCompiler> rb_mJit;
+#define RB_JIT rb_mJit
+
+extern "C"
+void
+jit_trace_start(rb_thread_t *th)
+{
+	RB_JIT->trace.insns_size = th->cfp->iseq->iseq_size;
+	is_jit_tracing = 1;
+	// if (RB_JIT->trace.insns) delete RB_JIT->trace.insns; // TODO:delete children
+	// RB_JIT->trace.insns = new jit_insn_t*[RB_JIT->trace.insns_size];
+}
+
+extern "C"
+void
+jit_push_new_trace(rb_control_frame_t *cfp)
+{
+	if (!cfp->iseq) return; // CFUNC
+	is_jit_tracing = 0;
+}
+
+extern "C"
+void
+jit_pop_trace()
+{
+}
 
 static void
 jit_insn_init(jit_insn_t *insn, rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 {
 	rb_iseq_t *iseq = cfp->iseq;
 	VALUE *iseq_encoded = rb_iseq_original_iseq(iseq);
-	int offset = pc - iseq->iseq_encoded;
-	insn->opecode = (int)iseq_encoded[offset];
+
+	insn->index = pc - iseq->iseq_encoded;
+	insn->opecode = (int)iseq_encoded[insn->index];
+	insn->len = insn_len(insn->opecode);
 	insn->th = th;
 	insn->cfp = cfp;
 	insn->pc = pc;
@@ -200,154 +247,29 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 	// TODO: トレースするかを実行回数などで判定
 	jit_trace_t &trace = rb_mJit->trace;
 	trace.insns.push_back(insn);
-
-	switch (insn->opecode) {
-		case BIN(putobject):
-			insn->operands.push_back(pc[1]);
-			break;
-		case BIN(opt_plus):
-			insn->operands.push_back(pc[1]);
-			break;
-		case BIN(opt_send_without_block):
-			insn->operands.push_back(pc[1]);
-			break;
-	}
+	for (int i=1, len=insn_len(insn->opecode); i<len; i++)
+		trace.insns.push_back(nullptr);
+	// trace.insns[trace.insns_iterator] = insn;
+	// trace.insns_iterator += insn_len(insn->opecode);
 }
 
 extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
 {
+	// JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns_size);
 	JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns.size());
-	for (auto insn : rb_mJit->trace.insns) {
-		JIT_DEBUG_LOG2("trace: %s(%d)", insn_name(insn->opecode), insn->opecode);
+	// for (auto insn : rb_mJit->trace.insns) {
+	unsigned i = 0;
+	while (i < RB_JIT->trace.insns.size()) {
+	// while (i < RB_JIT->trace.insns_size) {
+		jit_insn_t *insn = RB_JIT->trace.insns[i];
+		JIT_DEBUG_LOG2("%08p: %s(%d)", insn->pc, insn_name(insn->opecode), insn->opecode);
+		i += insn->len;
 	}
 	JIT_DEBUG_LOG("=== End trace dump ===");
 	void jit_codegen(rb_thread_t *th);
 	jit_codegen(th);
-}
-
-void
-jit_codegen(rb_thread_t *th)
-{
-#define JIT_DEBUG_SET_NAME_MODE
-#ifdef  JIT_DEBUG_SET_NAME_MODE
-#define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
-#else
-#define JIT_LLVM_SET_NAME(v, name)
-#endif
-
-	Type *llvm_thread_t = rb_mJit->module->getTypeByName("struct.rb_thread_struct")->getPointerTo();
-	Type *llvm_control_frame = rb_mJit->module->getTypeByName("struct.rb_control_frame_struct")->getPointerTo();
-
-
-	Function *llvm_search_method = rb_mJit->module->getFunction("vm_search_method");
-	Function *llvm_caller_setup_arg_block = rb_mJit->module->getFunction("vm_caller_setup_arg_block");
-
-
-	FunctionType* jit_trace_func_t = FunctionType::get(rb_mJit->voidTy, { llvm_thread_t, llvm_control_frame }, false);
-	Function *jit_trace_func = Function::Create(jit_trace_func_t, GlobalValue::ExternalLinkage, "jit_trace_func1", rb_mJit->module);
-	jit_trace_func->setCallingConv(CallingConv::C);
-
-	Function::arg_iterator args = jit_trace_func->arg_begin();
-	Argument *arg_th = args++;
-	Argument *arg_cfp = args++;
-
-
-	BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", jit_trace_func);
-	rb_mJit->builder->SetInsertPoint(entry);
-
-	std::deque<Value*> __stack;
-#define JIT_STACK __stack
-
-#define JIT_CHECK_STACK_SIZE
-#define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
-#undef TOPN
-#define TOPN(x)\
-	[&]{\
-	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
-	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
-	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->signedVal(-x));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
-	return rb_mJit->builder->CreateLoad(sp_incptr);}()
-// #ifdef JIT_CHECK_STACK_SIZE
-// #define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
-// #else
-// #define TOPN(x) (JIT_STACK[x])
-// #endif
-#undef POPN
-#define POPN(x) {\
-	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
-	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
-	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->signedVal(-x));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
-	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);}
-// #ifdef JIT_CHECK_STACK_SIZE
-// #define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
-// #else
-// #define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
-// #endif
-#undef PUSH
-#define PUSH(x) {\
-	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
-	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
-	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	rb_mJit->builder->CreateStore((x), sp);\
-	Value *sp_incptr = rb_mJit->builder->CreateInBoundsGEP(sp, rb_mJit->valueOne);\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
-	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);}
-// #define PUSH(x) JIT_STACK.push_front(x)
-
-#define POP2VM() \
-	Value *sp_elmptr = rb_mJit->builder->CreateStructGEP(arg_cfp, 1);\
-	JIT_LLVM_SET_NAME(sp_elmptr, "sp_ptr");\
-	Value *sp = rb_mJit->builder->CreateLoad(sp_elmptr);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	rb_mJit->builder->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();\
-	Value *sp_incptr = rb_mJit->builder->CreateGEP(sp, rb_mJit->valueOne);\
-	rb_mJit->builder->CreateStore(sp_incptr, sp_elmptr);
-
-#undef CALL_METHOD
-#define CALL_METHOD(ci) do { \
-	Value *v = rb_mJit->builder->CreateCall3(ci_call, arg_th, arg_cfp, ci); \
-	Value *cond_v = rb_mJit->builder->CreateICmpNE(v, rb_mJit->valueQundef, "ifcond");\
-    BasicBlock *then_block = BasicBlock::Create(getGlobalContext(), "then", jit_trace_func);\
-    BasicBlock *else_block = BasicBlock::Create(getGlobalContext(), "else", jit_trace_func);\
-    rb_mJit->builder->CreateCondBr(cond_v, then_block, else_block);\
-	rb_mJit->builder->SetInsertPoint(then_block);\
-	PUSH(v);\
-	rb_mJit->builder->CreateBr(else_block);\
-	rb_mJit->builder->SetInsertPoint(else_block);\
-} while (0)
-#undef JIT_CHECK_STACK_SIZE
-
-
-	for (auto insn : rb_mJit->trace.insns) {
-		switch (insn->opecode) {
-#include "jit_codegen.inc"
-		}
-	}
-
-	rb_mJit->builder->CreateRetVoid();
-	JIT_DEBUG_LOG("==== JITed instructions ====");
-	jit_trace_func->dump();
-	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
-	rb_mJit->optimizeFunction(*jit_trace_func);
-	jit_trace_func->dump();
-
-	sys::DynamicLibrary::AddSymbol("_vm_search_method", (void *)vm_search_method);
-	// sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
-	rb_mJit->engine->finalizeObject();
-	rb_mJit->engine->addGlobalMapping(llvm_search_method, (void *)vm_search_method);
-	void* pfptr = rb_mJit->engine->getPointerToFunction(jit_trace_func);
-	void (* fptr)(rb_thread_t *th, rb_control_frame_t*) = (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
-	JIT_DEBUG_LOG("==== Execute JITed function ====");
-	fptr(th, th->cfp);
 }
 
 extern "C"
@@ -361,7 +283,6 @@ ruby_jit_init(void)
 	InitializeNativeTargetAsmPrinter();
 	InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
-	// printf("Initialized LLVM!\n");
 }
 
 extern "C"
@@ -370,38 +291,11 @@ ruby_jit_test(void)
 {
 }
 
-// extern "C"
-// VALUE
-// rb_jit_compile_node(VALUE self, NODE *node)
-// {
-// 	// Node to LLVM が必要なら実装
-// 	assert("Not implementation");
-// }
-
 extern "C"
 VALUE
 jit_insn_to_llvm(rb_thread_t *th)
 {
 	return Qtrue;
-	rb_iseq_t *iseq;
-	iseq = th->cfp->iseq;
-
-#if OPT_DIRECT_THREADED_CODE || OPT_CALL_THREADED_CODE
-	unsigned int i;
-
-	VALUE* iseq_no_threaded = rb_iseq_original_iseq(iseq);
-
-	for (i = 0; i < iseq->iseq_size; /* */ ) {
-		int insn = (int)iseq_no_threaded[i];
-
-		if (insn == BIN(opt_plus)) {
-			fprintf(stderr, "足し算");
-		}
-
-		int len = insn_len(insn);
-		i += len;
-	}
-#endif
 }
 
 static VALUE
@@ -423,123 +317,6 @@ jit_compile(VALUE self, VALUE code)
 	VALUE str = rb_iseq_disasm(iseq->self);
 	printf("disasm[self]: %s\n", StringValueCStr(str));
 
-	std::deque<VALUE> vm_stack;
-	// std::deque<Value*> vm_stack;
-
-    // rb_thread_t * th = (rb_thread_t*)ruby_mimmalloc(sizeof(*th));
-    // MEMZERO(th, rb_thread_t, 1);
-    // th_init(th, 0);
-    //
-    // VALUE toplevel_binding = rb_const_get(rb_cObject, rb_intern("TOPLEVEL_BINDING"));
-    // rb_binding_t *bind;
-    // GetBindingPtr(toplevel_binding, bind);
-    //
-    // rb_env_t *env;
-    // GetEnvPtr(bind->env, env);
-	// env->block->self;
-	// printf("%p, %p\n", &env->block, th->cfp);
-
-    // vm_set_eval_stack(th, iseqval, 0, &env->block);
-	// printf("debug line 2\n");
-
-	rb_thread_t *th = ruby_current_thread;
-
-#undef GET_OPERAND
-#define GET_OPERAND(x) (iseq_encoded[i+(x)])
-#undef TOPN
-#define TOPN(x) (vm_stack[vm_stack.size() - (x)])
-#undef PUSH
-#define PUSH(x) (*(th->cfp->sp++) = (x))
-
-
-	Function *jit_main_func = rb_mJit->module->getFunction("jit_main_func");
-	if (!jit_main_func) {
-		auto jit_main_func_type = FunctionType::get(rb_mJit->voidTy, {}, false);
-		jit_main_func = Function::Create(jit_main_func_type, Function::ExternalLinkage,
-				"jit_main_func", rb_mJit->module);
-
-		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", jit_main_func);
-		rb_mJit->builder->SetInsertPoint(entry);
-	}
-
-	for (unsigned int i = 0; i < iseq->iseq_size; /* */ ) {
-		int insn = (int)iseq_encoded[i];
-
-		switch (insn) {
-			case BIN(putself):
-				JIT_DEBUG_LOG2("log: putself[%s]", rb_obj_classname(th->cfp->self));
-				vm_stack.push_back(th->cfp->self);
-				break;
-			case BIN(putobject):
-				JIT_DEBUG_LOG("log: putobject");
-				vm_stack.push_back(iseq_encoded[i+1]);
-				break;
-			case BIN(opt_plus): {
-				VALUE rb_r = vm_stack.back(); vm_stack.pop_back();
-				VALUE rb_l = vm_stack.back(); vm_stack.pop_back();
-				// VALUE rb_arg = iseq_encoded[i+1];
-				// if (FIXNUM_2_P(rb_r, rb_l) &&
-				// 		BASIC_OP_UNREDEFINED_P(BOP_PLUS,FIXNUM_REDEFINED_OP_FLAG)) {
-					int l = FIX2INT(rb_l);
-					int r = FIX2INT(rb_r);
-					// Value *ret = rb_mJit->builder->CreateAdd(arg1, arg2);
-
-				// }
-
-				// Function *opt_plus = rb_mJit->module->getFunction("opt_plus");
-				// if (!opt_plus) {
-				// 	Type *intTy = rb_mJit->int64Ty;
-				// 	auto opt_plus_type = FunctionType::get(intTy, { intTy, intTy }, false);
-				// 	opt_plus = Function::Create(opt_plus_type, Function::ExternalLinkage,
-				// 			"opt_plus", rb_mJit->module);
-                //
-				// 	BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", opt_plus);
-				// 	rb_mJit->builder->SetInsertPoint(entry);
-                //
-				// 	Function::arg_iterator args = opt_plus->arg_begin();
-				// 	Argument *arg1 = args++;
-				// 	Argument *arg2 = args++;
-                //
-				// 	Value *ret = rb_mJit->builder->CreateAdd(arg1, arg2);
-				// 	rb_mJit->builder->CreateRet(ret);
-				// 	opt_plus->dump();
-				// 	rb_mJit->engine->finalizeObject();
-				// }
-                //
-				// void* fptr = rb_mJit->engine->getPointerToFunction(opt_plus);
-				// int (* jit_opt_plus)(int, int) = (int (*)(int, int))fptr;
-                //
-				// int result = jit_opt_plus(l, r);
-				// // fprintf(stderr, "Result: %d (%d + %d)\n", result, l, r);
-				// PUSH(INT2FIX(result));
-				break;
-								}
-			case BIN(opt_send_without_block): {
-				CALL_INFO ci = (CALL_INFO)GET_OPERAND(1);
-				ci->argc = ci->orig_argc;
-
-				vm_search_method(ci, ci->recv = TOPN(ci->argc)); //segv
-
-				rb_control_frame_t *cfp = th->cfp;
-
-				// CALL_METHOD(ci);
-				JIT_DEBUG_LOG2("log: send[%s]", rb_id2name(ci->mid));
-				VALUE v = (*(ci)->call)(th, cfp, ci);
-				break;
-											  }
-		}
-
-		int len = insn_len(insn);
-		i += len;
-	}
-
-	rb_mJit->builder->CreateRetVoid();
-	jit_main_func->dump();
-	rb_mJit->engine->finalizeObject();
-	void* pfptr = rb_mJit->engine->getPointerToFunction(jit_main_func);
-	void (* fptr)() = (void (*)())pfptr;
-	fptr();
-
 	return Qtrue;
 }
 
@@ -553,5 +330,151 @@ Init_JIT(void)
 	VALUE rb_mJIT = rb_define_module("JIT");
 	rb_define_singleton_method(rb_mJIT, "compile", RUBY_METHOD_FUNC(jit_compile), 1);
 	// rb_define_singleton_method(rb_mJIT, "trace_dump", RUBY_METHOD_FUNC(jit_trace_dump), 0);
+}
+
+
+#define CONTEXT getGlobalContext()
+#define MODULE RB_JIT->module
+#define BUILDER RB_JIT->builder
+#define ENGINE RB_JIT->engine
+
+#include "jit_core.h"
+
+void
+jit_codegen(rb_thread_t *th)
+{
+#define JIT_DEBUG_SET_NAME_MODE
+#ifdef  JIT_DEBUG_SET_NAME_MODE
+#define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
+#else
+#define JIT_LLVM_SET_NAME(v, name)
+#endif
+
+	FunctionType* jit_trace_func_t = FunctionType::get(RB_JIT->voidTy,
+			{ RB_JIT->llvm_thread_t, RB_JIT->llvm_control_frame_t }, false);
+	Function *jit_trace_func = Function::Create(jit_trace_func_t,
+			GlobalValue::ExternalLinkage, "jit_trace_func1", MODULE);
+	jit_trace_func->setCallingConv(CallingConv::C);
+
+	BasicBlock *entry = BasicBlock::Create(CONTEXT, "entry", jit_trace_func);
+	BUILDER->SetInsertPoint(entry);
+
+	Function::arg_iterator args = jit_trace_func->arg_begin();
+	Argument *arg_th = args++, *arg_cfp = args++;
+
+	Value *sp_gep = BUILDER->CreateStructGEP(arg_cfp, 1); JIT_LLVM_SET_NAME(sp_gep, "sp_ptr");
+	Value *ep_gep = BUILDER->CreateStructGEP(arg_cfp, 6); JIT_LLVM_SET_NAME(ep_gep, "ep_ptr");
+
+#define JIT_TRACE_FUNC jit_trace_func
+
+#define JIT_TH arg_th
+#define JIT_CFP arg_cfp
+#define SP_GEP sp_gep
+#define EP_GEP ep_gep
+
+	std::deque<Value*> __stack;
+#define JIT_STACK __stack
+
+#define JIT_CHECK_STACK_SIZE
+#define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
+#undef TOPN
+#define TOPN(x)\
+	[&]{\
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->signedVal(-x));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
+	return BUILDER->CreateLoad(sp_incptr);}()
+// #ifdef JIT_CHECK_STACK_SIZE
+// #define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
+// #else
+// #define TOPN(x) (JIT_STACK[x])
+// #endif
+#undef POPN
+#define POPN(x) {\
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->signedVal(-x));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
+	BUILDER->CreateStore(sp_incptr, SP_GEP);}
+// #ifdef JIT_CHECK_STACK_SIZE
+// #define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
+// #else
+// #define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
+// #endif
+#undef PUSH
+#define PUSH(x) {\
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	BUILDER->CreateStore((x), sp);\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->valueOne);\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
+	BUILDER->CreateStore(sp_incptr, SP_GEP);}
+// #define PUSH(x) JIT_STACK.push_front(x)
+
+#define POP2VM() \
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	BUILDER->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();\
+	Value *sp_incptr = BUILDER->CreateGEP(sp, RB_JIT->valueOne);\
+	BUILDER->CreateStore(sp_incptr, SP_GEP);
+
+#undef CALL_METHOD
+#define CALL_METHOD(ci) do { \
+	Value *v = BUILDER->CreateCall3(ci_call, JIT_TH, JIT_CFP, ci); \
+	Value *cond_v = BUILDER->CreateICmpNE(v, RB_JIT->valueQundef, "ifcond");\
+    BasicBlock *then_block = BasicBlock::Create(CONTEXT, "then", jit_trace_func);\
+    BasicBlock *else_block = BasicBlock::Create(CONTEXT, "else", jit_trace_func);\
+    BUILDER->CreateCondBr(cond_v, then_block, else_block);\
+	BUILDER->SetInsertPoint(then_block);\
+	PUSH(v);\
+	BUILDER->CreateBr(else_block);\
+	BUILDER->SetInsertPoint(else_block);\
+} while (0)
+#define GET_SELF() RB_JIT->valueVal(th->cfp->self)
+#define GET_EP() BUILDER->CreateLoad(EP_GEP)
+#define GET_LEP() (JIT_EP_LEP(GET_EP()))
+#undef GET_OPERAND
+#define GET_OPERAND(x) (insn->pc[(x)])
+
+#define RSHIFT(x,y) BUILDER->CreateLShr(x, y)
+#define FIX2LONG(x) (RSHIFT((x), 1))
+
+#define INT2FIX(i) BUILDER->CreateOr(BUILDER->CreateShl(i, 1), FIXNUM_FLAG)
+#define LONG2FIX(i) INT2FIX(i)
+#define LONG2NUM(i) LONG2FIX(i)
+typedef long OFFSET;
+
+// #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
+#define RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->valueZero))
+#undef JIT_CHECK_STACK_SIZE
+
+	// for (auto insn : RB_JIT->trace.insns) {
+	//
+
+	unsigned i = 0;
+	// while (i < RB_JIT->trace.insns_size) {
+	while (i < RB_JIT->trace.insns.size()) {
+		auto &insns = RB_JIT->trace.insns;
+		jit_insn_t *insn = insns[i];
+
+		switch (insn->opecode) {
+#include "jit_codegen.inc"
+		}
+
+		i += insn->len;
+	}
+	BUILDER->CreateRetVoid();
+	// JIT_DEBUG_LOG("==== JITed instructions ====");
+	// jit_trace_func->dump();
+	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
+	RB_JIT->optimizeFunction(*jit_trace_func);
+	jit_trace_func->dump();
+
+	ENGINE->finalizeObject();
+	void* pfptr = ENGINE->getPointerToFunction(jit_trace_func);
+	void (* fptr)(rb_thread_t *th, rb_control_frame_t*) = (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
+	JIT_DEBUG_LOG("==== Execute JITed function ====");
+	fptr(th, th->cfp);
 }
 

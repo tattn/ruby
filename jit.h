@@ -8,11 +8,6 @@ extern "C" {
 /* compile.c */
 VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 
-/* vm_exec.c */
-void vm_search_method(rb_call_info_t *ci, VALUE recv);
-void vm_set_eval_stack(rb_thread_t * th, VALUE iseqval, const rb_cref_t *cref, rb_block_t *base_block);
-void th_init(rb_thread_t *th, VALUE self);
-
 
 void ruby_jit_init(void);
 
@@ -27,7 +22,12 @@ VALUE jit_insn_to_llvm(rb_thread_t *th);
 extern int is_jit_tracing;
 
 #define JIT_TRACE if (is_jit_tracing) jit_trace_insn(th, reg_cfp, reg_pc)
+#define JIT_NEW_TRACE(cfp) if (is_jit_tracing) jit_push_new_trace(cfp)
 
+
+void jit_trace_start(rb_thread_t *th);
+void jit_push_new_trace(rb_control_frame_t *cfp);
+void jit_pop_trace();
 void jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc);
 void jit_trace_dump(rb_thread_t *th);
 

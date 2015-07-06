@@ -147,6 +147,8 @@ vm_push_frame(rb_thread_t *th,
     cfp->block_iseq = 0;
     cfp->proc = 0;
 
+	JIT_NEW_TRACE(cfp);
+
     if (klass) {
 	cfp->klass = klass;
     }
