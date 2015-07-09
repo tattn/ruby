@@ -45,6 +45,14 @@ void vm_search_method(rb_call_info_t *ci, VALUE recv);
 #define JIT_DEBUG_LOG(format) do{ fprintf(stderr, format "\n"); }while(0)
 #define JIT_DEBUG_LOG2(format, ...) do{ fprintf(stderr, format "\n", __VA_ARGS__); }while(0)
 
+#define JIT_DEBUG_SET_NAME_MODE
+#ifdef  JIT_DEBUG_SET_NAME_MODE
+#define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
+#else
+#define JIT_LLVM_SET_NAME(v, name)
+#endif
+
+
 int is_jit_tracing = 0;
 
 typedef struct jit_insn_struct {
@@ -53,16 +61,24 @@ typedef struct jit_insn_struct {
 	VALUE *pc;
 	int opecode;
 	int index;
-	int len;
+	int len = 1;
 	BasicBlock *bb;
 } jit_insn_t;
 
 typedef struct jit_trace_struct {
-	std::deque<jit_insn_t*> insns;
-	// jit_insn_t **insns = nullptr;
+	// std::deque<jit_insn_t*> insns;
+	jit_insn_t *insns = nullptr;
 	unsigned insns_size = 0;
-	// unsigned insns_iterator = 0;
+	unsigned insns_iterator = 0;
 } jit_trace_t;
+
+struct jit_codegen_func_t {
+	Function *jit_trace_func;
+	Argument *arg_th;
+	Argument *arg_cfp;
+	Value *sp_gep;
+	Value *ep_gep;
+};
 
 class JitCompiler
 {
@@ -165,11 +181,9 @@ public:
 		fpm.add(createEarlyCSEPass());
 		fpm.add(createLoopIdiomPass());
 		fpm.add(createLoopRotatePass());
-		// fpm.add(createLowerSimdLoopPass());
 		fpm.add(createLICMPass());
 		fpm.add(createIndVarSimplifyPass());
 		fpm.add(createLoopDeletionPass());
-		// fpm.add(createLoopVectorizePass());
 		fpm.add(createSCCPPass());
 		fpm.add(createSinkingPass());
 		fpm.add(createInstructionSimplifierPass());
@@ -195,10 +209,45 @@ public:
 		fpm.run(f);
 	}
 
+	jit_codegen_func_t createJITFunction()
+	{
+		jit_codegen_func_t f;
+		FunctionType* jit_trace_func_t = FunctionType::get(voidTy,
+				{ llvm_thread_t, llvm_control_frame_t }, false);
+		f.jit_trace_func = Function::Create(jit_trace_func_t,
+				GlobalValue::ExternalLinkage, "jit_trace_func1", module);
+		f.jit_trace_func->setCallingConv(CallingConv::C);
+
+		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", f.jit_trace_func);
+		builder->SetInsertPoint(entry);
+
+		Function::arg_iterator args = f.jit_trace_func->arg_begin();
+		f.arg_th = args++;
+		f.arg_cfp = args++;
+
+		f.sp_gep = builder->CreateStructGEP(f.arg_cfp, 1); JIT_LLVM_SET_NAME(f.sp_gep, "sp_ptr");
+		f.ep_gep = builder->CreateStructGEP(f.arg_cfp, 6); JIT_LLVM_SET_NAME(f.ep_gep, "ep_ptr");
+
+		return f;
+	}
+
+	std::function<void(rb_thread_t*, rb_control_frame_t*)> compileFunction(Function *function)
+	{
+		engine->finalizeObject();
+		void* pfptr = engine->getPointerToFunction(function);
+		// void (* fptr)(rb_thread_t *th, rb_control_frame_t*) = (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
+		return (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
+	}
 };
 
 std::unique_ptr<JitCompiler> rb_mJit;
 #define RB_JIT rb_mJit
+
+#define CONTEXT getGlobalContext()
+#define MODULE RB_JIT->module
+#define BUILDER RB_JIT->builder
+#define ENGINE RB_JIT->engine
+
 
 extern "C"
 void
@@ -206,8 +255,8 @@ jit_trace_start(rb_thread_t *th)
 {
 	RB_JIT->trace.insns_size = th->cfp->iseq->iseq_size;
 	is_jit_tracing = 1;
-	// if (RB_JIT->trace.insns) delete RB_JIT->trace.insns; // TODO:delete children
-	// RB_JIT->trace.insns = new jit_insn_t*[RB_JIT->trace.insns_size];
+	if (RB_JIT->trace.insns) delete RB_JIT->trace.insns; // TODO:delete children
+	RB_JIT->trace.insns = new jit_insn_t[RB_JIT->trace.insns_size+1]; // +1 is for last basicblock
 }
 
 extern "C"
@@ -236,36 +285,38 @@ jit_insn_init(jit_insn_t *insn, rb_thread_t *th, rb_control_frame_t *cfp, VALUE 
 	insn->th = th;
 	insn->cfp = cfp;
 	insn->pc = pc;
+	insn->bb = nullptr;
 }
 
 extern "C"
 void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 {
-	jit_insn_t *insn = new jit_insn_t;
+	jit_trace_t &trace = rb_mJit->trace;
+	// jit_insn_t *insn = new jit_insn_t;
+	jit_insn_t *insn = &trace.insns[trace.insns_iterator];
 	jit_insn_init(insn, th, cfp, pc);
 	// TODO: トレースするかを実行回数などで判定
-	jit_trace_t &trace = rb_mJit->trace;
-	trace.insns.push_back(insn);
-	for (int i=1, len=insn_len(insn->opecode); i<len; i++)
-		trace.insns.push_back(nullptr);
-	// trace.insns[trace.insns_iterator] = insn;
-	// trace.insns_iterator += insn_len(insn->opecode);
+	// trace.insns.push_back(insn);
+	// for (int i=1, len=insn_len(insn->opecode); i<len; i++)
+	// 	trace.insns.push_back(nullptr);
+	trace.insns_iterator += insn->len;
 }
 
 extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
 {
-	// JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns_size);
-	JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns.size());
+	JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns_size);
+	// JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns.size());
 	// for (auto insn : rb_mJit->trace.insns) {
 	unsigned i = 0;
-	while (i < RB_JIT->trace.insns.size()) {
-	// while (i < RB_JIT->trace.insns_size) {
-		jit_insn_t *insn = RB_JIT->trace.insns[i];
-		JIT_DEBUG_LOG2("%08p: %s(%d)", insn->pc, insn_name(insn->opecode), insn->opecode);
+	// while (i < RB_JIT->trace.insns.size()) {
+	while (i < RB_JIT->trace.insns_size) {
+		jit_insn_t *insn = &RB_JIT->trace.insns[i];
+		JIT_DEBUG_LOG2("[%02d] %08p: %s(%d)", i, insn->pc, insn_name(insn->opecode), insn->opecode);
 		i += insn->len;
+		// if文などでトレースしてない部分がある場合のdumpとかコード生成どうする？
 	}
 	JIT_DEBUG_LOG("=== End trace dump ===");
 	void jit_codegen(rb_thread_t *th);
@@ -298,28 +349,54 @@ jit_insn_to_llvm(rb_thread_t *th)
 	return Qtrue;
 }
 
-static VALUE
-jit_compile(VALUE self, VALUE code)
+// static VALUE
+// jit_compile(VALUE self, VALUE code)
+// {
+// 	static VALUE name = rb_str_new2("<internal:jit>");
+// 	static VALUE line = INT2FIX(1);
+// 	VALUE iseqval = rb_iseq_compile_with_option(code, name, Qnil, line, 0, Qtrue);
+//
+// 	rb_iseq_t *iseq;
+// 	GetISeqPtr(iseqval, iseq);
+//
+// #if OPT_DIRECT_THREADED_CODE || OPT_CALL_THREADED_CODE
+// 	VALUE *iseq_encoded = rb_iseq_original_iseq(iseq);
+// #else
+// 	VALUE *iseq_encoded = iseq->iseq_encoded;
+// #endif
+//
+// 	VALUE str = rb_iseq_disasm(iseq->self);
+// 	printf("disasm[self]: %s\n", StringValueCStr(str));
+//
+// 	return Qtrue;
+// }
+
+static inline void
+jit_compile(rb_control_frame_t *cfp)
 {
-	static VALUE name = rb_str_new2("<internal:jit>");
-	static VALUE line = INT2FIX(1);
-	VALUE iseqval = rb_iseq_compile_with_option(code, name, Qnil, line, 0, Qtrue);
+	rb_iseq_t *iseq = cfp->iseq;
 
-	rb_iseq_t *iseq;
-	GetISeqPtr(iseqval, iseq);
+	if (!iseq) return; // CFUNC
 
-#if OPT_DIRECT_THREADED_CODE || OPT_CALL_THREADED_CODE
 	VALUE *iseq_encoded = rb_iseq_original_iseq(iseq);
-#else
-	VALUE *iseq_encoded = iseq->iseq_encoded;
-#endif
 
-	VALUE str = rb_iseq_disasm(iseq->self);
-	printf("disasm[self]: %s\n", StringValueCStr(str));
+	unsigned size = iseq->iseq_size;
 
-	return Qtrue;
+	// insn->index = pc - iseq->iseq_encoded;
+	// insn->opecode = (int)iseq_encoded[insn->index];
+	// insn->len = insn_len(insn->opecode);
+	// insn->th = th;
+	// insn->cfp = cfp;
+	// insn->pc = pc;
+	// insn->bb = nullptr;
+
+	for (unsigned i = 0, len = 0; i < size; i += len) {
+		VALUE *pc = &iseq_encoded[i];
+		int op = pc[0];
+		len = insn_len(op);
+
+	}
 }
-
 
 
 extern "C"
@@ -328,52 +405,79 @@ Init_JIT(void)
 {
 	ruby_jit_init();
 	VALUE rb_mJIT = rb_define_module("JIT");
-	rb_define_singleton_method(rb_mJIT, "compile", RUBY_METHOD_FUNC(jit_compile), 1);
+	// rb_define_singleton_method(rb_mJIT, "compile", RUBY_METHOD_FUNC(jit_compile), 1);
 	// rb_define_singleton_method(rb_mJIT, "trace_dump", RUBY_METHOD_FUNC(jit_trace_dump), 0);
 }
 
 
-#define CONTEXT getGlobalContext()
-#define MODULE RB_JIT->module
-#define BUILDER RB_JIT->builder
-#define ENGINE RB_JIT->engine
-
 #include "jit_core.h"
+
+
+static inline void
+jit_codegen_core(
+		jit_codegen_func_t &codegen_func,
+		rb_control_frame_t *cfp,
+		jit_insn_t *insns,
+		jit_insn_t *insn);
 
 void
 jit_codegen(rb_thread_t *th)
 {
-#define JIT_DEBUG_SET_NAME_MODE
-#ifdef  JIT_DEBUG_SET_NAME_MODE
-#define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
-#else
-#define JIT_LLVM_SET_NAME(v, name)
-#endif
+	jit_codegen_func_t codegen_func = RB_JIT->createJITFunction();
+	rb_control_frame_t *cfp = th->cfp;
 
-	FunctionType* jit_trace_func_t = FunctionType::get(RB_JIT->voidTy,
-			{ RB_JIT->llvm_thread_t, RB_JIT->llvm_control_frame_t }, false);
-	Function *jit_trace_func = Function::Create(jit_trace_func_t,
-			GlobalValue::ExternalLinkage, "jit_trace_func1", MODULE);
-	jit_trace_func->setCallingConv(CallingConv::C);
 
-	BasicBlock *entry = BasicBlock::Create(CONTEXT, "entry", jit_trace_func);
-	BUILDER->SetInsertPoint(entry);
+	// for (auto insn : RB_JIT->trace.insns) {
+	//
 
-	Function::arg_iterator args = jit_trace_func->arg_begin();
-	Argument *arg_th = args++, *arg_cfp = args++;
+	unsigned i = 0;
+	while (i < RB_JIT->trace.insns_size + 1) {
+		jit_insn_t *insn = &RB_JIT->trace.insns[i];
+		insn->bb = BasicBlock::Create(CONTEXT, "insn", codegen_func.jit_trace_func);
+		i += insn->len;
+	}
 
-	Value *sp_gep = BUILDER->CreateStructGEP(arg_cfp, 1); JIT_LLVM_SET_NAME(sp_gep, "sp_ptr");
-	Value *ep_gep = BUILDER->CreateStructGEP(arg_cfp, 6); JIT_LLVM_SET_NAME(ep_gep, "ep_ptr");
+	BUILDER->CreateBr(RB_JIT->trace.insns[0].bb);
 
-#define JIT_TRACE_FUNC jit_trace_func
+	i = 0;
+	while (i < RB_JIT->trace.insns_size) {
+	// while (i < RB_JIT->trace.insns.size()) {
+		// auto &insns = RB_JIT->trace.insns;
+		auto insns = RB_JIT->trace.insns;
+		jit_insn_t *insn = &insns[i];
 
-#define JIT_TH arg_th
-#define JIT_CFP arg_cfp
-#define SP_GEP sp_gep
-#define EP_GEP ep_gep
+		jit_codegen_core(codegen_func, cfp, insns, insn);
 
-	std::deque<Value*> __stack;
-#define JIT_STACK __stack
+		i += insn->len;
+		fprintf(stderr, "%d\n", i);
+	}
+	BUILDER->SetInsertPoint(RB_JIT->trace.insns[RB_JIT->trace.insns_size].bb);
+	BUILDER->CreateRetVoid();
+
+	// JIT_DEBUG_LOG("==== JITed instructions ====");
+	// jit_trace_func->dump();
+	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
+	RB_JIT->optimizeFunction(*codegen_func.jit_trace_func);
+	codegen_func.jit_trace_func->dump();
+
+	JIT_DEBUG_LOG("==== Execute JITed function ====");
+	auto fptr = RB_JIT->compileFunction(codegen_func.jit_trace_func);
+	fptr(th, cfp);
+}
+
+static inline void
+jit_codegen_core(
+		jit_codegen_func_t &codegen_func,
+		rb_control_frame_t *cfp,
+		jit_insn_t *insns,
+		jit_insn_t *insn)
+{
+#define JIT_TRACE_FUNC	codegen_func.jit_trace_func
+#define JIT_TH 			codegen_func.arg_th
+#define JIT_CFP			codegen_func.arg_cfp
+#define SP_GEP			codegen_func.sp_gep
+#define EP_GEP			codegen_func.ep_gep
+
 
 #define JIT_CHECK_STACK_SIZE
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
@@ -385,11 +489,6 @@ jit_codegen(rb_thread_t *th)
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->signedVal(-x));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	return BUILDER->CreateLoad(sp_incptr);}()
-// #ifdef JIT_CHECK_STACK_SIZE
-// #define TOPN(x) (JIT_STACK.size() > (x)? JIT_STACK[x] : jit_error("Out of range..."))
-// #else
-// #define TOPN(x) (JIT_STACK[x])
-// #endif
 #undef POPN
 #define POPN(x) {\
 	Value *sp = BUILDER->CreateLoad(SP_GEP);\
@@ -397,11 +496,6 @@ jit_codegen(rb_thread_t *th)
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->signedVal(-x));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	BUILDER->CreateStore(sp_incptr, SP_GEP);}
-// #ifdef JIT_CHECK_STACK_SIZE
-// #define POPN(x) do { for (int i=0; i<(x); i++) if (JIT_STACK.size() > 0) JIT_STACK.pop_front(); else jit_error("Out of range..."); } while(0)
-// #else
-// #define POPN(x) do { for (int i=0; i<(x); i++) JIT_STACK.pop_front(); } while(0)
-// #endif
 #undef PUSH
 #define PUSH(x) {\
 	Value *sp = BUILDER->CreateLoad(SP_GEP);\
@@ -410,28 +504,20 @@ jit_codegen(rb_thread_t *th)
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->valueOne);\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
 	BUILDER->CreateStore(sp_incptr, SP_GEP);}
-// #define PUSH(x) JIT_STACK.push_front(x)
-
-#define POP2VM() \
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	BUILDER->CreateStore(JIT_STACK.front(), sp); JIT_STACK.pop_front();\
-	Value *sp_incptr = BUILDER->CreateGEP(sp, RB_JIT->valueOne);\
-	BUILDER->CreateStore(sp_incptr, SP_GEP);
 
 #undef CALL_METHOD
 #define CALL_METHOD(ci) do { \
 	Value *v = BUILDER->CreateCall3(ci_call, JIT_TH, JIT_CFP, ci); \
 	Value *cond_v = BUILDER->CreateICmpNE(v, RB_JIT->valueQundef, "ifcond");\
-    BasicBlock *then_block = BasicBlock::Create(CONTEXT, "then", jit_trace_func);\
-    BasicBlock *else_block = BasicBlock::Create(CONTEXT, "else", jit_trace_func);\
+    BasicBlock *then_block = BasicBlock::Create(CONTEXT, "then", JIT_TRACE_FUNC);\
+    BasicBlock *else_block = BasicBlock::Create(CONTEXT, "else", JIT_TRACE_FUNC);\
     BUILDER->CreateCondBr(cond_v, then_block, else_block);\
 	BUILDER->SetInsertPoint(then_block);\
 	PUSH(v);\
 	BUILDER->CreateBr(else_block);\
 	BUILDER->SetInsertPoint(else_block);\
 } while (0)
-#define GET_SELF() RB_JIT->valueVal(th->cfp->self)
+#define GET_SELF() RB_JIT->valueVal(cfp->self)
 #define GET_EP() BUILDER->CreateLoad(EP_GEP)
 #define GET_LEP() (JIT_EP_LEP(GET_EP()))
 #undef GET_OPERAND
@@ -443,38 +529,16 @@ jit_codegen(rb_thread_t *th)
 #define INT2FIX(i) BUILDER->CreateOr(BUILDER->CreateShl(i, 1), FIXNUM_FLAG)
 #define LONG2FIX(i) INT2FIX(i)
 #define LONG2NUM(i) LONG2FIX(i)
-typedef long OFFSET;
+#define OFFSET long
 
 // #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
 #define RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->valueZero))
 #undef JIT_CHECK_STACK_SIZE
 
-	// for (auto insn : RB_JIT->trace.insns) {
-	//
-
-	unsigned i = 0;
-	// while (i < RB_JIT->trace.insns_size) {
-	while (i < RB_JIT->trace.insns.size()) {
-		auto &insns = RB_JIT->trace.insns;
-		jit_insn_t *insn = insns[i];
-
-		switch (insn->opecode) {
+	switch (insn->opecode) {
 #include "jit_codegen.inc"
-		}
-
-		i += insn->len;
 	}
-	BUILDER->CreateRetVoid();
-	// JIT_DEBUG_LOG("==== JITed instructions ====");
-	// jit_trace_func->dump();
-	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
-	RB_JIT->optimizeFunction(*jit_trace_func);
-	jit_trace_func->dump();
-
-	ENGINE->finalizeObject();
-	void* pfptr = ENGINE->getPointerToFunction(jit_trace_func);
-	void (* fptr)(rb_thread_t *th, rb_control_frame_t*) = (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
-	JIT_DEBUG_LOG("==== Execute JITed function ====");
-	fptr(th, th->cfp);
 }
+
+
 

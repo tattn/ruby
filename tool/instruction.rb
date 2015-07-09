@@ -1281,11 +1281,10 @@ class RubyVM
 					case insn.name
 					when 'opt_send_without_block'
 						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
-						make_insn_def(insn)
-					else
-						# @val_alloca = false if insn.optimized
-						make_insn_def insn
+					when 'branchunless'
+						@branch = true
 					end
+					make_insn_def insn
 					commit "    break; }"
 				}
       end
@@ -1294,12 +1293,17 @@ class RubyVM
     end
 
 		def make_header_basic_block
-			commit '    if (!insn->bb) insn->bb = BasicBlock::Create(CONTEXT, "insn", JIT_TRACE_FUNC);'
-			commit '    BUILDER->CreateBr(insn->bb);'
+			# commit '    if (!insn->bb) insn->bb = BasicBlock::Create(CONTEXT, "insn", JIT_TRACE_FUNC);'
+			# commit '    BUILDER->CreateBr(insn->bb);'
 			commit '    BUILDER->SetInsertPoint(insn->bb);'
 		end
 
 		def make_footer_basic_block
+			unless @branch
+				commit '    BUILDER->CreateBr((insn+insn->len)->bb);'
+			else
+				@branch = false
+			end
 		end
 
     def make_header_stack_val insn
@@ -1429,7 +1433,11 @@ class RubyVM
     end
 
 		def make_insn_def insn
-			return unless @insns_llvm[insn.name]
+			unless @insns_llvm[insn.name]
+				make_header_basic_block
+				make_footer_basic_block
+				return
+			end
 
 			make_header insn
 

@@ -106,15 +106,13 @@ $branchunless {
 	BUILDER->SetInsertPoint(bb_end);
 	*/
 
-	dst = insn->index + insn->len + dst;
-	BasicBlock *bb_dst = insns[dst]->bb;
-	if (!bb_dst) {
-		bb_dst = BasicBlock::Create(CONTEXT, "unless", JIT_TRACE_FUNC);
-		insns[dst]->bb = bb_dst;
-	}
-	// BranchInst::Create(nullptr, bb_dst, test);
-	// BUILDER->CreateCondBr(test, bb_begin, bb_dst);
-
+	BasicBlock *bb_dst  = insns[insn->index + insn->len + dst].bb;
+	BasicBlock *bb_next = insns[insn->index + insn->len      ].bb;
+	// if (!bb_dst) {
+	// 	bb_dst = BasicBlock::Create(CONTEXT, "unless", JIT_TRACE_FUNC);
+	// 	insns[dst].bb = bb_dst;
+	// }
+	BUILDER->CreateCondBr(test, bb_next, bb_dst);
 
 
 }
