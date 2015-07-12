@@ -39,6 +39,14 @@ $opt_div {
 	val = LONG2NUM(div);
 }
 
+$send {
+	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, JIT_TH, JIT_CFP, ci, RB_JIT->int32Zero);
+	BUILDER->CreateCall2(RB_JIT->llvm_search_method, ci, TOPN(rb_ci->argc));
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(ci, 14);
+	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
+	CALL_METHOD(ci);
+}
+
 $opt_send_without_block {
 	rb_ci->argc = rb_ci->orig_argc;
 	BUILDER->CreateCall2(RB_JIT->llvm_search_method, ci, TOPN(rb_ci->argc));
@@ -86,33 +94,8 @@ $getlocal_OP__WC__0 {
 }
 
 $branchunless {
-	printf("########## %ld\n", dst);
-	printf("########## %d\n", insn->index + insn->len + dst);
-
-/*
-    if (!RTEST(val)) {
-	RUBY_VM_CHECK_INTS(th);
-	JUMP(dst);
-    }
-*/
 	Value *test = RTEST(val);
-
-/*
-	BasicBlock *bb_begin = BasicBlock::Create(CONTEXT, "unless", jit_trace_func);
-	BasicBlock *bb_end = BasicBlock::Create(CONTEXT, "unless_end", jit_trace_func);
-	BUILDER->CreateCondBr(test, bb_begin, bb_end);
-	BUILDER->SetInsertPoint(bb_begin);
-	BUILDER->CreateBr(bb_end);
-	BUILDER->SetInsertPoint(bb_end);
-	*/
-
-	BasicBlock *bb_dst  = insns[insn->index + insn->len + dst].bb;
-	BasicBlock *bb_next = insns[insn->index + insn->len      ].bb;
-	// if (!bb_dst) {
-	// 	bb_dst = BasicBlock::Create(CONTEXT, "unless", JIT_TRACE_FUNC);
-	// 	insns[dst].bb = bb_dst;
-	// }
+	BasicBlock *bb_dst  = insns[insn->index + insn->len + dst]->bb;
+	BasicBlock *bb_next = insns[insn->index + insn->len      ]->bb;
 	BUILDER->CreateCondBr(test, bb_next, bb_dst);
-
-
 }

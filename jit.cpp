@@ -33,6 +33,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <deque>
+#include <unordered_map>
 #include <sstream>
 
 
@@ -40,6 +41,7 @@ using namespace llvm;
 
 extern "C" {
 void vm_search_method(rb_call_info_t *ci, VALUE recv);
+void vm_caller_setup_arg_block(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super);
 }
 
 #define JIT_DEBUG_LOG(format) do{ fprintf(stderr, format "\n"); }while(0)
@@ -52,8 +54,8 @@ void vm_search_method(rb_call_info_t *ci, VALUE recv);
 #define JIT_LLVM_SET_NAME(v, name)
 #endif
 
-
 int is_jit_tracing = 0;
+int trace_stack_size = 0;
 
 typedef struct jit_insn_struct {
 	rb_thread_t *th;
@@ -67,9 +69,10 @@ typedef struct jit_insn_struct {
 
 typedef struct jit_trace_struct {
 	// std::deque<jit_insn_t*> insns;
-	jit_insn_t *insns = nullptr;
+	jit_insn_t **insns = nullptr;
 	unsigned insns_size = 0;
 	unsigned insns_iterator = 0;
+	rb_iseq_t *iseq;
 } jit_trace_t;
 
 struct jit_codegen_func_t {
@@ -89,37 +92,34 @@ public:
 
 	Type *voidTy = Type::getVoidTy(getGlobalContext());
 	Type *int8Ty = Type::getInt8Ty(getGlobalContext());
+	Type *int32Ty = Type::getInt32Ty(getGlobalContext());
 	Type *int64Ty = Type::getInt64Ty(getGlobalContext());
 	Type *ptrTy = PointerType::getUnqual(int8Ty);
-
 	Type *valueTy = int64Ty;
 	Type *valuePtrTy = PointerType::getUnqual(int64Ty);
 
 	Value* valueVal(VALUE val) { return builder->getInt64(val); }
 	Value *signedVal(int val) { return llvm::ConstantInt::getSigned(int64Ty, val); }
 
-	Value *valueZero;
-	Value *valueOne;
-	Value *int32Zero;
-	Value *valueQundef;
+	Value *valueZero = ConstantInt::get(int64Ty, 0);
+	Value *valueOne = ConstantInt::get(int64Ty, 1);
+	Value *int32Zero = ConstantInt::get(int32Ty, 0);
+	Value *valueQundef = ConstantInt::get(int64Ty, Qundef);
 
 	Type *llvm_thread_t;
 	Type *llvm_control_frame_t;
 	Type *llvm_call_info_t;
 
 	Function *llvm_search_method;
+	Function *llvm_caller_setup_arg_block;
 
-	jit_trace_t trace;
+	jit_trace_t *trace = nullptr;
+	// std::unordered_map<rb_iseq_t*, jit_trace_t*> traces;
+	std::unordered_map<VALUE*, jit_trace_t*> traces;
 
 	JitCompiler()
 	: builder(std::unique_ptr<IRBuilder<>>(new IRBuilder<>(getGlobalContext())))
 	{
-
-		valueZero = builder->getInt64(0);
-		valueOne = builder->getInt64(1);
-		int32Zero = builder->getInt32(0);
-		valueQundef = builder->getInt64(Qundef);
-
 		auto Owner = make_unique<Module>("Ruby LLVM Module", getGlobalContext());
 		module = Owner.get();
 
@@ -136,12 +136,18 @@ public:
 			#include "tool/jit/jit_typedef.inc"
 		parseAndLink(ruby_module);
 
-		llvm_thread_t = module->getTypeByName("struct.rb_thread_struct")->getPointerTo();
-		llvm_control_frame_t = module->getTypeByName("struct.rb_control_frame_struct")->getPointerTo();
-		llvm_call_info_t = module->getTypeByName("struct.rb_call_info_struct")->getPointerTo();
+#define GET_RUBY_STRUCT(name) module->getTypeByName("struct." name)->getPointerTo()
+		llvm_thread_t = GET_RUBY_STRUCT("rb_thread_struct");
+		llvm_control_frame_t = GET_RUBY_STRUCT("rb_control_frame_struct");
+		llvm_call_info_t = GET_RUBY_STRUCT("rb_call_info_struct");
+#undef GET_RUBY_STRUCT
 
 		llvm_search_method = module->getFunction("vm_search_method");
 		sys::DynamicLibrary::AddSymbol("_vm_search_method", (void *)vm_search_method); // addGlobalMapping was failed in MCJIT
+
+		llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
+		sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
+
 	}
 
 	~JitCompiler()
@@ -235,7 +241,6 @@ public:
 	{
 		engine->finalizeObject();
 		void* pfptr = engine->getPointerToFunction(function);
-		// void (* fptr)(rb_thread_t *th, rb_control_frame_t*) = (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
 		return (void (*)(rb_thread_t *th, rb_control_frame_t*))pfptr;
 	}
 };
@@ -248,15 +253,43 @@ std::unique_ptr<JitCompiler> rb_mJit;
 #define BUILDER RB_JIT->builder
 #define ENGINE RB_JIT->engine
 
+#include "jit_dump.h"
+
+static inline void
+jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
+{
+	auto size = iseq->iseq_size;
+	auto insns = new jit_insn_t*[size+1];	// +1 is for last basicblock
+	insns[size] = new jit_insn_t;			// for last basicblock
+	memset(insns, 0, sizeof(jit_insn_t*) * size);
+
+	trace->insns = insns;
+	trace->insns_size = size;
+	trace->iseq = iseq;
+}
 
 extern "C"
 void
-jit_trace_start(rb_thread_t *th)
+jit_trace_start(rb_control_frame_t *cfp)
 {
-	RB_JIT->trace.insns_size = th->cfp->iseq->iseq_size;
+	jit_trace_t *trace;
+
 	is_jit_tracing = 1;
-	if (RB_JIT->trace.insns) delete RB_JIT->trace.insns; // TODO:delete children
-	RB_JIT->trace.insns = new jit_insn_t[RB_JIT->trace.insns_size+1]; // +1 is for last basicblock
+
+	auto &traces = RB_JIT->traces;
+	auto it = traces.find(cfp->iseq->iseq_encoded);
+	if (it != traces.end()) {
+		trace = it->second;
+	}
+	else {
+		trace = new jit_trace_t;
+		jit_init_trace(trace, cfp->iseq);
+
+		// save trace
+		RB_JIT->traces[cfp->iseq->iseq_encoded] = trace;
+	}
+
+	RB_JIT->trace = trace;
 }
 
 extern "C"
@@ -264,16 +297,43 @@ void
 jit_push_new_trace(rb_control_frame_t *cfp)
 {
 	if (!cfp->iseq) return; // CFUNC
-	is_jit_tracing = 0;
+
+	// ブロック呼び出しも push と pop はよばれる
+	// vm_yield_with_cfuncでifuncをプッシュした時は cfp->iseq->origが0以外で、sizeも未設定
+
+	// rb_iseq_location_t &loc = cfp->iseq->location;
+	// char *path = RSTRING_PTR(loc.path);
+	// char *base_label = RSTRING_PTR(loc.base_label);
+	// char *label = RSTRING_PTR(loc.label);
+	// JIT_DEBUG_LOG2("jit_push_new_trace: %s, %s, %s", path, base_label, label);
+
+	jit_trace_start(cfp);
 }
 
 extern "C"
-void
-jit_pop_trace()
+rb_control_frame_t *
+jit_pop_trace(rb_control_frame_t *cfp)
 {
+	// push_new_trace と pop_trace の呼び出し回数が合わない pop が多くなる???
+	if (cfp->iseq) {
+		// --trace_stack_size;
+		auto it = RB_JIT->traces.find(cfp->iseq->iseq_encoded);
+		if (it == RB_JIT->traces.end()) {
+			// installing default ripper libraries
+			// checking ../.././parse.y and ../.././ext/ripper/eventids2.c
+			is_jit_tracing = 0;
+			JIT_DEBUG_LOG2("@@@@ jit_pop_trace @@@@   %p, %d, %d", cfp->pc, cfp->iseq->type, cfp->flag);
+		}
+		else {
+			RB_JIT->trace = it->second;
+		}
+		// JIT_DEBUG_LOG("@@@@ jit_pop_trace @@@@   ???????????");
+	}
+
+	return cfp;
 }
 
-static void
+static inline void
 jit_insn_init(jit_insn_t *insn, rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 {
 	rb_iseq_t *iseq = cfp->iseq;
@@ -292,35 +352,50 @@ extern "C"
 void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 {
-	jit_trace_t &trace = rb_mJit->trace;
-	// jit_insn_t *insn = new jit_insn_t;
-	jit_insn_t *insn = &trace.insns[trace.insns_iterator];
+	jit_trace_t *trace = RB_JIT->trace;
+
+	if (cfp->iseq->iseq_encoded != trace->iseq->iseq_encoded) {
+		// th->cfp の切り替えの検知に失敗
+		JIT_DEBUG_LOG2("*** jit_trace_insn ***  : %p, %p, %d, %d", cfp->iseq, trace->iseq, cfp->flag, cfp->iseq->type);
+		jit_pop_trace(cfp);
+		trace = RB_JIT->trace;
+	}
+
+	{
+		// トレース済み
+		int index = pc - cfp->iseq->iseq_encoded;
+		if (trace->insns[index]) return;
+	}
+
+	jit_insn_t *insn = new jit_insn_t;
+
 	jit_insn_init(insn, th, cfp, pc);
 	// TODO: トレースするかを実行回数などで判定
-	// trace.insns.push_back(insn);
-	// for (int i=1, len=insn_len(insn->opecode); i<len; i++)
-	// 	trace.insns.push_back(nullptr);
-	trace.insns_iterator += insn->len;
+	trace->insns[insn->index] = insn;
 }
 
 extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
 {
-	JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns_size);
-	// JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", rb_mJit->trace.insns.size());
-	// for (auto insn : rb_mJit->trace.insns) {
-	unsigned i = 0;
-	// while (i < RB_JIT->trace.insns.size()) {
-	while (i < RB_JIT->trace.insns_size) {
-		jit_insn_t *insn = &RB_JIT->trace.insns[i];
-		JIT_DEBUG_LOG2("[%02d] %08p: %s(%d)", i, insn->pc, insn_name(insn->opecode), insn->opecode);
-		i += insn->len;
-		// if文などでトレースしてない部分がある場合のdumpとかコード生成どうする？
+	for (auto trace_map: RB_JIT->traces) {
+		jit_trace_t *trace = trace_map.second;
+		jit_insn_t **insns = trace->insns;
+		unsigned insns_size = trace->insns_size;
+
+		JIT_DEBUG_LOG2("=== Start trace dump (length: %lu) ===", insns_size);
+
+		for (unsigned i = 0; i < insns_size; i++) {
+			if (jit_insn_t *insn = insns[i]) {
+				jit_dump_insn(insn);
+			}
+		}
+
+		JIT_DEBUG_LOG("=== End trace dump ===");
 	}
-	JIT_DEBUG_LOG("=== End trace dump ===");
+
 	void jit_codegen(rb_thread_t *th);
-	jit_codegen(th);
+	// jit_codegen(th);
 }
 
 extern "C"
@@ -415,43 +490,52 @@ Init_JIT(void)
 
 static inline void
 jit_codegen_core(
-		jit_codegen_func_t &codegen_func,
+		jit_codegen_func_t codegen_func,
 		rb_control_frame_t *cfp,
-		jit_insn_t *insns,
+		jit_insn_t **insns,
 		jit_insn_t *insn);
 
 void
 jit_codegen(rb_thread_t *th)
 {
 	jit_codegen_func_t codegen_func = RB_JIT->createJITFunction();
-	rb_control_frame_t *cfp = th->cfp;
 
+	jit_insn_t **insns = RB_JIT->trace->insns;
+	unsigned insns_size = RB_JIT->trace->insns_size;
 
-	// for (auto insn : RB_JIT->trace.insns) {
-	//
+	VALUE *first_pc = insns[0]->pc;
+	auto *first_cfp = insns[0]->cfp;
 
-	unsigned i = 0;
-	while (i < RB_JIT->trace.insns_size + 1) {
-		jit_insn_t *insn = &RB_JIT->trace.insns[i];
+	// for (unsigned i = 0; i < insns_size + 1; i++) {
+	for (unsigned i = 0, len; i < insns_size + 1; i += len) {
+		auto *insn = insns[i];
+		if (!insn) {
+			// トレースしそこねた命令(branchlessなどでジャンプした場合に起こる)
+			// fprintf(stderr, "not tracing instruction: %d, %08p\n", i, first_pc + i);
+			jit_trace_insn(th, first_cfp, first_pc + i);
+			insn = insns[i];
+			// jit_dump_insn(insn);
+		}
+
 		insn->bb = BasicBlock::Create(CONTEXT, "insn", codegen_func.jit_trace_func);
-		i += insn->len;
+		len = insn->len;
 	}
 
-	BUILDER->CreateBr(RB_JIT->trace.insns[0].bb);
+	BUILDER->CreateBr(insns[0]->bb);
 
-	i = 0;
-	while (i < RB_JIT->trace.insns_size) {
-	// while (i < RB_JIT->trace.insns.size()) {
-		// auto &insns = RB_JIT->trace.insns;
-		auto insns = RB_JIT->trace.insns;
-		jit_insn_t *insn = &insns[i];
-
-		jit_codegen_core(codegen_func, cfp, insns, insn);
-
-		i += insn->len;
-		fprintf(stderr, "%d\n", i);
+	// for (unsigned i = 0, len; i < insns_size; i+= len) {
+	// 	jit_insn_t *insn = insns[i];
+    //
+	// 	jit_codegen_core(codegen_func, th->cfp, insns, insn);
+    //
+	// 	len = insn->len;
+	// }
+	for (unsigned i = 0; i < insns_size; i++) {
+		if (auto *insn = insns[i]) {
+			jit_codegen_core(codegen_func, th->cfp, insns, insn);
+		}
 	}
-	BUILDER->SetInsertPoint(RB_JIT->trace.insns[RB_JIT->trace.insns_size].bb);
+	BUILDER->SetInsertPoint(insns[insns_size]->bb);
 	BUILDER->CreateRetVoid();
 
 	// JIT_DEBUG_LOG("==== JITed instructions ====");
@@ -462,14 +546,14 @@ jit_codegen(rb_thread_t *th)
 
 	JIT_DEBUG_LOG("==== Execute JITed function ====");
 	auto fptr = RB_JIT->compileFunction(codegen_func.jit_trace_func);
-	fptr(th, cfp);
+	fptr(th, th->cfp);
 }
 
 static inline void
 jit_codegen_core(
-		jit_codegen_func_t &codegen_func,
+		jit_codegen_func_t codegen_func,
 		rb_control_frame_t *cfp,
-		jit_insn_t *insns,
+		jit_insn_t **insns,
 		jit_insn_t *insn)
 {
 #define JIT_TRACE_FUNC	codegen_func.jit_trace_func
@@ -534,6 +618,8 @@ jit_codegen_core(
 // #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
 #define RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->valueZero))
 #undef JIT_CHECK_STACK_SIZE
+
+#define NEXT_INSN() (insns[insn->index + insn->len])
 
 	switch (insn->opecode) {
 #include "jit_codegen.inc"

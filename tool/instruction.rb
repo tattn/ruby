@@ -1300,7 +1300,7 @@ class RubyVM
 
 		def make_footer_basic_block
 			unless @branch
-				commit '    BUILDER->CreateBr((insn+insn->len)->bb);'
+				commit '    BUILDER->CreateBr(NEXT_INSN()->bb);'
 			else
 				@branch = false
 			end

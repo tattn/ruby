@@ -90,6 +90,7 @@ vm_exec_core(rb_thread_t *th, VALUE initial)
 { \
   REG_CFP = th->cfp; \
   reg_pc  = reg_cfp->pc; \
+  JIT_POP_TRACE(th->cfp); \
 }
 
 #undef  REG_PC

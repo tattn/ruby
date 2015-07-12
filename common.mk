@@ -1603,8 +1603,8 @@ iseq.$(OBJEXT): {$(VPATH)}vm_core.h
 iseq.$(OBJEXT): {$(VPATH)}vm_debug.h
 iseq.$(OBJEXT): {$(VPATH)}vm_opts.h
 jit.$(OBJEXT): {$(VPATH)}jit.h
-jit.$(OBJEXT): {$(VPATH)}jit.cpp
 jit.$(OBJEXT): {$(VPATH)}jit_codegen.inc
+jit.$(OBJEXT): {$(VPATH)}jit.cpp
 load.$(OBJEXT): $(CCAN_DIR)/check_type/check_type.h
 load.$(OBJEXT): $(CCAN_DIR)/container_of/container_of.h
 load.$(OBJEXT): $(CCAN_DIR)/list/list.h
@@ -2338,6 +2338,8 @@ vm.$(OBJEXT): {$(VPATH)}intern.h
 vm.$(OBJEXT): {$(VPATH)}internal.h
 vm.$(OBJEXT): {$(VPATH)}io.h
 vm.$(OBJEXT): {$(VPATH)}iseq.h
+vm.$(OBJEXT): {$(VPATH)}jit.cpp
+vm.$(OBJEXT): {$(VPATH)}jit.h
 vm.$(OBJEXT): {$(VPATH)}method.h
 vm.$(OBJEXT): {$(VPATH)}missing.h
 vm.$(OBJEXT): {$(VPATH)}node.h

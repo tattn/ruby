@@ -1514,6 +1514,7 @@ vm_exec(rb_thread_t *th)
 					       rb_vm_frame_method_entry(th->cfp)->called_id);
 	    }
 	    th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp);
+		JIT_SET_CFP(th->cfp);
 	}
 
 	cfp = th->cfp;
@@ -1699,6 +1700,7 @@ vm_exec(rb_thread_t *th)
 	    }
 	    else {
 		th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp);
+		JIT_SET_CFP(th->cfp);
 		goto exception_handler;
 	    }
 	}
@@ -1731,7 +1733,7 @@ rb_iseq_eval_main(VALUE iseqval)
 
     vm_set_main_stack(th, iseqval);
 
-	jit_trace_start(th);
+	jit_trace_start(th->cfp);
 
     val = vm_exec(th);
 	if (getenv("RUBY_JIT_DEBUG")) jit_trace_dump(th);

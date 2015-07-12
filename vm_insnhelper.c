@@ -173,6 +173,7 @@ static inline void
 vm_pop_frame(rb_thread_t *th)
 {
     th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp);
+	JIT_POP_TRACE(th->cfp);
 
     if (VMDEBUG == 2) {
 	SDR();
@@ -1383,6 +1384,7 @@ vm_call_iseq_setup_tailcall(rb_thread_t *th, rb_control_frame_t *cfp, rb_call_in
     VALUE finish_flag = VM_FRAME_TYPE_FINISH_P(cfp) ? VM_FRAME_FLAG_FINISH : 0;
 
     cfp = th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp); /* pop cf */
+	JIT_SET_CFP(cfp);
 
     RUBY_VM_CHECK_INTS(th);
 
@@ -2285,6 +2287,7 @@ vm_yield_with_cfunc(rb_thread_t *th, const rb_block_t *block,
     val = (*ifunc->func) (arg, ifunc->data, argc, argv, blockarg);
 
     th->cfp++;
+	JIT_SET_CFP(th->cfp);
     return val;
 }
 

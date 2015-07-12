@@ -581,6 +581,7 @@ cont_restore_thread(rb_context_t *cont)
     th->root_lep = sth->root_lep;
     th->root_svar = sth->root_svar;
     th->ensure_list = sth->ensure_list;
+	JIT_SET_CFP(th->cfp);
 
 }
 
@@ -1214,6 +1215,7 @@ fiber_init(VALUE fibval, VALUE proc)
     th->local_storage_recursive_hash_for_trace = Qnil;
 
     th->first_proc = proc;
+	JIT_SET_CFP(th->cfp);
 
 #if !FIBER_USE_NATIVE
     MEMCPY(&cont->jmpbuf, &cth->root_jmpbuf, rb_jmpbuf_t, 1);

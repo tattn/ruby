@@ -70,6 +70,7 @@ extern VALUE ruby_vm_const_missing_count;
 
 #define RESTORE_REGS() do { \
   REG_CFP = th->cfp; \
+  JIT_SET_CFP(th->cfp); \
 } while (0)
 
 #define REG_A   reg_a
