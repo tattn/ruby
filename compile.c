@@ -1062,6 +1062,8 @@ iseq_setup(rb_iseq_t *iseq, LINK_ANCHOR *anchor)
     }
     debugs("[compile step: finish]\n");
 
+	jit_add_iseq(iseq);
+
     return 0;
 }
 

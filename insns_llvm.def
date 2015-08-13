@@ -4,7 +4,32 @@ $putobject
 $putobject_OP_INT2FIX_O_0_C_
 $putobject_OP_INT2FIX_O_1_C_
 
+$putnil {
+	val = RB_JIT->valueVal(Qnil);
+}
+
+$leave {
+	/* BUILDER->CreateCall(RB_JIT->llvm_pop_frame, JIT_TH); */
+	Value *ptr = BUILDER->CreateIntToPtr(RB_JIT->pop_frame, RB_JIT->ptrTy);
+}
+
 $getspecial {
+// $leave {
+//     // if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
+// 	// vm_pop_frame(th);
+//     //
+// 	// return val;
+//     // }
+//     // else {
+// 	// vm_pop_frame(th);
+// 	// RESTORE_REGS();
+//     // }
+//
+// 	BUILDER->CreateCall(RB_JIT->llvm_pop_frame, JIT_TH);
+// 	RESTORE_REGS();
+// }
+
+
     // val = vm_getspecial(th, GET_LEP(), key, type);
 }
 
@@ -40,8 +65,19 @@ $opt_div {
 }
 
 $send {
+	rb_ci->argc = rb_ci->orig_argc;
+	Value *ci_orig_argc_elmptr = BUILDER->CreateStructGEP(ci, 2);
+	Value *ci_orig_argc = BUILDER->CreateLoad(ci_orig_argc_elmptr);
+	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(ci, 12);
+	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
+
 	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, JIT_TH, JIT_CFP, ci, RB_JIT->int32Zero);
-	BUILDER->CreateCall2(RB_JIT->llvm_search_method, ci, TOPN(rb_ci->argc));
+
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(ci, 11);
+	Value *ci_recv = TOPN(rb_ci->argc);
+	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
+	BUILDER->CreateCall2(RB_JIT->llvm_search_method, ci, ci_recv);
+
 	Value *ci_call_elmptr = BUILDER->CreateStructGEP(ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
 	CALL_METHOD(ci);

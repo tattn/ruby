@@ -1279,6 +1279,8 @@ class RubyVM
         @insns.each{|insn|
 					commit "case BIN(#{insn.name}): {"
 					case insn.name
+					when 'send'
+						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
 					when 'opt_send_without_block'
 						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
 					when 'branchunless'

@@ -71,6 +71,7 @@ define void @function(%struct.rb_thread_struct* %th, %struct.rb_control_frame_st
   store %struct.rb_control_frame_struct* %cfp, %struct.rb_control_frame_struct** %2, align 8
   call void @vm_caller_setup_arg_block(%struct.rb_thread_struct* null, %struct.rb_control_frame_struct* null, %struct.rb_call_info_struct* null, i32 0)
   call void @vm_search_method(%struct.rb_call_info_struct* null, i64 0)
+  call void @vm_pop_frame(%struct.rb_thread_struct* null)
   store i64 6, i64* %idx, align 8
   %3 = load %struct.rb_control_frame_struct** %2, align 8
   %4 = getelementptr inbounds %struct.rb_control_frame_struct* %3, i32 0, i32 6
@@ -85,6 +86,8 @@ define void @function(%struct.rb_thread_struct* %th, %struct.rb_control_frame_st
 declare void @vm_caller_setup_arg_block(%struct.rb_thread_struct*, %struct.rb_control_frame_struct*, %struct.rb_call_info_struct*, i32) #1
 
 declare void @vm_search_method(%struct.rb_call_info_struct*, i64) #1
+
+declare void @vm_pop_frame(%struct.rb_thread_struct*) #1
 
 attributes #0 = { nounwind "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-realign-stack" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-realign-stack" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }

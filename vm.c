@@ -1733,10 +1733,15 @@ rb_iseq_eval_main(VALUE iseqval)
 
     vm_set_main_stack(th, iseqval);
 
-	jit_trace_start(th->cfp);
+	if (getenv("RUBY_JIT_DEBUG")) jit_trace_start(th->cfp);
 
     val = vm_exec(th);
-	if (getenv("RUBY_JIT_DEBUG")) jit_trace_dump(th);
+	/* if (getenv("RUBY_JIT_DEBUG")) { */
+	/* 	jit_trace_dump(th); */
+	/* 	vm_set_main_stack(th, iseqval); */
+	/* 	val = vm_exec(th); */
+	/* } */
+
     RB_GC_GUARD(iseqval); /* prohibit tail call optimization */
     return val;
 }
