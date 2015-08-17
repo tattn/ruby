@@ -821,6 +821,11 @@ class RubyVM
       commit  "  DEBUG_ENTER_INSN(\"#{insn.name}\");"
     end
 
+    def make_header_trace insn
+      comment "/* trace instruction */"
+      commit  "  JIT_TRACE();"
+    end
+
     def make_header_defines insn
       commit  "  #define CURRENT_INSN_#{insn.name} 1"
       commit  "  #define INSN_IS_SC()     #{insn.sc ? 0 : 1}"
@@ -870,6 +875,7 @@ class RubyVM
       make_header_temporary_vars insn
       #
       make_header_debug insn
+      make_header_trace insn
       make_header_pc insn
       make_header_popn insn
       make_header_defines insn

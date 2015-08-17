@@ -107,13 +107,18 @@ COMMONOBJS    = array.$(OBJEXT) \
 		$(BUILTIN_TRANSOBJS) \
 		$(MISSING)
 
+JITOBJS       = jit/jit.$(OBJEXT) \
+				jit/jit_trace.$(OBJEXT)
+
+
 EXPORTOBJS    = $(DLNOBJ) \
 		localeinit.$(OBJEXT) \
 		loadpath.$(OBJEXT) \
-		$(COMMONOBJS)
+		$(COMMONOBJS) \
+		$(JITOBJS)
 
 OBJS          = $(EXPORTOBJS) prelude.$(OBJEXT)
-ALLOBJS       = $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(INITOBJS)
+ALLOBJS       = $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(INITOBJS) $(JITOBJS)
 
 GOLFOBJS      = goruby.$(OBJEXT) golf_prelude.$(OBJEXT)
 
@@ -168,6 +173,7 @@ showflags:
 	"	CPPFLAGS = $(CPPFLAGS)" \
 	"	DLDFLAGS = $(DLDFLAGS)" \
 	"	SOLIBS = $(SOLIBS)" \
+	"   LDJITFLAGS = $(LDJITFLAGS)" \
 	$(MESSAGE_END)
 	-@$(CC_VERSION)
 
@@ -1600,6 +1606,10 @@ iseq.$(OBJEXT): {$(VPATH)}util.h
 iseq.$(OBJEXT): {$(VPATH)}vm_core.h
 iseq.$(OBJEXT): {$(VPATH)}vm_debug.h
 iseq.$(OBJEXT): {$(VPATH)}vm_opts.h
+jit.$(OBJEXT): {$(VPATH)}jit/jit.c
+jit.$(OBJEXT): {$(VPATH)}jit/jit.h
+jit_trace.$(OBJEXT): {$(VPATH)}jit/jit_trace.h
+jit_trace.$(OBJEXT): {$(VPATH)}jit/jit_trace.c
 load.$(OBJEXT): $(CCAN_DIR)/check_type/check_type.h
 load.$(OBJEXT): $(CCAN_DIR)/container_of/container_of.h
 load.$(OBJEXT): $(CCAN_DIR)/list/list.h

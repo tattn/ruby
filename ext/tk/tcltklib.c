@@ -22,6 +22,9 @@
 #undef RUBY_UNTYPED_DATA_WARNING
 #define RUBY_UNTYPED_DATA_WARNING 0
 
+#define HAVE_RB_THREAD_CHECK_TRAP_PENDING
+#define HAVE_RB_ERRINFO
+#define HAVE_RB_SAFE_LEVEL
 #ifdef HAVE_RB_THREAD_CHECK_TRAP_PENDING
 static int rb_thread_critical; /* dummy */
 int rb_thread_check_trap_pending(void);

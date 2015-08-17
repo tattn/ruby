@@ -11,6 +11,8 @@
 
 #include <math.h>
 
+#include "jit/jit_trace.h"
+
 #if VM_COLLECT_USAGE_DETAILS
 static void vm_analysis_insn(int insn);
 #endif

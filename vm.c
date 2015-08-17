@@ -21,6 +21,8 @@
 #include "probes.h"
 #include "probes_helper.h"
 
+#include "jit/jit.h"
+
 static inline VALUE *
 VM_EP_LEP(VALUE *ep)
 {
@@ -1707,6 +1709,8 @@ rb_iseq_eval_main(const rb_iseq_t *iseq)
 {
     rb_thread_t *th = GET_THREAD();
     VALUE val;
+
+	if (getenv("RUBY_JIT_DEBUG")) jit_test();
 
     vm_set_main_stack(th, iseq);
     val = vm_exec(th);

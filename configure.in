@@ -31,6 +31,11 @@ rm() {
 }
 ])])])
 
+# AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`/usr/local/Cellar/llvm/3.6.1/bin/llvm-config --cflags | tr '\n' ' '`)
+AC_SUBST(LDJITFLAGS,"-lncurses -lz -lgccjit")
+AC_SUBST(CJITFLAGS,"-std=c99")
+# AC_SUBST(CFLAGS,"-Wno-error=shorten-64-to-32 -Wshift-op-parentheses") #-Wno-error=shorten-64-to-32 must be required
+
 { # environment section
 
 AC_ARG_WITH(baseruby,
@@ -177,7 +182,8 @@ AC_DEFUN([RUBY_NACL],
   AC_SUBST(NACL_SDK_ROOT)
   AC_SUBST(NACL_SDK_VARIANT, "${nacl_cv_build_variant}")
   AC_SUBST(NACL_LIB_PATH, "${nacl_cv_libpath}")
-  AC_CHECK_TOOLS(CC, [clang gcc])
+  AC_CHECK_TOOLS(CC, [gcc])
+  # AC_CHECK_TOOLS(CC, [clang gcc])
   AC_CHECK_TOOLS(CXX, [clang++ g++])
 ])])
 
@@ -467,7 +473,8 @@ fi
 RUBY_NACL
 AS_CASE(["$host_os:$build_os"],
 [darwin*:darwin*], [
-    AC_CHECK_TOOLS(CC, [clang gcc cc])
+    AC_CHECK_TOOLS(CC, [gcc cc])
+    # AC_CHECK_TOOLS(CC, [clang gcc cc])
     # Following Apple deployed clang are broken
     # clang version 1.0 (http://llvm.org/svn/llvm-project/cfe/tags/Apple/clang-23 exported)
     # Apple clang version 2.0 (tags/Apple/clang-137) (based on LLVM 2.9svn)
@@ -806,7 +813,6 @@ if test "$GCC:${warnflags+set}:no" = yes::no; then
 		 -Wunused-variable \
 		 -Werror=pointer-arith \
 		 -Werror=write-strings \
-		 -Werror=declaration-after-statement \
 		 -Werror=shorten-64-to-32 \
 		 -Werror=implicit-function-declaration \
 		 -Werror=division-by-zero \
