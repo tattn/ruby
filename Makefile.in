@@ -11,6 +11,8 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 
 #### Start of system configuration section. ####
 
+JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3
+
 srcdir = @srcdir@
 top_srcdir = $(srcdir)
 hdrdir = $(srcdir)/include
@@ -60,7 +62,7 @@ OUTFLAG = @OUTFLAG@$(empty)
 COUTFLAG = @COUTFLAG@$(empty)
 ARCH_FLAG = @ARCH_FLAG@
 CFLAGS_NO_ARCH = @CFLAGS@
-CFLAGS = $(CFLAGS_NO_ARCH) $(ARCH_FLAG)
+CFLAGS = $(CFLAGS_NO_ARCH) $(ARCH_FLAG) $(JIT_DEBUG)
 cflags = @cflags@
 optflags = @optflags@
 debugflags = @debugflags@

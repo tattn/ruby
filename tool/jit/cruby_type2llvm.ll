@@ -1,6 +1,6 @@
 ; ModuleID = 'cruby_type2llvm.c'
 target datalayout = "e-m:o-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-apple-darwin14.4.0"
+target triple = "x86_64-apple-darwin14.5.0"
 
 %struct.rb_thread_struct = type { %struct.list_node, i64, %struct.rb_vm_struct*, i64*, i64, %struct.rb_control_frame_struct*, i32, i32, i64, i32, i32, %struct.rb_block_struct*, %struct.rb_method_entry_struct*, %struct.rb_call_info_struct*, i64, i64, %struct.rb_block_struct*, i64*, i64, %struct._opaque_pthread_t*, i32, i32, i32, %struct.native_thread_data_struct, i8*, i64, i64, i64, i64, i64, i32, i32, i64, %struct._opaque_pthread_mutex_t, %struct.rb_thread_cond_struct, %struct.rb_unblock_callback, i64, %struct.rb_mutex_struct*, %struct.rb_vm_tag*, %struct.rb_vm_protect_tag*, i32, i32, %struct.st_table*, i64, i64, %struct.rb_thread_list_struct*, i64, i64, i64 (...)*, %struct.anon.12, i64, %struct.rb_hook_list_struct, %struct.rb_trace_arg_struct*, %struct.rb_fiber_struct*, %struct.rb_fiber_struct*, [37 x i32], %struct.rb_ensure_list*, i32, i32, i8*, i64, i64 }
 %struct.list_node = type { %struct.list_node*, %struct.list_node* }
@@ -70,8 +70,6 @@ define void @function(%struct.rb_thread_struct* %th, %struct.rb_control_frame_st
   store %struct.rb_thread_struct* %th, %struct.rb_thread_struct** %1, align 8
   store %struct.rb_control_frame_struct* %cfp, %struct.rb_control_frame_struct** %2, align 8
   call void @vm_caller_setup_arg_block(%struct.rb_thread_struct* null, %struct.rb_control_frame_struct* null, %struct.rb_call_info_struct* null, i32 0)
-  call void @vm_search_method(%struct.rb_call_info_struct* null, i64 0)
-  call void @vm_pop_frame(%struct.rb_thread_struct* null)
   store i64 6, i64* %idx, align 8
   %3 = load %struct.rb_control_frame_struct** %2, align 8
   %4 = getelementptr inbounds %struct.rb_control_frame_struct* %3, i32 0, i32 6
@@ -84,10 +82,6 @@ define void @function(%struct.rb_thread_struct* %th, %struct.rb_control_frame_st
 }
 
 declare void @vm_caller_setup_arg_block(%struct.rb_thread_struct*, %struct.rb_control_frame_struct*, %struct.rb_call_info_struct*, i32) #1
-
-declare void @vm_search_method(%struct.rb_call_info_struct*, i64) #1
-
-declare void @vm_pop_frame(%struct.rb_thread_struct*) #1
 
 attributes #0 = { nounwind "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-realign-stack" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-realign-stack" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }

@@ -1188,6 +1188,6 @@ void rb_postponed_job_flush(rb_vm_t *vm);
 
 RUBY_SYMBOL_EXPORT_END
 
-#include "jit.h"
+#include "jit/jit.h"
 
 #endif /* RUBY_VM_CORE_H */

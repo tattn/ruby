@@ -18,7 +18,8 @@
 #include "eval_intern.h"
 #include "probes.h"
 #include "probes_helper.h"
-#include "jit.h"
+
+#include "jit/jit.h"
 
 static inline VALUE *
 VM_EP_LEP(VALUE *ep)

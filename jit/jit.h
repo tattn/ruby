@@ -11,8 +11,6 @@ VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 
 void ruby_jit_init(void);
 
-void ruby_jit_test(void);
-
 
 // VALUE rb_jit_compile_node(VALUE self, NODE *node);
 

@@ -1273,7 +1273,7 @@ class RubyVM
   # jit_codegen.inc
   class JitCodegenIncGenerator < VmBodyGenerator
     def generate
-      load_insns_llvm_def 'insns_llvm.def'
+      load_insns_llvm_def 'jit/insns_llvm.def'
 
       codegen_table = build_string do
         @insns.each{|insn|
@@ -1330,7 +1330,7 @@ class RubyVM
         if use_const?
           commit "  const #{e[0][0]} #{e[0][1]} = #{e[1]};"
         else
-					llvm_val = "#{$1}(RB_JIT->valueVal(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
+					llvm_val = "#{$1}(RB_JIT->values->value(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
           commit "  #define #{e[0][1]} #{llvm_val}"
         end
       }
@@ -1349,14 +1349,14 @@ class RubyVM
 				re = /\b#{var}\b/n
 				if re =~ insn.body or re =~ insn.sp_inc or insn.rets.any?{|t, v| re =~ v} or re =~ 'ic' or re =~ 'ci'
 					if type == 'VALUE'
-						ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->valueTy);"
-						ops << "    BUILDER->CreateStore(RB_JIT->valueVal(insn->pc[#{i+1}]), #{var});"
+						ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->types->valueT);"
+						ops << "    BUILDER->CreateStore(RB_JIT->values->value(insn->pc[#{i+1}]), #{var});"
 						@val_alloca = true
 					elsif type == 'CALL_INFO'
 						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
-						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->valueVal((VALUE)rb_ci), RB_JIT->llvm_call_info_t);"
+						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)rb_ci), RB_JIT->types->rb_call_info_t);"
 					elsif type == 'lindex_t' or type == 'rb_num_t'
-						ops << "    Value *#{var} = RB_JIT->valueVal(insn->pc[#{i+1}]);"
+						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
 					else
 						ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
 					end
@@ -1499,7 +1499,7 @@ class RubyVM
       'optunifs.inc'    => OptUnifsIncGenerator,
       'opt_sc.inc'      => OptSCIncGenerator,
       'yasmdata.rb'     => YASMDataRbGenerator,
-      'jit_codegen.inc' => JitCodegenIncGenerator,
+      'jit/jit_codegen.inc' => JitCodegenIncGenerator,
     }
 
     def generate args = []
