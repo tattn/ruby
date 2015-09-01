@@ -43,7 +43,7 @@ static inline void
 jit_codegen_core(
 		jit_codegen_func_t codegen_func,
 		rb_control_frame_t *cfp,
-		jit_insn_t **insns,
+		jit_trace_t *trace,
 		int index);
 
 static inline void
@@ -63,8 +63,21 @@ jit_codegen(rb_thread_t *th)
 }
 
 static inline void
+jit_codegen_make_return(jit_codegen_func_t codegen_func, int is_ret = 0)
+{
+	AllocaInst *ret_ptr = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
+	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_ptr, 0);
+	Value *is_ret_ptr = BUILDER->CreateStructGEP(ret_ptr, 1);
+	BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
+	BUILDER->CreateStore(RB_JIT->values->intV(is_ret), is_ret_ptr);
+	Value *ret = BUILDER->CreateLoad(ret_ptr);
+	BUILDER->CreateRet(ret);
+}
+
+static inline void
 jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 {
+	jit_trace_dump(th);
 	JIT_DEBUG_LOG("=== Start jit_codegen_trace  ===");
 	Module *module = RB_JIT->createModule();
 	jit_codegen_func_t codegen_func = RB_JIT->createJITFunction(module);
@@ -78,8 +91,8 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 
 	insns[insns_size] = new jit_insn_t;
 
-	// for (unsigned i = 0; i < insns_size + 1; i++) {
-	for (unsigned i = 0, len = 1; i < insns_size + 1; i += len) {
+	for (unsigned i = 0; i < insns_size + 1; i++) {
+	// for (unsigned i = 0, len = 1; i < insns_size + 1; i += len) {
 		auto *insn = insns[i];
 		// if (!insn) {
 		// 	// トレースしそこねた命令(branchlessなどでジャンプした場合に起こる)
@@ -104,25 +117,19 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 	for (unsigned i = 0; i < insns_size; i++) {
 		if (auto *insn = insns[i]) {
 			jit_dump_insn(insn);
-			jit_codegen_core(codegen_func, insn->cfp, insns, i);
+			jit_codegen_core(codegen_func, insn->cfp, trace, i);
 		}
 	}
 
 	BUILDER->SetInsertPoint(insns[insns_size]->bb);
-	// BUILDER->CreateRetVoid();
-	AllocaInst *ret_ptr = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
-	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_ptr, 0);
-	BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
-	Value *ret = BUILDER->CreateLoad(ret_ptr);
-	BUILDER->CreateRet(ret);
-
+	jit_codegen_make_return(codegen_func);
 
 	// JIT_DEBUG_LOG("==== JITed instructions ====");
 	// jit_trace_func->dump();
-	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
+	//JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
 	jit_codegen_optimize(*codegen_func.jit_trace_func, module);
 	// RB_JIT->optimizeFunction(*codegen_func.jit_trace_func, module);
-	JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
+	//JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
 
 	JIT_DEBUG_LOG("==== Compile instructions ====");
 	trace->jited = RB_JIT->compileFunction(codegen_func.jit_trace_func);
@@ -132,7 +139,7 @@ static inline void
 jit_codegen_core(
 		jit_codegen_func_t codegen_func,
 		rb_control_frame_t *cfp,
-		jit_insn_t **insns,
+		jit_trace_t *trace,
 		int index)
 {
 #define JIT_TRACE_FUNC	codegen_func.jit_trace_func
@@ -142,7 +149,12 @@ jit_codegen_core(
 #define EP_GEP			codegen_func.ep_gep
 #define MODULE			codegen_func.module
 
+
+#ifdef JIT_DEBUG_FLAG
 #define PRINT_VAL(val) RB_JIT->createPrintf(MODULE, (val));
+#else
+#define PRINT_VAL(val)
+#endif
 
 
 #define JIT_CHECK_STACK_SIZE
@@ -209,7 +221,10 @@ jit_codegen_core(
 // #define NEXT_INSN() (insns[insn->index + insn->len])
 #define NEXT_INSN() (insns[index + 1])
 
+	unsigned insns_size = trace->insns_iterator;
+	jit_insn_t **insns = trace->insns;
 	jit_insn_t *insn = insns[index];
+
 	switch (insn->opecode) {
 #include "jit_codegen.inc"
 	}

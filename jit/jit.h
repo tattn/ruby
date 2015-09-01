@@ -12,11 +12,6 @@ VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 void ruby_jit_init(void);
 
 
-// VALUE rb_jit_compile_node(VALUE self, NODE *node);
-
-VALUE jit_insn_to_llvm(rb_thread_t *th);
-
-
 extern int is_jit_tracing;
 
 
@@ -26,7 +21,7 @@ extern int is_jit_tracing;
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
 #define JIT_TRACE \
-if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp) { /* RESTORE_REGS(); */ ADD_PC(jmp); goto *(void const *)GET_CURRENT_INSN(); } }
+if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp > 0) { /* RESTORE_REGS(); */ ADD_PC(jmp); goto *(void const *)GET_CURRENT_INSN(); } else if (jmp < 0) { return TOPN(1); } }
 
 #define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
 // #define JIT_NEW_TRACE(cfp)
@@ -43,6 +38,9 @@ void jit_push_new_trace(rb_control_frame_t *cfp);
 rb_control_frame_t *jit_pop_trace(rb_control_frame_t *cfp);
 int jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc);
 void jit_trace_dump(rb_thread_t *th);
+
+
+void jit_trace_jump(int dest);
 
 #ifdef __cplusplus
 }

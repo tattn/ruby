@@ -42,7 +42,7 @@
 
 using namespace llvm;
 
-#define JIT_DEBUG_FLAG
+//#define JIT_DEBUG_FLAG
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -75,6 +75,7 @@ typedef struct jit_insn_struct {
 
 typedef struct jit_func_result_struct {
 	rb_control_frame_t *exit_cfp;
+	int is_ret;
 } jit_func_ret_t;
 
 typedef struct jit_trace_struct {
@@ -84,6 +85,7 @@ typedef struct jit_trace_struct {
 	unsigned insns_iterator = 0;
 	rb_iseq_t *iseq;
 
+	VALUE *first_pc;
 	std::unordered_set<VALUE*> pc_set;
 	std::function<jit_func_ret_t(rb_thread_t*, rb_control_frame_t*)> jited = nullptr;
 } jit_trace_t;
@@ -140,6 +142,8 @@ public:
 		}
 	}
 
+
+#ifdef JIT_DEBUG_FLAG
 	void createPrintf(llvm::Module *mod, llvm::Value* val)
 	{
 		GlobalVariable* var = mod->getGlobalVariable(".str", true);
@@ -155,6 +159,7 @@ public:
 
 		builder->CreateCall2(funcs->printf, var_ref, val);
 	}
+#endif
 
 	Module *createModule()
 	{
@@ -187,7 +192,6 @@ public:
 
 			sys::DynamicLibrary::AddSymbol("_vm_pop_frame", (void *)vm_pop_frame);
 
-			// llvm_search_method = module->getFunction("vm_search_method");
 			llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
 
 			if (funcs) delete funcs;
@@ -209,8 +213,6 @@ public:
 			// llvm_pop_frame = Function::Create(pop_frame_t, GlobalValue::ExternalLinkage, "vm_pop_frame", module);
 		// }
 
-
-		types->jit_func_ret_t = StructType::get(types->rb_control_frame_t, 0);
 
 		sys::PrintStackTraceOnErrorSignal();
 
@@ -301,7 +303,7 @@ static inline void
 jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 {
 	// auto size = iseq->iseq_size;
-	auto size = 0x100;
+	auto size = 0x50;
 	auto insns = new jit_insn_t*[size+1];	// +1 is for last basicblock
 	// insns[size] = new jit_insn_t;			// for last basicblock
 	memset(insns, 0, sizeof(jit_insn_t*) * size);
@@ -311,26 +313,27 @@ jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 	trace->iseq = iseq;
 }
 
+static inline jit_trace_t *
+jit_trace_find_trace(VALUE *pc)
+{
+	auto &traces = RB_JIT->traces;
+	auto it = traces.find(pc);
+	if (it == traces.end()) return nullptr;
+	return it->second;
+}
+
 extern "C"
 void
 jit_trace_start(rb_control_frame_t *cfp)
 {
-	jit_trace_t *trace;
-
 	is_jit_tracing = 1;
 
-	auto &traces = RB_JIT->traces;
-	// auto it = traces.find(cfp->iseq->iseq_encoded);
-	auto it = traces.find(cfp->pc);
-	if (it != traces.end()) {
-		trace = it->second;
-	}
-	else {
+	jit_trace_t *trace = jit_trace_find_trace(cfp->pc);
+	if (!trace) {
 		trace = new jit_trace_t;
 		jit_init_trace(trace, cfp->iseq);
 
 		// save trace
-		// RB_JIT->traces[cfp->iseq->iseq_encoded] = trace;
 		RB_JIT->traces[cfp->pc] = trace;
 		RB_JIT->trace_list.push_back(trace);
 	}
@@ -346,7 +349,6 @@ jit_push_new_trace(rb_control_frame_t *cfp)
 
 	// ブロック呼び出しも push と pop はよばれる
 	// vm_yield_with_cfuncでifuncをプッシュした時は cfp->iseq->origが0以外で、sizeも未設定
-
 	// rb_iseq_location_t &loc = cfp->iseq->location;
 	// char *path = RSTRING_PTR(loc.path);
 	// char *base_label = RSTRING_PTR(loc.base_label);
@@ -360,24 +362,7 @@ extern "C"
 rb_control_frame_t *
 jit_pop_trace(rb_control_frame_t *cfp)
 {
-	// push_new_trace と pop_trace の呼び出し回数が合わない pop が多くなる???
-	// if (cfp->iseq) {
-	// 	// --trace_stack_size;
-	// 	auto it = RB_JIT->traces.find(cfp->iseq->iseq_encoded);
-	// 	if (it == RB_JIT->traces.end()) {
-	// 		// installing default ripper libraries
-	// 		// checking ../.././parse.y and ../.././ext/ripper/eventids2.c
-	// 		is_jit_tracing = 0;
-	// 		JIT_DEBUG_LOG2("@@@@ jit_pop_trace @@@@   %p, %d, %d", cfp->pc, cfp->iseq->type, cfp->flag);
-	// 	}
-	// 	else {
-	// 		RB_JIT->trace = it->second;
-	// 	}
-	// 	// JIT_DEBUG_LOG("@@@@ jit_pop_trace @@@@   ???????????");
-
-	// }
 	jit_push_new_trace(cfp);
-
 	return cfp;
 }
 
@@ -413,17 +398,8 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 
 	{
 		// トレース済み
-		// int index = pc - cfp->iseq->iseq_encoded;
-		// if (trace->insns[index]) return;
-
-		// if (trace->pc_set.find(pc) == trace->pc_set.end()) {
-		// 	trace->pc_set.insert(pc);
-		// }
-		if (trace->insns_iterator > 0 && trace->insns[0]->pc == pc) {
-		// else {
-			int size = trace->insns_iterator;
-			// JIT_DEBUG_LOG2("trace yet: %d", size);
-			// JIT_DEBUG_LOG2("%p, %p", trace->insns[size - 1]->pc, pc + (trace->insns[size - 1]->pc - pc));
+		if (trace->first_pc == pc) {
+			// JIT_DEBUG_LOG("trace yet");
 
 			if (!trace->jited) jit_codegen_trace(th, trace);
 
@@ -433,22 +409,74 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 			// JIT_DEBUG_LOG("==== Finished executing JITed function ====");
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
 
-			th->cfp = ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
+			//th->cfp = ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
 			// th->cfp->pc = last_insn->pc + last_insn->len;
 
-			// return last_insn->pc - pc; //pc == trace->insns[0]????
+			if (ret.is_ret) {
+				return -1;
+			}
+
+			// JIT_DEBUG_LOG2("@ last_insn: %p(%d)", last_insn, trace->insns_iterator - 1);
+			// JIT_DEBUG_LOG2("@ jump pc: (%p - %p)[%d] + %d = %d[%08p]", last_insn->pc, pc, last_insn->pc - pc, last_insn->len, last_insn->pc - pc + last_insn->len, pc + ((last_insn->pc - pc) + last_insn->len));
+
+			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ((last_insn->pc - pc) + last_insn->len));
 			return last_insn->pc - pc + last_insn->len; //pc == trace->insns[0]????
 		}
 	}
 
 	jit_insn_t *insn = new jit_insn_t;
-
 	jit_insn_init(insn, th, cfp, pc);
+	insn->index = trace->insns_iterator;
+
+	if (trace->insns_iterator == 0) trace->first_pc = pc;
+
 	// TODO: トレースするかを実行回数などで判定
 	// trace->insns[insn->index] = insn;
 	trace->insns[trace->insns_iterator++] = insn;
 
 	return 0;
+}
+
+static inline jit_insn_t *
+jit_trace_last_insn(jit_trace_t *trace)
+{
+	return trace->insns[trace->insns_iterator - 1];
+}
+
+static inline jit_insn_t *
+jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
+{
+	jit_insn_t **insns = trace->insns;
+	unsigned insns_max = trace->insns_iterator - 1;
+
+	do {
+		if (insn->index > insns_max) {
+			// トレース外にジャンプ
+			return 0;
+		}
+		JIT_DEBUG_LOG2("jump_dst: %d, %d, %d, %d", dst, insn->len, insn->index, insns_max);
+		dst -= insn->len;
+		insn = insns[insn->index + 1];
+	} while (dst > 0);
+
+	JIT_DEBUG_LOG2("jump_insn: %08p", insn->pc);
+	return insn;
+}
+
+void
+jit_trace_jump(int dest)
+{
+	jit_trace_t *trace = RB_JIT->trace;
+	jit_insn_t *insn = jit_trace_last_insn(trace);
+
+	int cur = insn->index;
+	dest += cur;
+
+	while (cur < dest) {
+		jit_trace_insn(insn->th, insn->cfp, insn->pc + insn->len);
+		insn = jit_trace_last_insn(trace);
+		cur += insn->len;
+	}
 }
 
 extern "C"
@@ -500,13 +528,6 @@ ruby_jit_init(void)
 	InitializeNativeTargetAsmPrinter();
 	InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
-}
-
-extern "C"
-VALUE
-jit_insn_to_llvm(rb_thread_t *th)
-{
-	return Qtrue;
 }
 
 // static VALUE

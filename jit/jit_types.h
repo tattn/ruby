@@ -34,4 +34,6 @@ struct JITValues
 
 	Value* value(VALUE val);
 	Value* signedValue(int val);
+
+	Value* intV(int val);
 };
