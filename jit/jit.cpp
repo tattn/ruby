@@ -42,7 +42,7 @@
 
 using namespace llvm;
 
-//#define JIT_DEBUG_FLAG
+#define JIT_DEBUG_FLAG
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -186,11 +186,7 @@ public:
 
 
 		// if (!llvm_search_method) {
-			sys::DynamicLibrary::AddSymbol("_vm_search_method", (void *)vm_search_method);
-
 			sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
-
-			sys::DynamicLibrary::AddSymbol("_vm_pop_frame", (void *)vm_pop_frame);
 
 			llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
 
@@ -288,6 +284,13 @@ static std::unique_ptr<JitCompiler> rb_mJit;
 #define ENGINE RB_JIT->engine
 
 #include "jit_dump.h"
+
+extern "C"
+void
+jit_add_symbol(const char* name, void* pfunc)
+{
+	sys::DynamicLibrary::AddSymbol(name, pfunc);
+}
 
 extern "C"
 void
@@ -399,14 +402,12 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 	{
 		// トレース済み
 		if (trace->first_pc == pc) {
-			// JIT_DEBUG_LOG("trace yet");
-
 			if (!trace->jited) jit_codegen_trace(th, trace);
 
 			JIT_DEBUG_LOG("==== Execute JITed function ====");
 			jit_func_ret_t ret = trace->jited(th, cfp);
-
 			// JIT_DEBUG_LOG("==== Finished executing JITed function ====");
+
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
 
 			//th->cfp = ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
@@ -420,7 +421,10 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 			// JIT_DEBUG_LOG2("@ jump pc: (%p - %p)[%d] + %d = %d[%08p]", last_insn->pc, pc, last_insn->pc - pc, last_insn->len, last_insn->pc - pc + last_insn->len, pc + ((last_insn->pc - pc) + last_insn->len));
 
 			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ((last_insn->pc - pc) + last_insn->len));
-			return last_insn->pc - pc + last_insn->len; //pc == trace->insns[0]????
+			int jump = (last_insn->pc - pc) + last_insn->len;
+			cfp->pc += jump;
+			jit_trace_start(cfp);
+			return jump; //pc == trace->insns[0]????
 		}
 	}
 
@@ -448,15 +452,27 @@ jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
 {
 	jit_insn_t **insns = trace->insns;
 	unsigned insns_max = trace->insns_iterator - 1;
+	int index = insn->index;
+
+	int step;
+	if (dst > 0)
+		step = 1;
+	else {
+		step = -1;
+		dst = -dst;
+	}
 
 	do {
-		if (insn->index > insns_max) {
+		index += step;
+		JIT_DEBUG_LOG2("insns_max: %d, %d", index, insns_max);
+		if (index > insns_max) {
 			// トレース外にジャンプ
+			JIT_DEBUG_LOG("jump over trace");
 			return 0;
 		}
-		JIT_DEBUG_LOG2("jump_dst: %d, %d, %d, %d", dst, insn->len, insn->index, insns_max);
+		JIT_DEBUG_LOG2("jump_dst: %d, %d, %d, %d", dst * step, insn->len, index, insns_max);
 		dst -= insn->len;
-		insn = insns[insn->index + 1];
+		insn = insns[index];
 	} while (dst > 0);
 
 	JIT_DEBUG_LOG2("jump_insn: %08p", insn->pc);

@@ -9,29 +9,20 @@ $putnil {
 }
 
 $leave {
-	// BUILDER->CreateCall(RB_JIT->llvm_pop_frame, JIT_TH);
 	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, JIT_TH);
-	jit_codegen_make_return(codegen_func);
+    PUSH(val);
+	jit_codegen_make_return(codegen_func, 1);
 }
 
 $getspecial {
-// $leave {
-//     // if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
-// 	// vm_pop_frame(th);
-//     //
-// 	// return val;
-//     // }
-//     // else {
-// 	// vm_pop_frame(th);
-// 	// RESTORE_REGS();
-//     // }
-//
-// 	BUILDER->CreateCall(RB_JIT->llvm_pop_frame, JIT_TH);
-// 	RESTORE_REGS();
-// }
-
-
     // val = vm_getspecial(th, GET_LEP(), key, type);
+	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, GET_EP());
+	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, JIT_TH, ep, key, type);
+}
+
+$putstring {
+    // val = rb_str_resurrect(str);
+	val = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, str);
 }
 
 $opt_plus {
@@ -63,6 +54,23 @@ $opt_div {
 	y = FIX2LONG(obj);
 	div = BUILDER->CreateSDiv(x, y);
 	val = LONG2NUM(div);
+}
+
+$opt_lt {
+	Value *cmp = BUILDER->CreateICmpSLT(recv, obj);
+	BasicBlock *bb_then = BasicBlock::Create(CONTEXT, "lt_then", codegen_func.jit_trace_func);
+	BasicBlock *bb_else = BasicBlock::Create(CONTEXT, "lt_else", codegen_func.jit_trace_func);
+	BasicBlock *bb_merge = BasicBlock::Create(CONTEXT, "lt_merge", codegen_func.jit_trace_func);
+	val = BUILDER->CreateAlloca(RB_JIT->types->valueT);
+	BUILDER->CreateCondBr(cmp, bb_then, bb_else);
+	BUILDER->SetInsertPoint(bb_then);
+	BUILDER->CreateStore(RB_JIT->values->trueV, val);
+	BUILDER->CreateBr(bb_merge);
+	BUILDER->SetInsertPoint(bb_else);
+	BUILDER->CreateStore(RB_JIT->values->falseV, val);
+	BUILDER->CreateBr(bb_merge);
+	BUILDER->SetInsertPoint(bb_merge);
+	val = BUILDER->CreateLoad(val);
 }
 
 $send {
@@ -130,6 +138,29 @@ $getlocal_OP__WC__0 {
 	val = BUILDER->CreateLoad(idx_ep);
 }
 
+$jump { // JUMP(dst);
+	jit_insn_t *next_insn = insns[insn->index + 1];
+	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
+	BasicBlock *bb_dst;
+	if (dest_insn) {
+		bb_dst = dest_insn->bb;
+	}
+	else {
+		JIT_DEBUG_LOG("dest_insn_else");
+		bb_dst = BasicBlock::Create(CONTEXT, "jump", codegen_func.jit_trace_func);
+		BUILDER->SetInsertPoint(bb_dst);
+		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
+		tmp = BUILDER->CreateLoad(tmp);
+		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
+		PRINT_VAL(tmp);
+		BUILDER->CreateStore(tmp, cfp_pc);
+		jit_codegen_make_return(codegen_func);
+		BUILDER->SetInsertPoint(insn->bb);
+	}
+	BUILDER->CreateBr(bb_dst);
+}
+
 $branchunless {
 	Value *test = RTEST(val);
 	JIT_DEBUG_LOG2("branchless: %d, %d, %d", insn->index, insn->len, dst);
@@ -156,4 +187,34 @@ $branchunless {
 
 	BasicBlock *bb_next = next_insn->bb;
 	BUILDER->CreateCondBr(test, bb_next, bb_dst);
+}
+
+$branchif {
+	Value *test = RTEST(val);
+	JIT_DEBUG_LOG2("branchif: %d, %d, %d", insn->index, insn->len, dst);
+	// ジャンプ先や次の命令がトレース外の時の処理を統一化する
+	jit_insn_t *next_insn = insns[insn->index + 1];
+	//jit_insn_t *next_insn = jit_codegen_jump_insn(trace, insn, 1);
+	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
+	//BasicBlock *bb_dst  = insns[insn->index + insn->len + dst]->bb;
+	BasicBlock *bb_dst;
+	if (dest_insn) {
+		bb_dst = dest_insn->bb;
+	}
+	else {
+		JIT_DEBUG_LOG("dest_insn_else");
+		bb_dst = BasicBlock::Create(CONTEXT, "branchif", codegen_func.jit_trace_func);
+		BUILDER->SetInsertPoint(bb_dst);
+		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
+		tmp = BUILDER->CreateLoad(tmp);
+		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
+		PRINT_VAL(tmp);
+		BUILDER->CreateStore(tmp, cfp_pc);
+		jit_codegen_make_return(codegen_func);
+		BUILDER->SetInsertPoint(insn->bb);
+	}
+
+	BasicBlock *bb_next = next_insn->bb;
+	BUILDER->CreateCondBr(test, bb_dst, bb_next);
 }

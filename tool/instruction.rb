@@ -1285,6 +1285,13 @@ class RubyVM
 						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
 					when 'branchunless'
 						@branch = true
+					when 'branchif'
+						@branch = true
+					when 'jump'
+						@branch = true
+					when 'leave'
+						insn.clear_rets # メソッドの戻り値が undef の場合は最後にPUSH(val)をしないので、無理やり消す
+						@branch = true
 					end
 					make_insn_def insn
 					commit "    break; }"
@@ -1437,6 +1444,7 @@ class RubyVM
 		def make_insn_def insn
 			unless @insns_llvm[insn.name]
 				make_header_basic_block
+				commit "/* not implementation */"
 				make_footer_basic_block
 				return
 			end

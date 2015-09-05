@@ -169,7 +169,7 @@ vm_push_frame(rb_thread_t *th,
     return cfp;
 }
 
-void
+static inline void
 vm_pop_frame(rb_thread_t *th)
 {
     th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp);
@@ -1031,7 +1031,7 @@ vm_expandarray(rb_control_frame_t *cfp, VALUE ary, rb_num_t num, int flag)
 
 static VALUE vm_call_general(rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci);
 
-void
+static inline void
 vm_search_method(rb_call_info_t *ci, VALUE recv)
 {
     VALUE klass = CLASS_OF(recv);

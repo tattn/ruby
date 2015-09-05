@@ -23,9 +23,18 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// void vm_pop_frame(rb_thread_t *th)
 	DEFINE_FUNC(vm_pop_frame, t->voidT, t->rb_thread_t);
 
-
 	// void vm_search_method(rb_call_info_t *ci, VALUE recv)
 	DEFINE_FUNC(vm_search_method, t->voidT, t->rb_call_info_t, t->valueT);
+
+	// VALUE vm_getspecial(rb_thread_t *th, VALUE *lep, rb_num_t key, rb_num_t type)
+	DEFINE_FUNC(vm_getspecial, t->valueT, t->rb_thread_t, t->pvalueT, t->longT, t->longT);
+
+	// VALUE *VM_EP_LEP(VALUE *ep)
+	DEFINE_FUNC(VM_EP_LEP, t->pvalueT, t->pvalueT);
+
+	// VALUE rb_str_resurrect(VALUE str)
+	DEFINE_FUNC(rb_str_resurrect, t->valueT, t->valueT);
+
 
 
 #ifdef JIT_DEBUG_FLAG

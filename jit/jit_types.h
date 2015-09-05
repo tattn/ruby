@@ -9,6 +9,7 @@ struct JITTypes
 	Type *int32T;
 	Type *int64T;
 	Type *intT;
+	Type *longT;
 	Type *ptrT;
 	Type *valueT;
 	PointerType *pvalueT;
@@ -31,6 +32,8 @@ struct JITValues
 	Value *valueOne;
 	Constant *int32Zero;
 	Value *valueQundef;
+	Value *trueV;
+	Value *falseV;
 
 	Value* value(VALUE val);
 	Value* signedValue(int val);

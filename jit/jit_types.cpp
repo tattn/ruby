@@ -9,6 +9,7 @@ JITTypes::JITTypes()
 	int32T = Type::getInt32Ty(getGlobalContext());
 	int64T = Type::getInt64Ty(getGlobalContext());
 	intT = Type::getIntNTy(getGlobalContext(), sizeof(int) * 8);
+	longT = Type::getIntNTy(getGlobalContext(), sizeof(long) * 8);
 
 	ptrT = PointerType::getUnqual(int8T);
 	valueT = int64T;
@@ -120,7 +121,9 @@ JITValues::JITValues(JITTypes *types)
 	valueZero = ConstantInt::get(types->int64T, 0);
 	valueOne = ConstantInt::get(types->int64T, 1);
 	int32Zero = ConstantInt::get(types->int32T, 0);
-	valueQundef = ConstantInt::get(types->int64T, Qundef);
+	valueQundef = ConstantInt::get(types->valueT, Qundef);
+	trueV = ConstantInt::get(types->valueT, Qtrue);
+	falseV = ConstantInt::get(types->valueT, Qfalse);
 }
 
 Value* JITValues::value(VALUE val)

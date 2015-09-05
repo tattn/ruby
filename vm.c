@@ -2834,6 +2834,13 @@ Init_VM(void)
     /* vm_backtrace.c */
     Init_vm_backtrace();
     VM_PROFILE_ATEXIT();
+
+	/* for JIT */
+	jit_add_symbol("_vm_pop_frame", vm_pop_frame);
+	jit_add_symbol("_vm_search_method", vm_search_method);
+	jit_add_symbol("_vm_getspecial", vm_getspecial);
+	jit_add_symbol("_VM_EP_LEP", VM_EP_LEP);
+	jit_add_symbol("_rb_str_resurrect", rb_str_resurrect);
 }
 
 void

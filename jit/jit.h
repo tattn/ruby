@@ -21,7 +21,7 @@ extern int is_jit_tracing;
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
 #define JIT_TRACE \
-if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp > 0) { /* RESTORE_REGS(); */ ADD_PC(jmp); goto *(void const *)GET_CURRENT_INSN(); } else if (jmp < 0) { return TOPN(1); } }
+if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp == -1) { return TOPN(1); } else if (jmp != 0) { /* RESTORE_REGS(); */ ADD_PC(jmp); goto *(void const *)GET_CURRENT_INSN(); } }
 
 #define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
 // #define JIT_NEW_TRACE(cfp)
@@ -30,6 +30,8 @@ if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp > 0
 
 #define JIT_SET_CFP(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
 // #define JIT_SET_CFP(cfp)
+
+void jit_add_symbol(const char* name, void* pfunc);
 
 void jit_add_iseq(rb_iseq_t *iseq);
 

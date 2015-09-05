@@ -1089,6 +1089,7 @@ jump
 ()
 {
     RUBY_VM_CHECK_INTS(th);
+	if (is_jit_tracing) { jit_trace_jump(dst); }
     JUMP(dst);
 }
 
@@ -1105,7 +1106,9 @@ branchif
 {
     if (RTEST(val)) {
 	RUBY_VM_CHECK_INTS(th);
+	if (is_jit_tracing) { jit_trace_jump(dst); }
 	JUMP(dst);
+	JIT_NEW_TRACE(GET_CFP());
     }
 }
 
