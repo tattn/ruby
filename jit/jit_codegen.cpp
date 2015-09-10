@@ -1,3 +1,11 @@
+#include "vm_insnhelper.h"
+
+// vm_exec.h
+typedef rb_iseq_t *ISEQ;
+
+
+
+
 static inline void
 jit_codegen_optimize(Function& f, Module *module)
 {
@@ -63,14 +71,14 @@ jit_codegen(rb_thread_t *th)
 }
 
 static inline void
-jit_codegen_make_return(jit_codegen_func_t codegen_func, int is_ret = 0)
+jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT->values->valueZero)
 {
-	AllocaInst *ret_ptr = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
-	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_ptr, 0);
-	Value *is_ret_ptr = BUILDER->CreateStructGEP(ret_ptr, 1);
+	AllocaInst *ret_alloca = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
+	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_alloca, 0);
+	Value *ret_ptr = BUILDER->CreateStructGEP(ret_alloca, 1);
 	BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
-	BUILDER->CreateStore(RB_JIT->values->intV(is_ret), is_ret_ptr);
-	Value *ret = BUILDER->CreateLoad(ret_ptr);
+	BUILDER->CreateStore(retval, ret_ptr);
+	Value *ret = BUILDER->CreateLoad(ret_alloca);
 	BUILDER->CreateRet(ret);
 }
 
@@ -138,7 +146,7 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 static inline void
 jit_codegen_core(
 		jit_codegen_func_t codegen_func,
-		rb_control_frame_t *cfp,
+		rb_control_frame_t *reg_cfp,
 		jit_trace_t *trace,
 		int index)
 {
@@ -157,6 +165,8 @@ jit_codegen_core(
 #endif
 
 
+#define OFFSET long
+
 #define JIT_CHECK_STACK_SIZE
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
 #undef TOPN
@@ -164,9 +174,15 @@ jit_codegen_core(
 	[&]{\
 	Value *sp = BUILDER->CreateLoad(SP_GEP);\
 	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x)); /* -1?*/\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x - 1));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	return BUILDER->CreateLoad(sp_incptr);}()
+#define SET_TOPN(x, val) {\
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x - 1));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
+	BUILDER->CreateStore(val, sp_incptr);}
 #undef POPN
 #define POPN(x) {\
 	Value *sp = BUILDER->CreateLoad(SP_GEP);\
@@ -182,6 +198,14 @@ jit_codegen_core(
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->valueOne);\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
 	BUILDER->CreateStore(sp_incptr, SP_GEP);}
+#undef STACK_ADDR_FROM_TOP
+#define STACK_ADDR_FROM_TOP(n)\
+	[&]{\
+	Value *sp = BUILDER->CreateLoad(SP_GEP);\
+	JIT_LLVM_SET_NAME(sp, "sp");\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-n));\
+	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #n "_");\
+	return sp_incptr;}()
 
 #undef CALL_METHOD
 #define CALL_METHOD(ci) do { \
@@ -195,8 +219,10 @@ jit_codegen_core(
 	BUILDER->CreateBr(else_block);\
 	BUILDER->SetInsertPoint(else_block);\
 } while (0)
-#define GET_SELF() RB_JIT->values->value(cfp->self)
-#define GET_EP() BUILDER->CreateLoad(EP_GEP)
+#define GET_SELF() RB_JIT->values->value(reg_cfp->self)
+#define _GET_TH() JIT_TH
+#define _GET_CFP() JIT_CFP
+#define _GET_EP() BUILDER->CreateLoad(EP_GEP)
 #define GET_LEP() (JIT_EP_LEP(GET_EP()))
 #undef GET_OPERAND
 #define GET_OPERAND(x) (insn->pc[(x)])
@@ -205,18 +231,19 @@ jit_codegen_core(
 #undef FIX2LONG
 #define FIX2LONG(x) (RSHIFT((x), 1))
 
-#undef INT2FIX
-#define INT2FIX(i) BUILDER->CreateOr(BUILDER->CreateShl(i, 1), FIXNUM_FLAG)
-#undef LONG2FIX
-#define LONG2FIX(i) INT2FIX(i)
-#undef LONG2NUM
-#define LONG2NUM(i) LONG2FIX(i)
-#define OFFSET long
+#define _INT2FIX(i) BUILDER->CreateOr(BUILDER->CreateShl(i, 1), FIXNUM_FLAG)
+#define _LONG2FIX(i) _INT2FIX(i)
+#define _LONG2NUM(i) _LONG2FIX(i)
 
 // #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
 #undef RTEST
 #define RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
 #undef JIT_CHECK_STACK_SIZE
+
+
+#define V(x) RB_JIT->values->value(x)
+#define PV(x) BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)x), RB_JIT->types->pvalueT)
+#define I(x) RB_JIT->values->intV(x)
 
 // #define NEXT_INSN() (insns[insn->index + insn->len])
 #define NEXT_INSN() (insns[index + 1])

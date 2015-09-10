@@ -1,23 +1,136 @@
 $nop
-$putself
-$putobject
-$putobject_OP_INT2FIX_O_0_C_
-$putobject_OP_INT2FIX_O_1_C_
+
+// ===============================================
+// deal with variables
+// ===============================================
+// $getlocal {
+// /*
+//     int i, lev = (int)level;
+//     VALUE *ep = GET_EP();
+//
+//     for (i = 0; i < lev; i++) {
+// 	ep = GET_PREV_EP(ep);
+//     }
+//     val = *(ep - idx);
+// */
+// }
+
+$getlocal_OP__WC__0 {
+	Value *ep = _GET_EP();
+
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
+	val = BUILDER->CreateLoad(idx_ep);
+}
+
+$getlocal_OP__WC__1 {
+    VALUE *ep = GET_EP();
+	ep = GET_PREV_EP(ep);
+	Value *_ep = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)ep), RB_JIT->types->pvalueT);
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(_ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
+	val = BUILDER->CreateLoad(idx_ep);
+}
+
+// $setlocal {
+// /*
+//     int i, lev = (int)level;
+//     VALUE *ep = GET_EP();
+//
+//     for (i = 0; i < lev; i++) {
+// 	ep = GET_PREV_EP(ep);
+//     }
+//     *(ep - idx) = val;
+// */
+// }
+
+$setlocal_OP__WC__0 {
+	Value *ep = _GET_EP();
+
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
+	BUILDER->CreateStore(val, idx_ep);
+}
+
+$setlocal_OP__WC__1 {
+	VALUE *ep = GET_EP();
+	ep = GET_PREV_EP(ep);
+	Value *_ep = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)ep), RB_JIT->types->pvalueT);
+	Value *idx_ep = BUILDER->CreateInBoundsGEP(_ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
+	BUILDER->CreateStore(val, idx_ep);
+}
+
+$getspecial {
+    // val = vm_getspecial(th, GET_LEP(), key, type);
+	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, _GET_EP());
+	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, JIT_TH, ep, V(key), V(type));
+}
+
+// $setspecial
+
+$getinstancevariable {
+    // val = vm_getinstancevariable(GET_SELF(), id, ic);
+	val = BUILDER->CreateCall3(RB_JIT->funcs->vm_getinstancevariable, GET_SELF(), V(id), PV(ic));
+}
+
+$setinstancevariable {
+    // vm_setinstancevariable(GET_SELF(), id, val, ic);
+	BUILDER->CreateCall4(RB_JIT->funcs->vm_setinstancevariable, GET_SELF(), V(id), val, PV(ic));
+}
+
+$getclassvariable {
+    // val = rb_cvar_get(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id);
+	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
+	Value *b = BUILDER->CreateCall2(RB_JIT->funcs->vm_get_cvar_base, a, _GET_CFP());
+	val = BUILDER->CreateCall2(RB_JIT->funcs->rb_cvar_get, b, V(id));
+}
+
+$setclassvariable {
+    // rb_cvar_set(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id, val);
+	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
+	Value *b = BUILDER->CreateCall2(RB_JIT->funcs->vm_get_cvar_base, a, _GET_CFP());
+	BUILDER->CreateCall3(RB_JIT->funcs->rb_cvar_set, b, V(id), val);
+}
+
+$getconstant {
+    // val = vm_get_ev_const(th, klass, id, 0);
+	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_get_ev_const, _GET_TH(), klass, V(id), I(0));
+}
+
+$setconstant {
+    // vm_check_if_namespace(cbase);
+    // rb_const_set(cbase, id, val);
+	BUILDER->CreateCall(RB_JIT->funcs->vm_check_if_namespace, cbase);
+	BUILDER->CreateCall3(RB_JIT->funcs->rb_const_set, cbase, V(id), val);
+}
+
+$getglobal {
+    // val = GET_GLOBAL((VALUE)entry);
+	val = BUILDER->CreateCall(RB_JIT->funcs->rb_gvar_get, entry);
+}
+
+$setglobal {
+    // SET_GLOBAL((VALUE)entry, val);
+	BUILDER->CreateCall2(RB_JIT->funcs->rb_gvar_set, entry, val);
+}
+
+
+// ===============================================
+// deal with values
+// ===============================================
 
 $putnil {
 	val = RB_JIT->values->value(Qnil);
 }
 
-$leave {
-	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, JIT_TH);
-    PUSH(val);
-	jit_codegen_make_return(codegen_func, 1);
-}
+$putself
 
-$getspecial {
-    // val = vm_getspecial(th, GET_LEP(), key, type);
-	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, GET_EP());
-	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, JIT_TH, ep, key, type);
+$putobject
+$putobject_OP_INT2FIX_O_0_C_
+$putobject_OP_INT2FIX_O_1_C_
+
+//$putspecialobject
+
+$putiseq {
+    // ret = iseq->self;
+	ret = RB_JIT->values->value(iseq->self);
 }
 
 $putstring {
@@ -25,53 +138,95 @@ $putstring {
 	val = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, str);
 }
 
-$opt_plus {
-	Value *tmp = BUILDER->CreateAnd(obj, ~1);
-	val = BUILDER->CreateAdd(recv, tmp);
+//$concatstrings
+
+$tostring {
+    // val = rb_obj_as_string(val);
+	val = BUILDER->CreateCall(RB_JIT->funcs->rb_obj_as_string, val);
 }
 
-$opt_minus {
-	Value *a, *b, *c;
+// $toregexp
 
-	a = FIX2LONG(recv);
-	b = FIX2LONG(obj);
-	c = BUILDER->CreateSub(a, b);
-	val = LONG2FIX(c);
+$newarray {
+    // val = rb_ary_new4((long)num, STACK_ADDR_FROM_TOP(num));
+    // POPN(num);
+	val = BUILDER->CreateCall2(RB_JIT->funcs->rb_ary_new_from_values, V(num), STACK_ADDR_FROM_TOP(num));
+	POPN(num);
 }
 
-$opt_mult {
-	Value *a, *b;
-
-	a = FIX2LONG(recv);
-	b = FIX2LONG(obj);
-	val = LONG2FIX(BUILDER->CreateMul(a, b));
+$duparray {
+    // val = rb_ary_resurrect(ary);
+	val = BUILDER->CreateCall(RB_JIT->funcs->rb_ary_resurrect, ary);
 }
 
-$opt_div {
-	Value *x, *y, *div;
-
-	x = FIX2LONG(recv);
-	y = FIX2LONG(obj);
-	div = BUILDER->CreateSDiv(x, y);
-	val = LONG2NUM(div);
+$expandarray {
+    // vm_expandarray(GET_CFP(), ary, num, (int)flag);
+	BUILDER->CreateCall3(RB_JIT->funcs->vm_expandarray, ary, V(num), V(flag));
 }
 
-$opt_lt {
-	Value *cmp = BUILDER->CreateICmpSLT(recv, obj);
-	BasicBlock *bb_then = BasicBlock::Create(CONTEXT, "lt_then", codegen_func.jit_trace_func);
-	BasicBlock *bb_else = BasicBlock::Create(CONTEXT, "lt_else", codegen_func.jit_trace_func);
-	BasicBlock *bb_merge = BasicBlock::Create(CONTEXT, "lt_merge", codegen_func.jit_trace_func);
-	val = BUILDER->CreateAlloca(RB_JIT->types->valueT);
-	BUILDER->CreateCondBr(cmp, bb_then, bb_else);
-	BUILDER->SetInsertPoint(bb_then);
-	BUILDER->CreateStore(RB_JIT->values->trueV, val);
-	BUILDER->CreateBr(bb_merge);
-	BUILDER->SetInsertPoint(bb_else);
-	BUILDER->CreateStore(RB_JIT->values->falseV, val);
-	BUILDER->CreateBr(bb_merge);
-	BUILDER->SetInsertPoint(bb_merge);
-	val = BUILDER->CreateLoad(val);
+// $concatarray
+
+// $splatarray
+
+// $newhash
+
+$newrange {
+    // val = rb_range_new(low, high, (int)flag);
+	BUILDER->CreateCall3(RB_JIT->funcs->rb_range_new, low, high, V(flag));
 }
+
+// ===============================================
+// stack operations
+// ===============================================
+
+$pop
+
+$dup {
+    val1 = val2 = val;
+}
+
+// $dupn
+
+$swap
+
+// $reverse
+
+$reput
+
+$topn {
+    val = TOPN(n);
+}
+
+$setn {
+    // TOPN(n-1) = val;
+	SET_TOPN(n-1, val);
+}
+
+$adjuststack {
+    // DEC_SP(n);
+	POPN(n);
+}
+
+// ===============================================
+// deal with setting
+// ===============================================
+
+$defined {
+    // val = vm_defined(th, GET_CFP(), op_type, obj, needstr, v);
+	val = BUILDER->CreateCall(RB_JIT->funcs->vm_defined, { _GET_TH(), _GET_CFP(), V(op_type), obj, needstr, v });
+}
+
+//$checkmatch
+
+//$checkkeyword
+
+//$trace
+
+// ===============================================
+// deal with control flow 1: class/module
+// ===============================================
+
+//$defineclass
 
 $send {
 	rb_ci->argc = rb_ci->orig_argc;
@@ -92,6 +247,17 @@ $send {
 	CALL_METHOD(ci);
 }
 
+$opt_str_freeze {
+    if (BASIC_OP_UNREDEFINED_P(BOP_FREEZE, STRING_REDEFINED_OP_FLAG)) {
+	val = str;
+    }
+    else {
+	//val = rb_funcall(rb_str_resurrect(str), idFreeze, 0);
+	Value *tmp = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, str);
+	val = BUILDER->CreateCall3(RB_JIT->funcs->rb_funcall, tmp, I(idFreeze), I(0));
+    }
+}
+
 $opt_send_without_block {
 	rb_ci->argc = rb_ci->orig_argc;
 	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, ci, TOPN(rb_ci->argc));
@@ -100,43 +266,30 @@ $opt_send_without_block {
 	CALL_METHOD(ci);
 }
 
-$setlocal {
-/*
-    int i, lev = (int)level;
-    VALUE *ep = GET_EP();
+//$invokesuper
 
-    for (i = 0; i < lev; i++) {
-	ep = GET_PREV_EP(ep);
-    }
-    *(ep - idx) = val;
-*/
+//$invokeblock
+
+$leave { // 途中
+	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, JIT_TH);
+	jit_codegen_make_return(codegen_func, val);
 }
 
-$setlocal_OP__WC__0 {
-	Value *ep = GET_EP();
+// ===============================================
+// deal with control flow 3: exception
+// ===============================================
 
-	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
-	BUILDER->CreateStore(val, idx_ep);
+$throw { // 未試行
+    // RUBY_VM_CHECK_INTS(th);
+    // val = vm_throw(th, GET_CFP(), throw_state, throwobj);
+    // THROW_EXCEPTION(val);
+	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_throw, _GET_TH(), _GET_CFP(), V(throw_state), throwobj);
+	jit_codegen_make_return(codegen_func, val);
 }
 
-$getlocal {
-/*
-    int i, lev = (int)level;
-    VALUE *ep = GET_EP();
-
-    for (i = 0; i < lev; i++) {
-	ep = GET_PREV_EP(ep);
-    }
-    val = *(ep - idx);
-*/
-}
-
-$getlocal_OP__WC__0 {
-	Value *ep = GET_EP();
-
-	Value *idx_ep = BUILDER->CreateInBoundsGEP(ep, BUILDER->CreateSub(RB_JIT->values->valueZero, idx));
-	val = BUILDER->CreateLoad(idx_ep);
-}
+// ===============================================
+// deal with control flow 4: local jump
+// ===============================================
 
 $jump { // JUMP(dst);
 	jit_insn_t *next_insn = insns[insn->index + 1];
@@ -159,6 +312,37 @@ $jump { // JUMP(dst);
 		BUILDER->SetInsertPoint(insn->bb);
 	}
 	BUILDER->CreateBr(bb_dst);
+}
+
+$branchif {
+	Value *test = RTEST(val);
+	JIT_DEBUG_LOG2("branchif: %d, %d, %d", insn->index, insn->len, dst);
+	// ジャンプ先や次の命令がトレース外の時の処理を統一化する
+	 jit_insn_t *next_insn = insns[insn->index + 1];
+	// jit_insn_t *next_insn = jit_insn_next(trace, insn, codegen_func);
+	//jit_insn_t *next_insn = jit_codegen_jump_insn(trace, insn, 1);
+	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
+	//BasicBlock *bb_dst  = insns[insn->index + insn->len + dst]->bb;
+	BasicBlock *bb_dst;
+	if (dest_insn) {
+		bb_dst = dest_insn->bb;
+	}
+	else {
+		JIT_DEBUG_LOG("dest_insn_else");
+		bb_dst = BasicBlock::Create(CONTEXT, "branchif", codegen_func.jit_trace_func);
+		BUILDER->SetInsertPoint(bb_dst);
+		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
+		tmp = BUILDER->CreateLoad(tmp);
+		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
+		PRINT_VAL(tmp);
+		BUILDER->CreateStore(tmp, cfp_pc);
+		jit_codegen_make_return(codegen_func);
+		BUILDER->SetInsertPoint(insn->bb);
+	}
+
+	BasicBlock *bb_next = next_insn->bb;
+	BUILDER->CreateCondBr(test, bb_dst, bb_next);
 }
 
 $branchunless {
@@ -189,32 +373,115 @@ $branchunless {
 	BUILDER->CreateCondBr(test, bb_next, bb_dst);
 }
 
-$branchif {
-	Value *test = RTEST(val);
-	JIT_DEBUG_LOG2("branchif: %d, %d, %d", insn->index, insn->len, dst);
-	// ジャンプ先や次の命令がトレース外の時の処理を統一化する
-	jit_insn_t *next_insn = insns[insn->index + 1];
-	//jit_insn_t *next_insn = jit_codegen_jump_insn(trace, insn, 1);
-	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
-	//BasicBlock *bb_dst  = insns[insn->index + insn->len + dst]->bb;
-	BasicBlock *bb_dst;
-	if (dest_insn) {
-		bb_dst = dest_insn->bb;
-	}
-	else {
-		JIT_DEBUG_LOG("dest_insn_else");
-		bb_dst = BasicBlock::Create(CONTEXT, "branchif", codegen_func.jit_trace_func);
-		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
-		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
-		tmp = BUILDER->CreateLoad(tmp);
-		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
-		PRINT_VAL(tmp);
-		BUILDER->CreateStore(tmp, cfp_pc);
-		jit_codegen_make_return(codegen_func);
-		BUILDER->SetInsertPoint(insn->bb);
-	}
+// ===============================================
+// for optimize
+// ===============================================
 
-	BasicBlock *bb_next = next_insn->bb;
-	BUILDER->CreateCondBr(test, bb_dst, bb_next);
+//$getinlinecache
+
+//$setinlinecache
+
+//$once
+
+//$opt_case_dispatch
+
+// ===============================================
+// simple functions
+// ===============================================
+
+$opt_plus {
+	Value *tmp = BUILDER->CreateAnd(obj, ~1);
+	val = BUILDER->CreateAdd(recv, tmp);
 }
+
+$opt_minus {
+	Value *a, *b, *c;
+
+	a = FIX2LONG(recv);
+	b = FIX2LONG(obj);
+	c = BUILDER->CreateSub(a, b);
+	val = _LONG2FIX(c);
+}
+
+$opt_mult {
+	Value *a, *b;
+
+	a = FIX2LONG(recv);
+	b = FIX2LONG(obj);
+	val = _LONG2FIX(BUILDER->CreateMul(a, b));
+}
+
+$opt_div {
+	Value *x, *y, *div;
+
+	x = FIX2LONG(recv);
+	y = FIX2LONG(obj);
+	div = BUILDER->CreateSDiv(x, y);
+	val = _LONG2NUM(div);
+}
+
+//$opt_mod
+
+//$opt_eq
+
+//$opt_neq
+
+$opt_lt {
+	Value *cmp = BUILDER->CreateICmpSLT(recv, obj);
+	BasicBlock *bb_then = BasicBlock::Create(CONTEXT, "lt_then", codegen_func.jit_trace_func);
+	BasicBlock *bb_else = BasicBlock::Create(CONTEXT, "lt_else", codegen_func.jit_trace_func);
+	BasicBlock *bb_merge = BasicBlock::Create(CONTEXT, "lt_merge", codegen_func.jit_trace_func);
+	val = BUILDER->CreateAlloca(RB_JIT->types->valueT);
+	BUILDER->CreateCondBr(cmp, bb_then, bb_else);
+	BUILDER->SetInsertPoint(bb_then);
+	BUILDER->CreateStore(RB_JIT->values->trueV, val);
+	BUILDER->CreateBr(bb_merge);
+	BUILDER->SetInsertPoint(bb_else);
+	BUILDER->CreateStore(RB_JIT->values->falseV, val);
+	BUILDER->CreateBr(bb_merge);
+	BUILDER->SetInsertPoint(bb_merge);
+	val = BUILDER->CreateLoad(val);
+}
+
+//$opt_le
+
+//$opt_gt
+
+//$opt_ge
+
+//$opt_ltlt
+
+//$opt_aref
+
+//$opt_aset
+
+//$opt_aset_with
+
+//$opt_aref_with
+
+//$opt_length
+
+//$opt_size
+
+//$opt_empty_p
+
+//$opt_succ
+
+//$opt_not
+
+//$opt_regexpmatch1
+
+//$opt_regexpmatch2
+
+//$opt_call_c_function
+
+$bitblt {
+	ret = V(rb_str_new2("a bit of bacon, lettuce and tomato"));
+}
+
+$answer {
+	ret = V(INT2FIX(42));
+}
+
+
+

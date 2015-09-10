@@ -73,9 +73,9 @@ typedef struct jit_insn_struct {
 	BasicBlock *bb;
 } jit_insn_t;
 
-typedef struct jit_func_result_struct {
+typedef struct jit_func_return_struct {
 	rb_control_frame_t *exit_cfp;
-	int is_ret;
+	VALUE ret;
 } jit_func_ret_t;
 
 typedef struct jit_trace_struct {
@@ -384,11 +384,24 @@ jit_insn_init(jit_insn_t *insn, rb_thread_t *th, rb_control_frame_t *cfp, VALUE 
 	insn->bb = nullptr;
 }
 
+static inline jit_insn_t *
+jit_insn_next(jit_trace_t *trace, jit_insn_t *insn, jit_codegen_func_t codegen_func)
+{
+	int index = insn->index + 1;
+	jit_insn_t *next_insn = trace->insns[index];
+	if (index >= trace->insns_iterator) {
+		jit_insn_init(next_insn, insn->th, insn->cfp, insn->pc + insn->len);
+		insn->bb = BasicBlock::Create(CONTEXT, "insn", codegen_func.jit_trace_func);
+		trace->insns_iterator++;
+	}
+	return next_insn;
+}
+
 static void jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace);
 
 extern "C"
-int
-jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
+void
+jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret)
 {
 	jit_trace_t *trace = RB_JIT->trace;
 
@@ -405,7 +418,7 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 			if (!trace->jited) jit_codegen_trace(th, trace);
 
 			JIT_DEBUG_LOG("==== Execute JITed function ====");
-			jit_func_ret_t ret = trace->jited(th, cfp);
+			jit_func_ret_t func_ret = trace->jited(th, cfp);
 			// JIT_DEBUG_LOG("==== Finished executing JITed function ====");
 
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
@@ -413,18 +426,20 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 			//th->cfp = ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
 			// th->cfp->pc = last_insn->pc + last_insn->len;
 
-			if (ret.is_ret) {
-				return -1;
+			if (func_ret.ret) {
+				ret->jmp = -1;
+				ret->retval = func_ret.ret;
+				return;
 			}
 
 			// JIT_DEBUG_LOG2("@ last_insn: %p(%d)", last_insn, trace->insns_iterator - 1);
 			// JIT_DEBUG_LOG2("@ jump pc: (%p - %p)[%d] + %d = %d[%08p]", last_insn->pc, pc, last_insn->pc - pc, last_insn->len, last_insn->pc - pc + last_insn->len, pc + ((last_insn->pc - pc) + last_insn->len));
 
 			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ((last_insn->pc - pc) + last_insn->len));
-			int jump = (last_insn->pc - pc) + last_insn->len;
-			cfp->pc += jump;
+			ret->jmp = (last_insn->pc - pc) + last_insn->len;
+			cfp->pc += ret->jmp;
 			jit_trace_start(cfp);
-			return jump; //pc == trace->insns[0]????
+			return; //pc == trace->insns[0]????
 		}
 	}
 
@@ -438,7 +453,7 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)
 	// trace->insns[insn->index] = insn;
 	trace->insns[trace->insns_iterator++] = insn;
 
-	return 0;
+	ret->jmp = 0;
 }
 
 static inline jit_insn_t *
@@ -488,8 +503,9 @@ jit_trace_jump(int dest)
 	int cur = insn->index;
 	dest += cur;
 
+	jit_trace_ret_t ret;
 	while (cur < dest) {
-		jit_trace_insn(insn->th, insn->cfp, insn->pc + insn->len);
+		jit_trace_insn(insn->th, insn->cfp, insn->pc + insn->len, &ret);
 		insn = jit_trace_last_insn(trace);
 		cur += insn->len;
 	}

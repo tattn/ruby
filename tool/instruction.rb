@@ -1298,6 +1298,12 @@ class RubyVM
 				}
       end
 
+			implementation_counter = 0
+			@insns.each{|insn|
+				implementation_counter += 1 if @insns_llvm[insn.name]
+			}
+			puts "Completed(#{implementation_counter}/#{@insns.size})"
+
       ERB.new(vpath.read('template/jit_codegen.inc.tmpl')).result(binding)
     end
 
@@ -1337,7 +1343,7 @@ class RubyVM
         if use_const?
           commit "  const #{e[0][0]} #{e[0][1]} = #{e[1]};"
         else
-					llvm_val = "#{$1}(RB_JIT->values->value(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
+					llvm_val = "_#{$1}(RB_JIT->values->value(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
           commit "  #define #{e[0][1]} #{llvm_val}"
         end
       }
@@ -1356,14 +1362,17 @@ class RubyVM
 				re = /\b#{var}\b/n
 				if re =~ insn.body or re =~ insn.sp_inc or insn.rets.any?{|t, v| re =~ v} or re =~ 'ic' or re =~ 'ci'
 					if type == 'VALUE'
-						ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->types->valueT);"
-						ops << "    BUILDER->CreateStore(RB_JIT->values->value(insn->pc[#{i+1}]), #{var});"
-						@val_alloca = true
+						# ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->types->valueT);"
+						# ops << "    BUILDER->CreateStore(RB_JIT->values->value(insn->pc[#{i+1}]), #{var});"
+						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
+						# @val_alloca = true
 					elsif type == 'CALL_INFO'
 						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
 						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)rb_ci), RB_JIT->types->rb_call_info_t);"
-					elsif type == 'lindex_t' or type == 'rb_num_t'
+					elsif type == 'lindex_t'# or type == 'rb_num_t'
 						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
+					elsif type == 'GENTRY'# or type == 'ISEQ'
+						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value(insn->pc[#{i+1}]), RB_JIT->types->pvalueT);"
 					else
 						ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
 					end
@@ -1390,7 +1399,7 @@ class RubyVM
           pops << "  #{type} #{var} = SCREG(#{r});"
         else
 					if type == "VALUE"
-						pops << "    Value *#{var} = TOPN(#{n+1});"
+						pops << "    Value *#{var} = TOPN(#{n});"
 					else
 						pops << "  #{type} #{var} = TOPN(#{n});"
 					end
@@ -1471,6 +1480,8 @@ class RubyVM
         while line = f.gets
 					line.chomp!
 					case line
+
+					when /^\/\/.*/ # comment out
 
 					when /^\$(\w+)\s*\{/
 						insn = $1

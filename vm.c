@@ -2836,11 +2836,32 @@ Init_VM(void)
     VM_PROFILE_ATEXIT();
 
 	/* for JIT */
-	jit_add_symbol("_vm_pop_frame", vm_pop_frame);
-	jit_add_symbol("_vm_search_method", vm_search_method);
-	jit_add_symbol("_vm_getspecial", vm_getspecial);
-	jit_add_symbol("_VM_EP_LEP", VM_EP_LEP);
-	jit_add_symbol("_rb_str_resurrect", rb_str_resurrect);
+#define ADD_SYMBOL(name) jit_add_symbol("_" #name, name)
+	ADD_SYMBOL(vm_pop_frame);
+	ADD_SYMBOL(vm_search_method);
+	ADD_SYMBOL(vm_getspecial);
+	ADD_SYMBOL(VM_EP_LEP);
+	ADD_SYMBOL(rb_str_resurrect);
+	ADD_SYMBOL(rb_gvar_get);
+	ADD_SYMBOL(rb_obj_as_string);
+	ADD_SYMBOL(rb_ary_new_from_values);
+	ADD_SYMBOL(rb_ary_resurrect);
+	ADD_SYMBOL(vm_expandarray);
+	ADD_SYMBOL(rb_range_new);
+	ADD_SYMBOL(vm_getinstancevariable);
+	ADD_SYMBOL(vm_setinstancevariable);
+	ADD_SYMBOL(rb_cvar_get);
+	ADD_SYMBOL(vm_get_cvar_base);
+	ADD_SYMBOL(rb_vm_get_cref);
+	ADD_SYMBOL(rb_cvar_set);
+	ADD_SYMBOL(vm_get_ev_const);
+	ADD_SYMBOL(vm_check_if_namespace);
+	ADD_SYMBOL(rb_const_set);
+	ADD_SYMBOL(rb_gvar_set);
+	ADD_SYMBOL(vm_defined);
+	ADD_SYMBOL(rb_funcall);
+	ADD_SYMBOL(vm_throw);
+#undef ADD_SYMBOL
 }
 
 void

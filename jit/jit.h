@@ -5,6 +5,11 @@
 extern "C" {
 #endif /* __cplusplus */
 
+typedef struct jit_trace_result_struct {
+	VALUE retval;
+	int jmp;
+} jit_trace_ret_t;
+
 /* compile.c */
 VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 
@@ -21,7 +26,7 @@ extern int is_jit_tracing;
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
 #define JIT_TRACE \
-if (is_jit_tracing) { int jmp = jit_trace_insn(th, reg_cfp, reg_pc); if (jmp == -1) { return TOPN(1); } else if (jmp != 0) { /* RESTORE_REGS(); */ ADD_PC(jmp); goto *(void const *)GET_CURRENT_INSN(); } }
+if (is_jit_tracing) { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 0) { /* RESTORE_REGS(); */ ADD_PC(ret.jmp); goto *(void const *)GET_CURRENT_INSN(); } }
 
 #define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
 // #define JIT_NEW_TRACE(cfp)
@@ -38,7 +43,7 @@ void jit_add_iseq(rb_iseq_t *iseq);
 void jit_trace_start(rb_control_frame_t *cfp);
 void jit_push_new_trace(rb_control_frame_t *cfp);
 rb_control_frame_t *jit_pop_trace(rb_control_frame_t *cfp);
-int jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc);
+void jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret);
 void jit_trace_dump(rb_thread_t *th);
 
 

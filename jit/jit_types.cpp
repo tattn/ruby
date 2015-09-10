@@ -111,7 +111,7 @@ JITTypes::JITTypes()
 	newStruct->setBody(elements);
 
 
-	jit_func_ret_t = StructType::get(rb_control_frame_t, intT, 0);
+	jit_func_ret_t = StructType::get(rb_control_frame_t, valueT, 0);
 }
 
 
@@ -140,3 +140,4 @@ Value* JITValues::intV(int val)
 {
 	return llvm::ConstantInt::getSigned(types->intT, val);
 }
+
