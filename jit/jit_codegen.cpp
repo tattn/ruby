@@ -92,14 +92,13 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 	codegen_func.module = module;
 
 	jit_insn_t **insns = trace->insns;
-	unsigned insns_size = trace->insns_iterator;
 
 	VALUE *first_pc = insns[0]->pc;
 	auto *first_cfp = insns[0]->cfp;
 
-	insns[insns_size] = new jit_insn_t;
+	insns[trace->insns_iterator] = new jit_insn_t;
 
-	for (unsigned i = 0; i < insns_size + 1; i++) {
+	for (unsigned i = 0; i < trace->insns_iterator + 1; i++) {
 	// for (unsigned i = 0, len = 1; i < insns_size + 1; i += len) {
 		auto *insn = insns[i];
 		// if (!insn) {
@@ -122,22 +121,21 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
     //
 	// 	len = insn->len;
 	// }
-	for (unsigned i = 0; i < insns_size; i++) {
+	for (unsigned i = 0; i < trace->insns_iterator; i++) {
 		if (auto *insn = insns[i]) {
 			jit_dump_insn(insn);
 			jit_codegen_core(codegen_func, insn->cfp, trace, i);
 		}
 	}
 
-	BUILDER->SetInsertPoint(insns[insns_size]->bb);
+	BUILDER->SetInsertPoint(insns[trace->insns_iterator]->bb);
 	jit_codegen_make_return(codegen_func);
 
 	// JIT_DEBUG_LOG("==== JITed instructions ====");
 	// jit_trace_func->dump();
-	JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
+	//JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
 	jit_codegen_optimize(*codegen_func.jit_trace_func, module);
-	// RB_JIT->optimizeFunction(*codegen_func.jit_trace_func, module);
-	JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
+	//JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
 
 	JIT_DEBUG_LOG("==== Compile instructions ====");
 	trace->jited = RB_JIT->compileFunction(codegen_func.jit_trace_func);
@@ -169,43 +167,6 @@ jit_codegen_core(
 
 #define JIT_CHECK_STACK_SIZE
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
-#undef TOPN
-#define TOPN(x)\
-	[&]{\
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x - 1));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
-	return BUILDER->CreateLoad(sp_incptr);}()
-#define SET_TOPN(x, val) {\
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x - 1));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
-	BUILDER->CreateStore(val, sp_incptr);}
-#undef POPN
-#define POPN(x) {\
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-x));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
-	BUILDER->CreateStore(sp_incptr, SP_GEP);}
-#undef PUSH
-#define PUSH(x) {\
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	BUILDER->CreateStore((x), sp);\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->valueOne);\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
-	BUILDER->CreateStore(sp_incptr, SP_GEP);}
-#undef STACK_ADDR_FROM_TOP
-#define STACK_ADDR_FROM_TOP(n)\
-	[&]{\
-	Value *sp = BUILDER->CreateLoad(SP_GEP);\
-	JIT_LLVM_SET_NAME(sp, "sp");\
-	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, RB_JIT->values->signedValue(-n));\
-	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #n "_");\
-	return sp_incptr;}()
 
 #undef CALL_METHOD
 #define CALL_METHOD(ci) do { \
@@ -236,17 +197,16 @@ jit_codegen_core(
 #define _LONG2NUM(i) _LONG2FIX(i)
 
 // #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
-#undef RTEST
-#define RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
-#undef JIT_CHECK_STACK_SIZE
+#define _RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
 
 
-#define V(x) RB_JIT->values->value(x)
-#define PV(x) BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)x), RB_JIT->types->pvalueT)
-#define I(x) RB_JIT->values->intV(x)
+
+
 
 // #define NEXT_INSN() (insns[insn->index + insn->len])
 #define NEXT_INSN() (insns[index + 1])
+
+#include "jit_codegen_helper.h"
 
 	unsigned insns_size = trace->insns_iterator;
 	jit_insn_t **insns = trace->insns;

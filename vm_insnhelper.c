@@ -173,7 +173,7 @@ static inline void
 vm_pop_frame(rb_thread_t *th)
 {
     th->cfp = RUBY_VM_PREVIOUS_CONTROL_FRAME(th->cfp);
-	JIT_POP_TRACE(th->cfp);
+	//JIT_POP_TRACE(th->cfp); // tanaka
 
     if (VMDEBUG == 2) {
 	SDR();

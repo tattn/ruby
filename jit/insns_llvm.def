@@ -292,61 +292,54 @@ $throw { // 未試行
 // ===============================================
 
 $jump { // JUMP(dst);
-	jit_insn_t *next_insn = insns[insn->index + 1];
-	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
-	BasicBlock *bb_dst;
-	if (dest_insn) {
-		bb_dst = dest_insn->bb;
+	if (dst < 0) {
 	}
-	else {
-		JIT_DEBUG_LOG("dest_insn_else");
-		bb_dst = BasicBlock::Create(CONTEXT, "jump", codegen_func.jit_trace_func);
-		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
-		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
-		tmp = BUILDER->CreateLoad(tmp);
-		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
-		PRINT_VAL(tmp);
-		BUILDER->CreateStore(tmp, cfp_pc);
-		jit_codegen_make_return(codegen_func);
-		BUILDER->SetInsertPoint(insn->bb);
-	}
-	BUILDER->CreateBr(bb_dst);
+	// jit_insn_t *next_insn = insns[insn->index + 1];
+	// jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
+	// BasicBlock *bb_dst;
+	// if (dest_insn) {
+	// 	bb_dst = dest_insn->bb;
+	// }
+	// else {
+	// 	JIT_DEBUG_LOG("dest_insn_else");
+	// 	bb_dst = CreateBasicBlock("jump");
+	// 	SetBasicBlock(bb_dst);
+	// 	Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+	// 	Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, V(dst));
+	// 	tmp = BUILDER->CreateLoad(tmp);
+	// 	//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
+	// 	PRINT_VAL(tmp);
+	// 	BUILDER->CreateStore(tmp, cfp_pc);
+	// 	jit_codegen_make_return(codegen_func);
+	// 	SetBasicBlock(insn->bb);
+	// }
+	// BUILDER->CreateBr(bb_dst);
 }
 
 $branchif {
-	Value *test = RTEST(val);
-	JIT_DEBUG_LOG2("branchif: %d, %d, %d", insn->index, insn->len, dst);
-	// ジャンプ先や次の命令がトレース外の時の処理を統一化する
-	 jit_insn_t *next_insn = insns[insn->index + 1];
-	// jit_insn_t *next_insn = jit_insn_next(trace, insn, codegen_func);
-	//jit_insn_t *next_insn = jit_codegen_jump_insn(trace, insn, 1);
-	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
-	//BasicBlock *bb_dst  = insns[insn->index + insn->len + dst]->bb;
+	Value *test = _RTEST(val);
 	BasicBlock *bb_dst;
-	if (dest_insn) {
+
+	if (dst < 0) {
+		jit_insn_t next_insn;
+		jit_insn_init(&next_insn, insn->th, insn->cfp, insn->pc + insn->len);
+		// next_insn.index = trace->insns_iterator;
+		dst += next_insn.len;
+		jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, insn, dst);
 		bb_dst = dest_insn->bb;
 	}
-	else {
-		JIT_DEBUG_LOG("dest_insn_else");
-		bb_dst = BasicBlock::Create(CONTEXT, "branchif", codegen_func.jit_trace_func);
-		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
-		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
-		tmp = BUILDER->CreateLoad(tmp);
-		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
-		PRINT_VAL(tmp);
-		BUILDER->CreateStore(tmp, cfp_pc);
-		jit_codegen_make_return(codegen_func);
-		BUILDER->SetInsertPoint(insn->bb);
-	}
 
-	BasicBlock *bb_next = next_insn->bb;
-	BUILDER->CreateCondBr(test, bb_dst, bb_next);
+	BasicBlock *bb_else = CreateBasicBlock("branchif");
+
+	SetBasicBlock(bb_else);
+	jit_codegen_make_return(codegen_func);
+	SetBasicBlock(insn->bb);
+
+	BUILDER->CreateCondBr(test, bb_dst, bb_else);
 }
 
 $branchunless {
-	Value *test = RTEST(val);
+	Value *test = _RTEST(val);
 	JIT_DEBUG_LOG2("branchless: %d, %d, %d", insn->index, insn->len, dst);
 	jit_insn_t *next_insn = insns[insn->index + 1];
 	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);

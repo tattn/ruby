@@ -62,6 +62,7 @@ using namespace llvm;
 
 int is_jit_tracing = 0;
 int trace_stack_size = 0;
+int is_top_of_bytecode = 0;
 
 typedef struct jit_insn_struct {
 	rb_thread_t *th;
@@ -75,6 +76,7 @@ typedef struct jit_insn_struct {
 
 typedef struct jit_func_return_struct {
 	rb_control_frame_t *exit_cfp;
+	//VALUE *exit_pc;
 	VALUE ret;
 } jit_func_ret_t;
 
@@ -317,6 +319,18 @@ jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 }
 
 static inline jit_trace_t *
+jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
+{
+	jit_trace_t *trace = new jit_trace_t;
+	jit_init_trace(trace, cfp->iseq);
+
+	// save trace
+	RB_JIT->traces[pc] = trace;
+	RB_JIT->trace_list.push_back(trace);
+	return trace;
+}
+
+static inline jit_trace_t *
 jit_trace_find_trace(VALUE *pc)
 {
 	auto &traces = RB_JIT->traces;
@@ -325,23 +339,41 @@ jit_trace_find_trace(VALUE *pc)
 	return it->second;
 }
 
+static inline jit_trace_t *
+jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
+{
+	auto &traces = RB_JIT->traces;
+	auto it = traces.find(pc);
+	if (it == traces.end())
+		return jit_trace_create_trace(cfp, pc);
+	return it->second;
+}
+
+static inline void
+jit_switch_trace(jit_trace_t *trace)
+{
+	RB_JIT->trace = trace;
+}
+
 extern "C"
 void
 jit_trace_start(rb_control_frame_t *cfp)
 {
 	is_jit_tracing = 1;
 
-	jit_trace_t *trace = jit_trace_find_trace(cfp->pc);
-	if (!trace) {
-		trace = new jit_trace_t;
-		jit_init_trace(trace, cfp->iseq);
-
-		// save trace
-		RB_JIT->traces[cfp->pc] = trace;
-		RB_JIT->trace_list.push_back(trace);
-	}
-
-	RB_JIT->trace = trace;
+	// jit_trace_t *trace = jit_trace_find_trace(cfp->pc);
+	// if (!trace) {
+	// 	trace = new jit_trace_t;
+	// 	jit_init_trace(trace, cfp->iseq);
+    //
+	// 	// save trace
+	// 	RB_JIT->traces[cfp->pc] = trace;
+	// 	RB_JIT->trace_list.push_back(trace);
+	// }
+    //
+	// RB_JIT->trace = trace;
+	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp, cfp->pc);
+	jit_switch_trace(trace);
 }
 
 extern "C"
@@ -359,6 +391,7 @@ jit_push_new_trace(rb_control_frame_t *cfp)
 	// JIT_DEBUG_LOG2("jit_push_new_trace: %s, %s, %s", path, base_label, label);
 
 	jit_trace_start(cfp);
+	is_top_of_bytecode = 1;
 }
 
 extern "C"
@@ -391,6 +424,7 @@ jit_insn_next(jit_trace_t *trace, jit_insn_t *insn, jit_codegen_func_t codegen_f
 	jit_insn_t *next_insn = trace->insns[index];
 	if (index >= trace->insns_iterator) {
 		jit_insn_init(next_insn, insn->th, insn->cfp, insn->pc + insn->len);
+		next_insn->index = index;
 		insn->bb = BasicBlock::Create(CONTEXT, "insn", codegen_func.jit_trace_func);
 		trace->insns_iterator++;
 	}
@@ -404,13 +438,6 @@ void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret)
 {
 	jit_trace_t *trace = RB_JIT->trace;
-
-	// if (cfp->iseq->iseq_encoded != trace->iseq->iseq_encoded) {
-	// 	// th->cfp の切り替えの検知に失敗
-	// 	JIT_DEBUG_LOG2("*** jit_trace_insn ***  : %p, %p, %d, %d", cfp->iseq, trace->iseq, cfp->flag, cfp->iseq->type);
-	// 	jit_pop_trace(cfp);
-	// 	trace = RB_JIT->trace;
-	// }
 
 	{
 		// トレース済み
@@ -438,16 +465,34 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ((last_insn->pc - pc) + last_insn->len));
 			ret->jmp = (last_insn->pc - pc) + last_insn->len;
 			cfp->pc += ret->jmp;
+			JIT_DEBUG_LOG2("%% jmp: %d, pc: %p", ret->jmp, cfp->pc);
 			jit_trace_start(cfp);
 			return; //pc == trace->insns[0]????
 		}
 	}
 
+	// JIT_DEBUG_LOG2("$$$$ pc: %08p, iterator: %d", pc, trace->insns_iterator);
+
+	// if (is_top_of_bytecode) {
+	// 	jit_trace_t *check_trace = jit_trace_find_trace(pc);
+	// 	if (check_trace) {
+	// 		if (check_trace != trace) {
+	// 			jit_switch_trace(check_trace);   // times 等のブロックで繰り返す命令に対応
+	// 			jit_trace_insn(th, cfp, pc, ret);
+	// 			return;
+	// 		}
+	// 	}
+	// 	else
+	// 		jit_trace_create_trace(cfp, pc); // create a start position of trace
+	// 	is_top_of_bytecode = 0;
+	// }
+
+	if (trace->insns_iterator == 0) trace->first_pc = pc;
+
 	jit_insn_t *insn = new jit_insn_t;
 	jit_insn_init(insn, th, cfp, pc);
 	insn->index = trace->insns_iterator;
 
-	if (trace->insns_iterator == 0) trace->first_pc = pc;
 
 	// TODO: トレースするかを実行回数などで判定
 	// trace->insns[insn->index] = insn;
@@ -478,15 +523,16 @@ jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
 	}
 
 	do {
-		index += step;
-		JIT_DEBUG_LOG2("insns_max: %d, %d", index, insns_max);
 		if (index > insns_max) {
 			// トレース外にジャンプ
 			JIT_DEBUG_LOG("jump over trace");
 			return 0;
 		}
-		JIT_DEBUG_LOG2("jump_dst: %d, %d, %d, %d", dst * step, insn->len, index, insns_max);
+		JIT_DEBUG_LOG2("jump_dst[%08p: %s]: %d, %d, %d, %d",
+				insn->pc, insn_name(insn->opecode), dst * step, insn->len, index, insns_max);
+
 		dst -= insn->len;
+		index += step;
 		insn = insns[index];
 	} while (dst > 0);
 
