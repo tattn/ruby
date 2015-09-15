@@ -1308,8 +1308,6 @@ class RubyVM
     end
 
 		def make_header_basic_block
-			# commit '    if (!insn->bb) insn->bb = BasicBlock::Create(CONTEXT, "insn", JIT_TRACE_FUNC);'
-			# commit '    BUILDER->CreateBr(insn->bb);'
 			commit '    BUILDER->SetInsertPoint(insn->bb);'
 		end
 

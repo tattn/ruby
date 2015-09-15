@@ -321,10 +321,10 @@ $branchif {
 	BasicBlock *bb_dst;
 
 	if (dst < 0) {
-		jit_insn_t next_insn;
-		jit_insn_init(&next_insn, insn->th, insn->cfp, insn->pc + insn->len);
+		//jit_insn_t next_insn;
+		//jit_insn_init(&next_insn, insn->th, insn->cfp, insn->pc + insn->len);
 		// next_insn.index = trace->insns_iterator;
-		dst += next_insn.len;
+		//dst += next_insn.len;
 		jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, insn, dst);
 		bb_dst = dest_insn->bb;
 	}

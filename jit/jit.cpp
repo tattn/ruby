@@ -471,8 +471,6 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 		}
 	}
 
-	// JIT_DEBUG_LOG2("$$$$ pc: %08p, iterator: %d", pc, trace->insns_iterator);
-
 	// if (is_top_of_bytecode) {
 	// 	jit_trace_t *check_trace = jit_trace_find_trace(pc);
 	// 	if (check_trace) {
@@ -528,12 +526,12 @@ jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
 			JIT_DEBUG_LOG("jump over trace");
 			return 0;
 		}
-		JIT_DEBUG_LOG2("jump_dst[%08p: %s]: %d, %d, %d, %d",
+		insn = insns[index];
+		dst -= insn->len;
+		JIT_DEBUG_LOG2("jump[%08p: %s]: %d, %d, (%d/%d)",
 				insn->pc, insn_name(insn->opecode), dst * step, insn->len, index, insns_max);
 
-		dst -= insn->len;
 		index += step;
-		insn = insns[index];
 	} while (dst > 0);
 
 	JIT_DEBUG_LOG2("jump_insn: %08p", insn->pc);

@@ -132,7 +132,7 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 	jit_codegen_make_return(codegen_func);
 
 	// JIT_DEBUG_LOG("==== JITed instructions ====");
-	// jit_trace_func->dump();
+	// codegen_func.jit_trace_func->dump();
 	//JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
 	jit_codegen_optimize(*codegen_func.jit_trace_func, module);
 	//JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
