@@ -163,15 +163,19 @@ jit_codegen_core(
 #endif
 
 
+#include "jit_codegen_helper.h"
+
+
 #define OFFSET long
 
 #define JIT_CHECK_STACK_SIZE
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
 
-#undef CALL_METHOD
-#define CALL_METHOD(ci) do { \
-	Value *v = BUILDER->CreateCall3(ci_call, JIT_TH, JIT_CFP, ci);\
-	Value *cond_v = BUILDER->CreateICmpNE(v, RB_JIT->values->valueQundef, "ifcond");\
+#define _CALL_METHOD(_ci) do { \
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14); \
+	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr); \
+	Value *v = BUILDER->CreateCall3(ci_call, JIT_TH, JIT_CFP, _ci);\
+	Value *cond_v = BUILDER->CreateICmpNE(v, _Qundef, "ifcond");\
     BasicBlock *then_block = BasicBlock::Create(CONTEXT, "then", JIT_TRACE_FUNC);\
     BasicBlock *else_block = BasicBlock::Create(CONTEXT, "else", JIT_TRACE_FUNC);\
     BUILDER->CreateCondBr(cond_v, then_block, else_block);\
@@ -180,6 +184,23 @@ jit_codegen_core(
 	BUILDER->CreateBr(else_block);\
 	BUILDER->SetInsertPoint(else_block);\
 } while (0)
+
+
+// #define CALL_SIMPLE_METHOD(recv_) do { \
+//     ci->blockptr = 0; ci->argc = ci->orig_argc; \
+//     vm_search_method(ci, ci->recv = (recv_)); \
+//     CALL_METHOD(ci); \
+// } while (0)
+#define _CALL_SIMPLE_METHOD(recv_) do { \
+	Value *_ci = PT(ci, rb_call_info_t); \
+    ci->blockptr = 0; ci->argc = ci->orig_argc; \
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11); \
+	BUILDER->CreateStore(recv_, ci_recv_elmptr); \
+	_FCALL2(vm_search_method, _ci, V(ci->recv)); \
+    _CALL_METHOD(_ci); \
+} while (0)
+
+
 #define GET_SELF() RB_JIT->values->value(reg_cfp->self)
 #define _GET_TH() JIT_TH
 #define _GET_CFP() JIT_CFP
@@ -200,13 +221,19 @@ jit_codegen_core(
 #define _RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
 
 
+#define _RESTORE_REGS() \
+{ \
+	// BUILDER->CreateStore(_GET_CFP(), _GET_CFP()); \
+  REG_CFP = th->cfp; \
+  reg_pc  = reg_cfp->pc; \
+  JIT_POP_TRACE(th->cfp); \
+}
+
 
 
 
 // #define NEXT_INSN() (insns[insn->index + insn->len])
 #define NEXT_INSN() (insns[index + 1])
-
-#include "jit_codegen_helper.h"
 
 	unsigned insns_size = trace->insns_iterator;
 	jit_insn_t **insns = trace->insns;

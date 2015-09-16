@@ -92,6 +92,16 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// VALUE vm_throw(rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_num_t throw_state, VALUE throwobj)
 	DEFINE_FUNC(vm_throw, t->valueT, t->rb_thread_t, t->rb_control_frame_t, t->longT, t->valueT);
 
+	// VALUE vm_get_cbase(const VALUE *ep)
+	DEFINE_FUNC(vm_get_cbase, t->valueT, t->pvalueT);
+
+	// VALUE vm_get_const_base(const VALUE *ep)
+	DEFINE_FUNC(vm_get_const_base, t->valueT, t->pvalueT);
+
+	// VALUE opt_eq_func(VALUE recv, VALUE obj, CALL_INFO ci)
+	DEFINE_FUNC(opt_eq_func, t->valueT, t->valueT, t->rb_call_info_t);
+
+
 
 #ifdef JIT_DEBUG_FLAG
 	DEFINE_FUNC2(printf, t->int32T, t->int8T->getPointerTo());

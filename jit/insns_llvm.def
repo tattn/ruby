@@ -126,11 +126,27 @@ $putobject
 $putobject_OP_INT2FIX_O_0_C_
 $putobject_OP_INT2FIX_O_1_C_
 
-//$putspecialobject
+$putspecialobject {
+    enum vm_special_object_type type = (enum vm_special_object_type)value_type;
+
+    switch (type) {
+      case VM_SPECIAL_OBJECT_VMCORE:
+	val = V(rb_mRubyVMFrozenCore);
+	break;
+      case VM_SPECIAL_OBJECT_CBASE:
+	val = _FCALL1(vm_get_cbase, _GET_EP());
+	break;
+      case VM_SPECIAL_OBJECT_CONST_BASE:
+	val = _FCALL1(vm_get_const_base, _GET_EP());
+	break;
+      default:
+	rb_bug("putspecialobject insn: unknown value_type");
+    }
+}
 
 $putiseq {
     // ret = iseq->self;
-	ret = RB_JIT->values->value(iseq->self);
+	ret = jit_values->value(iseq->self);
 }
 
 $putstring {
@@ -229,22 +245,23 @@ $defined {
 //$defineclass
 
 $send {
-	rb_ci->argc = rb_ci->orig_argc;
-	Value *ci_orig_argc_elmptr = BUILDER->CreateStructGEP(ci, 2);
+	Value *_ci = PT(ci, rb_call_info_t);
+	ci->argc = ci->orig_argc;
+	Value *ci_orig_argc_elmptr = BUILDER->CreateStructGEP(_ci, 2);
 	Value *ci_orig_argc = BUILDER->CreateLoad(ci_orig_argc_elmptr);
-	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(ci, 12);
+	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(_ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
-	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, JIT_TH, JIT_CFP, ci, RB_JIT->values->int32Zero);
+	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, JIT_TH, JIT_CFP, _ci, RB_JIT->values->int32Zero);
 
-	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(ci, 11);
-	Value *ci_recv = TOPN(rb_ci->argc);
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
+	Value *ci_recv = TOPN(ci->argc);
 	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
-	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, ci, ci_recv);
+	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, _ci, ci_recv);
 
-	Value *ci_call_elmptr = BUILDER->CreateStructGEP(ci, 14);
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
-	CALL_METHOD(ci);
+	_CALL_METHOD(_ci);
 }
 
 $opt_str_freeze {
@@ -259,11 +276,12 @@ $opt_str_freeze {
 }
 
 $opt_send_without_block {
-	rb_ci->argc = rb_ci->orig_argc;
-	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, ci, TOPN(rb_ci->argc));
-	Value *ci_call_elmptr = BUILDER->CreateStructGEP(ci, 14);
+	Value *_ci = PT(ci, rb_call_info_t);
+	ci->argc = ci->orig_argc;
+	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, _ci, TOPN(ci->argc));
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
-	CALL_METHOD(ci);
+	_CALL_METHOD(_ci);
 }
 
 //$invokesuper
@@ -271,6 +289,31 @@ $opt_send_without_block {
 //$invokeblock
 
 $leave { // 途中
+
+//     if (OPT_CHECKED_RUN) {
+// 	if (reg_cfp->sp != vm_base_ptr(reg_cfp)) {
+// 	    rb_bug("Stack consistency error (sp: %"PRIdPTRDIFF", bp: %"PRIdPTRDIFF")",
+// 		   VM_SP_CNT(th, reg_cfp->sp), VM_SP_CNT(th, vm_base_ptr(reg_cfp)));
+// 	}
+//     }
+//
+//     RUBY_VM_CHECK_INTS(th);
+//
+//     if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
+// 	vm_pop_frame(th);
+//
+// #if OPT_CALL_THREADED_CODE
+// 	th->retval = val;
+// 	return 0;
+// #else
+// 	return val;
+// #endif
+//     }
+//     else {
+// 	vm_pop_frame(th);
+// 	RESTORE_REGS();
+//     }
+
 	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, JIT_TH);
 	jit_codegen_make_return(codegen_func, val);
 }
@@ -415,7 +458,24 @@ $opt_div {
 
 //$opt_mod
 
-//$opt_eq
+$opt_eq {
+    //  val = opt_eq_func(recv, obj, ci);
+
+    //  if (val == Qundef) {
+	//  /* other */
+	//  PUSH(recv);
+	//  PUSH(obj);
+	//  CALL_SIMPLE_METHOD(recv);
+    //  }
+
+    val = _FCALL3(opt_eq_func, recv, obj, PV(ci));
+
+	SetNewBasicBlock(bb_then, "then");
+	PUSH(recv);
+	PUSH(obj);
+	_CALL_SIMPLE_METHOD(recv);
+	_IF_EQ(val, _Qundef, bb_then);
+}
 
 //$opt_neq
 

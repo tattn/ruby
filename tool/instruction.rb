@@ -1364,9 +1364,9 @@ class RubyVM
 						# ops << "    BUILDER->CreateStore(RB_JIT->values->value(insn->pc[#{i+1}]), #{var});"
 						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
 						# @val_alloca = true
-					elsif type == 'CALL_INFO'
-						ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
-						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)rb_ci), RB_JIT->types->rb_call_info_t);"
+					# elsif type == 'CALL_INFO'
+					# 	ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
+					# 	ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)rb_ci), RB_JIT->types->rb_call_info_t);"
 					elsif type == 'lindex_t'# or type == 'rb_num_t'
 						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
 					elsif type == 'GENTRY'# or type == 'ISEQ'

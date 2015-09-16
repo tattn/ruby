@@ -121,7 +121,7 @@ JITValues::JITValues(JITTypes *types)
 	valueZero = ConstantInt::get(types->int64T, 0);
 	valueOne = ConstantInt::get(types->int64T, 1);
 	int32Zero = ConstantInt::get(types->int32T, 0);
-	valueQundef = ConstantInt::get(types->valueT, Qundef);
+	undefV = ConstantInt::get(types->valueT, Qundef);
 	trueV = ConstantInt::get(types->valueT, Qtrue);
 	falseV = ConstantInt::get(types->valueT, Qfalse);
 }

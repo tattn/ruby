@@ -28,6 +28,10 @@ struct JITFuncs
 	Function *vm_defined;
 	Function *rb_funcall;
 	Function *vm_throw;
+	Function *vm_get_cbase;
+	Function *vm_get_const_base;
+	Function *opt_eq_func;
+
 
 #ifdef JIT_DEBUG_FLAG
 	Function *printf;

@@ -2861,6 +2861,9 @@ Init_VM(void)
 	ADD_SYMBOL(vm_defined);
 	ADD_SYMBOL(rb_funcall);
 	ADD_SYMBOL(vm_throw);
+	ADD_SYMBOL(vm_get_cbase);
+	ADD_SYMBOL(vm_get_const_base);
+	ADD_SYMBOL(opt_eq_func);
 #undef ADD_SYMBOL
 }
 

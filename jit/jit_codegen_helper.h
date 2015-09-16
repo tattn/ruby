@@ -6,19 +6,41 @@
 
 #define jit_values RB_JIT->values
 #define jit_types  RB_JIT->types
+#define jit_funcs  RB_JIT->funcs
 
 #define V(x) jit_values->value(x)
 #define PV(x) BUILDER->CreateIntToPtr(V((VALUE)x), jit_types->pvalueT)
+#define PT(x, type) BUILDER->CreateIntToPtr(V((VALUE)x), jit_types->type)
 #define I(x) jit_values->intV(x)
 
+#define _Qundef jit_values->undefV
 
 // ==============================================
 // Utilities for codegen
 // ==============================================
 
-#define CreateBasicBlock(name) BasicBlock::Create(CONTEXT, (name), codegen_func.jit_trace_func)
-
+#define GetBasicBlock() BUILDER->GetInsertBlock()
 #define SetBasicBlock(bb) BUILDER->SetInsertPoint(bb)
+
+#define CreateBasicBlock(name) BasicBlock::Create(CONTEXT, (name), codegen_func.jit_trace_func)
+#define SetNewBasicBlock(bb, name) BasicBlock *bb = CreateBasicBlock(name); SetBasicBlock(bb)
+
+#define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)
+#define _FCALL1(name, a) BUILDER->CreateCall(jit_funcs->name, a)
+#define _FCALL2(name, a, b) BUILDER->CreateCall2(jit_funcs->name, a, b)
+#define _FCALL3(name, a, b, c) BUILDER->CreateCall3(jit_funcs->name, a, b, c)
+
+
+#define _IF_EQ(a, b, bb_then) do { \
+		BasicBlock *bb_cur = GetBasicBlock(); \
+		BasicBlock *bb_merge = CreateBasicBlock("merge"); \
+		Value *test = BUILDER->CreateICmpEQ(a, b, "if_eq"); \
+		BUILDER->CreateCondBr(test, bb_then, bb_merge);\
+		SetBasicBlock(bb_then); \
+		BUILDER->CreateBr(bb_merge); \
+		SetBasicBlock(bb_merge); \
+	} while (0)
+
 
 
 // ==============================================

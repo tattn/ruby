@@ -31,7 +31,7 @@ struct JITValues
 	Value *valueZero;
 	Value *valueOne;
 	Constant *int32Zero;
-	Value *valueQundef;
+	Value *undefV;
 	Value *trueV;
 	Value *falseV;
 

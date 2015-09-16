@@ -559,12 +559,8 @@ extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
 {
-	// for (auto trace_map: RB_JIT->traces) {
-	// 	jit_trace_t *trace = trace_map.second;
-
 	for (jit_trace_t *trace: RB_JIT->trace_list) {
 		jit_insn_t **insns = trace->insns;
-		// unsigned insns_size = trace->insns_size;
 		unsigned insns_size = trace->insns_iterator;
 
 		JIT_DEBUG_LOG2("=== Start trace dump (length: %u) ===", insns_size);
@@ -627,33 +623,6 @@ ruby_jit_init(void)
 //
 // 	return Qtrue;
 // }
-
-static inline void
-jit_compile(rb_control_frame_t *cfp)
-{
-	rb_iseq_t *iseq = cfp->iseq;
-
-	if (!iseq) return; // CFUNC
-
-	VALUE *iseq_encoded = rb_iseq_original_iseq(iseq);
-
-	unsigned size = iseq->iseq_size;
-
-	// insn->index = pc - iseq->iseq_encoded;
-	// insn->opecode = (int)iseq_encoded[insn->index];
-	// insn->len = insn_len(insn->opecode);
-	// insn->th = th;
-	// insn->cfp = cfp;
-	// insn->pc = pc;
-	// insn->bb = nullptr;
-
-	for (unsigned i = 0, len = 0; i < size; i += len) {
-		VALUE *pc = &iseq_encoded[i];
-		int op = pc[0];
-		len = insn_len(op);
-
-	}
-}
 
 
 extern "C"

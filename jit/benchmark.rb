@@ -6,6 +6,8 @@ else
 	benchmarks = [
 		'bm_loop_for.rb',
 		'bm_loop_times.rb',
+		'bm_loop_whileloop.rb',
+		'bm_loop_whileloop2.rb',
 	]
 end
 
