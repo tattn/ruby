@@ -10,6 +10,7 @@ struct JITTypes
 	Type *int64T;
 	Type *intT;
 	Type *longT;
+	Type *sizeT;
 	Type *ptrT;
 	Type *valueT;
 	PointerType *pvalueT;

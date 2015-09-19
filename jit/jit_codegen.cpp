@@ -76,7 +76,12 @@ jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT-
 	AllocaInst *ret_alloca = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
 	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_alloca, 0);
 	Value *ret_ptr = BUILDER->CreateStructGEP(ret_alloca, 1);
-	BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
+	// arg_th からcfp を取り出す vm_pop_frameでの変更を適用するため
+	Value* th_cfp_ptr = BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_th_ptr), 5);
+	// Value* th_cfp_ptr = BUILDER->CreateStructGEP(codegen_func.arg_th, 5);
+	Value* th_cfp = BUILDER->CreateLoad(th_cfp_ptr);
+	// BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
+	BUILDER->CreateStore(th_cfp, ret_cfp_ptr);
 	BUILDER->CreateStore(retval, ret_ptr);
 	Value *ret = BUILDER->CreateLoad(ret_alloca);
 	BUILDER->CreateRet(ret);
@@ -116,9 +121,7 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 
 	// for (unsigned i = 0, len; i < insns_size; i+= len) {
 	// 	jit_insn_t *insn = insns[i];
-    //
 	// 	jit_codegen_core(codegen_func, th->cfp, insns, insn);
-    //
 	// 	len = insn->len;
 	// }
 	for (unsigned i = 0; i < trace->insns_iterator; i++) {
@@ -134,7 +137,7 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 	// JIT_DEBUG_LOG("==== JITed instructions ====");
 	// codegen_func.jit_trace_func->dump();
 	//JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
-	jit_codegen_optimize(*codegen_func.jit_trace_func, module);
+	// jit_codegen_optimize(*codegen_func.jit_trace_func, module);
 	//JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
 
 	JIT_DEBUG_LOG("==== Compile instructions ====");
@@ -149,10 +152,12 @@ jit_codegen_core(
 		int index)
 {
 #define JIT_TRACE_FUNC	codegen_func.jit_trace_func
-#define JIT_TH 			codegen_func.arg_th
-#define JIT_CFP			codegen_func.arg_cfp
-#define SP_GEP			codegen_func.sp_gep
-#define EP_GEP			codegen_func.ep_gep
+// #define JIT_TH 			codegen_func.arg_th
+// #define JIT_CFP			codegen_func.arg_cfp
+// #define SP_GEP			codegen_func.sp_gep
+// #define EP_GEP			codegen_func.ep_gep
+// #define SP_GEP BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_cfp), 1)
+// #define EP_GEP BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_cfp), 6)
 #define MODULE			codegen_func.module
 
 
@@ -174,15 +179,15 @@ jit_codegen_core(
 #define _CALL_METHOD(_ci) do { \
 	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14); \
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr); \
-	Value *v = BUILDER->CreateCall3(ci_call, JIT_TH, JIT_CFP, _ci);\
-	Value *cond_v = BUILDER->CreateICmpNE(v, _Qundef, "ifcond");\
-    BasicBlock *then_block = BasicBlock::Create(CONTEXT, "then", JIT_TRACE_FUNC);\
-    BasicBlock *else_block = BasicBlock::Create(CONTEXT, "else", JIT_TRACE_FUNC);\
-    BUILDER->CreateCondBr(cond_v, then_block, else_block);\
-	BUILDER->SetInsertPoint(then_block);\
+	Value *v = BUILDER->CreateCall3(ci_call, _GET_TH(), _GET_CFP(), _ci);\
+	BasicBlock *bb_cur = GetBasicBlock(); \
+	SetNewBasicBlock(bb_then, "then"); \
+	_RESTORE_REGS(); \
+	JIT_DEBUG_LOG("CALL_METHOD then"); \
+	SetNewBasicBlock(bb_else, "else"); \
 	PUSH(v);\
-	BUILDER->CreateBr(else_block);\
-	BUILDER->SetInsertPoint(else_block);\
+	SetBasicBlock(bb_cur); \
+	_IF_EQ2(v, _Qundef, bb_then, bb_else); \
 } while (0)
 
 
@@ -202,9 +207,15 @@ jit_codegen_core(
 
 
 #define GET_SELF() RB_JIT->values->value(reg_cfp->self)
-#define _GET_TH() JIT_TH
-#define _GET_CFP() JIT_CFP
-#define _GET_EP() BUILDER->CreateLoad(EP_GEP)
+#define _GET_TH() BUILDER->CreateLoad(codegen_func.arg_th_ptr)// JIT_TH
+#define _GET_CFP() BUILDER->CreateLoad(codegen_func.arg_cfp_ptr)// JIT_CFP
+#define _GET_CFP_PTR() codegen_func.arg_cfp_ptr
+// #define _GET_EP() BUILDER->CreateLoad(EP_GEP)
+#define _GET_SP_PTR() BUILDER->CreateStructGEP(_GET_CFP(), 1)
+#define _GET_SP() BUILDER->CreateLoad(_GET_SP_PTR())
+#define _GET_EP_PTR() BUILDER->CreateStructGEP(_GET_CFP(), 6)
+#define _GET_EP() BUILDER->CreateLoad(_GET_EP_PTR())
+
 #define GET_LEP() (JIT_EP_LEP(GET_EP()))
 #undef GET_OPERAND
 #define GET_OPERAND(x) (insn->pc[(x)])
@@ -221,12 +232,18 @@ jit_codegen_core(
 #define _RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
 
 
-#define _RESTORE_REGS() \
+#undef  RESTORE_REGS
+#define RESTORE_REGS() \
 { \
-	// BUILDER->CreateStore(_GET_CFP(), _GET_CFP()); \
   REG_CFP = th->cfp; \
   reg_pc  = reg_cfp->pc; \
   JIT_POP_TRACE(th->cfp); \
+}
+#define _RESTORE_REGS() \
+{ \
+	Value* th_cfp_ptr = BUILDER->CreateStructGEP(_GET_TH(), 5); \
+	Value* th_cfp = BUILDER->CreateLoad(th_cfp_ptr); \
+	BUILDER->CreateStore(th_cfp, _GET_CFP_PTR()); \
 }
 
 

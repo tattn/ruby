@@ -60,7 +60,7 @@ $setlocal_OP__WC__1 {
 $getspecial {
     // val = vm_getspecial(th, GET_LEP(), key, type);
 	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, _GET_EP());
-	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, JIT_TH, ep, V(key), V(type));
+	val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, _GET_TH(), ep, V(key), V(type));
 }
 
 // $setspecial
@@ -252,7 +252,7 @@ $send {
 	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(_ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
-	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, JIT_TH, JIT_CFP, _ci, RB_JIT->values->int32Zero);
+	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
 
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
 	Value *ci_recv = TOPN(ci->argc);
@@ -289,33 +289,16 @@ $opt_send_without_block {
 //$invokeblock
 
 $leave { // 途中
+	if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
+		BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, _GET_TH());
+		jit_codegen_make_return(codegen_func, val);
+	}
+	else {
+		BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, _GET_TH());
+		/* _RESTORE_REGS(); */
+		jit_codegen_make_return(codegen_func);
+	}
 
-//     if (OPT_CHECKED_RUN) {
-// 	if (reg_cfp->sp != vm_base_ptr(reg_cfp)) {
-// 	    rb_bug("Stack consistency error (sp: %"PRIdPTRDIFF", bp: %"PRIdPTRDIFF")",
-// 		   VM_SP_CNT(th, reg_cfp->sp), VM_SP_CNT(th, vm_base_ptr(reg_cfp)));
-// 	}
-//     }
-//
-//     RUBY_VM_CHECK_INTS(th);
-//
-//     if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
-// 	vm_pop_frame(th);
-//
-// #if OPT_CALL_THREADED_CODE
-// 	th->retval = val;
-// 	return 0;
-// #else
-// 	return val;
-// #endif
-//     }
-//     else {
-// 	vm_pop_frame(th);
-// 	RESTORE_REGS();
-//     }
-
-	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, JIT_TH);
-	jit_codegen_make_return(codegen_func, val);
 }
 
 // ===============================================
@@ -347,7 +330,7 @@ $jump { // JUMP(dst);
 	// 	JIT_DEBUG_LOG("dest_insn_else");
 	// 	bb_dst = CreateBasicBlock("jump");
 	// 	SetBasicBlock(bb_dst);
-	// 	Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+	// 	Value* cfp_pc = BUILDER->CreateStructGEP(_GET_CFP(), 0);
 	// 	Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, V(dst));
 	// 	tmp = BUILDER->CreateLoad(tmp);
 	// 	//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));
@@ -395,7 +378,7 @@ $branchunless {
 		JIT_DEBUG_LOG("dest_insn_else");
 		bb_dst = BasicBlock::Create(CONTEXT, "branchunless", codegen_func.jit_trace_func);
 		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc = BUILDER->CreateStructGEP(JIT_CFP, 0);
+		Value* cfp_pc = BUILDER->CreateStructGEP(_GET_CFP(), 0);
 		Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst));
 		tmp = BUILDER->CreateLoad(tmp);
 		//Value* tmp2 = BUILDER->CreateAdd(tmp, RB_JIT->values->value(dst));

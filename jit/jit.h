@@ -8,6 +8,7 @@ extern "C" {
 typedef struct jit_trace_result_struct {
 	VALUE retval;
 	int jmp;
+	VALUE *pc;
 } jit_trace_ret_t;
 
 /* compile.c */
@@ -19,14 +20,12 @@ void ruby_jit_init(void);
 
 extern int is_jit_tracing;
 
-
-
 // #define JIT_IS_IFUNC(type) ((int)(type & VM_FRAME_MAGIC_MASK) == VM_FRAME_MAGIC_IFUNC)
 // VM_FRAME_TYPE を2回計算していて冗長
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
 #define JIT_TRACE \
-if (is_jit_tracing) { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 0) { /* RESTORE_REGS(); */ ADD_PC(ret.jmp); goto *(void const *)GET_CURRENT_INSN(); } }
+if (is_jit_tracing) { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 1) { ADD_PC(ret.jmp); RESTORE_REGS(); goto *(void const *)GET_CURRENT_INSN(); } }
 
 #define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
 // #define JIT_NEW_TRACE(cfp)

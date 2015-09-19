@@ -94,8 +94,12 @@ typedef struct jit_trace_struct {
 
 struct jit_codegen_func_t {
 	Function *jit_trace_func;
-	Argument *arg_th;
-	Argument *arg_cfp;
+	// Argument *arg_th;
+	// Argument *arg_cfp;
+	Value *arg_th;
+	Value *arg_th_ptr;
+	Value *arg_cfp;
+	Value *arg_cfp_ptr;
 	Value *sp_gep;
 	Value *ep_gep;
 	Module *module;
@@ -245,12 +249,19 @@ public:
 		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", f.jit_trace_func);
 		builder->SetInsertPoint(entry);
 
-		Function::arg_iterator args = f.jit_trace_func->arg_begin();
-		f.arg_th = args++;
-		f.arg_cfp = args++;
+		f.arg_th_ptr  = builder->CreateAlloca(types->rb_thread_t);
+		f.arg_cfp_ptr = builder->CreateAlloca(types->rb_control_frame_t);
+		// f.arg_th      = builder->CreateLoad(f.arg_th_ptr);
+		// f.arg_cfp     = builder->CreateLoad(f.arg_cfp_ptr);
 
-		f.sp_gep = builder->CreateStructGEP(f.arg_cfp, 1); JIT_LLVM_SET_NAME(f.sp_gep, "sp_ptr");
-		f.ep_gep = builder->CreateStructGEP(f.arg_cfp, 6); JIT_LLVM_SET_NAME(f.ep_gep, "ep_ptr");
+		Function::arg_iterator args = f.jit_trace_func->arg_begin();
+		builder->CreateStore(args++, f.arg_th_ptr);
+		builder->CreateStore(args++, f.arg_cfp_ptr);
+		// f.arg_th = args++;
+		// f.arg_cfp = args++;
+
+		// f.sp_gep = builder->CreateStructGEP(f.arg_cfp, 1); JIT_LLVM_SET_NAME(f.sp_gep, "sp_ptr");
+		// f.ep_gep = builder->CreateStructGEP(f.arg_cfp, 6); JIT_LLVM_SET_NAME(f.ep_gep, "ep_ptr");
 
 		return f;
 	}
@@ -450,7 +461,7 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
 
-			//th->cfp = ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
+			th->cfp = func_ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
 			// th->cfp->pc = last_insn->pc + last_insn->len;
 
 			if (func_ret.ret) {
@@ -462,10 +473,20 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			// JIT_DEBUG_LOG2("@ last_insn: %p(%d)", last_insn, trace->insns_iterator - 1);
 			// JIT_DEBUG_LOG2("@ jump pc: (%p - %p)[%d] + %d = %d[%08p]", last_insn->pc, pc, last_insn->pc - pc, last_insn->len, last_insn->pc - pc + last_insn->len, pc + ((last_insn->pc - pc) + last_insn->len));
 
-			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ((last_insn->pc - pc) + last_insn->len));
+			if (cfp != th->cfp) {
+				// バイトコードが遷移した場合
+				RB_JIT->trace = jit_trace_find_trace_or_create_trace(th->cfp, th->cfp->pc);
+				ret->jmp = 0;
+				cfp->pc += (last_insn->pc - pc) + last_insn->len;
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+				jit_trace_start(cfp);
+				return;
+			}
+
 			ret->jmp = (last_insn->pc - pc) + last_insn->len;
+			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ret->jmp);
 			cfp->pc += ret->jmp;
-			JIT_DEBUG_LOG2("%% jmp: %d, pc: %p", ret->jmp, cfp->pc);
+			// JIT_DEBUG_LOG2("%% jmp: %d, pc: %p", ret->jmp, cfp->pc);
 			jit_trace_start(cfp);
 			return; //pc == trace->insns[0]????
 		}
@@ -496,7 +517,7 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 	// trace->insns[insn->index] = insn;
 	trace->insns[trace->insns_iterator++] = insn;
 
-	ret->jmp = 0;
+	ret->jmp = 1;
 }
 
 static inline jit_insn_t *

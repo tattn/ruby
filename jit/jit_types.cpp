@@ -10,6 +10,7 @@ JITTypes::JITTypes()
 	int64T = Type::getInt64Ty(getGlobalContext());
 	intT = Type::getIntNTy(getGlobalContext(), sizeof(int) * 8);
 	longT = Type::getIntNTy(getGlobalContext(), sizeof(long) * 8);
+	sizeT = Type::getIntNTy(getGlobalContext(), sizeof(size_t) * 8);
 
 	ptrT = PointerType::getUnqual(int8T);
 	valueT = int64T;
@@ -47,8 +48,38 @@ JITTypes::JITTypes()
 	newStruct->setBody(elements);
 	this->rb_control_frame_t = newStruct->getPointerTo();
 
+// struct list_node
+// {
+// 	struct list_node *next, *prev;
+// };
+
 	// sorry
-	this->rb_thread_t = pvalueT;
+// typedef struct rb_thread_struct {
+//     struct list_node vmlt_node;
+//     VALUE self;
+//     rb_vm_t *vm;
+//
+//     #<{(| execution information |)}>#
+//     VALUE *stack;		#<{(| must free, must mark |)}>#
+//     size_t stack_size;          #<{(| size in word (byte size / sizeof(VALUE)) |)}>#
+//     rb_control_frame_t *cfp;
+//     int safe_level;
+//     int raised_flag;
+//     VALUE last_status; #<{(| $? |)}>#
+	newStruct = StructType::create(getGlobalContext(), "struct.rb_thread_struct");
+	elements.clear();
+	elements.push_back(StructType::get(pvalueT, pvalueT, 0));
+	elements.push_back(valueT);
+	elements.push_back(pvalueT); // rb_vm_t *
+	elements.push_back(pvalueT);
+	elements.push_back(sizeT);
+	elements.push_back(rb_control_frame_t);
+	elements.push_back(intT);
+	elements.push_back(intT);
+	elements.push_back(valueT);
+	// elements.push_back 省略
+	newStruct->setBody(elements);
+	this->rb_thread_t = newStruct->getPointerTo();
 
 // typedef struct rb_call_info_struct {
 //     #<{(| fixed at compile time |)}>#
