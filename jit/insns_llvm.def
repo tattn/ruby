@@ -295,7 +295,7 @@ $leave { // 途中
 	}
 	else {
 		BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, _GET_TH());
-		/* _RESTORE_REGS(); */
+		_RESTORE_REGS();
 		jit_codegen_make_return(codegen_func);
 	}
 
@@ -451,13 +451,25 @@ $opt_eq {
 	//  CALL_SIMPLE_METHOD(recv);
     //  }
 
-    val = _FCALL3(opt_eq_func, recv, obj, PV(ci));
+    val = _FCALL3(opt_eq_func, recv, obj, PT(ci, rb_call_info_t));
 
-	SetNewBasicBlock(bb_then, "then");
+	BasicBlock *bb_cur = GetBasicBlock();
+	           /* *bb_merge = CreateBasicBlock("merge"); */
+	SetNewBasicBlock(bb_then, "then_opt_eq");
 	PUSH(recv);
 	PUSH(obj);
 	_CALL_SIMPLE_METHOD(recv);
-	_IF_EQ(val, _Qundef, bb_then);
+	BasicBlock *bb_merge = GetBasicBlock();
+	SetBasicBlock(bb_cur);
+	/* _IF_EQ(val, _Qundef, bb_then); */
+
+	Value *test = BUILDER->CreateICmpEQ(val, _Qundef, "if");
+	BUILDER->CreateCondBr(test, bb_then, bb_merge);
+	SetBasicBlock(bb_merge);
+	/* BasicBlock *bb_merge2 = GetBasicBlock(); */
+	/* SetBasicBlock(bb_merge); */
+	/* BUILDER->CreateBr(bb_merge2); */
+	/* SetBasicBlock(bb_merge2); */
 }
 
 //$opt_neq

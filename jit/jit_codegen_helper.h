@@ -43,8 +43,8 @@
 	} while (0)
 
 #define _IF_EQ2(a, b, bb_then, bb_else) do { \
-		BasicBlock *bb_merge = CreateBasicBlock("merge"); \
-		Value *test = BUILDER->CreateICmpEQ(a, b, "if_eq"); \
+		BasicBlock *bb_merge = CreateBasicBlock("merge2."); \
+		Value *test = BUILDER->CreateICmpEQ(a, b, "if_eq2."); \
 		BUILDER->CreateCondBr(test, bb_then, bb_else);\
 		SetBasicBlock(bb_then); \
 		BUILDER->CreateBr(bb_merge); \

@@ -475,11 +475,11 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 
 			if (cfp != th->cfp) {
 				// バイトコードが遷移した場合
-				RB_JIT->trace = jit_trace_find_trace_or_create_trace(th->cfp, th->cfp->pc);
 				ret->jmp = 0;
 				cfp->pc += (last_insn->pc - pc) + last_insn->len;
 				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
-				jit_trace_start(cfp);
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+				jit_trace_start(th->cfp);
 				return;
 			}
 

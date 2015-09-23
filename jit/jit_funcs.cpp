@@ -99,7 +99,7 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	DEFINE_FUNC(vm_get_const_base, t->valueT, t->pvalueT);
 
 	// VALUE opt_eq_func(VALUE recv, VALUE obj, CALL_INFO ci)
-	DEFINE_FUNC(opt_eq_func, t->valueT, t->valueT, t->rb_call_info_t);
+	DEFINE_FUNC(opt_eq_func, t->valueT, t->valueT, t->valueT, t->rb_call_info_t);
 
 
 
