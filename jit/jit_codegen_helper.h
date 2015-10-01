@@ -9,8 +9,8 @@
 #define jit_funcs  RB_JIT->funcs
 
 #define V(x) jit_values->value(x)
-#define PV(x) BUILDER->CreateIntToPtr(V((VALUE)x), jit_types->pvalueT)
-#define PT(x, type) BUILDER->CreateIntToPtr(V((VALUE)x), jit_types->type)
+#define PV(x) BUILDER->CreateIntToPtr(V((VALUE)(x)), jit_types->pvalueT)
+#define PT(x, type) BUILDER->CreateIntToPtr(V((VALUE)(x)), jit_types->type)
 #define I(x) jit_values->intV(x)
 
 #define _Qundef jit_values->undefV

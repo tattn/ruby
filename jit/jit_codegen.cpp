@@ -183,8 +183,8 @@ jit_codegen_core(
 	BasicBlock *bb_cur = GetBasicBlock(); \
 	SetNewBasicBlock(bb_then, "then"); \
 	_RESTORE_REGS(); \
-	JIT_DEBUG_LOG("CALL_METHOD then"); \
 	SetNewBasicBlock(bb_else, "else"); \
+	JIT_DEBUG_LOG("CALL_METHOD else"); \
 	PUSH(v);\
 	SetBasicBlock(bb_cur); \
 	_IF_EQ2(v, _Qundef, bb_then, bb_else); \

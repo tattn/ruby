@@ -1451,7 +1451,8 @@ class RubyVM
 		def make_insn_def insn
 			unless @insns_llvm[insn.name]
 				make_header_basic_block
-				commit "/* not implementation */"
+				# commit "/* not implementation */"
+				commit 'assert(0 && "not implementation");'
 				make_footer_basic_block
 				return
 			end

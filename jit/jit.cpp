@@ -76,7 +76,6 @@ typedef struct jit_insn_struct {
 
 typedef struct jit_func_return_struct {
 	rb_control_frame_t *exit_cfp;
-	//VALUE *exit_pc;
 	VALUE ret;
 } jit_func_ret_t;
 
@@ -155,7 +154,7 @@ public:
 		GlobalVariable* var = mod->getGlobalVariable(".str", true);
 
 		if (!var) {
-			Constant* format_const = ConstantDataArray::getString(getGlobalContext(), "DEBUG_IR: %d\n");
+			Constant* format_const = ConstantDataArray::getString(getGlobalContext(), "DEBUG_IR: %08p\n");
 			var = new GlobalVariable(*mod, format_const->getType(), true,
 						GlobalValue::PrivateLinkage, format_const, ".str");
 		}
@@ -201,12 +200,6 @@ public:
 			// llvm_pop_frame = module->getFunction("vm_pop_frame");
 		// }
 		// else {
-			// 他のモジュールでもAddSymbol+関数ポインタで呼び出しで再利用できるかも
-			//
-			//
-			//
-			//
-			//
 			// void *p = prev_engine->getPointerToFunction(llvm_pop_frame);
 			// printf("%p\n", p);
 			// sys::DynamicLibrary::AddSymbol("_vm_pop_frame", p);
@@ -464,9 +457,12 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			th->cfp = func_ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
 			// th->cfp->pc = last_insn->pc + last_insn->len;
 
+
 			if (func_ret.ret) {
 				ret->jmp = -1;
 				ret->retval = func_ret.ret;
+				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
 				return;
 			}
 
@@ -477,17 +473,18 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 				// バイトコードが遷移した場合
 				ret->jmp = 0;
 				cfp->pc += (last_insn->pc - pc) + last_insn->len;
-				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
-				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
 				jit_trace_start(th->cfp);
 				return;
 			}
 
 			ret->jmp = (last_insn->pc - pc) + last_insn->len;
-			RB_JIT->trace = jit_trace_find_trace(cfp->pc + ret->jmp);
+			// RB_JIT->trace = jit_trace_find_trace(cfp->pc + ret->jmp);
 			cfp->pc += ret->jmp;
-			// JIT_DEBUG_LOG2("%% jmp: %d, pc: %p", ret->jmp, cfp->pc);
-			jit_trace_start(cfp);
+			JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+			JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+			jit_trace_start(th->cfp);
 			return; //pc == trace->insns[0]????
 		}
 	}
@@ -532,6 +529,8 @@ jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
 	jit_insn_t **insns = trace->insns;
 	unsigned insns_max = trace->insns_iterator - 1;
 	int index = insn->index;
+	//TODO: リファクタリング
+	dst += insns[index-1]->len;
 
 	int step;
 	if (dst > 0)
