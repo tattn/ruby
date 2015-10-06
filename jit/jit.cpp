@@ -437,6 +437,8 @@ jit_insn_next(jit_trace_t *trace, jit_insn_t *insn, jit_codegen_func_t codegen_f
 
 static void jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace);
 
+static VALUE *vm_base_ptr(rb_control_frame_t *cfp);
+
 extern "C"
 void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret)
@@ -454,9 +456,8 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
 
-			th->cfp = func_ret.exit_cfp; // trace->jited(th, cfp)のcfpが現状では返ってくる
+			th->cfp = func_ret.exit_cfp;
 			// th->cfp->pc = last_insn->pc + last_insn->len;
-
 
 			if (func_ret.ret) {
 				ret->jmp = -1;

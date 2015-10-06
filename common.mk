@@ -2342,11 +2342,11 @@ vm.$(OBJEXT): {$(VPATH)}intern.h
 vm.$(OBJEXT): {$(VPATH)}internal.h
 vm.$(OBJEXT): {$(VPATH)}io.h
 vm.$(OBJEXT): {$(VPATH)}iseq.h
-# vm.$(OBJEXT): {$(VPATH)}jit/jit_types.cpp
-# vm.$(OBJEXT): {$(VPATH)}jit/jit_funcs.cpp
-# vm.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
-# vm.$(OBJEXT): {$(VPATH)}jit/jit.cpp
-# vm.$(OBJEXT): {$(VPATH)}jit/jit.h
+vm.$(OBJEXT): {$(VPATH)}jit/jit_types.cpp
+vm.$(OBJEXT): {$(VPATH)}jit/jit_funcs.cpp
+vm.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
+vm.$(OBJEXT): {$(VPATH)}jit/jit.cpp
+vm.$(OBJEXT): {$(VPATH)}jit/jit.h
 vm.$(OBJEXT): {$(VPATH)}method.h
 vm.$(OBJEXT): {$(VPATH)}missing.h
 vm.$(OBJEXT): {$(VPATH)}node.h
