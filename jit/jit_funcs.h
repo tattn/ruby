@@ -31,6 +31,10 @@ struct JITFuncs
 	Function *vm_get_cbase;
 	Function *vm_get_const_base;
 	Function *opt_eq_func;
+    Function *rb_float_new;
+    Function *rb_float_new_inline;
+    Function *rb_float_value;
+	Function *rb_str_append;
 
 
 #ifdef JIT_DEBUG_FLAG

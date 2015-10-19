@@ -11,6 +11,7 @@ struct JITTypes
 	Type *intT;
 	Type *longT;
 	Type *sizeT;
+	Type *doubleT;
 	Type *ptrT;
 	Type *valueT;
 	PointerType *pvalueT;
@@ -18,6 +19,10 @@ struct JITTypes
 	PointerType *rb_thread_t;
 	PointerType *rb_control_frame_t;
 	PointerType *rb_call_info_t;
+
+	StructType *RBasic;
+	StructType *RFloat;
+	PointerType *PRFloat;
 
 	StructType *jit_func_ret_t;
 };
@@ -32,6 +37,7 @@ struct JITValues
 	Value *valueZero;
 	Value *valueOne;
 	Constant *int32Zero;
+	Value *nilV;
 	Value *undefV;
 	Value *trueV;
 	Value *falseV;

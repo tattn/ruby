@@ -11,9 +11,11 @@
 #define V(x) jit_values->value(x)
 #define PV(x) BUILDER->CreateIntToPtr(V((VALUE)(x)), jit_types->pvalueT)
 #define PT(x, type) BUILDER->CreateIntToPtr(V((VALUE)(x)), jit_types->type)
+#define _PT(x, type) BUILDER->CreateIntToPtr((x), jit_types->type)
 #define I(x) jit_values->intV(x)
 
 #define _Qundef jit_values->undefV
+#define _Qnil jit_values->nilV
 
 // ==============================================
 // Utilities for codegen
@@ -26,6 +28,7 @@
 #define SetNewBasicBlock(bb, name) BasicBlock *bb = CreateBasicBlock(name); SetBasicBlock(bb)
 
 #define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)
+
 #define _FCALL1(name, a) BUILDER->CreateCall(jit_funcs->name, a)
 #define _FCALL2(name, a, b) BUILDER->CreateCall2(jit_funcs->name, a, b)
 #define _FCALL3(name, a, b, c) BUILDER->CreateCall3(jit_funcs->name, a, b, c)
@@ -58,8 +61,7 @@
 // ==============================================
 // Stack operations
 // ==============================================
-#undef TOPN
-#define TOPN(x)\
+#define _TOPN(x)\
 	[&]{\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
@@ -67,6 +69,8 @@
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->signedValue(-x - 1));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	return BUILDER->CreateLoad(sp_incptr);}()
+// #undef TOPN
+// #define TOPN(x) (insn->pc[(x)+1])
 #define SET_TOPN(x, val) {\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
@@ -74,16 +78,16 @@
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->signedValue(-x - 1));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	BUILDER->CreateStore(val, sp_incptr);}
-#undef POPN
-#define POPN(x) {\
+// #undef POPN
+#define _POPN(x) {\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
 	JIT_LLVM_SET_NAME(sp, "sp");\
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->signedValue(-x));\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	BUILDER->CreateStore(sp_incptr, sp_ptr);}
-#undef PUSH
-#define PUSH(x) {\
+// #undef PUSH
+#define _PUSH(x) {\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
 	JIT_LLVM_SET_NAME(sp, "sp");\

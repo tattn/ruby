@@ -11,6 +11,7 @@ JITTypes::JITTypes()
 	intT = Type::getIntNTy(getGlobalContext(), sizeof(int) * 8);
 	longT = Type::getIntNTy(getGlobalContext(), sizeof(long) * 8);
 	sizeT = Type::getIntNTy(getGlobalContext(), sizeof(size_t) * 8);
+	doubleT = Type::getDoubleTy(getGlobalContext());
 
 	ptrT = PointerType::getUnqual(int8T);
 	valueT = int64T;
@@ -141,6 +142,18 @@ JITTypes::JITTypes()
 
 	newStruct->setBody(elements);
 
+// struct RBasic {
+//     VALUE flags;
+//     const VALUE klass;
+// }
+	RBasic = StructType::get(valueT, valueT, 0);
+
+// struct RFloat {
+//     struct RBasic basic;
+//     double float_value;
+// };
+	RFloat = StructType::get(RBasic, doubleT, 0);
+	PRFloat = RFloat->getPointerTo();
 
 	jit_func_ret_t = StructType::get(rb_control_frame_t, valueT, 0);
 }
@@ -152,6 +165,7 @@ JITValues::JITValues(JITTypes *types)
 	valueZero = ConstantInt::get(types->int64T, 0);
 	valueOne = ConstantInt::get(types->int64T, 1);
 	int32Zero = ConstantInt::get(types->int32T, 0);
+	nilV = ConstantInt::get(types->valueT, Qnil);
 	undefV = ConstantInt::get(types->valueT, Qundef);
 	trueV = ConstantInt::get(types->valueT, Qtrue);
 	falseV = ConstantInt::get(types->valueT, Qfalse);

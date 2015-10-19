@@ -2864,6 +2864,10 @@ Init_VM(void)
 	ADD_SYMBOL(vm_get_cbase);
 	ADD_SYMBOL(vm_get_const_base);
 	ADD_SYMBOL(opt_eq_func);
+	ADD_SYMBOL(rb_float_new);
+	ADD_SYMBOL(rb_float_new_inline);
+	ADD_SYMBOL(rb_float_value);
+	ADD_SYMBOL(rb_str_append);
 #undef ADD_SYMBOL
 }
 

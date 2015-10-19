@@ -1298,6 +1298,7 @@ class RubyVM
 				}
       end
 
+
 			implementation_counter = 0
 			@insns.each{|insn|
 				implementation_counter += 1 if @insns_llvm[insn.name]
@@ -1325,7 +1326,7 @@ class RubyVM
       insn.rets.each{|var|
         if vars.all?{|e| e[1] != var[1]} && var[1] != '...'
 					if var[0] == 'VALUE'
-						commit "    Value *#{var[1]};"
+						commit "    Value *_#{var[1]};"
 					else
 						commit "  #{var[0]} #{var[1]};"
 					end
@@ -1342,7 +1343,7 @@ class RubyVM
           commit "  const #{e[0][0]} #{e[0][1]} = #{e[1]};"
         else
 					llvm_val = "_#{$1}(RB_JIT->values->value(#{$2}))" if e[1] =~ /(\w+)\((\d+)\)/
-          commit "  #define #{e[0][1]} #{llvm_val}"
+          commit "  #define _#{e[0][1]} #{llvm_val}"
         end
       }
     end
@@ -1362,15 +1363,16 @@ class RubyVM
 					if type == 'VALUE'
 						# ops << "    Value *#{var} = BUILDER->CreateAlloca(RB_JIT->types->valueT);"
 						# ops << "    BUILDER->CreateStore(RB_JIT->values->value(insn->pc[#{i+1}]), #{var});"
-						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
+						# ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
+						ops << "    Value *_#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
 						# @val_alloca = true
 					# elsif type == 'CALL_INFO'
 					# 	ops << "    CALL_INFO rb_ci = (CALL_INFO)insn->pc[#{i+1}];"
 					# 	ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value((VALUE)rb_ci), RB_JIT->types->rb_call_info_t);"
 					elsif type == 'lindex_t'# or type == 'rb_num_t'
-						ops << "    Value *#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
+						ops << "    Value *_#{var} = RB_JIT->values->value(insn->pc[#{i+1}]);"
 					elsif type == 'GENTRY'# or type == 'ISEQ'
-						ops << "    Value *#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value(insn->pc[#{i+1}]), RB_JIT->types->pvalueT);"
+						ops << "    Value *_#{var} = BUILDER->CreateIntToPtr(RB_JIT->values->value(insn->pc[#{i+1}]), RB_JIT->types->pvalueT);"
 					else
 						ops << "  #{type} #{var} = (#{type})GET_OPERAND(#{i+1});"
 					end
@@ -1397,7 +1399,8 @@ class RubyVM
           pops << "  #{type} #{var} = SCREG(#{r});"
         else
 					if type == "VALUE"
-						pops << "    Value *#{var} = TOPN(#{n});"
+						# pops << "  #{type} #{var} = TOPN(#{n});"
+						pops << "    Value *_#{var} = _TOPN(#{n});"
 					else
 						pops << "  #{type} #{var} = TOPN(#{n});"
 					end
@@ -1409,7 +1412,11 @@ class RubyVM
       commit pops.reverse unless pops.empty?
     end
 
-    #### def make_header_popn insn
+    def make_header_popn insn
+      comment "  /* management */"
+      commit  "  _POPN(#{@popn});" if @popn > 0
+    end
+
 
     def make_footer_stack_val insn
       each_footer_stack_val(insn){|v|
@@ -1417,9 +1424,9 @@ class RubyVM
           commit "  SCREG(#{v[2]}) = #{v[1]};"
         else
 					if @val_alloca
-						commit "    PUSH(BUILDER->CreateLoad(#{v[1]}));"
+						commit "    _PUSH(BUILDER->CreateLoad(#{v[1]}));"
 					else
-						commit "    PUSH(#{v[1]});"
+						commit "    _PUSH(_#{v[1]});"
 					end
         end
       }

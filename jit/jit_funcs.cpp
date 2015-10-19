@@ -101,7 +101,15 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// VALUE opt_eq_func(VALUE recv, VALUE obj, CALL_INFO ci)
 	DEFINE_FUNC(opt_eq_func, t->valueT, t->valueT, t->valueT, t->rb_call_info_t);
 
+    // VALUE rb_float_new_inline(double d)
+	DEFINE_FUNC(rb_float_new, t->valueT, t->doubleT);
+	DEFINE_FUNC(rb_float_new_inline, t->valueT, t->doubleT);
 
+    // double rb_float_value_inline(VALUE v)
+	DEFINE_FUNC(rb_float_value, t->doubleT, t->valueT);
+
+	// VALUE rb_str_append(VALUE str, VALUE str2)
+	DEFINE_FUNC(rb_str_append, t->valueT, t->valueT, t->valueT);
 
 #ifdef JIT_DEBUG_FLAG
 	DEFINE_FUNC2(printf, t->int32T, t->int8T->getPointerTo());

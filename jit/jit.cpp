@@ -42,7 +42,7 @@
 
 using namespace llvm;
 
-#define JIT_DEBUG_FLAG
+// #define JIT_DEBUG_FLAG
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -531,7 +531,7 @@ jit_codegen_jump_insn(jit_trace_t *trace, jit_insn_t *insn, int dst)
 	unsigned insns_max = trace->insns_iterator - 1;
 	int index = insn->index;
 	//TODO: リファクタリング
-	dst += insns[index-1]->len;
+	dst += 2; //insns[index-1]->len;
 
 	int step;
 	if (dst > 0)

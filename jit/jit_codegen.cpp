@@ -185,7 +185,7 @@ jit_codegen_core(
 	_RESTORE_REGS(); \
 	SetNewBasicBlock(bb_else, "else"); \
 	JIT_DEBUG_LOG("CALL_METHOD else"); \
-	PUSH(v);\
+	_PUSH(v);\
 	SetBasicBlock(bb_cur); \
 	_IF_EQ2(v, _Qundef, bb_then, bb_else); \
 } while (0)
@@ -230,6 +230,14 @@ jit_codegen_core(
 
 // #define RTEST(v) !(((VALUE)(v) & ~Qnil) == 0)
 #define _RTEST(v) (BUILDER->CreateICmpNE(BUILDER->CreateAnd((v), ~Qnil), RB_JIT->values->valueZero))
+
+// #define FIXNUM_2_P(a, b) ((a) & (b) & 1)
+#define _FIXNUM_2_P(a, b) (BUILDER->CreateICmpNE(BUILDER->CreateAnd(BUILDER->CreateAnd((a), (b)), 1), jit_values->valueZero))
+
+// #define FLONUM_2_P(a, b) (((((a)^2) | ((b)^2)) & 3) == 0)
+
+#define _RBASIC(v) (BUILDER->CreateBitOrPointerCast((v), jit_types->RBASIC))
+#define _RBASIC_CLASS(v) (BUILDER->CreateStructGEP((v), 1)
 
 
 #undef  RESTORE_REGS
