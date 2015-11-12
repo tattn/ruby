@@ -62,7 +62,6 @@ using namespace llvm;
 
 int is_jit_tracing = 0;
 int trace_stack_size = 0;
-int is_top_of_bytecode = 0;
 
 typedef struct jit_insn_struct {
 	rb_thread_t *th;
@@ -451,7 +450,7 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			if (!trace->jited) jit_codegen_trace(th, trace);
 
 			JIT_DEBUG_LOG("==== Execute JITed function ====");
-			jit_func_ret_t func_ret = trace->jited(th, cfp);
+			const jit_func_ret_t& func_ret = trace->jited(th, cfp);
 			// JIT_DEBUG_LOG("==== Finished executing JITed function ====");
 
 			auto last_insn = trace->insns[trace->insns_iterator - 1];
@@ -490,26 +489,11 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 		}
 	}
 
-	// if (is_top_of_bytecode) {
-	// 	jit_trace_t *check_trace = jit_trace_find_trace(pc);
-	// 	if (check_trace) {
-	// 		if (check_trace != trace) {
-	// 			jit_switch_trace(check_trace);   // times 等のブロックで繰り返す命令に対応
-	// 			jit_trace_insn(th, cfp, pc, ret);
-	// 			return;
-	// 		}
-	// 	}
-	// 	else
-	// 		jit_trace_create_trace(cfp, pc); // create a start position of trace
-	// 	is_top_of_bytecode = 0;
-	// }
-
 	if (trace->insns_iterator == 0) trace->first_pc = pc;
 
 	jit_insn_t *insn = new jit_insn_t;
 	jit_insn_init(insn, th, cfp, pc);
 	insn->index = trace->insns_iterator;
-
 
 	// TODO: トレースするかを実行回数などで判定
 	// trace->insns[insn->index] = insn;

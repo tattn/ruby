@@ -220,9 +220,8 @@ jit_codegen_core(
 #undef GET_OPERAND
 #define GET_OPERAND(x) (insn->pc[(x)])
 
-#define RSHIFT(x,y) BUILDER->CreateLShr(x, y)
-#undef FIX2LONG
-#define FIX2LONG(x) (RSHIFT((x), 1))
+#define _RSHIFT(x,y) BUILDER->CreateLShr(x, y)
+#define _FIX2LONG(x) (_RSHIFT((x), 1))
 
 #define _INT2FIX(i) BUILDER->CreateOr(BUILDER->CreateShl(i, 1), FIXNUM_FLAG)
 #define _LONG2FIX(i) _INT2FIX(i)
@@ -237,7 +236,7 @@ jit_codegen_core(
 // #define FLONUM_2_P(a, b) (((((a)^2) | ((b)^2)) & 3) == 0)
 
 #define _RBASIC(v) (BUILDER->CreateBitOrPointerCast((v), jit_types->RBASIC))
-#define _RBASIC_CLASS(v) (BUILDER->CreateStructGEP((v), 1)
+#define _RBASIC_CLASS(v) (BUILDER->CreateStructGEP((v), 1))
 
 
 #undef  RESTORE_REGS

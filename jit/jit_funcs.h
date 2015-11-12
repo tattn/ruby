@@ -35,6 +35,7 @@ struct JITFuncs
     Function *rb_float_new_inline;
     Function *rb_float_value;
 	Function *rb_str_append;
+	Function *rb_ary_entry;
 
 
 #ifdef JIT_DEBUG_FLAG

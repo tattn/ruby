@@ -558,8 +558,8 @@ $opt_plus {
 $opt_minus {
 	Value *a, *b, *c;
 
-	a = FIX2LONG(_recv);
-	b = FIX2LONG(_obj);
+	a = _FIX2LONG(_recv);
+	b = _FIX2LONG(_obj);
 	c = BUILDER->CreateSub(a, b);
 	_val = _LONG2FIX(c);
 }
@@ -567,16 +567,16 @@ $opt_minus {
 $opt_mult {
 	Value *a, *b;
 
-	a = FIX2LONG(_recv);
-	b = FIX2LONG(_obj);
+	a = _FIX2LONG(_recv);
+	b = _FIX2LONG(_obj);
 	_val = _LONG2FIX(BUILDER->CreateMul(a, b));
 }
 
 $opt_div {
 	Value *x, *y, *div;
 
-	x = FIX2LONG(_recv);
-	y = FIX2LONG(_obj);
+	x = _FIX2LONG(_recv);
+	y = _FIX2LONG(_obj);
 	div = BUILDER->CreateSDiv(x, y);
 	_val = _LONG2NUM(div);
 }
@@ -659,6 +659,16 @@ $opt_aref {
 	/* PUSH(obj); */
 	/* CALL_SIMPLE_METHOD(recv); */
     /* } */
+
+	Value* klass = _RBASIC_CLASS(_recv);
+
+    auto bb_cur = GetBasicBlock();
+	auto bb_array = CreateBasicBlock("then");
+	_IF_EQ(klass, V(rb_cArray), bb_array);
+    SetBasicBlock(bb_array);
+	_val = _FCALL2(rb_ary_entry, _recv, _FIX2LONG(_obj));
+    BUILDER->CreateBr(bb_cur);
+    SetBasicBlock(bb_cur);
 }
 
 //$opt_aset

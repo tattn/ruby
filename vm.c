@@ -2868,6 +2868,7 @@ Init_VM(void)
 	ADD_SYMBOL(rb_float_new_inline);
 	ADD_SYMBOL(rb_float_value);
 	ADD_SYMBOL(rb_str_append);
+	ADD_SYMBOL(rb_ary_entry);
 #undef ADD_SYMBOL
 }
 

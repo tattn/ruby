@@ -111,6 +111,10 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// VALUE rb_str_append(VALUE str, VALUE str2)
 	DEFINE_FUNC(rb_str_append, t->valueT, t->valueT, t->valueT);
 
+	// VALUE rb_ary_entry(VALUE ary, long offset)
+	DEFINE_FUNC(rb_ary_entry, t->valueT, t->valueT, t->longT);
+
+
 #ifdef JIT_DEBUG_FLAG
 	DEFINE_FUNC2(printf, t->int32T, t->int8T->getPointerTo());
 #endif
