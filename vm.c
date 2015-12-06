@@ -2869,6 +2869,10 @@ Init_VM(void)
 	ADD_SYMBOL(rb_float_value);
 	ADD_SYMBOL(rb_str_append);
 	ADD_SYMBOL(rb_ary_entry);
+	ADD_SYMBOL(rb_hash_aref);
+	ADD_SYMBOL(rb_ary_store);
+	ADD_SYMBOL(rb_hash_aset);
+
 #undef ADD_SYMBOL
 }
 

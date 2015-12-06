@@ -114,6 +114,15 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// VALUE rb_ary_entry(VALUE ary, long offset)
 	DEFINE_FUNC(rb_ary_entry, t->valueT, t->valueT, t->longT);
 
+	// VALUE rb_hash_aref(VALUE hash, VALUE key)
+	DEFINE_FUNC(rb_hash_aref, t->valueT, t->valueT, t->valueT);
+
+	// void rb_ary_store(VALUE ary, long idx, VALUE val)
+	DEFINE_FUNC(rb_ary_store, t->voidT, t->valueT, t->longT, t->valueT);
+
+	// VALUE rb_hash_aset(VALUE hash, VALUE key, VALUE val)
+	DEFINE_FUNC(rb_hash_aset, t->valueT, t->valueT, t->valueT, t->valueT);
+
 
 #ifdef JIT_DEBUG_FLAG
 	DEFINE_FUNC2(printf, t->int32T, t->int8T->getPointerTo());

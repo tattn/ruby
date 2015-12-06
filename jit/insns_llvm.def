@@ -3,17 +3,25 @@ $nop
 // ===============================================
 // deal with variables
 // ===============================================
-// $getlocal {
-// /*
-//     int i, lev = (int)level;
-//     VALUE *ep = GET_EP();
-//
-//     for (i = 0; i < lev; i++) {
-// 	ep = GET_PREV_EP(ep);
-//     }
-//     val = *(ep - idx);
-// */
-// }
+$getlocal {
+/*
+    int i, lev = (int)level;
+    VALUE *ep = GET_EP();
+
+    for (i = 0; i < lev; i++) {
+	ep = GET_PREV_EP(ep);
+    }
+    val = *(ep - idx);
+*/
+    int i, lev = (int)level;
+    VALUE *ep = GET_EP();
+	VALUE idx = insn->pc[1];
+
+    for (i = 0; i < lev; i++) {
+	ep = GET_PREV_EP(ep);
+    }
+	_val = BUILDER->CreateLoad(PV(ep - idx));
+}
 
 $getlocal_OP__WC__0 {
 	Value *ep = _GET_EP();
@@ -272,6 +280,10 @@ $send {
 	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(_ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
+	_GET_TH()->dump();
+	_GET_TH()->getType()->dump();
+	_GET_CFP()->dump();
+	_GET_CFP()->getType()->dump();
 	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
 
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
@@ -660,18 +672,76 @@ $opt_aref {
 	/* CALL_SIMPLE_METHOD(recv); */
     /* } */
 
-	Value* klass = _RBASIC_CLASS(_recv);
+	Value* rbasic = _RBASIC(_recv);
+	Value* klass = _RBASIC_CLASS(rbasic);
 
-    auto bb_cur = GetBasicBlock();
-	auto bb_array = CreateBasicBlock("then");
-	_IF_EQ(klass, V(rb_cArray), bb_array);
-    SetBasicBlock(bb_array);
-	_val = _FCALL2(rb_ary_entry, _recv, _FIX2LONG(_obj));
-    BUILDER->CreateBr(bb_cur);
-    SetBasicBlock(bb_cur);
+	auto bb_array = CreateBasicBlock("then_ary");
+	auto bb_else_array = CreateBasicBlock("else_ary");
+	auto bb_hash = CreateBasicBlock("then_hash");
+	auto bb_merge = CreateBasicBlock("merge");
+
+	Value *test_array = BUILDER->CreateICmpEQ(klass, V(rb_cArray), "if_eq");
+	BUILDER->CreateCondBr(test_array, bb_array, bb_else_array);
+
+	SetBasicBlock(bb_else_array); {
+		Value *test_hash = BUILDER->CreateICmpEQ(klass, V(rb_cHash), "if_eq");
+		BUILDER->CreateCondBr(test_hash, bb_hash, bb_merge);
+	}
+
+	Value* val_array;
+	SetBasicBlock(bb_array); {
+		val_array = _FCALL2(rb_ary_entry, _recv, _FIX2LONG(_obj));
+	}
+	BUILDER->CreateBr(bb_merge);
+
+	Value* val_hash;
+	SetBasicBlock(bb_hash); {
+		val_hash = _FCALL2(rb_hash_aref, _recv, _FIX2LONG(_obj));
+	}
+	BUILDER->CreateBr(bb_merge);
+
+	SetBasicBlock(bb_merge);
+	PHINode *PN = BUILDER->CreatePHI(jit_types->valueT, 3, "phi");
+
+	PN->addIncoming(val_array, bb_array);
+	PN->addIncoming(val_hash, bb_hash);
+	PN->addIncoming(jit_values->valueZero, bb_else_array);
+	_val = PN;
 }
 
-//$opt_aset
+$opt_aset {
+	Value* rbasic = _RBASIC(_recv);
+	Value* klass = _RBASIC_CLASS(rbasic);
+
+	auto bb_array = CreateBasicBlock("then_ary");
+	auto bb_else_array = CreateBasicBlock("else_ary");
+	auto bb_hash = CreateBasicBlock("then_hash");
+	auto bb_merge = CreateBasicBlock("merge");
+
+	Value *test_array = BUILDER->CreateICmpEQ(klass, V(rb_cArray), "if_eq");
+	BUILDER->CreateCondBr(test_array, bb_array, bb_else_array);
+
+	SetBasicBlock(bb_else_array); {
+		Value *test_hash = BUILDER->CreateICmpEQ(klass, V(rb_cHash), "if_eq");
+		BUILDER->CreateCondBr(test_hash, bb_hash, bb_merge);
+	}
+
+	Value* val_array;
+	SetBasicBlock(bb_array); {
+		_FCALL3(rb_ary_store, _recv, _FIX2LONG(_obj), _set);
+	}
+	BUILDER->CreateBr(bb_merge);
+
+	Value* val_hash;
+	SetBasicBlock(bb_hash); {
+		_FCALL3(rb_hash_aset, _recv, _obj, _set);
+	}
+	BUILDER->CreateBr(bb_merge);
+
+	SetBasicBlock(bb_merge);
+
+	_val = _set;
+}
 
 //$opt_aset_with
 

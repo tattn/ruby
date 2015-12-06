@@ -21,6 +21,7 @@ struct JITTypes
 	PointerType *rb_call_info_t;
 
 	StructType *RBasic;
+	PointerType *PRBasic;
 	StructType *RFloat;
 	PointerType *PRFloat;
 

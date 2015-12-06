@@ -36,6 +36,9 @@ struct JITFuncs
     Function *rb_float_value;
 	Function *rb_str_append;
 	Function *rb_ary_entry;
+	Function *rb_hash_aref;
+	Function *rb_ary_store;
+	Function *rb_hash_aset;
 
 
 #ifdef JIT_DEBUG_FLAG

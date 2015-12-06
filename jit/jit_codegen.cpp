@@ -235,8 +235,8 @@ jit_codegen_core(
 
 // #define FLONUM_2_P(a, b) (((((a)^2) | ((b)^2)) & 3) == 0)
 
-#define _RBASIC(v) (BUILDER->CreateBitOrPointerCast((v), jit_types->RBASIC))
-#define _RBASIC_CLASS(v) (BUILDER->CreateStructGEP((v), 1))
+#define _RBASIC(v) (BUILDER->CreateBitOrPointerCast((v), jit_types->PRBasic))
+#define _RBASIC_CLASS(v) (BUILDER->CreateLoad(BUILDER->CreateStructGEP((v), 1)))
 
 
 #undef  RESTORE_REGS

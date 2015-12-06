@@ -147,6 +147,7 @@ JITTypes::JITTypes()
 //     const VALUE klass;
 // }
 	RBasic = StructType::get(valueT, valueT, 0);
+	PRBasic = RBasic->getPointerTo();
 
 // struct RFloat {
 //     struct RBasic basic;

@@ -42,7 +42,7 @@
 
 using namespace llvm;
 
-// #define JIT_DEBUG_FLAG
+#define JIT_DEBUG_FLAG
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -394,7 +394,6 @@ jit_push_new_trace(rb_control_frame_t *cfp)
 	// JIT_DEBUG_LOG2("jit_push_new_trace: %s, %s, %s", path, base_label, label);
 
 	jit_trace_start(cfp);
-	is_top_of_bytecode = 1;
 }
 
 extern "C"
