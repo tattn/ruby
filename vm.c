@@ -2837,6 +2837,7 @@ Init_VM(void)
 
 	/* for JIT */
 #define ADD_SYMBOL(name) jit_add_symbol("_" #name, name)
+	ADD_SYMBOL(vm_caller_setup_arg_block);
 	ADD_SYMBOL(vm_pop_frame);
 	ADD_SYMBOL(vm_search_method);
 	ADD_SYMBOL(vm_getspecial);
@@ -2872,7 +2873,6 @@ Init_VM(void)
 	ADD_SYMBOL(rb_hash_aref);
 	ADD_SYMBOL(rb_ary_store);
 	ADD_SYMBOL(rb_hash_aset);
-
 #undef ADD_SYMBOL
 }
 

@@ -31,6 +31,7 @@
 #include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/IRReader/IRReader.h"
 #include "llvm/Linker/Linker.h"
+
 #include <cstdio>
 #include <cstdlib>
 #include <deque>
@@ -42,7 +43,7 @@
 
 using namespace llvm;
 
-#define JIT_DEBUG_FLAG
+// #define JIT_DEBUG_FLAG
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -108,13 +109,10 @@ class JitCompiler
 public:
 	std::unique_ptr<IRBuilder<>> builder;
 	std::list<std::unique_ptr<ExecutionEngine>> engines;
-	// std::list<ExecutionEngine*> engines;
-	//
+
 	JITTypes *types;
 	JITValues *values;
 	JITFuncs *funcs;
-
-	Function *llvm_caller_setup_arg_block;
 
 	jit_trace_t *trace = nullptr;
 	std::unordered_map<VALUE*, jit_trace_t*> traces;
@@ -128,6 +126,8 @@ public:
 		types = new JITTypes();
 		values = new JITValues(types);
 		funcs = nullptr;
+
+		sys::PrintStackTraceOnErrorSignal();
 	}
 
 	~JitCompiler()
@@ -142,7 +142,6 @@ public:
 		auto end = engines.end();
 		for (auto it = begin; it != end; ++it) {
 			it->release();
-			// delete *it;
 		}
 	}
 
@@ -167,7 +166,7 @@ public:
 
 	Module *createModule()
 	{
-		auto Owner = make_unique<Module>("Ruby LLVM Module", getGlobalContext());
+		auto Owner = make_unique<Module>("RubyLLVM", getGlobalContext());
 		Module* module = Owner.get();
 
 		std::string error;
@@ -180,19 +179,18 @@ public:
 			.setErrorStr(&error)
 			.create());
 
-		auto prev_engine = engines.back().get();
-		// engines.push_back(engine);
+		// auto prev_engine = engines.back().get();
 		engines.push_back(std::move(engine));
 
-		const char *ruby_module =
-			#include "tool/jit/jit_typedef.inc"
-		parseAndLink(ruby_module, module);
+		// const char *ruby_module =
+		// 	#include "tool/jit/jit_typedef.inc"
+		// parseAndLink(ruby_module, module);
 
 
 		// if (!llvm_search_method) {
-			sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
+			// sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
 
-			llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
+			// llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
 
 			if (funcs) delete funcs;
 			funcs = new JITFuncs(module, types);
@@ -206,9 +204,6 @@ public:
 			// FunctionType* pop_frame_t = FunctionType::get(voidTy, { llvm_thread_t }, false);
 			// llvm_pop_frame = Function::Create(pop_frame_t, GlobalValue::ExternalLinkage, "vm_pop_frame", module);
 		// }
-
-
-		sys::PrintStackTraceOnErrorSignal();
 
 		return module;
 	}
@@ -359,7 +354,7 @@ jit_switch_trace(jit_trace_t *trace)
 }
 
 extern "C"
-void
+inline void
 jit_trace_start(rb_control_frame_t *cfp)
 {
 	is_jit_tracing = 1;

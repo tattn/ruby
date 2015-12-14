@@ -216,6 +216,24 @@ jit_codegen_core(
 #define _GET_EP_PTR() BUILDER->CreateStructGEP(_GET_CFP(), 6)
 #define _GET_EP() BUILDER->CreateLoad(_GET_EP_PTR())
 
+#define _NEXT_SP_PTR(x) [&] {\
+	Value *sp_ptr = _GET_SP_PTR(); \
+	Value *sp = BUILDER->CreateLoad(sp_ptr);\
+	return BUILDER->CreateInBoundsGEP(sp, jit_values->intV(x));}()
+
+#define _INC_SP(x) {\
+	Value *sp_ptr = _GET_SP_PTR(); \
+	Value *sp = BUILDER->CreateLoad(sp_ptr);\
+	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->intV(x));\
+	BUILDER->CreateStore(sp_incptr, sp_ptr);}
+
+// #define _INC_SP(x) {\
+// 	Value *sp_ptr = _GET_SP_PTR(); \
+// 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
+// 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->intV(x));\
+// 	BUILDER->CreateStore(sp_incptr, sp_ptr);}
+
+
 #define GET_LEP() (JIT_EP_LEP(GET_EP()))
 #undef GET_OPERAND
 #define GET_OPERAND(x) (insn->pc[(x)])

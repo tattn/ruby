@@ -70,7 +70,6 @@
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_minus_" #x "_");\
 	return BUILDER->CreateLoad(sp_incptr);}()
 // #undef TOPN
-// #define TOPN(x) (insn->pc[(x)+1])
 #define SET_TOPN(x, val) {\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\
@@ -95,8 +94,8 @@
 	Value *sp_incptr = BUILDER->CreateInBoundsGEP(sp, jit_values->valueOne);\
 	JIT_LLVM_SET_NAME(sp_incptr, "sp_plus_1_");\
 	BUILDER->CreateStore(sp_incptr, sp_ptr);}
-#undef STACK_ADDR_FROM_TOP
-#define STACK_ADDR_FROM_TOP(n)\
+// #undef STACK_ADDR_FROM_TOP
+#define _STACK_ADDR_FROM_TOP(n)\
 	[&]{\
 	Value *sp_ptr = _GET_SP_PTR(); \
 	Value *sp = BUILDER->CreateLoad(sp_ptr);\

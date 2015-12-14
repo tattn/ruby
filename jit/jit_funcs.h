@@ -4,6 +4,7 @@ struct JITFuncs
 
 	JITTypes *t;
 
+	Function *vm_caller_setup_arg_block;
 	Function *vm_pop_frame;
 	Function *vm_search_method;
 	Function *vm_getspecial;

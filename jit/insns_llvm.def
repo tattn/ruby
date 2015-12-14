@@ -192,7 +192,7 @@ $tostring {
 $newarray {
     // val = rb_ary_new4((long)num, STACK_ADDR_FROM_TOP(num));
     // POPN(num);
-	_val = BUILDER->CreateCall2(RB_JIT->funcs->rb_ary_new_from_values, V(num), STACK_ADDR_FROM_TOP(num));
+	_val = BUILDER->CreateCall2(RB_JIT->funcs->rb_ary_new_from_values, V(num), _STACK_ADDR_FROM_TOP(num));
 	_POPN(num);
 }
 
@@ -228,7 +228,24 @@ $dup {
     _val1 = _val2 = _val;
 }
 
-// $dupn
+$dupn {
+    // rb_num_t i;
+    // VALUE *sp = STACK_ADDR_FROM_TOP(n);
+    // for (i = 0; i < n; i++) {
+	// GET_SP()[i] = sp[i];
+    // }
+    // INC_SP(n);
+    rb_num_t i;
+    Value *sp_ptr = _STACK_ADDR_FROM_TOP(n);
+    for (i = 0; i < n; i++) {
+		Value *orig_sp_ptr = BUILDER->CreateInBoundsGEP(sp_ptr, jit_values->intV(i));
+		Value *orig_sp = BUILDER->CreateLoad(orig_sp_ptr);
+		Value *dest_sp = _NEXT_SP_PTR(i);
+		BUILDER->CreateStore(orig_sp, dest_sp);
+    }
+    _INC_SP(n);
+}
+
 
 $swap
 
@@ -242,7 +259,7 @@ $topn {
 
 $setn {
     // TOPN(n-1) = val;
-	SET_TOPN(n-1, _val);
+	SET_TOPN(n+1, _val); // ここ不安
 }
 
 $adjuststack {
@@ -280,11 +297,7 @@ $send {
 	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(_ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
-	_GET_TH()->dump();
-	_GET_TH()->getType()->dump();
-	_GET_CFP()->dump();
-	_GET_CFP()->getType()->dump();
-	BUILDER->CreateCall4(RB_JIT->llvm_caller_setup_arg_block, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
+	BUILDER->CreateCall4(RB_JIT->funcs->vm_caller_setup_arg_block, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
 
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
 	Value *ci_recv = _TOPN(ci->argc);
@@ -741,6 +754,7 @@ $opt_aset {
 	SetBasicBlock(bb_merge);
 
 	_val = _set;
+	PRINT_VAL(_val);
 }
 
 //$opt_aset_with
