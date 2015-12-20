@@ -57,6 +57,9 @@ using namespace llvm;
 #define JIT_LLVM_SET_NAME(v, name)
 #endif
 
+// #define JIT_INLINE static inline
+#define JIT_INLINE extern "C"
+
 #include "jit_types.cpp"
 #include "jit_funcs.cpp"
 
@@ -337,7 +340,7 @@ jit_trace_find_trace(VALUE *pc)
 	return it->second;
 }
 
-static inline jit_trace_t *
+JIT_INLINE jit_trace_t *
 jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 {
 	auto &traces = RB_JIT->traces;

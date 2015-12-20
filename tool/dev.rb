@@ -1,19 +1,47 @@
-case ARGV[0]
-when 'run'
-  if ARGV[1]
-    `RUBY_JIT_DEBUG= ./ruby --disable-gems #{ARGV[1]}`
+require 'optparse'
+params = Hash[ARGV.getopts('', 'run:', 'configure:', 'make', 'remake:', 'profile:').map { |k, v| [k.to_sym, v] }]
+
+def configure mode
+  puts 'configuring...'
+  # option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-dln --disable-pie --disable-rpath --disable-largefile"
+  option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-pie --disable-rpath --disable-largefile"
+  if mode == 'debug'
+    `autoconf && ./configure #{option} --enable-debug-env`
   else
-    puts 'ruby devutils.rb run [script_path]'
+    `autoconf && ./configure #{option}`
   end
-when 'configure'
-  `autoconf && ./configure --disable-install-doc`
-when 'make'
+end
+
+def make
+  puts 'making...'
   `make -j`
-when 'prof'
-  if ARGV[1] == 'view'
-    `perf report -g -G`
+end
+
+def clean
+  puts 'cleaning...'
+  `make clean`
+end
+
+def run filepath
+  `RUBY_JIT_DEBUG= ./ruby #{filepath}`
+end
+
+if params[:run]
+  run params[:run]
+elsif params[:configure]
+  configure params[:configure]
+elsif params[:make]
+  make
+elsif params[:remake]
+  configure params[:remake]
+  clean
+  make
+elsif params[:profile]
+  if params[:profile] == 'view'
+    `sudo perf report -g -G`
+  elsif params[:profile] == 'perf'
+    `RUBY_JIT_DEBUG= sudo perf record -a -g ./ruby #{params[:profile]}`
   else
-    `RUBY_JIT_DEBUG= sudo perf record -a -g ./ruby --disable-gems #{ARGV[1]}`
+    `gprof ./ruby | ./gprof2dot.py | dot -Tsvg -o output.svg`
   end
-  # `rm perf.data`
 end
