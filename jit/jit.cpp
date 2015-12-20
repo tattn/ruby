@@ -228,7 +228,7 @@ public:
 	{
 		jit_codegen_func_t f;
 		FunctionType* jit_trace_func_t = FunctionType::get(types->jit_func_ret_t,
-				{ types->rb_thread_t, types->rb_control_frame_t }, false);
+				std::vector<Type*>{ types->rb_thread_t, types->rb_control_frame_t }, false);
 		f.jit_trace_func = Function::Create(jit_trace_func_t,
 				GlobalValue::ExternalLinkage, "jit_trace_func", module);
 		f.jit_trace_func->setCallingConv(CallingConv::C);
@@ -354,7 +354,7 @@ jit_switch_trace(jit_trace_t *trace)
 }
 
 extern "C"
-inline void
+void
 jit_trace_start(rb_control_frame_t *cfp)
 {
 	is_jit_tracing = 1;

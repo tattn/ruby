@@ -31,13 +31,24 @@ rm() {
 }
 ])])])
 
-CPPLLVM=`/usr/local/Cellar/llvm/3.6.1/bin/llvm-config --libs --cflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker | tr '\n' ' '`
+# LLVMCONFIG=~/mywork/llvm/clang/bin/llvm-config
+LLVMCONFIG=llvm-config
+# CPPLLVM=`$LLVMCONFIG --libs core analysis executionengine mcjit interpreter native scalaropts irreader linker --cxxflags --ldflags | tr '\n' ' '`
+# CPPLLVM=`$LLVMCONFIG --libs --cxxflags --ldflags | tr '\n' ' '`
+# CPPLLVM="`$LLVMCONFIG --cxxflags --libs` `$LLVMCONFIG --ldflags`"
  # -lncurses: _del_curterm _set_curterm _setupterm _tigetnum -lz: zlib for LLVMSupport.a
-AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`/usr/local/Cellar/llvm/3.6.1/bin/llvm-config --cflags | tr '\n' ' '`)
-AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -lncurses -lz")
-AC_SUBST(CFLAGS,"-Wno-error=shorten-64-to-32 -Wshift-op-parentheses") #-Wno-error=shorten-64-to-32 must be required
-# OUTFLAG="-x c -o"
-# COUTFLAG="-x c -o"
+# AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`$LLVMCONFIG --cflags | tr '\n' ' '`)
+# AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -lncurses -lz")
+# AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -lz")
+# AC_SUBST(CFLAGS,"-Wno-error=shorten-64-to-32 -Wshift-op-parentheses") #-Wno-error=shorten-64-to-32 must be required
+
+# CPPLLVM=`$LLVMCONFIG --cxxflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker --libs | tr '\n' ' '`
+CPPLLVM=`$LLVMCONFIG --cppflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker --libs | tr '\n' ' '`
+# -lncurses: _del_curterm _set_curterm _setupterm _tigetnum -lz: zlib for LLVMSupport.a
+# AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`$LLVMCONFIG --cflags | tr '\n' ' '`)
+AC_SUBST(LLVMFLAGS,"-std=c++11 -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS $CPPLLVM")
+AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -ltinfo -lffi -lz -ldl -fPIC")
+
 
 { # environment section
 

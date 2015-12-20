@@ -273,7 +273,7 @@ $adjuststack {
 
 $defined {
     // val = vm_defined(th, GET_CFP(), op_type, obj, needstr, v);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_defined, { _GET_TH(), _GET_CFP(), V(op_type), _obj, _needstr, _v });
+	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_defined, std::vector<Value*>{ _GET_TH(), _GET_CFP(), V(op_type), _obj, _needstr, _v });
 }
 
 //$checkmatch

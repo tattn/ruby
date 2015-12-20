@@ -164,6 +164,7 @@ exts enc trans: showflags
 showflags:
 	$(MESSAGE_BEGIN) \
 	"	CC = $(CC)" \
+	"	CPP = $(CPP)" \
 	"	LD = $(LD)" \
 	"	LDSHARED = $(LDSHARED)" \
 	"	CFLAGS = $(CFLAGS)" \
@@ -171,7 +172,7 @@ showflags:
 	"	CPPFLAGS = $(CPPFLAGS)" \
 	"	DLDFLAGS = $(DLDFLAGS)" \
 	"	SOLIBS = $(SOLIBS)" \
-	"   LDLLVMFLAGS = $(LDLLVMFLAGS)" \
+	"	LDLLVMFLAGS = $(LDLLVMFLAGS)" \
 	$(MESSAGE_END)
 	-@$(CC_VERSION)
 

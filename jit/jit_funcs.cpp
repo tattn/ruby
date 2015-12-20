@@ -4,12 +4,12 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 : t(types)
 {
 #define DEFINE_FUNC(name, rettype, ...) \
-	static FunctionType* name##_type = FunctionType::get((rettype), {__VA_ARGS__}, false); \
-	name = Function::Create(name##_type, Function::ExternalLinkage, (#name), module);
+	static FunctionType* name##_type = FunctionType::get((rettype), std::vector<Type*>{__VA_ARGS__}, false); \
+	name = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
 
 #define DEFINE_FUNC2(name, rettype, ...) \
-	static FunctionType* name##_type = FunctionType::get((rettype), {__VA_ARGS__}, true); \
-	name = Function::Create(name##_type, Function::ExternalLinkage, (#name), module);
+	static FunctionType* name##_type = FunctionType::get((rettype), std::vector<Type*>{__VA_ARGS__}, true); \
+	name = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
 
 
 	// void vm_caller_setup_arg_block(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super)

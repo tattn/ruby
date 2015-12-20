@@ -11,15 +11,18 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 
 #### Start of system configuration section. ####
 
-JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3
+# JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3
+JIT_DEBUG = -O3
 
 srcdir = @srcdir@
 top_srcdir = $(srcdir)
 hdrdir = $(srcdir)/include
 PLATFORM_DIR = @PLATFORM_DIR@
 
-CC = @CC@
-CPP = clang++ #@CPP@
+# CC = clang #@CC@
+# CPP = clang++ #@CPP@
+CC = gcc #@CC@
+CPP = g++ #@CPP@
 LD = @LD@
 YACC = bison
 PURIFY =
@@ -221,12 +224,12 @@ all:
 miniruby$(EXEEXT):
 		@-if test -f $@; then $(MV) -f $@ $@.old; $(RM) $@.old; fi
 		$(ECHO) linking $@
-		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(LDLLVMFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(JITOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG)$@
+		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(JITOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG) $@ $(LDLLVMFLAGS)
 
 $(PROGRAM):
 		@$(RM) $@
 		$(ECHO) linking $@
-		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(LDLLVMFLAGS) $(MAINOBJ) $(EXTOBJS) $(LIBRUBYARG) $(MAINLIBS) $(LIBS) $(EXTLIBS) $(OUTFLAG)$@
+		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(MAINOBJ) $(EXTOBJS) $(LIBRUBYARG) $(MAINLIBS) $(LIBS) $(EXTLIBS) $(OUTFLAG)$@ $(LDLLVMFLAGS)
 		$(Q) $(POSTLINK)
 
 # We must `rm' the library each time this rule is invoked because "updating" a
@@ -238,7 +241,7 @@ $(LIBRUBY_A):
 		$(Q) $(AR) $(ARFLAGS) $@ $(LIBRUBY_A_OBJS) $(INITOBJS)
 		@-$(RANLIB) $@ 2> /dev/null || true
 		$(ECHO) verifying static-library $@
-		@$(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(LDLLVMFLAGS) $(MAINOBJ) $(LIBRUBY_A) $(MAINLIBS) $(EXTLIBS) $(LIBS) $(OUTFLAG)conftest$(EXEEXT)
+		@$(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(MAINOBJ) $(LIBRUBY_A) $(MAINLIBS) $(EXTLIBS) $(LIBS) $(OUTFLAG)conftest$(EXEEXT) $(LDLLVMFLAGS) 
 		@$(RM) conftest$(EXEEXT) conftest.c
 
 $(LIBRUBY_SO):
