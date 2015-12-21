@@ -3,8 +3,8 @@ params = Hash[ARGV.getopts('', 'run:', 'configure:', 'make', 'remake:', 'profile
 
 def configure mode
   puts 'configuring...'
-  # option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-dln --disable-pie --disable-rpath --disable-largefile"
-  option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-pie --disable-rpath --disable-largefile"
+  option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-dln --disable-pie --disable-rpath --disable-largefile"
+  # option = "--quiet --disable-install-doc --disable-rubygems --disable-FEATURE --disable-pie --disable-rpath --disable-largefile"
   if mode == 'debug'
     `autoconf && ./configure #{option} --enable-debug-env`
   else

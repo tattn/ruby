@@ -11,9 +11,9 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 
 #### Start of system configuration section. ####
 
-JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3 -g -pg -fno-omit-frame-pointer
+# JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3 -g -pg -fno-omit-frame-pointer
 # JIT_DEBUG = -DGC_DEBUG -O0 -ggdb3 -g
-# JIT_DEBUG = -O3
+JIT_DEBUG = -O3
 
 srcdir = @srcdir@
 top_srcdir = $(srcdir)

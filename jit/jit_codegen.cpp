@@ -1,4 +1,6 @@
 #include "vm_insnhelper.h"
+#include <future>
+#include <thread>
 
 // vm_exec.h
 typedef rb_iseq_t *ISEQ;
@@ -88,7 +90,7 @@ jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT-
 }
 
 static inline void
-jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
+jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 {
 	jit_trace_dump(th);
 	JIT_DEBUG_LOG("=== Start jit_codegen_trace  ===");
@@ -142,6 +144,17 @@ jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 
 	JIT_DEBUG_LOG("==== Compile instructions ====");
 	trace->jited = RB_JIT->compileFunction(codegen_func.jit_trace_func);
+
+	trace->compiling = false;
+}
+
+static inline void
+jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
+{
+	trace->compiling = true;
+	std::thread codegen_thread(jit_codegen_trace_core, th, trace);
+	codegen_thread.detach();
+
 }
 
 static inline void

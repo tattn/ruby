@@ -38,8 +38,8 @@ LLVMCONFIG=llvm-config
 CPPLLVM=`$LLVMCONFIG --cppflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker --libs | tr '\n' ' '`
 # -lncurses: _del_curterm _set_curterm _setupterm _tigetnum -lz: zlib for LLVMSupport.a
 # AC_SUBST(LLVMFLAGS,"-std=c++11 -stdlib=libc++ "`$LLVMCONFIG --cflags | tr '\n' ' '`)
-AC_SUBST(LLVMFLAGS,"-std=c++11 -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS $CPPLLVM")
-AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -ltinfo -lffi -lz -ldl -fPIC")
+AC_SUBST(LLVMFLAGS,"-std=c++11 -fpermissive -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS $CPPLLVM")
+AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -pthread -ltinfo -lffi -lz -ldl -fPIC")
 # AC_SUBST(LDLLVMFLAGS,"$CPPLLVM -lncurses -lz")
 
 
