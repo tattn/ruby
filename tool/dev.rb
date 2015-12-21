@@ -42,6 +42,6 @@ elsif params[:profile]
   elsif params[:profile] == 'perf'
     `RUBY_JIT_DEBUG= sudo perf record -a -g ./ruby #{params[:profile]}`
   else
-    `gprof ./ruby | ./gprof2dot.py | dot -Tsvg -o output.svg`
+    `gprof ./ruby | ./tool/gprof2dot.py | dot -Tsvg -o output.svg`
   end
 end

@@ -1604,7 +1604,7 @@ iseq.$(OBJEXT): {$(VPATH)}vm_core.h
 iseq.$(OBJEXT): {$(VPATH)}vm_debug.h
 iseq.$(OBJEXT): {$(VPATH)}vm_opts.h
 jit/jit.$(OBJEXT): {$(VPATH)}jit/jit.h
-jit/jit.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
+# jit/jit.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
 jit/jit.$(OBJEXT): {$(VPATH)}jit/jit.cpp
 jit/jit.$(OBJEXT): {$(VPATH)}jit/jit_types.cpp
 jit/jit.$(OBJEXT): {$(VPATH)}jit/jit_funcs.cpp
@@ -2345,7 +2345,7 @@ vm.$(OBJEXT): {$(VPATH)}io.h
 vm.$(OBJEXT): {$(VPATH)}iseq.h
 vm.$(OBJEXT): {$(VPATH)}jit/jit_types.cpp
 vm.$(OBJEXT): {$(VPATH)}jit/jit_funcs.cpp
-vm.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
+# vm.$(OBJEXT): {$(VPATH)}jit/jit_codegen.inc
 vm.$(OBJEXT): {$(VPATH)}jit/jit.cpp
 vm.$(OBJEXT): {$(VPATH)}jit/jit.h
 vm.$(OBJEXT): {$(VPATH)}method.h

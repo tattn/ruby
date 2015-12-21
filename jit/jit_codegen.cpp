@@ -145,16 +145,21 @@ jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 	JIT_DEBUG_LOG("==== Compile instructions ====");
 	trace->jited = RB_JIT->compileFunction(codegen_func.jit_trace_func);
 
+#ifdef USE_THREAD
 	trace->compiling = false;
+#endif
 }
 
 static inline void
 jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace)
 {
+#ifdef USE_THREAD
 	trace->compiling = true;
 	std::thread codegen_thread(jit_codegen_trace_core, th, trace);
 	codegen_thread.detach();
-
+#else
+	jit_codegen_trace_core(th, trace);
+#endif
 }
 
 static inline void

@@ -44,6 +44,7 @@
 using namespace llvm;
 
 // #define JIT_DEBUG_FLAG
+// #define USE_THREAD
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
@@ -92,7 +93,9 @@ typedef struct jit_trace_struct {
 	VALUE *first_pc;
 	std::unordered_set<VALUE*> pc_set;
 	std::function<jit_func_ret_t(rb_thread_t*, rb_control_frame_t*)> jited = nullptr;
+#ifdef USE_THREAD
 	bool compiling = false;
+#endif
 } jit_trace_t;
 
 struct jit_codegen_func_t {
@@ -445,11 +448,14 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 	{
 		// トレース済み
 		if (trace->first_pc == pc) {
-			// if (!trace->jited) jit_codegen_trace(th, trace);
+#ifdef USE_THREAD
 			if (!trace->jited) {
-				if (trace->compiling) goto GOTO_BYTECODE;
-				jit_codegen_trace(th, trace);
+				if (!trace->compiling) jit_codegen_trace(th, trace);
+				goto GOTO_BYTECODE;
 			}
+#else
+			if (!trace->jited) jit_codegen_trace(th, trace);
+#endif
 
 			JIT_DEBUG_LOG("==== Execute JITed function ====");
 			const jit_func_ret_t& func_ret = trace->jited(th, cfp);
