@@ -34,8 +34,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <deque>
-#include <unordered_map>
+// #include <deque>
 #include <list>
 #include <unordered_set>
 #include <sstream>
@@ -43,30 +42,35 @@
 
 using namespace llvm;
 
+// ====================================================================
+// Configuration
+// ====================================================================
 // #define JIT_DEBUG_FLAG
-// #define USE_THREAD
+#define USE_THREAD
+// #define USE_HASH
+// ====================================================================
 
 #ifdef JIT_DEBUG_FLAG
 #define JIT_DEBUG_RUN(stmt) stmt
 #define JIT_DEBUG_LOG(format) do{ fprintf(stderr, format "\n"); }while(0)
 #define JIT_DEBUG_LOG2(format, ...) do{ fprintf(stderr, format "\n", __VA_ARGS__); }while(0)
 #define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
+#define JIT_INLINE extern "C"
 #else
 #define JIT_DEBUG_RUN(stmt)
 #define JIT_DEBUG_LOG(format)
 #define JIT_DEBUG_LOG2(format, ...)
 #define JIT_LLVM_SET_NAME(v, name)
+#define JIT_INLINE static inline
 #endif
 
-// #define JIT_INLINE static inline
-#define JIT_INLINE extern "C"
 
 #include "jit_types.cpp"
 #include "jit_funcs.cpp"
 
 
 int is_jit_tracing = 0;
-int trace_stack_size = 0;
+// int trace_stack_size = 0;
 
 typedef struct jit_insn_struct {
 	rb_thread_t *th;
@@ -100,8 +104,6 @@ typedef struct jit_trace_struct {
 
 struct jit_codegen_func_t {
 	Function *jit_trace_func;
-	// Argument *arg_th;
-	// Argument *arg_cfp;
 	Value *arg_th;
 	Value *arg_th_ptr;
 	Value *arg_cfp;
@@ -110,6 +112,14 @@ struct jit_codegen_func_t {
 	Value *ep_gep;
 	Module *module;
 };
+
+#ifdef USE_HASH
+#include <unordered_map>
+using TraceMap = std::unordered_map<VALUE*, jit_trace_t*>;
+#else
+#include <map>
+using TraceMap = std::map<VALUE*, jit_trace_t*>;
+#endif
 
 class JitCompiler
 {
@@ -122,10 +132,10 @@ public:
 	JITFuncs *funcs;
 
 	jit_trace_t *trace = nullptr;
-	std::unordered_map<VALUE*, jit_trace_t*> traces;
+	TraceMap traces;
 	std::list<jit_trace_t*> trace_list;
 
-	std::unordered_map<VALUE*, rb_iseq_t*> iseq_list;
+	// std::unordered_map<VALUE*, rb_iseq_t*> iseq_list;
 
 	JitCompiler()
 	: builder(std::unique_ptr<IRBuilder<>>(new IRBuilder<>(getGlobalContext())))
@@ -134,7 +144,9 @@ public:
 		values = new JITValues(types);
 		funcs = nullptr;
 
+#ifdef JIT_DEBUG_FLAG
 		sys::PrintStackTraceOnErrorSignal();
+#endif
 	}
 
 	~JitCompiler()
@@ -179,38 +191,20 @@ public:
 		std::string error;
 		std::unique_ptr<RTDyldMemoryManager> MemMgr(new SectionMemoryManager());
 
-		// auto engine = EngineBuilder(std::move(Owner))
 		auto engine = std::unique_ptr<ExecutionEngine>(EngineBuilder(std::move(Owner))
 			.setEngineKind(llvm::EngineKind::JIT)
 			.setMCJITMemoryManager(std::move(MemMgr))
 			.setErrorStr(&error)
 			.create());
 
-		// auto prev_engine = engines.back().get();
 		engines.push_back(std::move(engine));
 
 		// const char *ruby_module =
 		// 	#include "tool/jit/jit_typedef.inc"
 		// parseAndLink(ruby_module, module);
 
-
-		// if (!llvm_search_method) {
-			// sys::DynamicLibrary::AddSymbol("_vm_caller_setup_arg_block", (void *)vm_caller_setup_arg_block);
-
-			// llvm_caller_setup_arg_block = module->getFunction("vm_caller_setup_arg_block");
-
-			if (funcs) delete funcs;
-			funcs = new JITFuncs(module, types);
-			// llvm_pop_frame = module->getFunction("vm_pop_frame");
-		// }
-		// else {
-			// void *p = prev_engine->getPointerToFunction(llvm_pop_frame);
-			// printf("%p\n", p);
-			// sys::DynamicLibrary::AddSymbol("_vm_pop_frame", p);
-			// llvm_pop_frame = module->getFunction("vm_pop_frame");
-			// FunctionType* pop_frame_t = FunctionType::get(voidTy, { llvm_thread_t }, false);
-			// llvm_pop_frame = Function::Create(pop_frame_t, GlobalValue::ExternalLinkage, "vm_pop_frame", module);
-		// }
+		if (funcs) delete funcs;
+		funcs = new JITFuncs(module, types);
 
 		return module;
 	}
@@ -262,7 +256,7 @@ public:
 
 	std::function<jit_func_ret_t(rb_thread_t*, rb_control_frame_t*)> compileFunction(Function *function)
 	{
-		static int flag = 0;
+		// static int flag = 0;
 		void* pfptr;
 		// if (flag++ == 1) {
 		// 	engine2->finalizeObject();
@@ -299,15 +293,15 @@ jit_add_symbol(const char* name, void* pfunc)
 	sys::DynamicLibrary::AddSymbol(name, pfunc);
 }
 
-extern "C"
-void
-jit_add_iseq(rb_iseq_t *iseq)
-{
-	return;
-	if (!iseq) return;
-
-	RB_JIT->iseq_list[iseq->iseq_encoded] = iseq;
-}
+// extern "C"
+// void
+// jit_add_iseq(rb_iseq_t *iseq)
+// {
+// 	return;
+// 	if (!iseq) return;
+//
+// 	RB_JIT->iseq_list[iseq->iseq_encoded] = iseq;
+// }
 
 static inline void
 jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
@@ -347,9 +341,8 @@ jit_trace_find_trace(VALUE *pc)
 JIT_INLINE jit_trace_t *
 jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 {
-	auto &traces = RB_JIT->traces;
-	auto it = traces.find(pc);
-	if (it == traces.end())
+	auto it = RB_JIT->traces.find(pc);
+	if (it == RB_JIT->traces.end())
 		return jit_trace_create_trace(cfp, pc);
 	return it->second;
 }
@@ -439,8 +432,7 @@ static void jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace);
 
 static VALUE *vm_base_ptr(rb_control_frame_t *cfp);
 
-extern "C"
-void
+extern "C" void
 jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret)
 {
 	jit_trace_t *trace = RB_JIT->trace;
@@ -612,7 +604,7 @@ ruby_jit_init(void)
 	LLVMLinkInMCJIT();
 	InitializeNativeTarget();
 	InitializeNativeTargetAsmPrinter();
-	InitializeNativeTargetAsmParser();
+	// InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
 }
 
@@ -651,6 +643,5 @@ Init_JIT(void)
 
 
 #include "jit_core.h"
-
 #include "jit_codegen.cpp"
 

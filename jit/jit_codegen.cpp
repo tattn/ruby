@@ -1,5 +1,4 @@
 #include "vm_insnhelper.h"
-#include <future>
 #include <thread>
 
 // vm_exec.h
@@ -170,12 +169,6 @@ jit_codegen_core(
 		int index)
 {
 #define JIT_TRACE_FUNC	codegen_func.jit_trace_func
-// #define JIT_TH 			codegen_func.arg_th
-// #define JIT_CFP			codegen_func.arg_cfp
-// #define SP_GEP			codegen_func.sp_gep
-// #define EP_GEP			codegen_func.ep_gep
-// #define SP_GEP BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_cfp), 1)
-// #define EP_GEP BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_cfp), 6)
 #define MODULE			codegen_func.module
 
 
