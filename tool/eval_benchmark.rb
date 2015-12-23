@@ -99,6 +99,7 @@ end
 
 results = []
 benchmarks = []
+ignored_benchmarks = []
 Dir::glob("#{BENCHMARK}/*.rb").each do |b|
   b = File.basename(b)
   if !%w(bm_so_lists.rb
@@ -127,6 +128,8 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
          runc.rb
          ).include? b
     benchmarks.push b
+  else
+    ignored_benchmarks.push b
   end
 end
 
@@ -164,12 +167,9 @@ end
   end
 end
 
-File.write('myruby.csv', results[0].join(","))
-File.write('ruby.csv', results[1].join(","))
-
 data = []
 
-puts "================ RESULT ================"
+puts "================ RESULT ================="
 benchmarks.each_with_index do |benchmark, index|
   result1 = results[0][index]
   result2 = results[1][index]
@@ -184,11 +184,29 @@ benchmarks.each_with_index do |benchmark, index|
   end
 end
 
-# File.write('data.csv', data.join(","))
-
-File.open('data.csv', 'w') do |f|
+File.open('result.csv', 'w') do |f|
+  f.puts "================== MYRUBY =================="
+  f.puts results[0].join(",")
+  f.puts "================== ORIGINAL RUBY =================="
+  f.puts results[1].join(",")
+  f.puts "================== COMPARISON FOR EXCEL =================="
   data.each_with_index do |d, index|
-    f.puts "#{benchmarks[index]}, #{d}, #{results[0][index]}, #{results[1][index]}"
+    if results[0][index] != -1
+      f.puts "#{benchmarks[index]}, #{d}, #{results[0][index]}, #{results[1][index]}"
+    end
+  end
+end
+
+File.open('failed.txt', 'w') do |f|
+  f.puts "================== SEGV or TIMEOUT =================="
+  data.each_with_index do |d, index|
+    if results[0][index] == -1
+      f.puts "#{benchmarks[index]}"
+    end
+  end
+  f.puts "================== IGNORED =================="
+  ignored_benchmarks.each do |b|
+    f.puts b
   end
 end
 

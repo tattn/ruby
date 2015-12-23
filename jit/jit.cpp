@@ -46,7 +46,7 @@ using namespace llvm;
 // Configuration
 // ====================================================================
 // #define JIT_DEBUG_FLAG
-#define USE_THREAD
+// #define USE_THREAD
 // #define USE_HASH
 // ====================================================================
 
@@ -168,6 +168,7 @@ public:
 #ifdef JIT_DEBUG_FLAG
 	void createPrintf(llvm::Module *mod, llvm::Value* val)
 	{
+#if 0
 		GlobalVariable* var = mod->getGlobalVariable(".str", true);
 
 		if (!var) {
@@ -176,10 +177,10 @@ public:
 						GlobalValue::PrivateLinkage, format_const, ".str");
 		}
 
-		std::vector<llvm::Constant*> indices = { values->int32Zero, values->int32Zero };
-		Constant *var_ref = ConstantExpr::getGetElementPtr(var, indices);
+		Constant *var_ref = ConstantExpr::getGetElementPtr(var, { values->int32Zero, values->int32Zero }, 0);
 
-		builder->CreateCall2(funcs->printf, var_ref, val);
+		builder->CreateCall(funcs->printf, {var_ref, val});
+#endif
 	}
 #endif
 
@@ -269,6 +270,7 @@ public:
 
 			// pfptr = engine->getPointerToFunction(function);
 			// pfptr = (void *)engine->getFunctionAddress(function->getName());
+			//
 			pfptr = (void *)engines.back()->getFunctionAddress(function->getName());
 			JIT_DEBUG_LOG2("compile: %p", pfptr);
 		// }
@@ -604,7 +606,7 @@ ruby_jit_init(void)
 	LLVMLinkInMCJIT();
 	InitializeNativeTarget();
 	InitializeNativeTargetAsmPrinter();
-	// InitializeNativeTargetAsmParser();
+	InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
 }
 

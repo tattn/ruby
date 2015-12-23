@@ -30,8 +30,8 @@
 #define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)
 
 #define _FCALL1(name, a) BUILDER->CreateCall(jit_funcs->name, (a))
-#define _FCALL2(name, a, b) BUILDER->CreateCall2(jit_funcs->name, (a), (b))
-#define _FCALL3(name, a, b, c) BUILDER->CreateCall3(jit_funcs->name, (a), (b), (c))
+#define _FCALL2(name, a, b) BUILDER->CreateCall(jit_funcs->name, {(a), (b)})
+#define _FCALL3(name, a, b, c) BUILDER->CreateCall(jit_funcs->name, {(a), (b), (c)})
 
 
 // if a == b then do bb_then

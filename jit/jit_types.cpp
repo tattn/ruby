@@ -35,7 +35,7 @@ JITTypes::JITTypes()
 //     VALUE *bp_check;		#<{(| cfp[9] |)}>#
 // #endif
 // } rb_control_frame_t;
-	newStruct = StructType::create(getGlobalContext(), "struct.rb_control_frame_struct");
+	this->rb_control_frame_st = StructType::create(getGlobalContext(), "struct.rb_control_frame_struct");
 	elements.clear();
 	elements.push_back(pvalueT);
 	elements.push_back(pvalueT);
@@ -46,8 +46,8 @@ JITTypes::JITTypes()
 	elements.push_back(pvalueT);
 	elements.push_back(pvalueT);
 	elements.push_back(valueT);
-	newStruct->setBody(elements);
-	this->rb_control_frame_t = newStruct->getPointerTo();
+	this->rb_control_frame_st->setBody(elements);
+	this->rb_control_frame_t = this->rb_control_frame_st->getPointerTo();
 
 // struct list_node
 // {
@@ -67,7 +67,7 @@ JITTypes::JITTypes()
 //     int safe_level;
 //     int raised_flag;
 //     VALUE last_status; #<{(| $? |)}>#
-	newStruct = StructType::create(getGlobalContext(), "struct.rb_thread_struct");
+	this->rb_thread_st = StructType::create(getGlobalContext(), "struct.rb_thread_struct");
 	elements.clear();
 	elements.push_back(StructType::get(pvalueT, pvalueT, 0));
 	elements.push_back(valueT);
@@ -79,8 +79,9 @@ JITTypes::JITTypes()
 	elements.push_back(intT);
 	elements.push_back(valueT);
 	// elements.push_back 省略
-	newStruct->setBody(elements);
-	this->rb_thread_t = newStruct->getPointerTo();
+	this->rb_thread_st->setBody(elements);
+	this->rb_thread_t = this->rb_thread_st->getPointerTo();
+
 
 // typedef struct rb_call_info_struct {
 //     #<{(| fixed at compile time |)}>#
@@ -113,8 +114,8 @@ JITTypes::JITTypes()
 //
 //     VALUE (*call)(struct rb_thread_struct *th, struct rb_control_frame_struct *cfp, struct rb_call_info_struct *ci);
 // } rb_call_info_t;
-	newStruct = StructType::create(getGlobalContext(), "struct.rb_call_info_struct");
-	this->rb_call_info_t = newStruct->getPointerTo();
+	this->rb_call_info_st = StructType::create(getGlobalContext(), "struct.rb_call_info_struct");
+	this->rb_call_info_t = this->rb_call_info_st->getPointerTo();
 	elements.clear();
 	elements.push_back(valueT);		// mid
 	elements.push_back(intT);		// flag
@@ -136,11 +137,11 @@ JITTypes::JITTypes()
 	pFnTypes.push_back(this->rb_control_frame_t);
 	pFnTypes.push_back(this->rb_call_info_t);
 	FunctionType* FuncTy = FunctionType::get(valueT, pFnTypes, false);
-	PointerType* pFnT = PointerType::get(FuncTy, 0);
+	this->rb_call_info_call_funcPtrT = PointerType::get(FuncTy, 0);
 
-	elements.push_back(pFnT);		// call
+	elements.push_back(this->rb_call_info_call_funcPtrT); // call
 
-	newStruct->setBody(elements);
+	this->rb_call_info_st->setBody(elements);
 
 // struct RBasic {
 //     VALUE flags;

@@ -31,7 +31,7 @@ rm() {
 }
 ])])])
 
-LLVMCONFIG=llvm-config
+LLVMCONFIG=llvm-config-3.7
 # AC_SUBST(CFLAGS,"-Wno-error=shorten-64-to-32 -Wshift-op-parentheses") #-Wno-error=shorten-64-to-32 must be required
 
 # CPPLLVM=`$LLVMCONFIG --cxxflags --ldflags core analysis executionengine mcjit interpreter native scalaropts irreader linker --libs | tr '\n' ' '`

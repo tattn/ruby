@@ -68,45 +68,45 @@ $setlocal_OP__WC__1 {
 $getspecial {
     // val = vm_getspecial(th, GET_LEP(), key, type);
 	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, _GET_EP());
-	_val = BUILDER->CreateCall4(RB_JIT->funcs->vm_getspecial, _GET_TH(), ep, V(key), V(type));
+	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_getspecial, {_GET_TH(), ep, V(key), V(type)});
 }
 
 // $setspecial
 
 $getinstancevariable {
     // val = vm_getinstancevariable(GET_SELF(), id, ic);
-	_val = BUILDER->CreateCall3(RB_JIT->funcs->vm_getinstancevariable, GET_SELF(), V(id), PV(ic));
+	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_getinstancevariable, {GET_SELF(), V(id), PV(ic)});
 }
 
 $setinstancevariable {
     // vm_setinstancevariable(GET_SELF(), id, val, ic);
-	BUILDER->CreateCall4(RB_JIT->funcs->vm_setinstancevariable, GET_SELF(), V(id), _val, PV(ic));
+	BUILDER->CreateCall(RB_JIT->funcs->vm_setinstancevariable, {GET_SELF(), V(id), _val, PV(ic)});
 }
 
 $getclassvariable {
     // val = rb_cvar_get(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id);
 	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
-	Value *b = BUILDER->CreateCall2(RB_JIT->funcs->vm_get_cvar_base, a, _GET_CFP());
-	_val = BUILDER->CreateCall2(RB_JIT->funcs->rb_cvar_get, b, V(id));
+	Value *b = BUILDER->CreateCall(RB_JIT->funcs->vm_get_cvar_base, {a, _GET_CFP()});
+	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_cvar_get, {b, V(id)});
 }
 
 $setclassvariable {
     // rb_cvar_set(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id, val);
 	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
-	Value *b = BUILDER->CreateCall2(RB_JIT->funcs->vm_get_cvar_base, a, _GET_CFP());
-	BUILDER->CreateCall3(RB_JIT->funcs->rb_cvar_set, b, V(id), _val);
+	Value *b = BUILDER->CreateCall(RB_JIT->funcs->vm_get_cvar_base, {a, _GET_CFP()});
+	BUILDER->CreateCall(RB_JIT->funcs->rb_cvar_set, {b, V(id), _val});
 }
 
 $getconstant {
     // val = vm_get_ev_const(th, klass, id, 0);
-	_val = BUILDER->CreateCall4(RB_JIT->funcs->vm_get_ev_const, _GET_TH(), _klass, V(id), I(0));
+	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_get_ev_const, {_GET_TH(), _klass, V(id), I(0)});
 }
 
 $setconstant {
     // vm_check_if_namespace(cbase);
     // rb_const_set(cbase, id, val);
 	BUILDER->CreateCall(RB_JIT->funcs->vm_check_if_namespace, _cbase);
-	BUILDER->CreateCall3(RB_JIT->funcs->rb_const_set, _cbase, V(id), _val);
+	BUILDER->CreateCall(RB_JIT->funcs->rb_const_set, {_cbase, V(id), _val});
 }
 
 $getglobal {
@@ -116,7 +116,7 @@ $getglobal {
 
 $setglobal {
     // SET_GLOBAL((VALUE)entry, val);
-	BUILDER->CreateCall2(RB_JIT->funcs->rb_gvar_set, _entry, _val);
+	BUILDER->CreateCall(RB_JIT->funcs->rb_gvar_set, {_entry, _val});
 }
 
 
@@ -177,7 +177,7 @@ $concatstrings {
     rb_num_t i = num - 1;
 	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, _TOPN(i));
 	while (i-- > 0) {
-		BUILDER->CreateCall2(RB_JIT->funcs->rb_str_append, _val, _TOPN(i));
+		BUILDER->CreateCall(RB_JIT->funcs->rb_str_append, {_val, _TOPN(i)});
 	}
 	_POPN(num);
 }
@@ -192,7 +192,7 @@ $tostring {
 $newarray {
     // val = rb_ary_new4((long)num, STACK_ADDR_FROM_TOP(num));
     // POPN(num);
-	_val = BUILDER->CreateCall2(RB_JIT->funcs->rb_ary_new_from_values, V(num), _STACK_ADDR_FROM_TOP(num));
+	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_ary_new_from_values, {V(num), _STACK_ADDR_FROM_TOP(num)});
 	_POPN(num);
 }
 
@@ -203,7 +203,7 @@ $duparray {
 
 $expandarray {
     // vm_expandarray(GET_CFP(), ary, num, (int)flag);
-	BUILDER->CreateCall3(RB_JIT->funcs->vm_expandarray, _ary, V(num), V(flag));
+	BUILDER->CreateCall(RB_JIT->funcs->vm_expandarray, {_ary, V(num), V(flag)});
 }
 
 // $concatarray
@@ -214,7 +214,7 @@ $expandarray {
 
 $newrange {
     // val = rb_range_new(low, high, (int)flag);
-	BUILDER->CreateCall3(RB_JIT->funcs->rb_range_new, _low, _high, V(flag));
+	BUILDER->CreateCall(RB_JIT->funcs->rb_range_new, {_low, _high, V(flag)});
 }
 
 // ===============================================
@@ -292,19 +292,19 @@ $trace { // 未実装
 $send {
 	Value *_ci = PT(ci, rb_call_info_t);
 	ci->argc = ci->orig_argc;
-	Value *ci_orig_argc_elmptr = BUILDER->CreateStructGEP(_ci, 2);
+	Value *ci_orig_argc_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 2);
 	Value *ci_orig_argc = BUILDER->CreateLoad(ci_orig_argc_elmptr);
-	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(_ci, 12);
+	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
-	BUILDER->CreateCall4(RB_JIT->funcs->vm_caller_setup_arg_block, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
+	BUILDER->CreateCall(RB_JIT->funcs->vm_caller_setup_arg_block, {_GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero});
 
-	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11);
 	Value *ci_recv = _TOPN(ci->argc);
 	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
-	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, _ci, ci_recv);
+	BUILDER->CreateCall(RB_JIT->funcs->vm_search_method, {_ci, ci_recv});
 
-	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14);
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
 	_CALL_METHOD(_ci);
 }
@@ -316,18 +316,18 @@ $opt_str_freeze {
     else {
 	//val = rb_funcall(rb_str_resurrect(str), idFreeze, 0);
 	Value *tmp = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, _str);
-	_val = BUILDER->CreateCall3(RB_JIT->funcs->rb_funcall, tmp, I(idFreeze), I(0));
+	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_funcall, {tmp, I(idFreeze), I(0)});
     }
 }
 
 $opt_send_without_block {
 	Value *_ci = PT(ci, rb_call_info_t);
 	ci->argc = ci->orig_argc;
-	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11);
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11);
 	Value *ci_recv = _TOPN(ci->argc);
 	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
-	BUILDER->CreateCall2(RB_JIT->funcs->vm_search_method, _ci, ci_recv);
-	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14);
+	BUILDER->CreateCall(RB_JIT->funcs->vm_search_method, {_ci, ci_recv});
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
 	_CALL_METHOD(_ci);
 }
@@ -357,7 +357,7 @@ $throw { // 未試行
     // RUBY_VM_CHECK_INTS(th);
     // val = vm_throw(th, GET_CFP(), throw_state, throwobj);
     // THROW_EXCEPTION(val);
-	_val = BUILDER->CreateCall4(RB_JIT->funcs->vm_throw, _GET_TH(), _GET_CFP(), V(throw_state), _throwobj);
+	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_throw, {_GET_TH(), _GET_CFP(), V(throw_state), _throwobj});
 	jit_codegen_make_return(codegen_func, _val);
 }
 
@@ -374,7 +374,7 @@ $jump { // JUMP(dst);
 	jit_insn_t *dest_insn = jit_codegen_jump_insn(trace, next_insn, dst);
 	if (!dest_insn) {
 		JIT_DEBUG_LOG("dest_insn_else");
-		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(_GET_CFP(), 0);
+		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(jit_types->rb_control_frame_st, _GET_CFP(), 0);
 		Value* cfp_pc = BUILDER->CreateLoad(cfp_pc_ptr);
 		/* Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, V(dst)); */
 		/* PRINT_VAL(tmp); */
@@ -452,7 +452,7 @@ $branchif {
 		JIT_DEBUG_LOG("dest_insn_else");
 		bb_dst = CreateBasicBlock("branchif");
 		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(_GET_CFP(), 0);
+		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(jit_types->rb_control_frame_st, _GET_CFP(), 0);
 		/* Value* cfp_pc = BUILDER->CreateLoad(cfp_pc_ptr); */
 		/* Value* tmp = BUILDER->CreateInBoundsGEP(cfp_pc, RB_JIT->values->value(dst)); */
 		/* PRINT_VAL(cfp_pc); */
@@ -512,7 +512,7 @@ $branchunless {
 		JIT_DEBUG_LOG("dest_insn_else");
 		bb_dst = CreateBasicBlock("branchif");
 		BUILDER->SetInsertPoint(bb_dst);
-		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(_GET_CFP(), 0);
+		Value* cfp_pc_ptr = BUILDER->CreateStructGEP(jit_types->rb_control_frame_st, _GET_CFP(), 0);
 		// jit.cpp:484で強制的にPCを加算しているので、フラグ等で調整したほうがいいかも
 		auto last_insn = trace->insns[trace->insns_iterator - 1];
 		VALUE *first_pc = trace->insns[0]->pc;

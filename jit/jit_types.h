@@ -16,9 +16,14 @@ struct JITTypes
 	Type *valueT;
 	PointerType *pvalueT;
 
+	StructType  *rb_thread_st;
 	PointerType *rb_thread_t;
+	StructType  *rb_control_frame_st;
 	PointerType *rb_control_frame_t;
+	StructType  *rb_call_info_st;
 	PointerType *rb_call_info_t;
+
+	PointerType *rb_call_info_call_funcPtrT;
 
 	StructType *RBasic;
 	PointerType *PRBasic;

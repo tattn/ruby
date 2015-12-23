@@ -10,6 +10,7 @@ typedef rb_iseq_t *ISEQ;
 static inline void
 jit_codegen_optimize(Function& f, Module *module)
 {
+	return;
 	//https://github.com/WestleyArgentum/pass-optimizer/blob/master/codegen/pass_setup.cpp
 	legacy::FunctionPassManager fpm(module);
 	/////// fpm.addPass(new DataLayout(*engine->getDataLayout()));
@@ -75,10 +76,10 @@ static inline void
 jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT->values->valueZero)
 {
 	AllocaInst *ret_alloca = BUILDER->CreateAlloca(RB_JIT->types->jit_func_ret_t);
-	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(ret_alloca, 0);
-	Value *ret_ptr = BUILDER->CreateStructGEP(ret_alloca, 1);
+	Value *ret_cfp_ptr = BUILDER->CreateStructGEP(RB_JIT->types->rb_control_frame_st, ret_alloca, 0);
+	Value *ret_ptr = BUILDER->CreateStructGEP(RB_JIT->types->jit_func_ret_t, ret_alloca, 1);
 	// arg_th からcfp を取り出す vm_pop_frameでの変更を適用するため
-	Value* th_cfp_ptr = BUILDER->CreateStructGEP(BUILDER->CreateLoad(codegen_func.arg_th_ptr), 5);
+	Value* th_cfp_ptr = BUILDER->CreateStructGEP(RB_JIT->types->rb_thread_st, BUILDER->CreateLoad(codegen_func.arg_th_ptr), 5);
 	// Value* th_cfp_ptr = BUILDER->CreateStructGEP(codegen_func.arg_th, 5);
 	Value* th_cfp = BUILDER->CreateLoad(th_cfp_ptr);
 	// BUILDER->CreateStore(codegen_func.arg_cfp, ret_cfp_ptr);
@@ -188,9 +189,9 @@ jit_codegen_core(
 #define jit_error(msg) (fprintf(stderr, msg" (%s, %d)", __FILE__, __LINE__), rb_raise(rb_eRuntimeError, "JIT error"), nullptr)
 
 #define _CALL_METHOD(_ci) do { \
-	Value *ci_call_elmptr = BUILDER->CreateStructGEP(_ci, 14); \
+	Value *ci_call_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 14); \
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr); \
-	Value *v = BUILDER->CreateCall3(ci_call, _GET_TH(), _GET_CFP(), _ci);\
+	Value *v = BUILDER->CreateCall(ci_call, {_GET_TH(), _GET_CFP(), _ci});\
 	BasicBlock *bb_cur = GetBasicBlock(); \
 	SetNewBasicBlock(bb_then, "then"); \
 	_RESTORE_REGS(); \
@@ -210,7 +211,7 @@ jit_codegen_core(
 #define _CALL_SIMPLE_METHOD(recv_) do { \
 	Value *_ci = PT(ci, rb_call_info_t); \
     ci->blockptr = 0; ci->argc = ci->orig_argc; \
-	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(_ci, 11); \
+	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11); \
 	BUILDER->CreateStore(recv_, ci_recv_elmptr); \
 	_FCALL2(vm_search_method, _ci, V(ci->recv)); \
     _CALL_METHOD(_ci); \
@@ -222,9 +223,9 @@ jit_codegen_core(
 #define _GET_CFP() BUILDER->CreateLoad(codegen_func.arg_cfp_ptr)// JIT_CFP
 #define _GET_CFP_PTR() codegen_func.arg_cfp_ptr
 // #define _GET_EP() BUILDER->CreateLoad(EP_GEP)
-#define _GET_SP_PTR() BUILDER->CreateStructGEP(_GET_CFP(), 1)
+#define _GET_SP_PTR() BUILDER->CreateStructGEP(jit_types->rb_control_frame_st, _GET_CFP(), 1)
 #define _GET_SP() BUILDER->CreateLoad(_GET_SP_PTR())
-#define _GET_EP_PTR() BUILDER->CreateStructGEP(_GET_CFP(), 6)
+#define _GET_EP_PTR() BUILDER->CreateStructGEP(jit_types->rb_control_frame_st, _GET_CFP(), 6)
 #define _GET_EP() BUILDER->CreateLoad(_GET_EP_PTR())
 
 #define _NEXT_SP_PTR(x) [&] {\
@@ -265,7 +266,7 @@ jit_codegen_core(
 // #define FLONUM_2_P(a, b) (((((a)^2) | ((b)^2)) & 3) == 0)
 
 #define _RBASIC(v) (BUILDER->CreateBitOrPointerCast((v), jit_types->PRBasic))
-#define _RBASIC_CLASS(v) (BUILDER->CreateLoad(BUILDER->CreateStructGEP((v), 1)))
+#define _RBASIC_CLASS(v) (BUILDER->CreateLoad(BUILDER->CreateStructGEP(jit_types->RBasic, (v), 1)))
 
 
 #undef  RESTORE_REGS
@@ -277,7 +278,7 @@ jit_codegen_core(
 }
 #define _RESTORE_REGS() \
 { \
-	Value* th_cfp_ptr = BUILDER->CreateStructGEP(_GET_TH(), 5); \
+	Value* th_cfp_ptr = BUILDER->CreateStructGEP(jit_types->rb_thread_st, _GET_TH(), 5); \
 	Value* th_cfp = BUILDER->CreateLoad(th_cfp_ptr); \
 	BUILDER->CreateStore(th_cfp, _GET_CFP_PTR()); \
 }
