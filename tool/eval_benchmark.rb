@@ -1,7 +1,7 @@
 require "open3"
 require 'optparse'
 
-params = Hash[ARGV.getopts('', 'run:', 'compare').map { |k, v| [k.to_sym, v] }]
+params = Hash[ARGV.getopts('', 'run', 'compare').map { |k, v| [k.to_sym, v] }]
 
 # 比較ができるようにする
 
@@ -139,7 +139,7 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
 end
 
 
-def run_benchmarks
+if params[:run]
   results = []
   [MYRUBY, RUBY].each_with_index do |ruby, index|
     results.push []
@@ -216,21 +216,19 @@ def run_benchmarks
       f.puts b
     end
   end
-end
 
-
-if params[:run]
-  run_benchmarks
 elsif params[:compare]
   File.open('result.csv') do |new_f|
     File.open('old_result.csv') do |old_f|
       new_benchmarks = new_f.read.split("\n")
       old_benchmarks = old_f.read.split("\n")
-
+      new_benchmarks.shift 5
+      old_benchmarks.shift 5
+    
       new_benchmarks.zip(old_benchmarks).each do |new, old|
         new = new.split(",")
         old = old.split(",")
-        result = new[1].to_i - old[1].to_i
+        result = new[2].to_f - old[2].to_f
         if result == 0
           result = result.to_s
         elsif result < 0
@@ -238,7 +236,7 @@ elsif params[:compare]
         elsif result > 0
           result = result.to_s.green
         end
-        printf "%06f @ %s\n", result, new[0]
+        puts "#{result} @ #{new[0]}"
       end
     end
   end
