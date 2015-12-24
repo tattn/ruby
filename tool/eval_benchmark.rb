@@ -1,4 +1,9 @@
 require "open3"
+require 'optparse'
+
+params = Hash[ARGV.getopts('', 'run:', 'compare').map { |k, v| [k.to_sym, v] }]
+
+# 比較ができるようにする
 
 #==========================================
 # http://qiita.com/fetaro/items/6a1ad6bf3c14470c949b
@@ -23,7 +28,6 @@ class Cmd
         end
       rescue Timeout::Error => e
         begin
-          # Process.kill('SIGINT', pid)
           Process.kill('SIGKILL', pid)
           `kill -9 #{pid}`
           `kill -KILL #{pid}`
@@ -82,9 +86,11 @@ end
 
 
 
+#============== Configuration =============
 RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
 MYRUBY = '~/mywork/myruby/ruby'
 BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
+#==========================================
 
 def run_benchmark filename, ruby = MYRUBY
   benchmark = "RUBY_JIT_DEBUG= time #{ruby} #{BENCHMARK}/#{filename}"
@@ -97,7 +103,6 @@ rescue Cmd::Exception
   return ["", "timeout", -1]
 end
 
-results = []
 benchmarks = []
 ignored_benchmarks = []
 Dir::glob("#{BENCHMARK}/*.rb").each do |b|
@@ -134,79 +139,107 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
 end
 
 
-[MYRUBY, RUBY].each_with_index do |ruby, index|
-  results.push []
-  benchmarks.each_with_index do |filename, index2|
-    print "#{filename}: ".green if ruby == MYRUBY
-    print "#{filename}: ".pink if ruby == RUBY
+def run_benchmarks
+  results = []
+  [MYRUBY, RUBY].each_with_index do |ruby, index|
+    results.push []
+    benchmarks.each_with_index do |filename, index2|
+      print "#{filename}: ".green if ruby == MYRUBY
+      print "#{filename}: ".pink if ruby == RUBY
 
-    if ruby == RUBY
-      if results[0][index2] == -1
-        puts "pass"
-        results[index].push -1
-        next
+      if ruby == RUBY
+        if results[0][index2] == -1
+          puts "pass"
+          results[index].push -1
+          next
+        end
       end
-    end
 
-    out, err, status = run_benchmark(filename, ruby)
+      out, err, status = run_benchmark(filename, ruby)
 
-    if status == 0
-      err.match(/(.*)user.*/) do |md|
-        puts "succeeded! [time: #{md[1]}]"
-        results[index].push md[1].to_f
-      end
-    else
-      if err == "timeout"
-        puts "failed[#{status}] - timeout".red
+      if status == 0
+        err.match(/(.*)user.*/) do |md|
+          puts "succeeded! [time: #{md[1]}]"
+          results[index].push md[1].to_f
+        end
       else
-        puts "failed[#{status}] - SEGV".red
+        if err == "timeout"
+          puts "failed[#{status}] - timeout".red
+        else
+          puts "failed[#{status}] - SEGV".red
+        end
+        results[index].push -1
       end
-      results[index].push -1
-    end
-    sleep 1
-  end
-end
-
-data = []
-
-puts "================ RESULT ================="
-benchmarks.each_with_index do |benchmark, index|
-  result1 = results[0][index]
-  result2 = results[1][index]
-
-  if result1 == -1 or result2 == -1
-    puts "#{benchmark}, *"
-    data.push 0
-  else
-    per = result2 / result1
-    puts "#{benchmark}, #{per} = #{result2} / #{result1}"
-    data.push per
-  end
-end
-
-File.open('result.csv', 'w') do |f|
-  f.puts "================== MYRUBY =================="
-  f.puts results[0].join(",")
-  f.puts "================== ORIGINAL RUBY =================="
-  f.puts results[1].join(",")
-  f.puts "================== COMPARISON FOR EXCEL =================="
-  data.each_with_index do |d, index|
-    if results[0][index] != -1
-      f.puts "#{benchmarks[index]}, #{d}, #{results[0][index]}, #{results[1][index]}"
+      sleep 1
     end
   end
-end
 
-File.open('failed.txt', 'w') do |f|
-  f.puts "================== SEGV or TIMEOUT =================="
-  data.each_with_index do |d, index|
-    if results[0][index] == -1
-      f.puts "#{benchmarks[index]}"
+  data = []
+
+  puts "================ RESULT ================="
+  benchmarks.each_with_index do |benchmark, index|
+    result1 = results[0][index]
+    result2 = results[1][index]
+
+    if result1 == -1 or result2 == -1
+      puts "#{benchmark}, *"
+      data.push 0
+    else
+      per = result2 / result1
+      puts "#{benchmark}, #{per} = #{result2} / #{result1}"
+      data.push per
     end
   end
-  f.puts "================== IGNORED =================="
-  ignored_benchmarks.each do |b|
-    f.puts b
+
+  File.open('result.csv', 'w') do |f|
+    f.puts "================== MYRUBY =================="
+    f.puts results[0].join(",")
+    f.puts "================== ORIGINAL RUBY =================="
+    f.puts results[1].join(",")
+    f.puts "================== COMPARISON FOR EXCEL =================="
+    data.each_with_index do |d, index|
+      if results[0][index] != -1
+        f.puts "#{benchmarks[index]}, #{d}, #{results[0][index]}, #{results[1][index]}"
+      end
+    end
+  end
+
+  File.open('failed.txt', 'w') do |f|
+    f.puts "================== SEGV or TIMEOUT =================="
+    data.each_with_index do |d, index|
+      if results[0][index] == -1
+        f.puts "#{benchmarks[index]}"
+      end
+    end
+    f.puts "================== IGNORED =================="
+    ignored_benchmarks.each do |b|
+      f.puts b
+    end
   end
 end
 
+
+if params[:run]
+  run_benchmarks
+elsif params[:compare]
+  File.open('result.csv') do |new_f|
+    File.open('old_result.csv') do |old_f|
+      new_benchmarks = new_f.read.split("\n")
+      old_benchmarks = old_f.read.split("\n")
+
+      new_benchmarks.zip(old_benchmarks).each do |new, old|
+        new = new.split(",")
+        old = old.split(",")
+        result = new[1].to_i - old[1].to_i
+        if result == 0
+          result = result.to_s
+        elsif result < 0
+          result = result.to_s.red
+        elsif result > 0
+          result = result.to_s.green
+        end
+        printf "%06f @ %s\n", result, new[0]
+      end
+    end
+  end
+end
