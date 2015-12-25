@@ -10,7 +10,6 @@ typedef rb_iseq_t *ISEQ;
 static inline void
 jit_codegen_optimize(Function& f, Module *module)
 {
-	return;
 	//https://github.com/WestleyArgentum/pass-optimizer/blob/master/codegen/pass_setup.cpp
 	legacy::FunctionPassManager fpm(module);
 	/////// fpm.addPass(new DataLayout(*engine->getDataLayout()));

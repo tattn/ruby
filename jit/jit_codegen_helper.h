@@ -37,8 +37,8 @@
 // if a == b then do bb_then
 #define _IF_EQ(a, b, bb_then) do { \
 		BasicBlock *bb_cur = GetBasicBlock(); \
-		BasicBlock *bb_merge = CreateBasicBlock("merge"); \
-		Value *test = BUILDER->CreateICmpEQ(a, b, "if_eq"); \
+		BasicBlock *bb_merge = CreateBasicBlock(JIT_LLVM_INSN_NAME("merge")); \
+		Value *test = BUILDER->CreateICmpEQ(a, b, JIT_LLVM_INSN_NAME("if_eq")); \
 		BUILDER->CreateCondBr(test, bb_then, bb_merge);\
 		SetBasicBlock(bb_then); \
 		BUILDER->CreateBr(bb_merge); \
@@ -46,8 +46,8 @@
 	} while (0)
 
 #define _IF_EQ2(a, b, bb_then, bb_else) do { \
-		BasicBlock *bb_merge = CreateBasicBlock("merge2."); \
-		Value *test = BUILDER->CreateICmpEQ(a, b, "if_eq2."); \
+		BasicBlock *bb_merge = CreateBasicBlock(JIT_LLVM_INSN_NAME("merge2.")); \
+		Value *test = BUILDER->CreateICmpEQ(a, b, JIT_LLVM_INSN_NAME("if_eq2.")); \
 		BUILDER->CreateCondBr(test, bb_then, bb_else);\
 		SetBasicBlock(bb_then); \
 		BUILDER->CreateBr(bb_merge); \

@@ -55,12 +55,14 @@ using namespace llvm;
 #define JIT_DEBUG_LOG(format) do{ fprintf(stderr, format "\n"); }while(0)
 #define JIT_DEBUG_LOG2(format, ...) do{ fprintf(stderr, format "\n", __VA_ARGS__); }while(0)
 #define JIT_LLVM_SET_NAME(v, name) do { v->setName(name); } while(0)
+#define JIT_LLVM_INSN_NAME(name) (name)
 #define JIT_INLINE extern "C"
 #else
 #define JIT_DEBUG_RUN(stmt)
 #define JIT_DEBUG_LOG(format)
 #define JIT_DEBUG_LOG2(format, ...)
 #define JIT_LLVM_SET_NAME(v, name)
+#define JIT_LLVM_INSN_NAME(name) ("A")
 #define JIT_INLINE static inline
 #endif
 
@@ -186,7 +188,7 @@ public:
 
 	Module *createModule()
 	{
-		auto Owner = make_unique<Module>("RubyLLVM", getGlobalContext());
+		auto Owner = make_unique<Module>(JIT_LLVM_INSN_NAME("RubyLLVM"), getGlobalContext());
 		Module* module = Owner.get();
 
 		std::string error;
@@ -210,6 +212,7 @@ public:
 		return module;
 	}
 
+#if 0
 	void parseAndLink(const char *bitcode, Module *module)
 	{
 		std::unique_ptr<MemoryBuffer> buffer = MemoryBuffer::getMemBuffer(bitcode);
@@ -225,6 +228,7 @@ public:
 			JIT_DEBUG_LOG("Module link error");
 		}
 	}
+#endif
 
 	jit_codegen_func_t createJITFunction(Module *module)
 	{
@@ -232,10 +236,10 @@ public:
 		FunctionType* jit_trace_func_t = FunctionType::get(types->jit_func_ret_t,
 				std::vector<Type*>{ types->rb_thread_t, types->rb_control_frame_t }, false);
 		f.jit_trace_func = Function::Create(jit_trace_func_t,
-				GlobalValue::ExternalLinkage, "jit_trace_func", module);
-		f.jit_trace_func->setCallingConv(CallingConv::C);
+				GlobalValue::ExternalLinkage, JIT_LLVM_INSN_NAME("jit_trace_func"), module);
+		f.jit_trace_func->setCallingConv(CallingConv::Fast);
 
-		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), "entry", f.jit_trace_func);
+		BasicBlock *entry = BasicBlock::Create(getGlobalContext(), JIT_LLVM_INSN_NAME("entry"), f.jit_trace_func);
 		builder->SetInsertPoint(entry);
 
 		f.arg_th_ptr  = builder->CreateAlloca(types->rb_thread_t);
@@ -309,7 +313,7 @@ static inline void
 jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 {
 	// auto size = iseq->iseq_size;
-	auto size = 0x50;
+	auto size = 0x40;
 	auto insns = new jit_insn_t*[size+1];	// +1 is for last basicblock
 	// insns[size] = new jit_insn_t;			// for last basicblock
 	memset(insns, 0, sizeof(jit_insn_t*) * size);

@@ -1,12 +1,12 @@
+# 使い捨てベンチマーク評価ツール
+
 require "open3"
 require 'optparse'
 
 params = Hash[ARGV.getopts('', 'run', 'compare').map { |k, v| [k.to_sym, v] }]
 
-# 比較ができるようにする
-
 #==========================================
-# http://qiita.com/fetaro/items/6a1ad6bf3c14470c949b
+# Thanks to http://qiita.com/fetaro/items/6a1ad6bf3c14470c949b
 require 'fileutils'
 require 'tempfile'
 require 'tmpdir'
@@ -107,6 +107,9 @@ benchmarks = []
 ignored_benchmarks = []
 Dir::glob("#{BENCHMARK}/*.rb").each do |b|
   b = File.basename(b)
+  # timeout
+  # need an input file
+  # SEGV
   if !%w(bm_so_lists.rb
          bm_app_pentomiso.rb
          bm_so_sieve.rb
@@ -122,6 +125,7 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
          bm_app_pentomino.rb
          bm_so_reverse_complement.rb
          bm_vm1_gc_short_with_long.rb
+         bm_so_k_nucleotide.rb
 
          driver.rb
          make_fasta.output.rb
@@ -131,7 +135,85 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
          report.rb
          run.rb
          runc.rb
-         ).include? b
+         make_fasta_output.rb
+         prepare_so_k_nucleotide.rb
+
+         bm_app_erb.rb
+         bm_vm2_method.rb
+         bm_vm1_gc_short_with_complex_long.rb
+         bm_vm_thread_mutex1.rb
+         bm_so_nsieve_bits.rb
+         bm_vm2_mutex.rb
+         bm_vm_thread_pipe.rb
+         bm_so_array.rb
+         bm_hash_aref_str.rb
+         bm_so_pidigits.rb
+         bm_app_tarai.rb
+         bm_hash_aref_str.rb
+         bm_so_pidigits.rb
+         bm_app_tarai.rb
+         bm_vm1_block.rb
+         bm_so_binary_trees.rb
+         bm_so_object.rb
+         bm_vm1_yield.rb
+         bm_vm2_case.rb
+         bm_vm2_super.rb
+         bm_vm3_gc.rb
+         bm_app_factorial.rb
+         bm_array_shift.rb
+         bm_vm3_clearmethodcache.rb
+         bm_vm_thread_close.rb
+         bm_vm_thread_create_join.rb
+         bm_app_aobench.rb
+         bm_vm2_struct_big_aset.rb
+         bm_vm1_lvar_init.rb
+         bm_vm_thread_pass.rb
+         bm_vm2_proc.rb
+         bm_vm2_defined_method.rb
+         bm_so_partial_sums.rb
+         bm_vm1_simplereturn.rb
+         bm_vm2_poly_method_ov.rb
+         bm_vm1_neq.rb
+         bm_hash_shift.rb
+         bm_vm2_struct_small_aset.rb
+         bm_io_select3.rb
+         bm_vm1_float_simple.rb
+         bm_vm2_struct_big_aref_lo.rb
+         bm_vm2_eval.rb
+         bm_so_exception.rb
+         bm_vm2_zsuper.rb
+         bm_vm2_raise2.rb
+         bm_so_nsieve.rb
+         bm_vm2_method_with_block.rb
+         bm_vm_thread_queue.rb
+         bm_vm_thread_alive_check1.rb
+         bm_hash_aref_miss.rb
+         bm_so_fannkuch.rb
+         bm_app_lc_fizzbuzz.rb
+         bm_io_file_write.rb
+         bm_vm2_poly_method.rb
+         bm_vm2_struct_big_aref_hi.rb
+         bm_so_spectralnorm.rb
+         bm_app_raise.rb
+         bm_io_file_read.rb
+         bm_vm_thread_mutex2.rb
+         bm_vm2_send.rb
+         bm_vm2_method_missing.rb
+         bm_app_answer.rb
+         bm_vm2_raise1.rb
+         bm_so_meteor_contest.rb
+         bm_so_mandelbrot.rb
+         bm_so_random.rb
+         bm_vm_thread_mutex3.rb
+         bm_vm1_gc_wb_obj_promoted.rb
+         bm_so_concatenate.rb
+         bm_vm2_unif1.rb
+         bm_app_uri.rb
+         bm_securerandom.rb
+         bm_so_matrix.rb
+         bm_vm1_gc_wb_ary_promoted.rb
+         bm_so_ackermann.rb
+    ).include? b
     benchmarks.push b
   else
     ignored_benchmarks.push b
@@ -141,73 +223,52 @@ end
 
 if params[:run]
   results = []
-  [MYRUBY, RUBY].each_with_index do |ruby, index|
-    results.push []
-    benchmarks.each_with_index do |filename, index2|
-      print "#{filename}: ".green if ruby == MYRUBY
-      print "#{filename}: ".pink if ruby == RUBY
-
-      if ruby == RUBY
-        if results[0][index2] == -1
-          puts "pass"
-          results[index].push -1
-          next
-        end
-      end
-
+  benchmarks.each_with_index do |filename, index|
+    result = {}
+    [MYRUBY, RUBY].each_with_index do |ruby, index2|
       out, err, status = run_benchmark(filename, ruby)
 
       if status == 0
         err.match(/(.*)user.*/) do |md|
-          puts "succeeded! [time: #{md[1]}]"
-          results[index].push md[1].to_f
+          result[ruby] = md[1]
         end
       else
-        if err == "timeout"
-          puts "failed[#{status}] - timeout".red
-        else
-          puts "failed[#{status}] - SEGV".red
-        end
-        results[index].push -1
+        result[:err] = {status: status, type: err == "timeout" ? "timeout" : "SEGV"}
+        result[MYRUBY] = result[RUBY] = -1
+        break
       end
-      sleep 1
     end
-  end
-
-  data = []
-
-  puts "================ RESULT ================="
-  benchmarks.each_with_index do |benchmark, index|
-    result1 = results[0][index]
-    result2 = results[1][index]
-
-    if result1 == -1 or result2 == -1
-      puts "#{benchmark}, *"
-      data.push 0
+    if result[MYRUBY] == -1
+      puts "#{result[:err][:type].red}[#{result[:err][:status]}] @ #{filename}"
     else
-      per = result2 / result1
-      puts "#{benchmark}, #{per} = #{result2} / #{result1}"
-      data.push per
+      result[:compare] = result[RUBY].to_f / result[MYRUBY].to_f
+      if result[MYRUBY] <= result[RUBY]
+        emotion = "HAPPY :-)".green
+        myruby = result[MYRUBY].green
+        ruby = result[RUBY]
+      else
+        emotion = " SAD  ;-(".yellow
+        myruby = result[MYRUBY]
+        ruby = result[RUBY].yellow
+      end
+      printf "%s [%s, %s](%f) @ %s\n", emotion, myruby, ruby, result[:compare], filename
     end
+    results.push result
   end
 
   File.open('result.csv', 'w') do |f|
-    f.puts "================== MYRUBY =================="
-    f.puts results[0].join(",")
-    f.puts "================== ORIGINAL RUBY =================="
-    f.puts results[1].join(",")
     f.puts "================== COMPARISON FOR EXCEL =================="
-    data.each_with_index do |d, index|
-      if results[0][index] != -1
-        f.puts "#{benchmarks[index]}, #{d}, #{results[0][index]}, #{results[1][index]}"
+    results.each_with_index do |result, index|
+      if result[MYRUBY] != -1
+        f.puts "#{benchmarks[index]}, #{result[:compare]}, #{result[MYRUBY]}, #{result[RUBY]}"
       end
     end
   end
 
   File.open('failed.txt', 'w') do |f|
     f.puts "================== SEGV or TIMEOUT =================="
-    data.each_with_index do |d, index|
-      if results[0][index] == -1
+    results.each_with_index do |result, index|
+      if result[MYRUBY] == -1
         f.puts "#{benchmarks[index]}"
       end
     end
@@ -222,13 +283,13 @@ elsif params[:compare]
     File.open('old_result.csv') do |old_f|
       new_benchmarks = new_f.read.split("\n")
       old_benchmarks = old_f.read.split("\n")
-      new_benchmarks.shift 5
-      old_benchmarks.shift 5
+      new_benchmarks.shift 1
+      old_benchmarks.shift 1
     
       new_benchmarks.zip(old_benchmarks).each do |new, old|
         new = new.split(",")
         old = old.split(",")
-        result = new[2].to_f - old[2].to_f
+        result = new[1].to_f - old[1].to_f
         if result == 0
           result = result.to_s
         elsif result < 0
