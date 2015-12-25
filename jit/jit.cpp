@@ -71,7 +71,7 @@ using namespace llvm;
 #include "jit_funcs.cpp"
 
 
-int is_jit_tracing = 0;
+// int is_jit_tracing = 1;
 // int trace_stack_size = 0;
 
 typedef struct jit_insn_struct {
@@ -363,7 +363,7 @@ extern "C"
 void
 jit_trace_start(rb_control_frame_t *cfp)
 {
-	is_jit_tracing = 1;
+	// is_jit_tracing = 1;
 
 	// jit_trace_t *trace = jit_trace_find_trace(cfp->pc);
 	// if (!trace) {

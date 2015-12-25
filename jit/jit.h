@@ -18,7 +18,7 @@ VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 void ruby_jit_init(void);
 
 
-extern int is_jit_tracing;
+// extern int is_jit_tracing;
 
 #define _ADD_PC(x) (reg_pc += (x))
 
@@ -26,16 +26,20 @@ extern int is_jit_tracing;
 // VM_FRAME_TYPE を2回計算していて冗長
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
+// #define JIT_TRACE \
+// if (is_jit_tracing) { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 1) { #<{(| _ADD_PC(ret.jmp); |)}># RESTORE_REGS();  goto *(void const *)GET_CURRENT_INSN(); } }
+
 #define JIT_TRACE \
-if (is_jit_tracing) { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 1) { /* _ADD_PC(ret.jmp); */ RESTORE_REGS();  goto *(void const *)GET_CURRENT_INSN(); } }
+ { static jit_trace_ret_t ret; jit_trace_insn(th, reg_cfp, reg_pc, &ret); if (ret.jmp == -1) { return ret.retval; } else if (ret.jmp != 1) { /* _ADD_PC(ret.jmp); */ RESTORE_REGS();  goto *(void const *)GET_CURRENT_INSN(); } }
 
-#define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
-// #define JIT_NEW_TRACE(cfp)
-#define JIT_POP_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
-// #define JIT_POP_TRACE(cfp)
+// #define JIT_NEW_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
+#define JIT_NEW_TRACE(cfp) if (!JIT_IS_PASS(cfp)) jit_push_new_trace(cfp)
 
-#define JIT_SET_CFP(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
-// #define JIT_SET_CFP(cfp)
+// #define JIT_POP_TRACE(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
+#define JIT_POP_TRACE(cfp) if (!JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
+
+// #define JIT_SET_CFP(cfp) if (is_jit_tracing && !JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
+#define JIT_SET_CFP(cfp) if (!JIT_IS_PASS(cfp)) jit_pop_trace(cfp)
 
 void jit_add_symbol(const char* name, void* pfunc);
 
