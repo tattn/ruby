@@ -224,10 +224,10 @@ all:
 # Prevent GNU make v3 from overflowing arg limit on SysV.
 .NOEXPORT:
 
-miniruby$(EXEEXT):
-		@-if test -f $@; then $(MV) -f $@ $@.old; $(RM) $@.old; fi
-		$(ECHO) linking $@
-		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(JITOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG) $@ $(LDLLVMFLAGS)
+# miniruby$(EXEEXT):
+# 		@-if test -f $@; then $(MV) -f $@ $@.old; $(RM) $@.old; fi
+# 		$(ECHO) linking $@
+# 		$(Q) $(PURIFY) $(CPP) $(LDFLAGS) $(XLDFLAGS) $(NORMALMAINOBJ) $(MINIOBJS) $(COMMONOBJS) $(JITOBJS) $(MAINLIBS) $(LIBS) $(OUTFLAG) $@ $(LDLLVMFLAGS)
 
 $(PROGRAM):
 		@$(RM) $@

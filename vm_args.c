@@ -761,7 +761,7 @@ vm_caller_setup_arg_kw(rb_control_frame_t *cfp, rb_call_info_t *ci)
     (ci)->argc = saved_argc; (ci)->blockptr = saved_blockptr; /* restore */ \
 } while (0)
 
-void
+static inline void
 vm_caller_setup_arg_block(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super)
 {
     if (ci->flag & VM_CALL_ARGS_BLOCKARG) {

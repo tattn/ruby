@@ -542,6 +542,7 @@ typedef struct rb_control_frame_struct {
 #if VM_DEBUG_BP_CHECK
     VALUE *bp_check;		/* cfp[9] */
 #endif
+	int trace_index;
 } rb_control_frame_t;
 
 typedef struct rb_block_struct {

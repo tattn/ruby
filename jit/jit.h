@@ -45,7 +45,7 @@ void jit_add_symbol(const char* name, void* pfunc);
 
 void jit_add_iseq(rb_iseq_t *iseq);
 
-void jit_trace_start(rb_control_frame_t *cfp);
+// void jit_trace_start(rb_control_frame_t *cfp);
 void jit_push_new_trace(rb_control_frame_t *cfp);
 rb_control_frame_t *jit_pop_trace(rb_control_frame_t *cfp);
 void jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_ret_t *ret);

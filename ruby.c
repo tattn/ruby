@@ -1172,8 +1172,9 @@ proc_options(long argc, char **argv, struct cmdline_options *opt, int envopt)
 static void
 ruby_init_prelude(void)
 {
-    Init_prelude();
-    rb_const_remove(rb_cObject, rb_intern_const("TMP_RUBY_PREFIX"));
+	// Remove for JIT
+    /* Init_prelude(); */
+    /* rb_const_remove(rb_cObject, rb_intern_const("TMP_RUBY_PREFIX")); */
 }
 
 static int

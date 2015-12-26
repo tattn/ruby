@@ -241,15 +241,20 @@ if params[:run]
     if result[MYRUBY] == -1
       puts "#{result[:err][:type].red}[#{result[:err][:status]}] @ #{filename}"
     else
-      result[:compare] = result[RUBY].to_f / result[MYRUBY].to_f
-      if result[MYRUBY] <= result[RUBY]
+      myruby = result[MYRUBY]
+      ruby = result[RUBY]
+      result[:compare] = ruby.to_f / myruby.to_f
+      if myruby.to_f <= ruby.to_f
         emotion = "HAPPY :-)".green
-        myruby = result[MYRUBY].green
-        ruby = result[RUBY]
+        myruby = myruby.green
       else
-        emotion = " SAD  ;-(".yellow
-        myruby = result[MYRUBY]
-        ruby = result[RUBY].yellow
+        if myruby.to_f - ruby.to_f <= 0.1
+          emotion = " SAFE :-|".yellow
+          ruby = ruby.yellow
+        else
+          emotion = " SAD  ;-(".red
+          ruby = ruby.red
+        end
       end
       printf "%s [%s, %s](%f) @ %s\n", emotion, myruby, ruby, result[:compare], filename
     end
@@ -259,9 +264,9 @@ if params[:run]
   File.open('result.csv', 'w') do |f|
     f.puts "================== COMPARISON FOR EXCEL =================="
     results.each_with_index do |result, index|
-      if result[MYRUBY] != -1
+      # if result[MYRUBY] != -1
         f.puts "#{benchmarks[index]}, #{result[:compare]}, #{result[MYRUBY]}, #{result[RUBY]}"
-      end
+      # end
     end
   end
 
@@ -289,15 +294,23 @@ elsif params[:compare]
       new_benchmarks.zip(old_benchmarks).each do |new, old|
         new = new.split(",")
         old = old.split(",")
-        result = new[1].to_f - old[1].to_f
-        if result == 0
-          result = result.to_s
-        elsif result < 0
-          result = result.to_s.red
-        elsif result > 0
-          result = result.to_s.green
+        if new[2].to_i == -1 or old[2].to_i == -1
+          puts "pass"
+        else
+          result = new[1].to_f - old[1].to_f
+          if result == 0
+            result = result.to_s
+          elsif result < 0
+            if result >= -0.05
+              result = result.to_s.yellow
+            else
+              result = result.to_s.red
+            end
+          elsif result > 0
+            result = result.to_s.green
+          end
+          puts "#{result} @ #{new[0]}"
         end
-        puts "#{result} @ #{new[0]}"
       end
     end
   end

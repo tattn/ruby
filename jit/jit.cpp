@@ -48,6 +48,7 @@ using namespace llvm;
 // #define JIT_DEBUG_FLAG
 // #define USE_THREAD
 // #define USE_HASH
+// #define USE_BINARY
 // ====================================================================
 
 #ifdef JIT_DEBUG_FLAG
@@ -118,9 +119,12 @@ struct jit_codegen_func_t {
 #ifdef USE_HASH
 #include <unordered_map>
 using TraceMap = std::unordered_map<VALUE*, jit_trace_t*>;
-#else
+#elif USE_BINARY
 #include <map>
 using TraceMap = std::map<VALUE*, jit_trace_t*>;
+#else
+// using TraceMap = std::vector<jit_trace_t*>;
+using TraceMap = std::vector<std::map<VALUE*, jit_trace_t*>*>;
 #endif
 
 class JitCompiler
@@ -133,7 +137,7 @@ public:
 	JITValues *values;
 	JITFuncs *funcs;
 
-	jit_trace_t *trace = nullptr;
+	jit_trace_t *trace = nullptr; // current trace
 	TraceMap traces;
 	std::list<jit_trace_t*> trace_list;
 
@@ -156,6 +160,12 @@ public:
 		delete types;
 		delete values;
 		if (funcs) delete funcs;
+
+		// trace profiling
+		// fprintf(stderr, "TRACE RESULT: %d\n", traces.size());
+		// for (auto trace : traces) {
+		// 	fprintf(stderr, "%d\n", trace->size());
+		// }
 
 		JIT_DEBUG_LOG("==== Destroy JitCompiler ====");
 		JIT_DEBUG_LOG2("ExecutionEngine: size=%d\n", engines.size());
@@ -330,11 +340,23 @@ jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 	jit_init_trace(trace, cfp->iseq);
 
 	// save trace
+#ifdef USE_HASH || USE_BINARY
 	RB_JIT->traces[pc] = trace;
+#else
+	// RB_JIT->traces.push_back(trace);
+	if (cfp->trace_index == 0) {
+		RB_JIT->traces.push_back(new std::map<VALUE*, jit_trace_t*>{{pc, trace}});
+		cfp->trace_index = RB_JIT->traces.size(); // あえて一つ大きい
+	} else
+		(*RB_JIT->traces[cfp->trace_index - 1])[pc] = trace;
+#endif
+	// CFPが同じでもpcが違う場合があるから
+	// マップの配列にするのがいいかも
 	RB_JIT->trace_list.push_back(trace);
 	return trace;
 }
 
+#if 0
 static inline jit_trace_t *
 jit_trace_find_trace(VALUE *pc)
 {
@@ -343,14 +365,28 @@ jit_trace_find_trace(VALUE *pc)
 	if (it == traces.end()) return nullptr;
 	return it->second;
 }
+#endif
 
 JIT_INLINE jit_trace_t *
 jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 {
+#ifdef USE_HASH || USE_BINARY
 	auto it = RB_JIT->traces.find(pc);
 	if (it == RB_JIT->traces.end())
 		return jit_trace_create_trace(cfp, pc);
 	return it->second;
+#else
+	// fprintf(stderr, "TRACE_INDEX: %d, %p\n", cfp->trace_index, pc);
+	if (cfp->trace_index == 0)
+		return jit_trace_create_trace(cfp, pc);
+	// return RB_JIT->traces[cfp->trace_index - 1];
+	//
+	auto* tracebox = RB_JIT->traces[cfp->trace_index - 1];
+	auto it = tracebox->find(pc);
+	if (it == tracebox->end())
+		return jit_trace_create_trace(cfp, pc);
+	return it->second;
+#endif
 }
 
 static inline void
@@ -359,8 +395,7 @@ jit_switch_trace(jit_trace_t *trace)
 	RB_JIT->trace = trace;
 }
 
-extern "C"
-void
+JIT_INLINE void
 jit_trace_start(rb_control_frame_t *cfp)
 {
 	// is_jit_tracing = 1;
