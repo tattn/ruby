@@ -362,6 +362,9 @@ struct rb_iseq_struct {
     /* original iseq, before encoding
      * used for debug/dump (TODO: union with compile_data) */
     VALUE *iseq;
+
+
+	int trace_index;
 };
 
 enum ruby_special_exceptions {
@@ -542,7 +545,6 @@ typedef struct rb_control_frame_struct {
 #if VM_DEBUG_BP_CHECK
     VALUE *bp_check;		/* cfp[9] */
 #endif
-	int trace_index;
 } rb_control_frame_t;
 
 typedef struct rb_block_struct {

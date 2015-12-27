@@ -34,8 +34,8 @@ jit_codegen_optimize(Function& f, Module *module)
 	fpm.add(createDeadCodeEliminationPass());
 	fpm.add(createLoopStrengthReducePass());
 	fpm.add(createTailCallEliminationPass());
-	fpm.add(createMemCpyOptPass());
-	fpm.add(createLowerAtomicPass());
+	fpm.add(createMemCpyOptPass()); 
+	// fpm.add(createLowerAtomicPass()); // SIGSEGV @bm_app_fib.rb
 	fpm.add(createCorrelatedValuePropagationPass());
 	fpm.add(createLowerExpectIntrinsicPass());
 
@@ -91,7 +91,6 @@ jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT-
 static inline void
 jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 {
-	jit_trace_dump(th);
 	JIT_DEBUG_LOG("=== Start jit_codegen_trace  ===");
 	Module *module = RB_JIT->createModule();
 	jit_codegen_func_t codegen_func = RB_JIT->createJITFunction(module);
@@ -114,7 +113,7 @@ jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 		// 	insn = insns[i];
 		// 	// jit_dump_insn(insn);
 		// }
-		insn->bb = BasicBlock::Create(CONTEXT, "insn", codegen_func.jit_trace_func);
+		insn->bb = BasicBlock::Create(CONTEXT, JIT_LLVM_INSN_NAME("insn"), codegen_func.jit_trace_func);
 		// len = insn->len;
 	}
 
@@ -125,9 +124,14 @@ jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 	// 	jit_codegen_core(codegen_func, th->cfp, insns, insn);
 	// 	len = insn->len;
 	// }
+#ifdef DUMP_CODEGEN_TRACE
+	fprintf(stderr, "==== Dump codegen traces ====\n");
+#endif
 	for (unsigned i = 0; i < trace->insns_iterator; i++) {
 		if (auto *insn = insns[i]) {
+#ifdef DUMP_CODEGEN_TRACE
 			jit_dump_insn(insn);
+#endif
 			jit_codegen_core(codegen_func, insn->cfp, trace, i);
 		}
 	}
@@ -135,11 +139,17 @@ jit_codegen_trace_core(rb_thread_t *th, jit_trace_t *trace)
 	BUILDER->SetInsertPoint(insns[trace->insns_iterator]->bb);
 	jit_codegen_make_return(codegen_func);
 
-	// JIT_DEBUG_LOG("==== JITed instructions ====");
-	// codegen_func.jit_trace_func->dump();
-	//JIT_DEBUG_LOG("==== Optimized JITed instructions ====");
-	// jit_codegen_optimize(*codegen_func.jit_trace_func, module);
-	//JIT_DEBUG_RUN(codegen_func.jit_trace_func->dump());
+#ifdef DUMP_LLVM_IR
+	fprintf(stderr, "==== JITed instructions ====\n");
+	codegen_func.jit_trace_func->dump();
+#endif
+#ifdef USE_OPT_LLVM_IR
+	jit_codegen_optimize(*codegen_func.jit_trace_func, module);
+#endif
+#ifdef DUMP_OPT_LLVM_IR
+	fprintf(,stderr, "==== Optimized JITed instructions ====\n");
+	codegen_func.jit_trace_func->dump();
+#endif
 
 	JIT_DEBUG_LOG("==== Compile instructions ====");
 	trace->jited = RB_JIT->compileFunction(codegen_func.jit_trace_func);
@@ -202,11 +212,6 @@ jit_codegen_core(
 } while (0)
 
 
-// #define CALL_SIMPLE_METHOD(recv_) do { \
-//     ci->blockptr = 0; ci->argc = ci->orig_argc; \
-//     vm_search_method(ci, ci->recv = (recv_)); \
-//     CALL_METHOD(ci); \
-// } while (0)
 #define _CALL_SIMPLE_METHOD(recv_) do { \
 	Value *_ci = PT(ci, rb_call_info_t); \
     ci->blockptr = 0; ci->argc = ci->orig_argc; \

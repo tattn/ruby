@@ -24,7 +24,7 @@
 #define GetBasicBlock() BUILDER->GetInsertBlock()
 #define SetBasicBlock(bb) BUILDER->SetInsertPoint(bb)
 
-#define CreateBasicBlock(name) BasicBlock::Create(CONTEXT, (name), codegen_func.jit_trace_func)
+#define CreateBasicBlock(name) BasicBlock::Create(CONTEXT, JIT_LLVM_INSN_NAME(name), codegen_func.jit_trace_func)
 #define SetNewBasicBlock(bb, name) BasicBlock *bb = CreateBasicBlock(name); SetBasicBlock(bb)
 
 #define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)

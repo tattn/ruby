@@ -45,7 +45,12 @@ using namespace llvm;
 // ====================================================================
 // Configuration
 // ====================================================================
+static const unsigned MAX_TRACE_SIZE = 0x40;
 // #define JIT_DEBUG_FLAG
+// #define DUMP_CODEGEN_TRACE
+// #define DUMP_LLVM_IR
+// #define DUMP_OPT_LLVM_IR
+#define USE_OPT_LLVM_IR
 // #define USE_THREAD
 // #define USE_HASH
 // #define USE_BINARY
@@ -124,7 +129,7 @@ using TraceMap = std::unordered_map<VALUE*, jit_trace_t*>;
 using TraceMap = std::map<VALUE*, jit_trace_t*>;
 #else
 // using TraceMap = std::vector<jit_trace_t*>;
-using TraceMap = std::vector<std::map<VALUE*, jit_trace_t*>*>;
+using TraceMap = std::vector<jit_trace_t**>;
 #endif
 
 class JitCompiler
@@ -323,7 +328,7 @@ static inline void
 jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 {
 	// auto size = iseq->iseq_size;
-	auto size = 0x40;
+	const auto size = MAX_TRACE_SIZE;
 	auto insns = new jit_insn_t*[size+1];	// +1 is for last basicblock
 	// insns[size] = new jit_insn_t;			// for last basicblock
 	memset(insns, 0, sizeof(jit_insn_t*) * size);
@@ -343,15 +348,21 @@ jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 #ifdef USE_HASH || USE_BINARY
 	RB_JIT->traces[pc] = trace;
 #else
-	// RB_JIT->traces.push_back(trace);
-	if (cfp->trace_index == 0) {
-		RB_JIT->traces.push_back(new std::map<VALUE*, jit_trace_t*>{{pc, trace}});
-		cfp->trace_index = RB_JIT->traces.size(); // あえて一つ大きい
-	} else
-		(*RB_JIT->traces[cfp->trace_index - 1])[pc] = trace;
+	auto* iseq = cfp->iseq;
+	unsigned pc_index = (pc - iseq->iseq_encoded) / 3;
+	if (iseq->trace_index == 0) {
+		static const unsigned MAX_INSN_SIZE = 4 - 1; //-1 is aggressive optimization
+		static const unsigned MAX_BUCKET_SIZE = MAX_TRACE_SIZE * MAX_INSN_SIZE / 3; 
+		auto** new_traces = new jit_trace_t*[MAX_BUCKET_SIZE]; 
+		memset(new_traces, 0, sizeof(jit_trace_t*) * MAX_BUCKET_SIZE);
+		// memsetなくしたい
+		new_traces[pc_index] = trace;
+		RB_JIT->traces.push_back(new_traces);
+		iseq->trace_index = RB_JIT->traces.size(); // あえて一つ大きい
+	} else {
+		RB_JIT->traces[iseq->trace_index - 1][pc_index] = trace;
+	}
 #endif
-	// CFPが同じでもpcが違う場合があるから
-	// マップの配列にするのがいいかも
 	RB_JIT->trace_list.push_back(trace);
 	return trace;
 }
@@ -376,16 +387,12 @@ jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 		return jit_trace_create_trace(cfp, pc);
 	return it->second;
 #else
-	// fprintf(stderr, "TRACE_INDEX: %d, %p\n", cfp->trace_index, pc);
-	if (cfp->trace_index == 0)
-		return jit_trace_create_trace(cfp, pc);
-	// return RB_JIT->traces[cfp->trace_index - 1];
-	//
-	auto* tracebox = RB_JIT->traces[cfp->trace_index - 1];
-	auto it = tracebox->find(pc);
-	if (it == tracebox->end())
-		return jit_trace_create_trace(cfp, pc);
-	return it->second;
+	unsigned pc_index = (pc - cfp->iseq->iseq_encoded) / 3;
+	if (cfp->iseq->trace_index == 0) return jit_trace_create_trace(cfp, pc);
+	
+	jit_trace_t* trace = RB_JIT->traces[cfp->iseq->trace_index - 1][pc_index];
+	if (trace) return trace;
+	return jit_trace_create_trace(cfp, pc);
 #endif
 }
 
@@ -393,6 +400,13 @@ static inline void
 jit_switch_trace(jit_trace_t *trace)
 {
 	RB_JIT->trace = trace;
+}
+
+JIT_INLINE void
+jit_jump_trace(rb_control_frame_t *cfp, VALUE* pc)
+{
+	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp, pc);
+	jit_switch_trace(trace);
 }
 
 JIT_INLINE void
@@ -502,8 +516,8 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			if (func_ret.ret) {
 				ret->jmp = -1;
 				ret->retval = func_ret.ret;
-				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
-				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
 				return;
 			}
 
@@ -514,8 +528,8 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 				// バイトコードが遷移した場合
 				ret->jmp = 0;
 				cfp->pc += (last_insn->pc - pc) + last_insn->len;
-				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
-				JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+				// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
 				jit_trace_start(th->cfp);
 				return;
 			}
@@ -523,9 +537,10 @@ jit_trace_insn(rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc, jit_trace_re
 			ret->jmp = (last_insn->pc - pc) + last_insn->len;
 			// RB_JIT->trace = jit_trace_find_trace(cfp->pc + ret->jmp);
 			cfp->pc += ret->jmp;
-			JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
-			JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
-			jit_trace_start(th->cfp);
+			// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp->pc: %p, reg_cfp->pc: %p reg_pc: %p", ret->jmp, th->cfp->pc, cfp->pc, pc);
+			// JIT_DEBUG_LOG2("%%cfp%% jmp: %d, th->cfp    : %p, reg_cfp    : %p", ret->jmp, th->cfp, cfp);
+			// jit_trace_start(th->cfp);
+			jit_trace_start(cfp);
 			return; //pc == trace->insns[0]????
 		}
 	}
