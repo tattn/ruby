@@ -1736,7 +1736,7 @@ rb_iseq_eval_main(VALUE iseqval)
 
 	/* if (getenv("RUBY_JIT_DEBUG")) jit_trace_start(th->cfp); */
 	/* jit_trace_start(th->cfp); */
-	jit_push_new_trace(th->cfp);
+	JIT_SET_CFP_WITHOUT_CHECK(th->cfp);
 
     val = vm_exec(th);
 	/* if (getenv("RUBY_JIT_DEBUG")) { */

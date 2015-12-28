@@ -412,19 +412,6 @@ jit_jump_trace(rb_control_frame_t *cfp, VALUE* pc)
 JIT_INLINE void
 jit_trace_start(rb_control_frame_t *cfp)
 {
-	// is_jit_tracing = 1;
-
-	// jit_trace_t *trace = jit_trace_find_trace(cfp->pc);
-	// if (!trace) {
-	// 	trace = new jit_trace_t;
-	// 	jit_init_trace(trace, cfp->iseq);
-    //
-	// 	// save trace
-	// 	RB_JIT->traces[cfp->pc] = trace;
-	// 	RB_JIT->trace_list.push_back(trace);
-	// }
-    //
-	// RB_JIT->trace = trace;
 	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp, cfp->pc);
 	jit_switch_trace(trace);
 }
@@ -433,8 +420,6 @@ extern "C"
 void
 jit_push_new_trace(rb_control_frame_t *cfp)
 {
-	if (!cfp->iseq) return; // CFUNC
-
 	// ブロック呼び出しも push と pop はよばれる
 	// vm_yield_with_cfuncでifuncをプッシュした時は cfp->iseq->origが0以外で、sizeも未設定
 	// rb_iseq_location_t &loc = cfp->iseq->location;
@@ -446,13 +431,16 @@ jit_push_new_trace(rb_control_frame_t *cfp)
 	jit_trace_start(cfp);
 }
 
+#if 0
 extern "C"
 rb_control_frame_t *
 jit_pop_trace(rb_control_frame_t *cfp)
 {
-	jit_push_new_trace(cfp);
+	// jit_push_new_trace(cfp);
+	jit_trace_start(cfp);
 	return cfp;
 }
+#endif
 
 static inline void
 jit_insn_init(jit_insn_t *insn, rb_thread_t *th, rb_control_frame_t *cfp, VALUE *pc)

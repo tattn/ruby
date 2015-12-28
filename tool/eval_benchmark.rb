@@ -93,7 +93,7 @@ BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 #==========================================
 
 def run_benchmark filename, ruby = MYRUBY
-  benchmark = "RUBY_JIT_DEBUG= time #{ruby} #{BENCHMARK}/#{filename}"
+  benchmark = "time #{ruby} #{BENCHMARK}/#{filename}"
 
   Cmd.timeout = 10
   result = Cmd.run(benchmark)
@@ -108,7 +108,7 @@ ignored_benchmarks = []
 Dir::glob("#{BENCHMARK}/*.rb").each do |b|
   b = File.basename(b)
   # timeout
-  # need an input file
+  # need input files
   # SEGV
   if !%w(bm_so_lists.rb
          bm_app_pentomiso.rb
