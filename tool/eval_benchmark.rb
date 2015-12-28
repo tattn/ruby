@@ -243,7 +243,11 @@ if params[:run]
     else
       myruby = result[MYRUBY]
       ruby = result[RUBY]
-      result[:compare] = ruby.to_f / myruby.to_f
+      if ruby.to_f == 0 and myruby.to_f == 0
+        result[:compare] = 1.0
+      else
+        result[:compare] = ruby.to_f / myruby.to_f
+      end
       if myruby.to_f <= ruby.to_f
         emotion = "HAPPY :-)".green
         myruby = myruby.green

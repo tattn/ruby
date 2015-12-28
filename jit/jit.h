@@ -16,7 +16,10 @@ VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 
 #define _ADD_PC(x) (reg_pc += (x))
 
-// VM_FRAME_TYPE を2回計算していて冗長
+// VM_FRAME_TYPE を2回計算していて冗長?
+// IFUNC: Iterator function?, frame of block when call yield on the method with block
+//        cfp->iseq is not rb_iseq_t, but NODE(AST).
+// DUMMY: http://svn.ruby-lang.org/cgi-bin/viewvc.cgi?revision=50701&view=revision 
 #define JIT_IS_PASS(cfp) (VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_IFUNC || VM_FRAME_TYPE(cfp) == VM_FRAME_MAGIC_DUMMY)
 
 // #define JIT_TRACE \
@@ -30,6 +33,10 @@ VALUE *rb_iseq_original_iseq(rb_iseq_t *iseq);
 #define JIT_NEW_TRACE(cfp) if (!JIT_IS_PASS(cfp) && cfp->iseq) jit_push_new_trace(cfp)
 #define JIT_POP_TRACE(cfp) if (!JIT_IS_PASS(cfp) && cfp->iseq) jit_push_new_trace(cfp)
 #define JIT_SET_CFP(cfp)   if (!JIT_IS_PASS(cfp) && cfp->iseq) jit_push_new_trace(cfp)
+
+// #define JIT_NEW_TRACE(cfp) JIT_SET_CFP_WITHOUT_CHECK(cfp)
+// #define JIT_POP_TRACE(cfp) JIT_SET_CFP_WITHOUT_CHECK(cfp)
+// #define JIT_SET_CFP(cfp)   JIT_SET_CFP_WITHOUT_CHECK(cfp)
 #define JIT_SET_CFP_WITHOUT_CHECK(cfp) if (cfp->iseq) jit_push_new_trace(cfp)
 
 void ruby_jit_init(void);
