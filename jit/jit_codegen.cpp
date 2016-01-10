@@ -10,42 +10,44 @@ typedef rb_iseq_t *ISEQ;
 static inline void
 jit_codegen_optimize(Function& f, Module *module)
 {
+// #define ADD_PASS(name) static FunctionPass* _##name = name(); fpm.add(_##name)
+#define ADD_PASS(name) fpm.add(name())
 	//https://github.com/WestleyArgentum/pass-optimizer/blob/master/codegen/pass_setup.cpp
 	legacy::FunctionPassManager fpm(module);
 	/////// fpm.addPass(new DataLayout(*engine->getDataLayout()));
-	fpm.add(createTypeBasedAliasAnalysisPass());
-	fpm.add(createPromoteMemoryToRegisterPass());
-	fpm.add(createJumpThreadingPass());
-	fpm.add(createReassociatePass());
-	fpm.add(createEarlyCSEPass());
-	fpm.add(createLoopIdiomPass());
-	fpm.add(createLoopRotatePass());
-	fpm.add(createLICMPass());
-	fpm.add(createIndVarSimplifyPass());
-	fpm.add(createLoopDeletionPass());
-	fpm.add(createSCCPPass());
-	fpm.add(createSinkingPass());
-	fpm.add(createInstructionSimplifierPass());
-	fpm.add(createDeadStoreEliminationPass());
-	fpm.add(createScalarizerPass());
-	fpm.add(createAggressiveDCEPass());
-	fpm.add(createConstantPropagationPass());
-	fpm.add(createDeadInstEliminationPass());
-	fpm.add(createDeadCodeEliminationPass());
-	fpm.add(createLoopStrengthReducePass());
-	fpm.add(createTailCallEliminationPass());
-	fpm.add(createMemCpyOptPass()); 
-	// fpm.add(createLowerAtomicPass()); // SIGSEGV @bm_app_fib.rb
-	fpm.add(createCorrelatedValuePropagationPass());
-	fpm.add(createLowerExpectIntrinsicPass());
+	ADD_PASS(createTypeBasedAliasAnalysisPass);
+	ADD_PASS(createPromoteMemoryToRegisterPass);
+	ADD_PASS(createJumpThreadingPass);
+	ADD_PASS(createReassociatePass);
+	ADD_PASS(createEarlyCSEPass);
+	ADD_PASS(createLoopIdiomPass);
+	ADD_PASS(createLoopRotatePass);
+	ADD_PASS(createLICMPass);
+	ADD_PASS(createIndVarSimplifyPass);
+	ADD_PASS(createLoopDeletionPass);
+	ADD_PASS(createSCCPPass);
+	ADD_PASS(createSinkingPass);
+	ADD_PASS(createInstructionSimplifierPass);
+	ADD_PASS(createDeadStoreEliminationPass);
+	ADD_PASS(createScalarizerPass);
+	ADD_PASS(createAggressiveDCEPass);
+	ADD_PASS(createConstantPropagationPass);
+	ADD_PASS(createDeadInstEliminationPass);
+	ADD_PASS(createDeadCodeEliminationPass);
+	ADD_PASS(createLoopStrengthReducePass);
+	ADD_PASS(createTailCallEliminationPass);
+	ADD_PASS(createMemCpyOptPass);
+	ADD_PASS(createLowerAtomicPass); // SIGSEGV @bm_app_fib.rb
+	ADD_PASS(createCorrelatedValuePropagationPass);
+	ADD_PASS(createLowerExpectIntrinsicPass);
 
-	fpm.add(createBasicAliasAnalysisPass());
-	fpm.add(createInstructionCombiningPass());
-	fpm.add(createReassociatePass());
-	fpm.add(createGVNPass());
-	fpm.add(createCFGSimplificationPass());
+	ADD_PASS(createBasicAliasAnalysisPass);
+	ADD_PASS(createInstructionCombiningPass);
+	ADD_PASS(createGVNPass);
+	ADD_PASS(createCFGSimplificationPass);
 	fpm.doInitialization();
 	fpm.run(f);
+#undef ADD_PASS
 }
 
 static inline void

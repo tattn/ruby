@@ -87,8 +87,10 @@ end
 
 
 #============== Configuration =============
-RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
-MYRUBY = '~/mywork/myruby/ruby'
+# RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
+# MYRUBY = '~/mywork/myruby/ruby'
+RUBY = '~/mywork/myruby/binary_ruby'
+MYRUBY = '~/mywork/myruby/opt_ruby'
 BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 #==========================================
 

@@ -124,7 +124,7 @@ struct jit_codegen_func_t {
 #ifdef USE_HASH
 #include <unordered_map>
 using TraceMap = std::unordered_map<VALUE*, jit_trace_t*>;
-#elif USE_BINARY
+#elif defined USE_BINARY
 #include <map>
 using TraceMap = std::map<VALUE*, jit_trace_t*>;
 #else
@@ -345,14 +345,14 @@ jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 	jit_init_trace(trace, cfp->iseq);
 
 	// save trace
-#ifdef USE_HASH || USE_BINARY
+#if defined USE_HASH || defined USE_BINARY
 	RB_JIT->traces[pc] = trace;
 #else
 	auto* iseq = cfp->iseq;
-	unsigned pc_index = (pc - iseq->iseq_encoded) / 3;
+	unsigned pc_index = (pc - iseq->iseq_encoded) / 6;
 	if (iseq->trace_index == 0) {
 		static const unsigned MAX_INSN_SIZE = 4 - 1; //-1 is aggressive optimization
-		static const unsigned MAX_BUCKET_SIZE = MAX_TRACE_SIZE * MAX_INSN_SIZE / 3; 
+		static const unsigned MAX_BUCKET_SIZE = MAX_TRACE_SIZE * MAX_INSN_SIZE / 6; 
 		auto** new_traces = new jit_trace_t*[MAX_BUCKET_SIZE]; 
 		memset(new_traces, 0, sizeof(jit_trace_t*) * MAX_BUCKET_SIZE);
 		// memsetなくしたい
@@ -367,6 +367,24 @@ jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
 	return trace;
 }
 
+JIT_INLINE jit_trace_t *
+jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
+{
+#if defined USE_HASH || defined USE_BINARY
+	auto it = RB_JIT->traces.find(pc);
+	if (it == RB_JIT->traces.end())
+		return jit_trace_create_trace(cfp, pc);
+	return it->second;
+#else
+	unsigned pc_index = (pc - cfp->iseq->iseq_encoded) / 6;
+	if (cfp->iseq->trace_index == 0) return jit_trace_create_trace(cfp, pc);
+	
+	jit_trace_t* trace = RB_JIT->traces[cfp->iseq->trace_index - 1][pc_index];
+	if (trace) return trace;
+	return jit_trace_create_trace(cfp, pc);
+#endif
+}
+
 #if 0
 static inline jit_trace_t *
 jit_trace_find_trace(VALUE *pc)
@@ -377,24 +395,6 @@ jit_trace_find_trace(VALUE *pc)
 	return it->second;
 }
 #endif
-
-JIT_INLINE jit_trace_t *
-jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
-{
-#ifdef USE_HASH || USE_BINARY
-	auto it = RB_JIT->traces.find(pc);
-	if (it == RB_JIT->traces.end())
-		return jit_trace_create_trace(cfp, pc);
-	return it->second;
-#else
-	unsigned pc_index = (pc - cfp->iseq->iseq_encoded) / 3;
-	if (cfp->iseq->trace_index == 0) return jit_trace_create_trace(cfp, pc);
-	
-	jit_trace_t* trace = RB_JIT->traces[cfp->iseq->trace_index - 1][pc_index];
-	if (trace) return trace;
-	return jit_trace_create_trace(cfp, pc);
-#endif
-}
 
 static inline void
 jit_switch_trace(jit_trace_t *trace)
