@@ -60,6 +60,7 @@ jit_codegen_core(
 static inline void
 jit_codegen_trace(rb_thread_t *th, jit_trace_t *trace);
 
+#if 0
 void
 jit_codegen(rb_thread_t *th)
 {
@@ -72,6 +73,7 @@ jit_codegen(rb_thread_t *th)
 		JIT_DEBUG_LOG("=== End trace dump ===");
 	}
 }
+#endif
 
 static inline void
 jit_codegen_make_return(jit_codegen_func_t codegen_func, Value* retval = RB_JIT->values->valueZero)

@@ -98,7 +98,7 @@ typedef struct jit_func_return_struct {
 typedef struct jit_trace_struct {
 	// std::deque<jit_insn_t*> insns;
 	jit_insn_t **insns = nullptr;
-	unsigned insns_size = 0;
+	// unsigned insns_size = 0;
 	unsigned insns_iterator = 0;
 	rb_iseq_t *iseq;
 
@@ -130,6 +130,7 @@ using TraceMap = std::map<VALUE*, jit_trace_t*>;
 #else
 // using TraceMap = std::vector<jit_trace_t*>;
 using TraceMap = std::vector<jit_trace_t**>;
+static jit_trace_t** jit_trace_create_hash_bucket();
 #endif
 
 class JitCompiler
@@ -144,7 +145,9 @@ public:
 
 	jit_trace_t *trace = nullptr; // current trace
 	TraceMap traces;
+#ifdef JIT_DEBUG_FLAG
 	std::list<jit_trace_t*> trace_list;
+#endif 
 
 	// std::unordered_map<VALUE*, rb_iseq_t*> iseq_list;
 
@@ -154,6 +157,13 @@ public:
 		types = new JITTypes();
 		values = new JITValues(types);
 		funcs = nullptr;
+
+#if defined USE_HASH || defined USE_BINARY
+#else
+		// optimize jit_trace_find_trace_or_create_trace()
+		jit_trace_t** bucket = jit_trace_create_hash_bucket();
+		traces.push_back(bucket);
+#endif
 
 #ifdef JIT_DEBUG_FLAG
 		sys::PrintStackTraceOnErrorSignal();
@@ -165,12 +175,6 @@ public:
 		delete types;
 		delete values;
 		if (funcs) delete funcs;
-
-		// trace profiling
-		// fprintf(stderr, "TRACE RESULT: %d\n", traces.size());
-		// for (auto trace : traces) {
-		// 	fprintf(stderr, "%d\n", trace->size());
-		// }
 
 		JIT_DEBUG_LOG("==== Destroy JitCompiler ====");
 		JIT_DEBUG_LOG2("ExecutionEngine: size=%d\n", engines.size());
@@ -334,54 +338,66 @@ jit_init_trace(jit_trace_t *trace, rb_iseq_t *iseq)
 	memset(insns, 0, sizeof(jit_insn_t*) * size);
 
 	trace->insns = insns;
-	trace->insns_size = size;
+	// trace->insns_size = size;
 	trace->iseq = iseq;
 }
 
+#if !defined USE_HASH && !defined USE_BINARY
+static inline jit_trace_t**
+jit_trace_create_hash_bucket()
+{
+	static const unsigned MAX_INSN_SIZE = 4 - 1; //-1 is aggressive optimization
+	static const unsigned MAX_BUCKET_SIZE = MAX_TRACE_SIZE * MAX_INSN_SIZE / 6; 
+	auto** new_traces = new jit_trace_t*[MAX_BUCKET_SIZE]; 
+	memset(new_traces, 0, sizeof(jit_trace_t*) * MAX_BUCKET_SIZE); // hope to remove memset()
+	return new_traces;
+}
+#endif
+
 static inline jit_trace_t *
-jit_trace_create_trace(rb_control_frame_t *cfp, VALUE *pc)
+#if defined USE_HASH || defined USE_BINARY
+jit_trace_create_trace(rb_iseq_t *iseq, VALUE *pc)
+#else
+jit_trace_create_trace(rb_iseq_t *iseq, unsigned pc_index)
+#endif
 {
 	jit_trace_t *trace = new jit_trace_t;
-	jit_init_trace(trace, cfp->iseq);
+	jit_init_trace(trace, iseq);
 
 	// save trace
 #if defined USE_HASH || defined USE_BINARY
 	RB_JIT->traces[pc] = trace;
 #else
-	auto* iseq = cfp->iseq;
-	unsigned pc_index = (pc - iseq->iseq_encoded) / 6;
 	if (iseq->trace_index == 0) {
-		static const unsigned MAX_INSN_SIZE = 4 - 1; //-1 is aggressive optimization
-		static const unsigned MAX_BUCKET_SIZE = MAX_TRACE_SIZE * MAX_INSN_SIZE / 6; 
-		auto** new_traces = new jit_trace_t*[MAX_BUCKET_SIZE]; 
-		memset(new_traces, 0, sizeof(jit_trace_t*) * MAX_BUCKET_SIZE);
-		// memsetなくしたい
-		new_traces[pc_index] = trace;
-		RB_JIT->traces.push_back(new_traces);
-		iseq->trace_index = RB_JIT->traces.size(); // あえて一つ大きい
+		jit_trace_t** bucket = jit_trace_create_hash_bucket();
+		bucket[pc_index] = trace;
+		iseq->trace_index = RB_JIT->traces.size();
+		RB_JIT->traces.push_back(bucket);
 	} else {
-		RB_JIT->traces[iseq->trace_index - 1][pc_index] = trace;
+		RB_JIT->traces[iseq->trace_index][pc_index] = trace;
 	}
 #endif
+
+#ifdef JIT_DEBUG_FLAG
 	RB_JIT->trace_list.push_back(trace);
+#endif
+
 	return trace;
 }
 
 JIT_INLINE jit_trace_t *
-jit_trace_find_trace_or_create_trace(rb_control_frame_t *cfp, VALUE *pc)
+jit_trace_find_trace_or_create_trace(rb_iseq_t *iseq, VALUE *pc)
 {
 #if defined USE_HASH || defined USE_BINARY
 	auto it = RB_JIT->traces.find(pc);
 	if (it == RB_JIT->traces.end())
-		return jit_trace_create_trace(cfp, pc);
+		return jit_trace_create_trace(iseq, pc);
 	return it->second;
 #else
-	unsigned pc_index = (pc - cfp->iseq->iseq_encoded) / 6;
-	if (cfp->iseq->trace_index == 0) return jit_trace_create_trace(cfp, pc);
-	
-	jit_trace_t* trace = RB_JIT->traces[cfp->iseq->trace_index - 1][pc_index];
+	unsigned pc_index = (pc - iseq->iseq_encoded) / 6;
+	jit_trace_t* trace = RB_JIT->traces[iseq->trace_index][pc_index];
 	if (trace) return trace;
-	return jit_trace_create_trace(cfp, pc);
+	return jit_trace_create_trace(iseq, pc_index);
 #endif
 }
 
@@ -405,14 +421,14 @@ jit_switch_trace(jit_trace_t *trace)
 JIT_INLINE void
 jit_jump_trace(rb_control_frame_t *cfp, VALUE* pc)
 {
-	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp, pc);
+	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp->iseq, pc);
 	jit_switch_trace(trace);
 }
 
 JIT_INLINE void
 jit_trace_start(rb_control_frame_t *cfp)
 {
-	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp, cfp->pc);
+	jit_trace_t *trace = jit_trace_find_trace_or_create_trace(cfp->iseq, cfp->pc);
 	jit_switch_trace(trace);
 }
 
@@ -604,6 +620,7 @@ jit_trace_jump(int dest)
 	}
 }
 
+#ifdef JIT_DEBUG_FLAG
 extern "C"
 void
 jit_trace_dump(rb_thread_t *th)
@@ -637,17 +654,17 @@ jit_trace_dump(rb_thread_t *th)
     //
 	// JIT_DEBUG_LOG("=== End trace dump ===");
 }
+#endif
 
-extern "C"
-void
+JIT_INLINE void
 ruby_jit_init(void)
 {
     LLVMInitializeX86AsmPrinter();
-    LLVMInitializeX86Disassembler();
+    // LLVMInitializeX86Disassembler();
 	LLVMLinkInMCJIT();
 	InitializeNativeTarget();
-	InitializeNativeTargetAsmPrinter();
-	InitializeNativeTargetAsmParser();
+	// InitializeNativeTargetAsmPrinter();
+	// InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
 }
 
@@ -679,7 +696,7 @@ void
 Init_JIT(void)
 {
 	ruby_jit_init();
-	VALUE rb_mJIT = rb_define_module("JIT");
+	// VALUE rb_mJIT = rb_define_module("JIT");
 	// rb_define_singleton_method(rb_mJIT, "compile", RUBY_METHOD_FUNC(jit_compile), 1);
 	// rb_define_singleton_method(rb_mJIT, "trace_dump", RUBY_METHOD_FUNC(jit_trace_dump), 0);
 }

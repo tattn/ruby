@@ -3,7 +3,7 @@
 require "open3"
 require 'optparse'
 
-params = Hash[ARGV.getopts('', 'run', 'compare').map { |k, v| [k.to_sym, v] }]
+params = Hash[ARGV.getopts('', 'run', 'benchmark:', 'compare').map { |k, v| [k.to_sym, v] }]
 
 #==========================================
 # Thanks to http://qiita.com/fetaro/items/6a1ad6bf3c14470c949b
@@ -87,9 +87,9 @@ end
 
 
 #============== Configuration =============
-# RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
+RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
 # MYRUBY = '~/mywork/myruby/ruby'
-RUBY = '~/mywork/myruby/binary_ruby'
+# RUBY = '~/mywork/myruby/hash_ruby'
 MYRUBY = '~/mywork/myruby/opt_ruby'
 BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 #==========================================
@@ -97,7 +97,7 @@ BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 def run_benchmark filename, ruby = MYRUBY
   benchmark = "time #{ruby} #{BENCHMARK}/#{filename}"
 
-  Cmd.timeout = 10
+  Cmd.timeout = 25
   result = Cmd.run(benchmark)
   return [result.stdout, result.stderr, result.status]
 
@@ -112,21 +112,14 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
   # timeout
   # need input files
   # SEGV
+
   if !%w(bm_so_lists.rb
          bm_app_pentomiso.rb
          bm_so_sieve.rb
-         bm_vm1_gc_short_lived.rb
-         bm_vm1_gc_short_with_symbol.rb
          bm_so_fasta.rb
          bm_so_nbody.rb
          bm_app_tak.rb
-         bm_vm1_attr_ivar.rb
-         bm_vm1_lvar_set.rb
-         bm_vm2_bighash.rb
-         bm_vm2_bigarray.rb
          bm_app_pentomino.rb
-         bm_so_reverse_complement.rb
-         bm_vm1_gc_short_with_long.rb
          bm_so_k_nucleotide.rb
 
          driver.rb
@@ -222,6 +215,9 @@ Dir::glob("#{BENCHMARK}/*.rb").each do |b|
   end
 end
 
+if params[:benchmark]
+  benchmarks = [params[:benchmark]]
+end
 
 if params[:run]
   results = []
