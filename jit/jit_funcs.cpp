@@ -1,26 +1,28 @@
 #include "jit_funcs.h"
+#include "llvm/IR/ValueSymbolTable.h"
 
 JITFuncs::JITFuncs(Module *module, JITTypes *types)
 : t(types)
 {
 #define DEFINE_FUNC(name, rettype, ...) \
-	static FunctionType* name##_type = FunctionType::get((rettype), std::vector<Type*>{__VA_ARGS__}, false); \
+	static FunctionType* name##_type = FunctionType::get((rettype), true); \
 	name = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
 
-#define DEFINE_FUNC2(name, rettype, ...) \
-	static FunctionType* name##_type = FunctionType::get((rettype), std::vector<Type*>{__VA_ARGS__}, true); \
-	name = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
+#define DEFINE_FUNC_RENAME(name, newname, rettype, ...) \
+	static FunctionType* name##_type = FunctionType::get((rettype), true); \
+	newname = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
 
+#define DEFINE_FUNC2(name, rettype, ...) DEFINE_FUNC(name, rettype)
 
 	// void vm_caller_setup_arg_block(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super)
-	DEFINE_FUNC(vm_caller_setup_arg_block,
+	DEFINE_FUNC_RENAME(vm_caller_setup_arg_block_extern, vm_caller_setup_arg_block,
 			t->voidT, t->rb_thread_t, t->rb_control_frame_t, t->rb_call_info_t, t->intT);
 
 	// void vm_pop_frame(rb_thread_t *th)
-	DEFINE_FUNC(vm_pop_frame, t->voidT, t->rb_thread_t);
+	DEFINE_FUNC_RENAME(vm_pop_frame_extern, vm_pop_frame, t->voidT, t->rb_thread_t);
 
 	// void vm_search_method(rb_call_info_t *ci, VALUE recv)
-	DEFINE_FUNC(vm_search_method, t->voidT, t->rb_call_info_t, t->valueT);
+	DEFINE_FUNC_RENAME(vm_search_method_extern, vm_search_method, t->voidT, t->rb_call_info_t, t->valueT);
 
 	// VALUE vm_getspecial(rb_thread_t *th, VALUE *lep, rb_num_t key, rb_num_t type)
 	DEFINE_FUNC(vm_getspecial, t->valueT, t->rb_thread_t, t->pvalueT, t->longT, t->longT);
@@ -50,10 +52,10 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	DEFINE_FUNC(rb_range_new, t->voidT, t->valueT, t->valueT, t->intT);
 
 	// VALUE vm_getinstancevariable(VALUE obj, ID id, IC ic)
-	DEFINE_FUNC(vm_getinstancevariable, t->valueT, t->valueT, t->valueT, t->pvalueT);
+	DEFINE_FUNC_RENAME(vm_getinstancevariable_extern, vm_getinstancevariable, t->valueT, t->valueT, t->valueT, t->pvalueT);
 
 	// void vm_setinstancevariable(VALUE obj, ID id, VALUE val, IC ic)
-	DEFINE_FUNC(vm_setinstancevariable, t->voidT, t->valueT, t->valueT, t->valueT, t->pvalueT);
+	DEFINE_FUNC_RENAME(vm_setinstancevariable_extern, vm_setinstancevariable, t->voidT, t->valueT, t->valueT, t->valueT, t->pvalueT);
 
 	//VALUE rb_cvar_get(VALUE klass, ID id)
 	DEFINE_FUNC(rb_cvar_get, t->valueT, t->valueT, t->valueT);
@@ -68,7 +70,7 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	DEFINE_FUNC(rb_cvar_set, t->voidT, t->valueT, t->valueT, t->valueT);
 
 	// VALUE vm_get_ev_const(rb_thread_t *th, VALUE orig_klass, ID id, int is_defined)
-	DEFINE_FUNC(vm_get_ev_const, t->valueT, t->rb_thread_t, t->valueT, t->valueT, t->intT);
+	DEFINE_FUNC_RENAME(vm_get_ev_const_extern, vm_get_ev_const, t->valueT, t->rb_thread_t, t->valueT, t->valueT, t->intT);
 
 	// void vm_check_if_namespace(VALUE klass)
 	DEFINE_FUNC(vm_check_if_namespace, t->voidT, t->valueT);
@@ -97,9 +99,8 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 	// VALUE opt_eq_func(VALUE recv, VALUE obj, CALL_INFO ci)
 	DEFINE_FUNC(opt_eq_func, t->valueT, t->valueT, t->valueT, t->rb_call_info_t);
 
-    // VALUE rb_float_new_inline(double d)
+    // VALUE rb_float_new(double d)
 	DEFINE_FUNC(rb_float_new, t->valueT, t->doubleT);
-	DEFINE_FUNC(rb_float_new_inline, t->valueT, t->doubleT);
 
     // double rb_float_value_inline(VALUE v)
 	DEFINE_FUNC(rb_float_value, t->doubleT, t->valueT);

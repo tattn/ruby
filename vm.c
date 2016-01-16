@@ -2838,7 +2838,8 @@ Init_VM(void)
     VM_PROFILE_ATEXIT();
 
 	/* for JIT */
-#define ADD_SYMBOL(name) jit_add_symbol("_" #name, name)
+/* #define ADD_SYMBOL(name) jit_add_symbol("_" #name, name) */
+#define ADD_SYMBOL(name)
 	ADD_SYMBOL(vm_caller_setup_arg_block);
 	ADD_SYMBOL(vm_pop_frame);
 	ADD_SYMBOL(vm_search_method);

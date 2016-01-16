@@ -87,17 +87,17 @@ end
 
 
 #============== Configuration =============
-RUBY = '~/mywork/orig_ruby/ruby --disable-gems'
+RUBY = 'LD_LIBRARY_PATH=~/mywork/orig_ruby time ~/mywork/orig_ruby/ruby --disable-gems'
 # MYRUBY = '~/mywork/myruby/ruby'
 # RUBY = '~/mywork/myruby/hash_ruby'
-MYRUBY = '~/mywork/myruby/opt_ruby'
+MYRUBY = 'LD_LIBRARY_PATH=~/mywork/myruby time  ~/mywork/myruby/ruby'
 BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 #==========================================
 
 def run_benchmark filename, ruby = MYRUBY
-  benchmark = "time #{ruby} #{BENCHMARK}/#{filename}"
+  benchmark = "#{ruby} #{BENCHMARK}/#{filename}"
 
-  Cmd.timeout = 25
+  Cmd.timeout = 30
   result = Cmd.run(benchmark)
   return [result.stdout, result.stderr, result.status]
 

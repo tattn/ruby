@@ -1193,4 +1193,13 @@ RUBY_SYMBOL_EXPORT_END
 
 #include "jit/jit.h"
 
+RUBY_SYMBOL_EXPORT_BEGIN
+void vm_pop_frame_extern(rb_thread_t *th);
+void vm_search_method_extern(rb_call_info_t *ci, VALUE recv);
+void vm_caller_setup_arg_block_extern(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super);
+VALUE vm_get_ev_const_extern(rb_thread_t *th, VALUE orig_klass, ID id, int is_defined);
+VALUE vm_getinstancevariable_extern(VALUE obj, ID id, IC ic);
+void vm_setinstancevariable_extern(VALUE obj, ID id, VALUE val, IC ic);
+RUBY_SYMBOL_EXPORT_END
+
 #endif /* RUBY_VM_CORE_H */

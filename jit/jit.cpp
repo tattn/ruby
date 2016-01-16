@@ -666,6 +666,19 @@ ruby_jit_init(void)
 	// InitializeNativeTargetAsmPrinter();
 	// InitializeNativeTargetAsmParser();
 	rb_mJit = make_unique<JitCompiler>();
+
+	const char *libname = "libruby.so";
+	std::string ErrMsg;
+	if (sys::DynamicLibrary::LoadLibraryPermanently(libname, &ErrMsg)) {
+		fprintf(stderr, "Error opening %s\n", libname);
+		exit(1);
+	}
+
+	// void *symAddr = sys::DynamicLibrary::SearchForAddressOfSymbol("vm_pop_frame");
+	// if (!symAddr) {
+	// 	fprintf(stderr, "Error Function Not Found\n");
+	// 	exit(1);
+	// }
 }
 
 // static VALUE

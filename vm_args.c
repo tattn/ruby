@@ -806,6 +806,12 @@ vm_caller_setup_arg_block(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb
     }
 }
 
+void
+vm_caller_setup_arg_block_extern(const rb_thread_t *th, rb_control_frame_t *reg_cfp, rb_call_info_t *ci, const int is_super)
+{
+	vm_caller_setup_arg_block(th, reg_cfp, ci, is_super);
+}
+
 #define IS_ARGS_SPLAT(ci) ((ci)->flag & VM_CALL_ARGS_SPLAT)
 #define IS_ARGS_KEYWORD(ci) ((ci)->kw_arg != NULL)
 

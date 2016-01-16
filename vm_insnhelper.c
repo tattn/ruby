@@ -180,6 +180,11 @@ vm_pop_frame(rb_thread_t *th)
     }
 }
 
+void
+vm_pop_frame_extern(rb_thread_t *th) {
+	vm_pop_frame(th);
+}
+
 /* method dispatch */
 static inline VALUE
 rb_arity_error_new(int argc, int min, int max)
@@ -648,6 +653,12 @@ vm_get_ev_const(rb_thread_t *th, VALUE orig_klass, ID id, int is_defined)
     }
 }
 
+VALUE
+vm_get_ev_const_extern(rb_thread_t *th, VALUE orig_klass, ID id, int is_defined)
+{
+	return vm_get_ev_const(th, orig_klass, id, is_defined);
+}
+
 static inline VALUE
 vm_get_cvar_base(const rb_cref_t *cref, rb_control_frame_t *cfp)
 {
@@ -792,8 +803,20 @@ vm_getinstancevariable(VALUE obj, ID id, IC ic)
     return vm_getivar(obj, id, ic, 0, 0);
 }
 
+VALUE
+vm_getinstancevariable_extern(VALUE obj, ID id, IC ic)
+{
+    return vm_getivar(obj, id, ic, 0, 0);
+}
+
 static void
 vm_setinstancevariable(VALUE obj, ID id, VALUE val, IC ic)
+{
+    vm_setivar(obj, id, val, ic, 0, 0);
+}
+
+void
+vm_setinstancevariable_extern(VALUE obj, ID id, VALUE val, IC ic)
 {
     vm_setivar(obj, id, val, ic, 0, 0);
 }
@@ -1050,6 +1073,12 @@ vm_search_method(rb_call_info_t *ci, VALUE recv)
     ci->method_state = GET_GLOBAL_METHOD_STATE();
     ci->class_serial = RCLASS_SERIAL(klass);
 #endif
+}
+
+void
+vm_search_method_extern(rb_call_info_t *ci, VALUE recv)
+{
+	vm_search_method(ci, recv);
 }
 
 static inline int

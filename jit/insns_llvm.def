@@ -568,7 +568,7 @@ $opt_plus {
 		Value* _recv_float = _FCALL1(rb_float_value, _recv);
 		Value* _obj_float = _FCALL1(rb_float_value, _obj);
 		val_float = BUILDER->CreateFAdd(_recv_float, _obj_float);
-		val_float = _FCALL1(rb_float_new_inline, val_float);
+		val_float = _FCALL1(rb_float_new, val_float);
 	}
 	BUILDER->CreateBr(merge_fixnum);
 
