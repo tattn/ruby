@@ -31,6 +31,12 @@ struct JITTypes
 	PointerType *PRFloat;
 
 	StructType *jit_func_ret_t;
+
+
+	FunctionType* fnVoid;
+	FunctionType* fnValue;
+	FunctionType* fnValueP;
+	FunctionType* fnDouble;
 };
 
 struct JITValues

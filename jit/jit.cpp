@@ -1,4 +1,5 @@
-#include "internal.h"
+// #include "internal.h"
+#include "include/ruby.h"
 #include "insns.inc"
 #include "insns_info.inc"
 #include "vm_core.h"

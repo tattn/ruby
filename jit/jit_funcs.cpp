@@ -1,9 +1,50 @@
 #include "jit_funcs.h"
 #include "llvm/IR/ValueSymbolTable.h"
 
-JITFuncs::JITFuncs(Module *module, JITTypes *types)
-: t(types)
+#undef rb_float_new
+#undef rb_float_value
+
+JITFuncs::JITFuncs(Module *module, JITTypes *types) :
+t(types),
+vm_caller_setup_arg_block_extern(0),
+vm_pop_frame_extern(0),
+vm_search_method_extern(0),
+vm_getspecial(0),
+VM_EP_LEP(0),
+rb_str_resurrect(0),
+rb_gvar_get(0),
+rb_obj_as_string(0),
+rb_ary_new_from_values(0),
+rb_ary_resurrect(0),
+vm_expandarray(0),
+rb_range_new(0),
+vm_getinstancevariable_extern(0),
+vm_setinstancevariable_extern(0),
+rb_cvar_get(0),
+vm_get_cvar_base(0),
+rb_vm_get_cref(0),
+rb_cvar_set(0),
+vm_get_ev_const_extern(0),
+vm_check_if_namespace(0),
+rb_const_set(0),
+rb_gvar_set(0),
+vm_defined(0),
+rb_funcall(0),
+vm_throw(0),
+vm_get_cbase(0),
+vm_get_const_base(0),
+opt_eq_func(0),
+rb_float_new(0),
+rb_float_value(0),
+rb_str_append(0),
+rb_ary_entry(0),
+rb_hash_aref(0),
+rb_ary_store(0),
+rb_hash_aset(0)
 {
+	return;
+
+#if 0
 #define DEFINE_FUNC(name, rettype, ...) \
 	static FunctionType* name##_type = FunctionType::get((rettype), true); \
 	name = Function::Create(name##_type, Function::ExternalLinkage, ("_" #name), module);
@@ -127,5 +168,6 @@ JITFuncs::JITFuncs(Module *module, JITTypes *types)
 
 #undef DEFINE_FUNC
 #undef DEFINE_FUNC2
+#endif
 }
 

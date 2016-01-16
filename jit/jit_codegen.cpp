@@ -221,7 +221,7 @@ jit_codegen_core(
     ci->blockptr = 0; ci->argc = ci->orig_argc; \
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11); \
 	BUILDER->CreateStore(recv_, ci_recv_elmptr); \
-	_FCALL2(vm_search_method, _ci, V(ci->recv)); \
+	_FCALL(vm_search_method_extern, fnVoid, _ci, V(ci->recv)); \
     _CALL_METHOD(_ci); \
 } while (0)
 

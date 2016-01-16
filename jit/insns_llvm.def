@@ -67,56 +67,56 @@ $setlocal_OP__WC__1 {
 
 $getspecial {
     // val = vm_getspecial(th, GET_LEP(), key, type);
-	Value *ep = BUILDER->CreateCall(RB_JIT->funcs->VM_EP_LEP, _GET_EP());
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_getspecial, {_GET_TH(), ep, V(key), V(type)});
+	Value *ep = _FCALL(VM_EP_LEP, fnValue, _GET_EP());
+	_val = _FCALL(vm_getspecial, fnValue, _GET_TH(), ep, V(key), V(type));
 }
 
 // $setspecial
 
 $getinstancevariable {
     // val = vm_getinstancevariable(GET_SELF(), id, ic);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_getinstancevariable, {GET_SELF(), V(id), PV(ic)});
+	_val = _FCALL(vm_getinstancevariable_extern, fnValue, GET_SELF(), V(id), PV(ic));
 }
 
 $setinstancevariable {
     // vm_setinstancevariable(GET_SELF(), id, val, ic);
-	BUILDER->CreateCall(RB_JIT->funcs->vm_setinstancevariable, {GET_SELF(), V(id), _val, PV(ic)});
+	_FCALL(vm_setinstancevariable_extern, fnVoid, GET_SELF(), V(id), _val, PV(ic));
 }
 
 $getclassvariable {
     // val = rb_cvar_get(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id);
-	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
-	Value *b = BUILDER->CreateCall(RB_JIT->funcs->vm_get_cvar_base, {a, _GET_CFP()});
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_cvar_get, {b, V(id)});
+	Value *a = _FCALL(rb_vm_get_cref, fnValueP, _GET_EP());
+	Value *b = _FCALL(vm_get_cvar_base, fnValue, a, _GET_CFP());
+	_val = _FCALL(rb_cvar_get, fnValue, b, V(id));
 }
 
 $setclassvariable {
     // rb_cvar_set(vm_get_cvar_base(rb_vm_get_cref(GET_EP()), GET_CFP()), id, val);
-	Value *a = BUILDER->CreateCall(RB_JIT->funcs->rb_vm_get_cref, _GET_EP());
-	Value *b = BUILDER->CreateCall(RB_JIT->funcs->vm_get_cvar_base, {a, _GET_CFP()});
-	BUILDER->CreateCall(RB_JIT->funcs->rb_cvar_set, {b, V(id), _val});
+	Value *a = _FCALL(rb_vm_get_cref, fnValueP, _GET_EP());
+	Value *b = _FCALL(vm_get_cvar_base, fnValue, a, _GET_CFP());
+	_FCALL(rb_cvar_set, fnVoid, b, V(id), _val);
 }
 
 $getconstant {
     // val = vm_get_ev_const(th, klass, id, 0);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_get_ev_const, {_GET_TH(), _klass, V(id), I(0)});
+	_val = _FCALL(vm_get_ev_const_extern, fnValue, _GET_TH(), _klass, V(id), I(0));
 }
 
 $setconstant {
     // vm_check_if_namespace(cbase);
     // rb_const_set(cbase, id, val);
-	BUILDER->CreateCall(RB_JIT->funcs->vm_check_if_namespace, _cbase);
-	BUILDER->CreateCall(RB_JIT->funcs->rb_const_set, {_cbase, V(id), _val});
+	_FCALL(vm_check_if_namespace, fnVoid, _cbase);
+	_FCALL(rb_const_set, fnVoid, _cbase, V(id), _val);
 }
 
 $getglobal {
     // val = GET_GLOBAL((VALUE)entry);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_gvar_get, _entry);
+	_val = _FCALL(rb_gvar_get, fnValue, _entry);
 }
 
 $setglobal {
     // SET_GLOBAL((VALUE)entry, val);
-	BUILDER->CreateCall(RB_JIT->funcs->rb_gvar_set, {_entry, _val});
+	_FCALL(rb_gvar_set, fnValue, _entry, _val);
 }
 
 
@@ -144,10 +144,10 @@ $putspecialobject {
 	_val = V(rb_mRubyVMFrozenCore);
 	break;
       case VM_SPECIAL_OBJECT_CBASE:
-	_val = _FCALL1(vm_get_cbase, _GET_EP());
+	_val = _FCALL(vm_get_cbase, fnValue, _GET_EP());
 	break;
       case VM_SPECIAL_OBJECT_CONST_BASE:
-	_val = _FCALL1(vm_get_const_base, _GET_EP());
+	_val = _FCALL(vm_get_const_base, fnValue, _GET_EP());
 	break;
       default:
 	rb_bug("putspecialobject insn: unknown value_type");
@@ -161,7 +161,7 @@ $putiseq {
 
 $putstring {
     // val = rb_str_resurrect(str);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, _str);
+	_val = _FCALL(rb_str_resurrect, fnValue, _str);
 }
 
 $concatstrings {
@@ -175,16 +175,16 @@ $concatstrings {
     // POPN(num);
 
     rb_num_t i = num - 1;
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, _TOPN(i));
+	_val = _FCALL(rb_str_resurrect, fnValue, _TOPN(i));
 	while (i-- > 0) {
-		BUILDER->CreateCall(RB_JIT->funcs->rb_str_append, {_val, _TOPN(i)});
+		_FCALL(rb_str_append, fnValue, _val, _TOPN(i));
 	}
 	_POPN(num);
 }
 
 $tostring {
     // val = rb_obj_as_string(val);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_obj_as_string, _val);
+	_val = _FCALL(rb_obj_as_string, fnValue, _val);
 }
 
 // $toregexp
@@ -192,18 +192,18 @@ $tostring {
 $newarray {
     // val = rb_ary_new4((long)num, STACK_ADDR_FROM_TOP(num));
     // POPN(num);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_ary_new_from_values, {V(num), _STACK_ADDR_FROM_TOP(num)});
+	_val = _FCALL(rb_ary_new_from_values, fnValue, V(num), _STACK_ADDR_FROM_TOP(num));
 	_POPN(num);
 }
 
 $duparray {
     // val = rb_ary_resurrect(ary);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_ary_resurrect, _ary);
+	_val = _FCALL(rb_ary_resurrect, fnValue, _ary);
 }
 
 $expandarray {
     // vm_expandarray(GET_CFP(), ary, num, (int)flag);
-	BUILDER->CreateCall(RB_JIT->funcs->vm_expandarray, {_ary, V(num), V(flag)});
+	_FCALL(vm_expandarray, fnVoid, _ary, V(num), V(flag));
 }
 
 // $concatarray
@@ -214,7 +214,7 @@ $expandarray {
 
 $newrange {
     // val = rb_range_new(low, high, (int)flag);
-	BUILDER->CreateCall(RB_JIT->funcs->rb_range_new, {_low, _high, V(flag)});
+	_FCALL(rb_range_new, fnValue, _low, _high, V(flag));
 }
 
 // ===============================================
@@ -273,7 +273,7 @@ $adjuststack {
 
 $defined {
     // val = vm_defined(th, GET_CFP(), op_type, obj, needstr, v);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_defined, std::vector<Value*>{ _GET_TH(), _GET_CFP(), V(op_type), _obj, _needstr, _v });
+	_val = _FCALL(vm_defined, fnValue, _GET_TH(), _GET_CFP(), V(op_type), _obj, _needstr, _v );
 }
 
 //$checkmatch
@@ -297,12 +297,12 @@ $send {
 	Value *ci_argc_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 12);
 	BUILDER->CreateStore(ci_orig_argc, ci_argc_elmptr);
 
-	BUILDER->CreateCall(RB_JIT->funcs->vm_caller_setup_arg_block, {_GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero});
+	_FCALL(vm_caller_setup_arg_block_extern, fnVoid, _GET_TH(), _GET_CFP(), _ci, RB_JIT->values->int32Zero);
 
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11);
 	Value *ci_recv = _TOPN(ci->argc);
 	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
-	BUILDER->CreateCall(RB_JIT->funcs->vm_search_method, {_ci, ci_recv});
+	_FCALL(vm_search_method_extern, fnVoid, _ci, ci_recv);
 
 	Value *ci_call_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
@@ -315,8 +315,8 @@ $opt_str_freeze {
     }
     else {
 	//val = rb_funcall(rb_str_resurrect(str), idFreeze, 0);
-	Value *tmp = BUILDER->CreateCall(RB_JIT->funcs->rb_str_resurrect, _str);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->rb_funcall, {tmp, I(idFreeze), I(0)});
+	Value *tmp = _FCALL(rb_str_resurrect, fnValue, _str);
+	_val = _FCALL(rb_funcall, fnValue, tmp, I(idFreeze), I(0));
     }
 }
 
@@ -326,7 +326,7 @@ $opt_send_without_block {
 	Value *ci_recv_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 11);
 	Value *ci_recv = _TOPN(ci->argc);
 	BUILDER->CreateStore(ci_recv, ci_recv_elmptr);
-	BUILDER->CreateCall(RB_JIT->funcs->vm_search_method, {_ci, ci_recv});
+	_FCALL(vm_search_method_extern, fnVoid, _ci, ci_recv);
 	Value *ci_call_elmptr = BUILDER->CreateStructGEP(jit_types->rb_call_info_st, _ci, 14);
 	Value *ci_call = BUILDER->CreateLoad(ci_call_elmptr);
 	_CALL_METHOD(_ci);
@@ -337,7 +337,7 @@ $opt_send_without_block {
 //$invokeblock
 
 $leave { // 途中
-	BUILDER->CreateCall(RB_JIT->funcs->vm_pop_frame, _GET_TH());
+	_FCALL(vm_pop_frame_extern, fnVoid, _GET_TH());
 	if (UNLIKELY(VM_FRAME_TYPE_FINISH_P(GET_CFP()))) {
 		jit_codegen_make_return(codegen_func, _val);
 	}
@@ -357,7 +357,7 @@ $throw { // 未試行
     // RUBY_VM_CHECK_INTS(th);
     // val = vm_throw(th, GET_CFP(), throw_state, throwobj);
     // THROW_EXCEPTION(val);
-	_val = BUILDER->CreateCall(RB_JIT->funcs->vm_throw, {_GET_TH(), _GET_CFP(), V(throw_state), _throwobj});
+	_val = _FCALL(vm_throw, fnValue, _GET_TH(), _GET_CFP(), V(throw_state), _throwobj);
 	jit_codegen_make_return(codegen_func, _val);
 }
 
@@ -565,10 +565,10 @@ $opt_plus {
 
 	Value* val_float;
 	SetBasicBlock(else_fixnum); {
-		Value* _recv_float = _FCALL1(rb_float_value, _recv);
-		Value* _obj_float = _FCALL1(rb_float_value, _obj);
+		Value* _recv_float = _FCALL(rb_float_value, fnDouble, _recv);
+		Value* _obj_float = _FCALL(rb_float_value, fnDouble, _obj);
 		val_float = BUILDER->CreateFAdd(_recv_float, _obj_float);
-		val_float = _FCALL1(rb_float_new, val_float);
+		val_float = _FCALL(rb_float_new, fnValue, val_float);
 	}
 	BUILDER->CreateBr(merge_fixnum);
 
@@ -618,7 +618,7 @@ $opt_eq {
 	//  CALL_SIMPLE_METHOD(recv);
     //  }
 
-    _val = _FCALL3(opt_eq_func, _recv, _obj, PT(ci, rb_call_info_t));
+    _val = _FCALL(opt_eq_func, fnValue, _recv, _obj, PT(ci, rb_call_info_t));
 
 	BasicBlock *bb_cur = GetBasicBlock();
 	           /* *bb_merge = CreateBasicBlock("merge"); */
@@ -703,13 +703,13 @@ $opt_aref {
 
 	Value* val_array;
 	SetBasicBlock(bb_array); {
-		val_array = _FCALL2(rb_ary_entry, _recv, _FIX2LONG(_obj));
+		val_array = _FCALL(rb_ary_entry, fnValue, _recv, _FIX2LONG(_obj));
 	}
 	BUILDER->CreateBr(bb_merge);
 
 	Value* val_hash;
 	SetBasicBlock(bb_hash); {
-		val_hash = _FCALL2(rb_hash_aref, _recv, _FIX2LONG(_obj));
+		val_hash = _FCALL(rb_hash_aref, fnValue, _recv, _FIX2LONG(_obj));
 	}
 	BUILDER->CreateBr(bb_merge);
 
@@ -741,13 +741,13 @@ $opt_aset {
 
 	Value* val_array;
 	SetBasicBlock(bb_array); {
-		_FCALL3(rb_ary_store, _recv, _FIX2LONG(_obj), _set);
+		_FCALL(rb_ary_store, fnVoid, _recv, _FIX2LONG(_obj), _set);
 	}
 	BUILDER->CreateBr(bb_merge);
 
 	Value* val_hash;
 	SetBasicBlock(bb_hash); {
-		_FCALL3(rb_hash_aset, _recv, _obj, _set);
+		_FCALL(rb_hash_aset, fnValue, _recv, _obj, _set);
 	}
 	BUILDER->CreateBr(bb_merge);
 

@@ -27,11 +27,17 @@
 #define CreateBasicBlock(name) BasicBlock::Create(CONTEXT, JIT_LLVM_INSN_NAME(name), codegen_func.jit_trace_func)
 #define SetNewBasicBlock(bb, name) BasicBlock *bb = CreateBasicBlock(name); SetBasicBlock(bb)
 
-#define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)
+// #define _FCALL0(name) BUILDER->CreateCall(jit_funcs->name)
+// #define _FCALL1(name, a) BUILDER->CreateCall(jit_funcs->name, (a))
+// #define _FCALL2(name, a, b) BUILDER->CreateCall(jit_funcs->name, {(a), (b)})
+// #define _FCALL3(name, a, b, c) BUILDER->CreateCall(jit_funcs->name, {(a), (b), (c)})
 
-#define _FCALL1(name, a) BUILDER->CreateCall(jit_funcs->name, (a))
-#define _FCALL2(name, a, b) BUILDER->CreateCall(jit_funcs->name, {(a), (b)})
-#define _FCALL3(name, a, b, c) BUILDER->CreateCall(jit_funcs->name, {(a), (b), (c)})
+#define _FCALL(name, type, ...) ({\
+	if (!jit_funcs->name) {\
+		jit_funcs->name = Function::Create((jit_types->type), Function::ExternalLinkage, ("_" #name), MODULE);\
+	}\
+	BUILDER->CreateCall((jit_funcs->name), { __VA_ARGS__ });\
+})
 
 
 // if a == b then do bb_then

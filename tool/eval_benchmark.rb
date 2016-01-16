@@ -97,7 +97,7 @@ BENCHMARK =  File::expand_path('~/mywork/myruby/benchmark')
 def run_benchmark filename, ruby = MYRUBY
   benchmark = "#{ruby} #{BENCHMARK}/#{filename}"
 
-  Cmd.timeout = 30
+  Cmd.timeout = 40
   result = Cmd.run(benchmark)
   return [result.stdout, result.stderr, result.status]
 

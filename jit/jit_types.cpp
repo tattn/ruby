@@ -158,6 +158,12 @@ JITTypes::JITTypes()
 	PRFloat = RFloat->getPointerTo();
 
 	jit_func_ret_t = StructType::get(rb_control_frame_t, valueT, 0);
+
+
+	fnVoid = FunctionType::get(voidT, true);
+	fnValue = FunctionType::get(valueT, true);
+	fnValueP = FunctionType::get(pvalueT, true);
+	fnDouble = FunctionType::get(doubleT, true);
 }
 
 
